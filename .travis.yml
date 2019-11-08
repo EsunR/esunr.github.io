@@ -9,5 +9,7 @@ branches:
 script:
   - hexo clean
   - hexo generate # generate static files
+deploy:
+  github-token: $GH_TOKEN
 after_success:
   - hexo deploy
