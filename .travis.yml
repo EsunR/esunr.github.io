@@ -12,4 +12,7 @@ script:
 deploy:
   github-token: $GH_TOKEN
 after_success:
+  - git config --local user.name "travis-ci"
+  - git config --local user.email "deploy@travis-ci.org"
+  - sed -i'' "s~git@github.com:~https://${GITHUB_REPO_TOKEN}@github.com/~" _config.yml
   - hexo deploy
