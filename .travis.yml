@@ -1,12 +1,15 @@
 sudo: required
 language: node_js
 node_js:
-  - 10 # use nodejs v10 LTS
-cache: npm
+  - 10
+cache:
+  directories:
+    - node_modules
 branches:
   only:
-    - source # build master branch only
+    - source
 script:
+  - npm install
   - rm -rf .deploy_git
   - hexo clean
   - hexo generate

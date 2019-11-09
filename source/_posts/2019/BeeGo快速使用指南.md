@@ -1,8 +1,8 @@
 ---
 title: BeeGo快速使用指南
-date: 2019-11-09 14:03:52
-tags: GoLang
-categories: GoLang
+date: 2019-09-26 14:03:52
+tags: [BeeGo, ORM, 快速使用]
+categories: [Back, GoLang]
 ---
 
 # 1. 安装与使用
