@@ -8,13 +8,12 @@ cache:
 install:
   - npm install
   - npm install hexo-deployer-git --save
-  - npm install hexo --save
 branches:
   only:
     - source # build master branch only
 script:
   - hexo clean
-  - hexo generate # generate static files
+  - hexo generate
 after_success:
   - git config --local user.name "travis-ci"
   - git config --local user.email "deploy@travis-ci.org"
