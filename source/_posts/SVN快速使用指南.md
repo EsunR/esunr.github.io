@@ -1,7 +1,7 @@
 ---
 title: SVN快速使用指南
 date: 2019-11-09 16:34:44
-tags: [svn, 运维, 版本控制]
+tags: SVN
 categories: Git
 ---
 # 1.svn的安装

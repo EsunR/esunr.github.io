@@ -103,8 +103,3 @@ search:
   path: search.xml
   field: post
   content: true
-
-# algolia:
-#   applicationID: 'FBF0EO8JHW'
-#   apiKey: '2a988a5c031b8cf906cd5896039d396a'
-#   indexName: 'EsunR-Blog'

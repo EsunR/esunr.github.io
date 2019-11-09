@@ -1,7 +1,7 @@
 ---
 title: BeeGo快速使用指南
 date: 2019-11-09 14:03:52
-tags: [Go, BeeGo]
+tags: GoLang
 categories: GoLang
 ---
 
