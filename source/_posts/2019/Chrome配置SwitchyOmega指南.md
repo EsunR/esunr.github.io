@@ -5,7 +5,7 @@ categories:
   - Other
 date: 2019-04-03 21:51:27
 ---
-## 代理服务器模式设置：
+## 代理服务器模式设置
 
 在该模式下，相当于ShadowSocks的全局模式，浏览的所有网页都会直接走代理；
 
@@ -16,7 +16,7 @@ date: 2019-04-03 21:51:27
 
 ![watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTI5MjU4MzM=,size_16,color_FFFFFF,t_70](http://img.cdn.esunr.xyz/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTI5MjU4MzM=,size_16,color_FFFFFF,t_70)
 
-## 自动切换模式设置：
+## 自动切换模式设置
 
 新加自动切换模式可以实现自动切换，大陆无法访问的网站可以自动切换代理访问，可以正常访问的网站就直接访问。
 
@@ -26,7 +26,7 @@ date: 2019-04-03 21:51:27
 
 ![watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTI5MjU4MzM=,size_16,color_FFFFFF,t_70](http://img.cdn.esunr.xyz/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTI5MjU4MzM=,size_16,color_FFFFFF,t_70)
 
-### 服务器推荐：
+## 服务器推荐
 
 [戳我访问](http://cp.dawangidc.com/aff.php?aff=753)（← 请先找个梯子，稳定快速）
 
