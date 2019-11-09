@@ -495,6 +495,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 原生的模板引擎支持以下的能力：
 
+```
 - 字段操作：`{{.}}`
 - 数据遍历： `{{with …}}…{{end}}`  `{{range …}}{{end}}`
 - 条件处理：`if ... else ...`
@@ -504,6 +505,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 - Must 操作：作用是检测模板是否正确，例如大括号是否匹配，注释是否正确的关闭，变量是否正确的书写。
 
 - 嵌套模板
+```
 
 [引用来源](https://learnku.com/docs/build-web-application-with-golang/074-template-processing/3198)
 
