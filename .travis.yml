@@ -2,11 +2,7 @@ sudo: required
 language: node_js
 node_js:
   - 10 # use nodejs v10 LTS
-cache:
-  directories:
-    - node_modules
-install:
-  - npm install
+cache: npm
 branches:
   only:
     - source # build master branch only
