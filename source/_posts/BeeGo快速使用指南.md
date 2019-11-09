@@ -7,6 +7,8 @@ categories: GoLang
 
 # 1. 安装与使用
 
+test test
+
 ## 1.1 安装Bee
 
 ```
