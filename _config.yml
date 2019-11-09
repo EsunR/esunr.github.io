@@ -5,7 +5,7 @@
 # Site
 title: EsunR-Blog
 subtitle: "不忘初心， 一生浪漫"
-description: ""
+description: "永存谦卑，永持敬畏"
 keywords: [EsunR, Blog, 博客]
 author: EsunR
 language: zh
@@ -98,3 +98,13 @@ deploy:
   type: git
   repo: git@github.com:EsunR/esunr.github.io.git
   branch: master
+
+search:
+  path: search.xml
+  field: post
+  content: true
+
+# algolia:
+#   applicationID: 'FBF0EO8JHW'
+#   apiKey: '2a988a5c031b8cf906cd5896039d396a'
+#   indexName: 'EsunR-Blog'
