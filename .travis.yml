@@ -7,6 +7,8 @@ cache:
     - node_modules
 install:
   - npm install
+  - npm install hexo-deployer-git --save
+  - npm install hexo --save
 branches:
   only:
     - source # build master branch only
