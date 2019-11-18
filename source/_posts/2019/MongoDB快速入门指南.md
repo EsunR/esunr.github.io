@@ -1,9 +1,9 @@
 ---
 title: MongoDB快速使用指南
-tags: [Mongodb]
+tags: [MongoDB]
 categories:
-  - Front
-  - Mongodb
+  - Back
+  - 数据库
 date: 2019-06-04 22:13:04
 ---
 # 1. 基本概念
