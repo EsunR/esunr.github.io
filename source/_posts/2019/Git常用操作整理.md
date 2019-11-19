@@ -73,5 +73,31 @@ git reflog  # 查看包含回滚信息的历史版本信息
 
 # 3. 远程仓库
 
+## 3.1 远程源
 
+查看当前仓库远程源：
 
+```sh
+git remote -v
+```
+
+添加/删除远程源:
+
+```sh
+git remote add origin 'Git Origin'   
+git remote remove origin 'Git Origin'   
+```
+
+## 3.2 拉取提交到远程源
+
+拉取远程源：
+
+```sh
+git pull origin master
+```
+
+提交远程源：
+
+```sh
+git push origin master
+```
