@@ -1,8 +1,8 @@
 ---
 title: Git常用操作整理
-tags: []
+tags: [Github, Git]
 categories:
-  - Front
+  - Git
 date: 2019-11-18 23:05:28
 ---
 # 1. Git 基本原理
