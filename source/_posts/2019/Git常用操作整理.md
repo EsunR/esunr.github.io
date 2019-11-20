@@ -22,6 +22,7 @@ date: 2019-11-18 23:05:28
 ```sh
 git config -l           # 查看配置信息
 git config --global -l  # 查看全局配置
+git config --local  -l  # 查看当前项目配置
 ```
 
 设置配置：
@@ -100,4 +101,12 @@ git pull origin master
 
 ```sh
 git push origin master
+```
+
+## 3.4 Clone
+
+Clone 可以简化拉取远程项目的步骤，与 `add remote origin` 并 `git pull` 不同的是，Clone 拉取的是整个项目的所有分支：
+
+```sh
+git clone 'Git Origin' 
 ```
