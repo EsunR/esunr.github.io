@@ -60,9 +60,13 @@ app.listen(3000, function() {
       document.querySelector(".data").innerHTML += JSON.stringify(data)
     }
     function getdata() {
+      // 添加 script 标签
       const script = document.createElement("script")
       script.src = `${options.url}?callback=${options.cbName}${queryString}`
       document.head.appendChild(script)
+      // 移除 script 标签
+      document.head.appendChild(script)
+      script.parentNode.removeChild(script)
     }
   </script>
 </head>
@@ -104,6 +108,8 @@ class JsonpRequest {
     const script = document.createElement("script")
     script.src = `${this.url}?callback=${this.cbName}${this.queryString}`
     document.head.appendChild(script)
+    document.head.appendChild(script)
+    script.parentNode.removeChild(script)
   }
 }
 ```
@@ -139,6 +145,8 @@ function jsonpReq(options) {
   const script = document.createElement("script")
   script.src = `${options.url}?callback=${options.cbName}${queryString}`
   document.head.appendChild(script)
+  document.head.appendChild(script)
+  script.parentNode.removeChild(script)
 }
 ```
 
