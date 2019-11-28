@@ -28,13 +28,13 @@ viewport是虚拟显示视口，它是时刻存在的（在现代浏览器上）
 </body>
 ```
 
-![](http://ww1.sinaimg.cn/large/a71efaafly1g206khgcj6j20u30izwf4.jpg)
+![20191129000538.png](https://i.loli.net/2019/11/29/eahqXZrIJ7PARLD.png)
 
 看起来布局上似乎很完美，但当我们添加上文字后，在我们的手机上就会这样显示：
 
 <center>
 
-![](http://ww1.sinaimg.cn/large/a71efaafly1g20701i07xj20a70grglk.jpg)
+![20191129000558.png](https://i.loli.net/2019/11/29/JIWFeYHq7lbtGT4.png)
 
 </center>
 
@@ -48,7 +48,7 @@ viewport是虚拟显示视口，它是时刻存在的（在现代浏览器上）
 
 <center>
 
-![](http://ww1.sinaimg.cn/large/a71efaafly1g206ylbrbsj20ae0h3q2x.jpg)
+![20191129000619.png](https://i.loli.net/2019/11/29/2RYJ9UuzrbNwxvB.png)
 
 </center>
 
@@ -58,7 +58,7 @@ viewport是虚拟显示视口，它是时刻存在的（在现代浏览器上）
 
 <center>
 
-![将Div#container宽度设置为400px](https://ws1.sinaimg.cn/large/a71efaafly1g20q6hhhlsj209t0goq2w.jpg)
+![20191129000644.png](https://i.loli.net/2019/11/29/yLdfOrjIaYgTUPS.png)
 
 </center>
 
@@ -88,12 +88,11 @@ iPhoneSE的缩放比为2，那么我们将它的物理像素统统除以2，得�
 
 1. 如果我们不定义viewport，viewport在所有的显示设备上的显示宽度均为980px。那么在iPhoneSE上，我们看到的定义的200px宽高的元素的实际物理像素宽高为 `640*(200/980)px`。
 
-![viewport默认宽度](https://ws1.sinaimg.cn/large/a71efaafly1g20qkjqqk2j20b903k742.jpg)
+![viewport默认宽度](https://i.loli.net/2019/11/29/9VYo8kqErlIODGi.png)
 
-2. 如果我们定义了viewport的宽度为设备宽度，那么在iPhoneSE上，我们看到的定义为200px宽高的元素的实际物理像素宽高为 `640*(200/320)px`，即为 `CSS像素*DPR`。
+1. 如果我们定义了viewport的宽度为设备宽度，那么在iPhoneSE上，我们看到的定义为200px宽高的元素的实际物理像素宽高为 `640*(200/320)px`，即为 `CSS像素*DPR`。 
 
-![定义viewport宽度为设备宽度](https://ws1.sinaimg.cn/large/a71efaafly1g20ql88ex7j20dy07g744.jpg)
-
+![定义viewport宽度为设备宽度](https://i.loli.net/2019/11/29/PNs15RwKvu2Lagq.png)
 
 # 何为缩放比
 
@@ -105,10 +104,9 @@ iPhoneSE的缩放比为2，那么我们将它的物理像素统统除以2，得�
 <meta name="viewport" content="width=device-width, initial-scale=2">
 ```
 
-![桌面显示器显示效果](https://ws1.sinaimg.cn/large/a71efaafly1g20rh126ccj20te09y3yg.jpg)
+![桌面显示器显示效果](https://i.loli.net/2019/11/29/lLQaEDKgTxIYUJH.png)
 
-
-![ipad显示效果](https://ws1.sinaimg.cn/large/a71efaafly1g20rhi7fabj20st0chq30.jpg)
+![ipad显示效果](https://i.loli.net/2019/11/29/WpvkZqBbh4sORUN.png)
 
 那缩放比具体有什么卵用呢？
 
