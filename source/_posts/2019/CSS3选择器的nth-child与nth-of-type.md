@@ -7,7 +7,7 @@ categories:
 date: 2019-12-01 15:42:01
 ---
 
-# 吐槽：
+# 吐槽
 
 CSS3 的选择器文档说明简直让人看的头大，每一句话都搞得跟阅读理解一样，就算读通了也没有办法理解，所以就在这里好好研究一下 CSS3 的选择器到底选择目标是什么。
 
@@ -116,3 +116,44 @@ CSS3 的选择器文档说明简直让人看的头大，每一句话都搞得跟
 ![](https://i.loli.net/2019/12/01/N2QHjxTtnbIXf9i.png)
 
 这个是因为没有规定子级的过滤元素，那么在匹配到每个新的标签类型时，都会验证其在兄弟节点相同的标签类型下，其是否是第2个，如果是就应用样式，如果不是就不应用样式
+
+# 权重问题
+
+CSS 的伪类选择器权重与 class 选择器权重是同等级的，举个例子：
+
+```html
+<div class="wrapper">
+  <div class="child">div</div>
+  <div class="child">div</div>
+  <li class="child">li</li>
+  <li class="child">li</li>
+</div>
+```
+
+```css
+.wrapper .child {
+  background-color: pink;
+}
+
+.wrapper :nth-of-type(2) {
+  background-color: skyblue;
+}
+```
+
+![](https://i.loli.net/2019/12/01/lSwPCH1p6BkLaxQ.png)
+
+同等级下，伪类选择器的效果覆盖了 class 选择器
+
+```css
+.wrapper :nth-of-type(2) {
+  background-color: skyblue;
+}
+
+.wrapper .child {
+  background-color: pink;
+}
+```
+
+![](https://i.loli.net/2019/12/01/9TGyMjkSzHsgulq.png)
+
+调换位置后，class选择器覆盖了伪类选择器的效果
