@@ -1,5 +1,5 @@
 ---
-title: 用人话解释CSS3选择器
+title: CSS3选择器的 nth-child 与 nth-of-type
 tags: []
 categories:
   - Front
