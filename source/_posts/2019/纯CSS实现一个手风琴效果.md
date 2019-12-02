@@ -1,5 +1,5 @@
 ---
-title: 纯CSS实现一个手风琴效果
+title: 开脑洞：纯CSS实现一个手风琴效果
 tags: []
 categories:
   - Front
@@ -9,7 +9,7 @@ date: 2019-12-01 17:45:02
 
 # 原理
 
-实现单个展开的手风琴效果很像 `radio` 组件，即单项选择组件，我们可以利用 CSS 伪类选择器 `:selected` 来检测其是否被选中。我们再 `radio` 旁边加一个兄弟节点作为手风琴面板展开显示的内容，默认设置为 `display: none`，然而当 `radio` 被选中后，就将其兄弟节点显示为 `display: block`。
+在研究CSS选择器的时候，突然想到实现单个展开的手风琴效果很像 `radio` 组件，即单项选择组件，他们都是选择一个进入 selected 状态后，其他元素的 selected 状态就被取消。所以，对于表单的 `radio` 组件我们可以利用 CSS 伪类选择器 `:selected` 来检测其是否被选中。我们在 `radio` 旁边加一个兄弟节点作为手风琴面板展开显示的内容，默认设置为 `display: none`，然而当 `radio` 被选中后，就将其兄弟节点显示为 `display: block`。
 
 同时，使用 `label` 标签，可以扩展 `radio` 组件的可选范围，使用 `visibility: hidden` 或者 `display: none` 可以隐藏原有的 `input` 标签样式。我们可以将 `label` 作为被点击对象的实例，而隐藏原有的 `input`，这样就可以进行美化。或者为 `input` 添加一个 `::after` 伪类元素，也可以起到同样的效果。
 
