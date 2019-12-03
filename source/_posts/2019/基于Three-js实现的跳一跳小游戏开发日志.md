@@ -1,10 +1,10 @@
 ---
 title: 基于Three.js实现的跳一跳小游戏开发日志
-tags: []
+tags: [Canvas, 微信小程序]
 categories:
   - Front
   - JS
-date: 2019-12-03 20:45:21
+date: 2019-9-03 20:45:21
 ---
 
 # 说明
