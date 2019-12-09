@@ -111,6 +111,18 @@ Clone 可以简化拉取远程项目的步骤，与 `add remote origin` 并 `git
 git clone 'Git Origin' 
 ```
 
+## 3.5 https 免密码同步
+
+在添加 git remote 地址的时候，如果使用的是 https，则需要每次提交同步代码的时候都输入用户名与密码，为了免去用户名与密码的输入我们可以修改 `.git/config` 文件下的配置，添加用户名与密码：
+
+```diff
+## config
+
+[remote "origin"]
+-      url = https://github.com/UserName/YourProject.git
++      url = https://username:password@github.com/UserName/YourProject.git
+```
+
 # 4. 内容处理
 
 ## 4.1 丢弃更改
