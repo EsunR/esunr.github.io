@@ -172,5 +172,13 @@ git commit --amend -m '纠正过的提交信息'
 
 > amend: 修正
 
+## 4.5 .gitignore
+
+- `*.a` 忽略所有 .a 结尾的文件
+- `!lib.a` 在上述的忽略规则中 lib.a 除外
+- `/TODO` 仅仅忽略项目根目录下的 TODO 文件，不包括 subdir/TODO
+- `build/` 忽略 build/ 目录下的所有文件
+- `doc/*.txt` 会忽略 doc/notes.txt 但不包括 doc/server/arch.txt
+
 # 5. 分支
 
