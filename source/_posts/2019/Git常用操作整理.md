@@ -64,8 +64,9 @@ git commit -m '描述信息'
 查看历史信息：
 
 ```
-git log     # 查看历史版本信息
-git reflog  # 查看包含回滚信息的历史版本信息
+git log         # 查看历史版本信息
+git reflog      # 查看包含回滚信息的历史版本信息
+git log --graph # 以时间线的形式查看分支信息
 ```
 
 从工作区提交到暂存区、从暂存区提交到历史区都是把内容复制一份传过去，文本域中仍存在这些信息。
@@ -192,9 +193,91 @@ git branch
 
 ![](http://img.cdn.esunr.xyz/markdown/20191210112942.png)
 
+查看各分支最近一次提交的记录：
+
+```sh
+git branch -v
+```
+
 ## 5.2 创建分支
 
 ```sh
 git branch <branch name>
+git checkout -b <branch name> # 创建并切换到新分支
 ```
 
+## 5.3 切换分支
+
+git 分支的切换也用的是 `checkout` 指令，这与文件的签出要进行区别，文件的签出是将文件从工作区撤销更改，而分支的签出是改变分支：
+
+```sh
+git checkout <branch name>
+git checkout - # 切换到上一个分支
+```
+
+## 5.4 删除分支
+
+git 不可以删除当前分支，删除分支前需要切换到别的分支：
+
+```sh
+git branch -d <branch name>
+```
+
+如果删除的目标分支被改动且没有被合并过，则分支需要使用强制删除：
+
+```sh
+git branch -D <branch name>
+```
+
+## 5.5 分支合并
+
+```sh
+git merge <target branch> <branch>  # 将 branch 的最新修改合并到 target branch 中
+git merge <branch>                  # 将 branch 的最新修改合并到当前分支
+```
+
+如果将某一个分支（branch）的最新修改合并到目标分支（target branch）上，那么目标分支（target branch）的文件会处于修改的最新版本，而合并的分支（branch）并不会拥有目标分支（target branch）的新内容。如果需要目标分支（target branch）的新内容，则需要将目标分支合并到该分支上。
+
+## 5.6 HEAD 与 master
+
+HEAD 指的是当前分支，master 指的是当前提交的版本：
+
+![](http://img.cdn.esunr.xyz/markdown/20191210141717.png)
+
+当用户新创建了一个 dev 分支，最新的分支还是会指向当前 master 主分支指向的节点：
+
+![](http://img.cdn.esunr.xyz/markdown/20191210142013.png)
+
+当用户在 dev 分支进行提交后，dev 分支会新建一个版本并指向新版本的提交：
+
+![](http://img.cdn.esunr.xyz/markdown/20191210142110.png)
+
+当 master 分支上没有进行更改，此时合并 dev 与 master 分支的话，master 分支的指针会直接指向当前的版本，我们称这样的操作为 “快进（fast forward）”：
+
+![](http://img.cdn.esunr.xyz/markdown/20191210142312.png)
+
+
+## 5.7 冲突解决
+
+当我们将 dev 分支的最新内容合并到 master 分支时如果出现了冲突需要手动解决冲突，冲突的文件会内容会被标识为类似：
+
+```
+new file
+<<<<<<< HEAD
+master edit
+=======
+dev edit
+>>>>>>> dev
+```
+
+此时我们需要手动进入到文件中，将不需要的代码删除，然后再进行一次提交，这样就解决了冲突。
+
+当此时切回到 dev 分支后，如果想要获取到最新的 master 分支的内容，则需要将 master 分支合并到 dev 分支，此时由于 master 分支被标记为最新更改，所以如果在 dev 分支上没有对已在 master 分支解决了冲突的文件进行修改，dev 分支就会直接快进到 master 分支的版本。
+
+实际上冲突也是另外开了一个冲突分支，我们解决冲突就是去合并冲突分支：
+
+![](http://img.cdn.esunr.xyz/markdown/20191210152834.png)
+
+## 5.8 fast-forward
+
+如果可能，git 提交会使用 fast-forward 模式，在这种模式下合并分支并未生成一个新的提交，而是将当前分支的指针指向了
