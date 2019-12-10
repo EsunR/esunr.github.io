@@ -1,5 +1,5 @@
 ---
-title: React 开发框架 —— Mui 与 Dva 的快速使用指南
+title: React 开发框架 —— Umi 与 Dva 的快速使用指南
 tags: [React]
 categories:
   - Front
