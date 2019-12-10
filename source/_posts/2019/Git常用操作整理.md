@@ -127,7 +127,7 @@ git clone 'Git Origin'
 
 ## 4.1 丢弃更改
 
-当文件进行变更后，且尚未进入暂存区时，使用 `chekcout` 指令可以丢弃已有的更改
+当文件进行变更后，且尚未进入暂存区时，使用 `chekcout --` 指令可以丢弃已有的更改
 
 ```sh
 git checkout -- <file>
@@ -189,3 +189,12 @@ git commit --amend -m '纠正过的提交信息'
 ```sh
 git branch
 ```
+
+![](http://img.cdn.esunr.xyz/markdown/20191210112942.png)
+
+## 5.2 创建分支
+
+```sh
+git branch <branch name>
+```
+
