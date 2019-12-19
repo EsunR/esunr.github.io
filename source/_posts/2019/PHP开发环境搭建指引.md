@@ -191,7 +191,7 @@ extension_dir = "C:/Progarm Files/php/7.4.0/ext/"
 
 > Ubuntu 可以通过查看 phpinfo 来获取插件的默认路径。
 
-# 3.5 设置 PHP 时区
+## 3.5 设置 PHP 时区
 
 系统默认的时区并不安全，需要手动切换为当前国家的时区：
 
@@ -199,7 +199,7 @@ extension_dir = "C:/Progarm Files/php/7.4.0/ext/"
 date.timezone = RPC
 ```
 
-# 3.6 Linux 系统下的注意事项
+## 3.6 Linux 系统下的注意事项
 
 - Linux 系统下可能会安装多个 PHP 版本，可以用 `php --verison` 查看当前 php 版本。
 
