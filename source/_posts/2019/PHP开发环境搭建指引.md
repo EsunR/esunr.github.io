@@ -74,7 +74,7 @@ httpd -t
 
 # 2. PHP
 
-# 2.1 PHP 环境配置
+## 2.1 PHP 环境配置
 
 上官网安装[适用于 Windows 的 PHP](https://windows.php.net/download)，**注意要下载 Thread Safe 版本，否则没有 Apache 的模块**。
 
