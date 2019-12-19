@@ -198,3 +198,26 @@ extension_dir = "C:/Progarm Files/php/7.4.0/ext/"
 ```
 date.timezone = RPC
 ```
+
+# 3.6 Linux 系统下的注意事项
+
+- Linux 系统下可能会安装多个 PHP 版本，可以用 `php --verison` 查看当前 php 版本。
+
+- PHP 的目录为 `/etc/php`，在该目录下可以看到多个 PHP 版本。
+
+- PHP 命令行环境下与 Apache 环境下加载的 `php.ini` 文件是不一样的。
+  - 命令行环境下执行的是 `/etc/php/[php_version]/cli/php.ini`，命令行中使用 `php -i | grep php.ini` 可以查看。
+  - Apache 环境下加载的是 `/etc/php/[php_version]/cli/php.ini`，php 文件中使用 `phpinfo()` 方法输出当前环境可以查看。
+
+- 模块位置在 `/usr/lib/php/[php_api_version]/` 目录下存放。
+  - 该位置可以按照 windows 上的设置方式显式指定（不推荐更改）。
+  - 该位置不同的 php 版本不一样，具体看当前的 PHP API 的值。
+  - 命令行环境与 Apache 环境中对于扩展的路径是相同的，命令行环境下使用 `php -i | grep extension_dir` 查看。
+
+- 如果安装有多个版本的 php 可以使用 `php[version]` 来执行不同版本的 php ，如 `php7.2 --version`。
+
+> 可以在 `/usr/bin` 目录下查看当前所可执行的 php 版本
+
+- 如果要手动安装扩展，需要安装当前版本的 `dev` 开发工具，比如 php7.3 需要安装 `php7.3-dev`。
+  - dev 工具中的 phpize 可以用来编译扩展，与多版本的 php 使用类似，可以使用 `phpize[version]` 来切换不同版本的编译工具
+  - dev 工具中可以调用 `php-config` 来查看当前开发工具对应的 php 环境，如果当前设备安装了 `php7.3` 而 dev 工具是 `php7.2-dev` ，那么当前的环境只会是 php7.2 的环境，响应的编译的文件也会编译到 `php7.2` 的扩展路径中。
