@@ -70,9 +70,13 @@ httpd -t
 # Syntax OK 表示没有错误
 ```
 
+> Ubuntu 环境下需要使用 `apachectl` 替代 `httpd`
+
 # 2. PHP
 
-上官网安装[适用于 Windows 的 PHP](https://windows.php.net/download)，注意要下载 Thread Safe 版本，否则没有兼容 PHP 的模块。
+# 2.1 PHP 环境配置
+
+上官网安装[适用于 Windows 的 PHP](https://windows.php.net/download)，**注意要下载 Thread Safe 版本，否则没有 Apache 的模块**。
 
 下载同样是一个压缩包格式的文件，将其解压并放置到自定的目录，其目录结构为：
 
@@ -112,9 +116,7 @@ $ php helloword.php
 > hello world
 ```
 
-# 3. 配置 Apache 加载 PHP
-
-## 3.1 Apache 加载 PHP 模块
+## 2.2 Apache 加载 PHP 模块
 
 打开 Apache 配置文件，在 LoadModule 处添加模块路径：
 
@@ -129,9 +131,7 @@ LoadModule php7_module 'C:/Program Files/php/7.4.0/php7apache2_4.dll'
 php7_module (shared)
 ```
 
-## 3.2 Apache 分配工作给 PHP 模块
-
-在 Apache 目录下创建添加文件类型支持：
+除此之外，我们还要显式配置 Apache 支持读取 php 文件：
 
 ```
 # httpd.conf
@@ -140,9 +140,11 @@ AddType application/x-httpd-php .php
 
 此时已可以将 php 文件放置到 `Apache24/htdocs/` 目录下，服务器即可处理 php 文件了。
 
-## 3.3 加载 PHP 配置文件
+## 3.3 Apache 加载 PHP 配置文件
 
-由于 Apache 是 PHP 的服务器，所以 PHP 通过配置文件可以反向控制 Apache 的相关设置，这时就需要我们将 PHP 的配置文件加载到 Apache 环境中。
+由于 Apache 是运行 php 的环境，所以 php 的相关设置比如加载模块，需要让 Apache 读取，因此我们要让 Apache 去加载 PHP 的配置文件。
+
+> 以下配置仅适用于 Windows 平台
 
 在 Apache 配置文件中添加：
 
@@ -153,7 +155,43 @@ PHPIniDir 'C:/Program Files/php/7.4.0'
 
 由于 PHP 环境下载下来之后，相关的配置文件并没有进行初始化操作，我们需要在 PHP 目录下创建一个 `php.ini` 文件，我们可以将 `php.ini-development` 复制一份并重命名为 `php.ini` 完成初始化操作。
 
-# 4. 设置 PHP 时区
+之后我们可以在 apache 静态文件目录下（windows 平台在为 Apache 目录下的 htdocs 文件夹）中创建一个 `info.php`，输入：
+
+```php
+// info.php
+<?php
+phpinfo();
+```
+
+访问 `http://localhost/env.php` 既可看到当前的 php 环境配置详情：
+
+![inof.php](http://img.cdn.esunr.xyz/markdown/20191219111739.png)
+
+> php 的很大一个好处就是可以热更新，无需重启服务器修改文件即可生效，当然加载模块还是要重启服务器的。
+
+## 3.4 PHP 选择加载模块
+
+通过以上的设置，Apache 已经能够处理 PHP 文件了，但是 PHP 还有众多扩展包可以供我们使用，比如 `mysqli` 扩展可以帮助我们连接 myslq，只有我们启用了这些扩展，才可以在 PHP 中使用这些服务。
+
+这里以启用 `myslqi` 扩展为例，打开 `php.ini` 文件，在 `;extension=mysqli` 这一行取消掉前面的 `;` 即启用该插件：
+
+```
+;php.ini
+extension=mysqli
+```
+
+> 在 php7.3 以下版本，`mysqli` 可能被写为 `php_mysqli.dll`，这里也可以填写一个绝对路径来指向插件的存放位置。
+
+在 Windows 平台上还需要额外配置 PHP 扩展的路径，如：
+
+```
+;php.ini
+extension_dir = "C:/Progarm Files/php/7.4.0/ext/"
+```
+
+> Ubuntu 可以通过查看 phpinfo 来获取插件的默认路径。
+
+# 3.5 设置 PHP 时区
 
 系统默认的时区并不安全，需要手动切换为当前国家的时区：
 
