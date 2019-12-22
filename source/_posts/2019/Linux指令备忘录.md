@@ -48,7 +48,7 @@ reboot
 
 ### 创建用户
 
-```
+```sh
 sudo useradd [Options] UserName
 ```
 
@@ -65,6 +65,12 @@ sudo useradd [Options] UserName
 
 ```sh
 sudo passwd UserName
+```
+
+通常 `useradd` 指令创建一个新用户需要对新用户进行各种初始化设置，如果不想手动设置，可以使用 `adduser` 指令快速添加一个新用户：
+
+```sh
+sudo adduser UserName
 ```
 
 ### 用户组群
