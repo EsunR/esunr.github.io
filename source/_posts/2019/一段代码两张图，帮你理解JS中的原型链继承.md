@@ -44,7 +44,7 @@ console.log(Animal.prototype.__proto__); // {}
 
 将以上的显式原型（prototype）与隐式原型（\_\_proto\_\_）转换为如下的可视关系：
 
-![](http://markdown.img.esunr.xyz/20191109222750.png)
+![](http://img.cdn.esunr.xyz/markdown/20191224133325.png)
 
 网上流行的一张图：
 
