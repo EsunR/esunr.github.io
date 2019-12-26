@@ -112,6 +112,8 @@ typeof document.all === 'undefined';
 
 instanceof 运算符用于检测构造函数的 prototype 属性是否出现在某个实例对象的原型链上，换句话说，instanceof 可以帮助我们来判断一个对象是否是否继承与另一个对象。
 
+### 内部原理
+
 其实这里可以看一下 `instanceof` 运算符代码：
 
 ```js
@@ -147,6 +149,37 @@ console.log(Function instanceof Function);//true
 上面第一组的解析我们很容易就能明白，因为一个对象本身的隐式原型与其显示原型不相等，那么肯定返回 `false`；第二组，Foo 函数构造于 `Function` 这是一个很标准的原型继承；而第三组似乎有些特殊，但是仔细看一下原型继承图我们就很容易看明白，对于 Object 来说 `Object.__proto__.proto__ === Object.prototype`，对于 Function 来说 `Function.__proto__ === Function.prototype`。
 
 [](!http://markdown.img.esunr.xyz/20191109222853.png)
+
+### 特殊情况
+
+对于字面量而非对象的元素，不可以使用 instanceof 来判断类型，因为其本身并非是 Object，因此会出现如下的情况：
+
+```js
+let num = 123
+num instanceof Number // false
+
+let str = "string"
+str instanceof String // false
+```
+
+```js
+let num = new Number(123)
+typeof num // 'object'
+num instanceof Number // true
+
+let str = "string"
+typeof str // 'object'
+str instanceof String // true
+```
+
+但有趣的一点是，我们直接对比变量的隐式原型，其指向的正是这些内置对象的显式原型：
+
+```js
+let str = "string"
+str.__proto__ === String.prototype // true
+```
+
+按照 instance 的判断规则，可以判断出 `str instanceof String` 返回结果是 `true`，因此说明其底层对字面量元素进行了屏蔽，使其直接返回了 false 
 
 # 3.Object.prototype.toString()
 
