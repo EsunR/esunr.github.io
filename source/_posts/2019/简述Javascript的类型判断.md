@@ -179,7 +179,7 @@ let str = "string"
 str.__proto__ === String.prototype // true
 ```
 
-按照 instance 的判断规则，可以判断出 `str instanceof String` 返回结果是 `true`，因此说明其底层对字面量元素进行了屏蔽，使其直接返回了 false 
+按照 instance 的判断规则，可以判断出 `str instanceof String` 返回结果是 `true`，因此说明其底层对字面量元素进行了屏蔽，使其直接返回了 false 。因此对于字面量的 Number 或者 String，只能使用 typeof 来判断或者 `Object.prototype.toString()` 来判断。
 
 # 3.Object.prototype.toString()
 
