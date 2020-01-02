@@ -8,7 +8,7 @@ date: 2019-12-05 17:09:57
 
 # 1. 系统相关
 
-### 1.1 关机与重启
+### 关机与重启
 
 关机指令：
 
@@ -247,5 +247,37 @@ cp -r -i FloderName1 FolderName2 	# 将 FolderName1 下的文件全部覆盖到 
 
 -u:若目标文件比源文件旧，更新目标文件 
 
-# 5. 进程相关
+# 5. 应用相关
+
+### 查找应用
+
+通过以下指令可以查找到安装过的应用：
+
+```shell
+dpkg --get-selections | grep ‘软件相关名称’
+```
+
+### 卸载应用
+
+`apt-get purge / apt-get --purge remove`
+
+删除已安装包（不保留配置文件）。
+
+如软件包a，依赖软件包b，则执行该命令会删除a，而且不保留配置文件
+
+`apt-get autoremove`
+
+删除为了满足依赖而安装的，但现在不再需要的软件包（包括已安装包），保留配置文件。
+
+`apt-get remove`
+
+删除已安装的软件包（保留配置文件），不会删除依赖软件包，且保留配置文件。
+
+`apt-get autoclean`
+
+APT的底层包是dpkg, 而dpkg 安装Package时, 会将 \*.deb 放在 /var/cache/apt/archives/中，apt\-get autoclean 只会删除 /var/cache/apt/archives/ 已经过期的deb。
+
+`apt-get clean`
+
+使用 apt\-get clean 会将 /var/cache/apt/archives/ 的 所有 deb 删掉，可以理解为 rm /var/cache/apt/archives/\*.deb。
 
