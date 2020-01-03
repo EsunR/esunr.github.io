@@ -281,3 +281,39 @@ APT的底层包是dpkg, 而dpkg 安装Package时, 会将 \*.deb 放在 /var/cach
 
 使用 apt\-get clean 会将 /var/cache/apt/archives/ 的 所有 deb 删掉，可以理解为 rm /var/cache/apt/archives/\*.deb。
 
+### 添加环境变量
+
+当在源码安装的过程中如果在生成内容时用 `prefix` 设置了源码安装应用的位置，那么安装的应用携带有 bin 文件，是无法自动与系统做关联的，我们就无法在 bash 中直接使用它们，与 Windows 相似的，我们需要添加系统环境变量中的 PATH 才能连接到应用的 bin 文件，这时如果直接在命令行中使用 `export` 设置 PATH 的话只是临时的，如果想要永久产生影响就还是需要去修改 `/etc/.profile` 文件，这是在系统每次启动时会自动执行的文件，我们在这里设置 PATH 会让系统在每次开机时都应用这些 PATH，与其相类似的文件还有以下几个：
+
+1. **/etc/profile：** 此文件为系统的每个用户设置环境信息,当用户第一次登录时,该文件被执行. 并从/etc/profile.d目录的配置文件中搜集shell的设置。
+
+2. **/etc/bashrc:** 为每一个运行bash shell的用户执行此文件.当bash shell被打开时,该文件被读取（即每次新开一个终端，都会执行bashrc）。
+
+3. **~/.bash\_profile:** 每个用户都可使用该文件输入专用于自己使用的shell信息,当用户登录时,该文件仅仅执行一次。默认情况下,设置一些环境变量,执行用户的.bashrc文件。
+
+4. **~/.bashrc:** 该文件包含专用于你的bash shell的bash信息,当登录时以及每次打开新的shell时,该该文件被读取。
+
+5. **~/.bash\_logout:** 当每次退出系统(退出bash shell)时,执行该文件. 另外,/etc/profile中设定的变量(全局)的可以作用于任何用户,而~/.bashrc等中设定的变量(局部)只能继承 /etc/profile中的变量,他们是"父子"关系。
+
+6. **~/.bash\_profile:** 是交互式、login 方式进入 bash 运行的~/.bashrc 是交互式 non\-login 方式进入 bash 运行的通常二者设置大致相同，所以通常前者会调用后者。
+
+```bash
+sudo vim /etc/profile
+
+###### /etc/profile
+# $PATH 表示已经设置的环境变量
+export PATH=xxx/xxx/bin:$PATH 
+######
+```
+
+保存后再运行该文件让其生效：
+
+```bash
+source /etc/profile
+```
+
+输出环境变量检查是否设置成功：
+
+```bash
+echo $PATH
+```
