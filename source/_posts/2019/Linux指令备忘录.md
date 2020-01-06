@@ -2,7 +2,7 @@
 title: Linux指令备忘录
 tags: []
 categories:
-  - Front
+  - Other
 date: 2019-12-05 17:09:57
 ---
 
