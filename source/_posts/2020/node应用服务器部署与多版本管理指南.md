@@ -74,7 +74,7 @@ $ n use 7.4.0 index.js
 $ n bin 8.17.0
 ```
 
-# 1.2 nvm
+## 1.2 nvm
 
 不同于 n，nvm 不是一个 npm package，而是一个独立软件包。
 
