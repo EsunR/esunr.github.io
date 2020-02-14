@@ -266,7 +266,19 @@ cp -r -i FloderName1 FolderName2 	# 将 FolderName1 下的文件全部覆盖到 
 通过以下指令可以查找到安装过的应用：
 
 ```shell
-dpkg --get-selections | grep ‘软件相关名称’
+dpkg --get-selections | grep appName
+```
+
+通过以下指令查看安装的应用的详情：
+
+```sh
+dpkg -l appName
+```
+
+通过以下指令查找软件位置：
+
+```sh
+dpkg -L appName
 ```
 
 ### 卸载应用
