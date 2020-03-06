@@ -1,6 +1,6 @@
 ---
 title: Nginx 快速使用指南
-tags: [快速使用, Nginx, Linux, 运维, 服务器]
+tags: [快速使用, Nginx]
 categories:
   - 运维
 date: 2020-03-06 23:17:30
