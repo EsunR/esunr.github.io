@@ -9,7 +9,7 @@ branches:
   only:
     - source
 script:
-  - npm install
+  - yarn
   - rm -rf .deploy_git
   - hexo clean
   - hexo generate
