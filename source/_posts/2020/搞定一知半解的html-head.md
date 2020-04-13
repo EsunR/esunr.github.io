@@ -160,4 +160,74 @@ name 属性可以定义元数据的类型，content 属性可以定义这些元�
 
   详情查看：[从移动端适配探讨响应式布局与 view-port](https://blog.esunr.xyz/2019/11/%E4%BB%8E%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%80%82%E9%85%8D%E8%B0%88%E8%B0%88%E5%93%8D%E5%BA%94%E5%BC%8F%E5%B8%83%E5%B1%80%E4%B8%8Eview-port/)
 
-【未完待续】
+* uc强制竖屏
+  
+  ```html
+  <meta name="screen-orientation" content="portrait">
+  ```
+
+* QQ强制竖屏
+  
+  ```html
+  <meta name="x5-orientation" content="portrait">
+  ```
+
+* UC应用模式 
+
+  ```html
+  <meta name="browsermode" content="application">
+  ```
+
+* QQ应用模式 
+
+  ```html
+  <meta name="x5-page-mode" content="app">
+  ```
+
+* IOS启用 WebApp 全屏模式
+
+  ```html
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  ```
+
+* IOS全屏模式下隐藏状态栏/设置状态栏颜色 content的值为default | black | black-translucent
+
+  ```html
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  ```
+
+* IOS添加到主屏后的标题 
+
+  ```html
+  <meta name="apple-mobile-web-app-title" content="标题">
+  ```
+
+* IOS添加智能 App 广告条 Smart App Banner
+
+  ```html
+  <meta name="apple-itunes-app" content="app-id=myAppStoreID, affiliate-data=myAffiliateData, app-argument=myURL">
+  ```
+
+* 去除 iPhone 识别数字为号码
+
+  ```html
+  <meta name="format-detection" content="telephone=no">
+  ```
+
+* 不识别邮箱
+
+  ```html
+  <meta name="format-detection" content="email=no">
+  ```
+
+* 禁止跳转至地图
+
+  ```html
+  <meta name="format-detection" content="adress=no">
+  ```
+
+* 可以连写
+
+  ```html
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  ```
