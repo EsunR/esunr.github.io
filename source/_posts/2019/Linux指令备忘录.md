@@ -1,8 +1,8 @@
 ---
 title: Linux指令备忘录
-tags: []
+tags: [Linux]
 categories:
-  - Other
+  - 运维
 date: 2019-12-05 17:09:57
 ---
 
@@ -258,6 +258,54 @@ cp -r -i FloderName1 FolderName2 	# 将 FolderName1 下的文件全部覆盖到 
 -s:复制成符号连接文件(symbolic link)，即“快捷方式”文件
 
 -u:若目标文件比源文件旧，更新目标文件 
+
+### 压缩文件处理
+
+**`.tar` 文件**
+
+压缩：
+
+```sh
+tar -zcvf distFilePath（生成压缩包的目录） originFilePath（要压缩的文件目录）
+```
+
+> 示例：tar -zcvf /home/xahot.tar.gz /xahot
+
+解压：
+
+```sh
+tar -zcxf targetFile
+```
+
+**`.zip` 文件**
+
+压缩：
+
+```sh
+ zip -r distFilePath originFilePath/* -r # r表示递归
+```
+
+> 示例：zip -r ./xahot.zip ./* -r
+
+linux zip命令参数列表：
+  - `-a` 将文件转成ASCII模式
+  - `-F` 尝试修复损坏的压缩文件
+  - `-h` 显示帮助界面
+  - `-m` 将文件压缩之后，删除源文件
+
+  - `-n` 特定字符串 不压缩具有特定字尾字符串的文件
+  - `-o` 将压缩文件内的所有文件的最新变动时间设为压缩时候的时间
+  - `-q` 安静模式，在压缩的时候不显示指令的执行过程
+  - `-r` 将指定的目录下的所有子目录以及文件一起处理
+  - `-S` 包含系统文件和隐含文件（S是大写）
+  - `-t` 日期 把压缩文件的最后修改日期设为指定的日期，日期格式为mmddyyyy
+
+解压：
+
+```sh
+unzip tragetFile # 解压到当前目录
+```
+
 
 # 5. 应用相关
 
