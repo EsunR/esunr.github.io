@@ -193,6 +193,12 @@ git branch
 
 ![](http://img.cdn.esunr.xyz/markdown/20191210112942.png)
 
+查看本地分支以及远程分支：
+
+```sh
+git branch -a
+```
+
 查看各分支最近一次提交的记录：
 
 ```sh
@@ -227,6 +233,30 @@ git branch -d <branch name>
 
 ```sh
 git branch -D <branch name>
+```
+
+删除远程分支：
+
+```sh
+git push origin --delete <branch name>
+```
+
+删除当前分支外的所有分支：
+
+```sh
+git branch | xargs git branch -d
+```
+
+删除分支名包含指定字符的分支：
+
+```sh
+git branch | grep 'dev*' | xargs git branch -d
+```
+
+删除远程不存在的分支：
+
+```sh
+git remote prune origin
 ```
 
 ## 5.5 分支合并
