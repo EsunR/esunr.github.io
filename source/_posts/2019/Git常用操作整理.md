@@ -15,7 +15,7 @@ date: 2019-11-18 23:05:28
 
 # 2. 基础指令
 
-## 2.1 Git 配置
+## Git 配置
 
 查看配置信息：
 
@@ -32,7 +32,7 @@ git config --global user.name 'username'
 git config --global user.email 'email'
 ```
 
-## 2.2 提交到暂存区
+## 提交到暂存区
 
 在本地编写完成代码后，把一些内容提交到暂存区
 
@@ -42,7 +42,7 @@ git add .     # 把当前仓库中的所有最新修改的文件都提交到暂�
 git add -A    # 同上
 ```
 
-## 2.3 查看当前文件状态
+## 查看当前文件状态
 
 红色代表在工作区，绿色代表在暂存区，看不见东西证明所有修改信息都已提交到历史区
 
@@ -53,7 +53,7 @@ git status
 ![演示示例](http://img.cdn.esunr.xyz/markdown/20191118233413.png)
 
 
-## 2.4 提交到历史区
+## 提交到历史区
 
 只能将暂存区中的代码提交到历史区：
 
@@ -75,7 +75,7 @@ git log --graph # 以时间线的形式查看分支信息
 
 # 3. 远程仓库
 
-## 3.1 远程源
+## 远程源
 
 查看当前仓库远程源：
 
@@ -90,7 +90,7 @@ git remote add origin 'Git Origin'
 git remote remove origin 'Git Origin'   
 ```
 
-## 3.2 拉取提交到远程源
+## 拉取提交到远程源
 
 拉取远程源：
 
@@ -104,7 +104,7 @@ git pull origin master
 git push origin master
 ```
 
-## 3.4 Clone
+## Clone
 
 Clone 可以简化拉取远程项目的步骤，与 `add remote origin` 并 `git pull` 不同的是，Clone 拉取的是整个项目的所有分支：
 
@@ -112,7 +112,7 @@ Clone 可以简化拉取远程项目的步骤，与 `add remote origin` 并 `git
 git clone 'Git Origin' 
 ```
 
-## 3.5 https 免密码同步
+## https 免密码同步
 
 在添加 git remote 地址的时候，如果使用的是 https，则需要每次提交同步代码的时候都输入用户名与密码，为了免去用户名与密码的输入我们可以修改 `.git/config` 文件下的配置，添加用户名与密码：
 
@@ -126,7 +126,7 @@ git clone 'Git Origin'
 
 # 4. 内容处理
 
-## 4.1 丢弃更改
+## 丢弃更改
 
 当文件进行变更后，且尚未进入暂存区时，使用 `chekcout --` 指令可以丢弃已有的更改
 
@@ -134,7 +134,7 @@ git clone 'Git Origin'
 git checkout -- <file>
 ```
 
-## 4.2 撤销暂存
+## 撤销暂存
 
 当更改过的文件被提交到暂存区后，可以重新撤回到工作区
 
@@ -142,9 +142,9 @@ git checkout -- <file>
 git reset HEAD <file>
 ```
 
-## 4.3 文件修改
+## 文件修改
 
-### 4.3.1 文件删除
+### 文件删除
 
 删除一个被 git 追踪的文件：
 
@@ -155,7 +155,7 @@ git rm <file>
 与使用系统指令直接删除不同的是，文件删除之后会出现在暂存区，可以从暂存区中撤销到工作区，也可以再从工作区撤销更改，文件就会被恢复。
 
 
-### 4.3.2 文件重命名
+### 文件重命名
 
 ```sh
 git mv <file name> <new file name>
@@ -163,7 +163,7 @@ git mv <file name> <new file name>
 
 此时文件会被存放到暂存区，显示为对文件进行了一个 R（rename） 操作
 
-## 4.4 修改已提交的信息
+## 修改已提交的信息
 
 当用户写错了一个提交信息并向修正信息时可以使用以下指令修正信息：
 
@@ -173,7 +173,7 @@ git commit --amend -m '纠正过的提交信息'
 
 > amend: 修正
 
-## 4.5 .gitignore
+## .gitignore
 
 - `*.a` 忽略所有 .a 结尾的文件
 - `!lib.a` 在上述的忽略规则中 lib.a 除外
@@ -183,7 +183,7 @@ git commit --amend -m '纠正过的提交信息'
 
 # 5. 分支
 
-## 5.1 分支查看
+## 分支查看
 
 查看当前版本库的所有分支：
 
@@ -205,14 +205,14 @@ git branch -a
 git branch -v
 ```
 
-## 5.2 创建分支
+## 创建分支
 
 ```sh
 git branch <branch name>
 git checkout -b <branch name> # 创建并切换到新分支
 ```
 
-## 5.3 切换分支
+## 切换分支
 
 git 分支的切换也用的是 `checkout` 指令，这与文件的签出要进行区别，文件的签出是将文件从工作区撤销更改，而分支的签出是改变分支：
 
@@ -221,7 +221,7 @@ git checkout <branch name>
 git checkout - # 切换到上一个分支
 ```
 
-## 5.4 删除分支
+## 删除分支
 
 git 不可以删除当前分支，删除分支前需要切换到别的分支：
 
@@ -259,7 +259,7 @@ git branch | grep 'dev*' | xargs git branch -d
 git remote prune origin
 ```
 
-## 5.5 分支合并
+## 分支合并
 
 ```sh
 git merge <target branch> <branch>  # 将 branch 的最新修改合并到 target branch 中
@@ -268,7 +268,7 @@ git merge <branch>                  # 将 branch 的最新修改合并到当前�
 
 如果将某一个分支（branch）的最新修改合并到目标分支（target branch）上，那么目标分支（target branch）的文件会处于修改的最新版本，而合并的分支（branch）并不会拥有目标分支（target branch）的新内容。如果需要目标分支（target branch）的新内容，则需要将目标分支合并到该分支上。
 
-## 5.6 HEAD 与 master
+## HEAD 与 master
 
 HEAD 指的是当前分支，master 指的是当前提交的版本：
 
@@ -287,7 +287,7 @@ HEAD 指的是当前分支，master 指的是当前提交的版本：
 ![](http://img.cdn.esunr.xyz/markdown/20191210142312.png)
 
 
-## 5.7 冲突解决
+## 冲突解决
 
 当我们将 dev 分支的最新内容合并到 master 分支时如果出现了冲突需要手动解决冲突，冲突的文件会内容会被标识为类似：
 
@@ -308,6 +308,47 @@ dev edit
 
 ![](http://img.cdn.esunr.xyz/markdown/20191210152834.png)
 
-## 5.8 fast-forward
+## fast-forward
 
 如果可能，git 提交会使用 fast-forward 模式，在这种模式下合并分支并未生成一个新的提交，而是将当前分支的指针指向了
+
+# 6. 子模块
+
+## 子模块初始化
+
+项目有子模块，Clone 后需要进行初始化：
+
+```sh
+git submodule init     # 初始化子模块信息
+git submodule update   # 拉去子模块更新
+```
+
+上面两个模块可以合并为一个：
+
+```sh
+git submodule update --init
+```
+
+## 拉取子模块上游更新
+
+> --recursive 为递归
+
+从远程源拉取：
+
+```sh
+git submodule update --recursive --remote
+```
+
+> 远程源默认拉取 master 分支，如果需要更改拉取分支，则需要在 .gitmodules 文件中添加 branch 信息
+
+从本地 url 源拉取：
+
+```sh
+git submodule update --init --recursive
+```
+
+手动递归拉取：
+
+```sh
+git submodule foreach git pull origin <branch>
+```
