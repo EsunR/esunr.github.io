@@ -61,6 +61,8 @@ Native Modules 是一个很令人兴奋的能力，但是代价就是我们始�
 - 在 `android/app` 目录下，创建了一个你所命名的模块同名的文件夹，作为你所要搭建的模块的目录。
 - 在 `settings.gradle` 中写入了一行 `include ':react-native-xxx'`，说明你的项目中引用了你刚才所创建的 Module（这也是 React Native 在进行第三方包自动 Link 的其中一步）。
 
+此时再看我们的工程文件，app 的同级目录下就多了一个名为 `react-native-xxx` 的 Module。
+
 由此，我们就可以理解，那些以 `react-native` 开头的 Module 其实都来自于我们所下载的第三方包，他们本质是存在于 `node_modules` 目录下的，在项目编译的过程中会被建立了一层链接，从而我们可以在 Android Studio 的工程目录看到他们（这也是 React Native 在进行自动 Link 的功劳）：
 
 ![](http://img.cdn.esunr.xyz/markdown/20200828191713.png)
