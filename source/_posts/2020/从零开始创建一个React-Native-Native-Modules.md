@@ -127,7 +127,7 @@ dependencies {
 
 当我们辛辛苦苦写好了一个 Native Module，肯定会想把他共享出去，最好的平台自然就是 npm。同时发布到 npm 上还有一个好处就，在讲这个好处之前我们先来再看看 React Native 进行 Link 的过程中到底 Link 了啥：
 
-当我们下载一个 React Native 包时，如果这个包有原生代码，那么它必定是要进行 Link 才能用的，这也是有的项目的 ReadMe 中会有手动 Link 指引的这一步。在这一过程中，主要进行了对主项目 Gradle 的配置，让其识别到下载的 Native Modules，以及注册 Native Modules，让我们可以在 Javascript 层调用到原生代码的能力。这是一个繁杂的过程，但是好在这些过程都有很多重复的地方，有重复就必定有自动化。因此在早期的社区中存在 rnpm 这种工具来帮助我们实现自动化 Link。在 React Native 0.60 以上版本，自动 Link 已经成了一种特性，我们再从 npm 下载下俩包之后，React Native 的构建工具 Metro 会自动的检索包，如果这个包是 Native Module，那么就会自动建立与 Android 项目以及 iOS 项目的连接。
+当我们下载一个 React Native 包时，如果这个包有原生代码，那么它必定是要进行 Link 才能用的，这也是有的项目的 ReadMe 中会有手动 Link 指引的这一步。在这一过程中，主要进行了对主项目 Gradle 的配置，让其识别到下载的 Native Modules，以及注册 Native Modules，让我们可以在 Javascript 层调用到原生代码的能力。这是一个繁杂的过程，但是好在这些过程都有很多重复的地方，有重复就必定有自动化。因此在早期的社区中存在 rnpm 这种工具来帮助我们实现自动化 Link。在 React Native 0.60 以上版本，自动 Link 已经成了一种特性，我们再从 npm 下载下了包之后，React Native 的构建工具 Metro 会自动的检索包，如果这个包是 Native Module，那么就会自动建立与 Android 项目以及 iOS 项目的连接。
 
 因此将 Native Modules 作为 NPM Package 发布的额外一个好处就是，它会被 React Native 自动检测到并且进行自动化的连接。
 
