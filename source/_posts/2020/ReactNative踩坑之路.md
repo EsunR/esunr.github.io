@@ -74,3 +74,49 @@ keyboardType={"default"}
 - 当我们想要触发可点击元素身上的事件，同时失去当前聚焦的 `TextInput` 的焦点，那就使用 `handled`。
 
 **需要特别注意的是**，如果在 ScrollView 中嵌套 ScrollView，如果父级的 ScrollView 没有设置 `keyboardShouldPersistTaps` 属性，那么子级的 ScrollView 设置的 `keyboardShouldPersistTaps` 属性是无效的。
+
+# 4. 奇葩的 Navigation Listener
+
+在 Navigation 5 中使用 `addListener()` 方法添加导航监听，如果初次看官方文档可能会一脸懵比，因为没有提到如何移除时间监听。但是在官方示例中，我们可以看到一个细节，示例中使用了一个箭头函数，直接返回了 `addListener()` 方法的返回值，由此我们可以看出 `addListener()` 方法的返回值是一个函数，而且这个函数就是用来移除监听函数的。我们如果写的明白点就可以写为：
+
+```js
+useEffect(() => {
+  const removeListener = navigation.addListener("beforeRemove", ()=>{
+    // do something
+  });
+  return () => { 
+    removeListener()
+  }
+}, [])
+```
+
+还有一个坑，假设一个场景，通过事件监听拦截返回动作，让返回上层的默认动作改为返回到路由界面顶层，那么我们可能会这么写：
+
+```js
+useEffect(() => {
+  const removeListener = navigation.addListener("beforeRemove", (e)=>{
+    e.preventDefault();
+    navigation.popToTop(); // 退回到顶层路由
+  });
+  return removeListener;
+}, [])
+```
+
+然后当我们返回后，就会 Boom ！出现堆栈溢出的警告。
+
+这是因为在执行 `popToTop()` 时，必定会再次触发组件的 `beforeRemove` 事件，然后再触发监听，导致再次执行 `popToTop()`，然后触发监听事件 ... ... 这样就陷入了一个死循环，堆栈自然会溢出。于此相类似的，只要我们想返回之前的任一页面，就都会触发 `beforeRemove` 事件，然后陷入到如此的死循环。但是如果我们前往一个新的页面，就不会触发 `beforeRemove` 事件，也就能正常跳转了。
+
+那解决方案也很简单，在执行 `popToTop()` 方法前，移除掉路由的监听：
+
+```diff
+  useEffect(() => {
+    const removeListener = navigation.addListener("beforeRemove", (e)=>{
++     removeListener();
+      e.preventDefault();
+      navigation.popToTop(); // 退回到顶层路由
+    });
+    return removeListener;
+  }, [])
+```
+
+> PS: 官方使用了 `navigation.dispatch(e.data.action)` 来正常使页面进行了 goBack 操作并没有触发 `beforeRemove`，这一点让我很迷。因为 `e.data.action` 实际上就是 `{type: "GO_BACK"}` 而使用 `dispatch` 派发这个动作必定会触发 `beforeRemove`，不知道为什 `navigation.dispatch(e.data.action)` 可行，而 `navigation.dispatch({type: "GO_BACK"})` 不行
