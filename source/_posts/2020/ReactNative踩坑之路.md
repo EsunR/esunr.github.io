@@ -120,3 +120,19 @@ useEffect(() => {
 ```
 
 > PS: 官方使用了 `navigation.dispatch(e.data.action)` 来正常使页面进行了 goBack 操作并没有触发 `beforeRemove`，这一点让我很迷。因为 `e.data.action` 实际上就是 `{type: "GO_BACK"}` 而使用 `dispatch` 派发这个动作必定会触发 `beforeRemove`，不知道为什 `navigation.dispatch(e.data.action)` 可行，而 `navigation.dispatch({type: "GO_BACK"})` 不行
+
+# 5. 阻止事件冒泡
+
+
+React Native 的事件系统与 Web 是有些不一样的。
+
+以触摸事件举例，当父元素绑定了触摸事件，会出现以下的情况：
+
+- 当子元素上没有任何 Touchable 组件，会触发父元素的事件
+- 当子元素有 Touchable 组件，那么只会触发当前子元素的点击事件，不会触发父元素的事件
+
+因此可得 React Native 默认是阻止事件冒泡的，但是总感觉阻止冒泡的方式很奇怪，而且如果阻止了点击事件，子元素的滑动事件也无效了（比如在子元素中加入一个 ScrollView，那么 ScrollView 是无法滑动的）。
+
+那么有没有一个方法可以显示指定不触发父元素的事件呢，经过对 react-native-elements `Overlay` 组件的学习，发现 View 上有一个 [pointerEvents](https://reactnative.cn/docs/view#pointerevents) 属性。
+
+如果子元素想阻止父元素的点击事件，只需要在子元素上添加 `pointerEvents="box-none"` 即可
