@@ -136,3 +136,36 @@ React Native 的事件系统与 Web 是有些不一样的。
 那么有没有一个方法可以显示指定不触发父元素的事件呢，经过对 react-native-elements `Overlay` 组件的学习，发现 View 上有一个 [pointerEvents](https://reactnative.cn/docs/view#pointerevents) 属性。
 
 如果子元素想阻止父元素的点击事件，只需要在子元素上添加 `pointerEvents="box-none"` 即可
+
+# 6. 什么时候该收起键盘？
+
+这个问题在表单场景下时会经常遇到，我们会纠结于到底如何控制键盘的收起于展开，首先我们来看下 ReactNative 中对键盘收起于展开的默认行为预设：
+
+- 在 View 中，如果存在 `TextInput` 组件与 `Button` 组件：
+  - 点击视图空白区域，键盘不会收起
+  - 点击按钮，按钮事件正常触发，键盘不会收起
+- 在 ScrollView 中，如果存在 `TextInput` 组件与 `Button` 组件：
+  - 点击视图空白区域，键盘收起
+  - 点击按钮，按钮事件**不触发**，键盘收起，再次点击按钮，按钮事件触发（第一次点击触发键盘收起操作，第二次点击触发按钮事件）
+  - 滑动视图，键盘不会收起
+
+在 View 组件中，我们无法控制默认的键盘收起行为，除非使用 Keyboard 相关方法强制键盘收起。
+
+在 ScrollView 组件中，组件提供了 `keyboardShouldPersistTaps` 属性可以让开发者来控制键盘收起与展开的行为，其可以设置三个值，分别为：
+
+1. 'never' （默认值），点击 TextInput 以外的子组件会使当前的软键盘收起。此时子元素不会收到点击事件。
+2. 'always'，键盘不会自动收起，ScrollView 也不会捕捉点击事件，但子组件可以捕获。
+3. 'handled'，当点击事件被子组件捕获时，键盘不会自动收起。这样切换 TextInput 时键盘可以保持状态。多数带有 TextInput 的情况下你应该选择此项。
+
+在表单场景下，并不推荐默认的 `never`，因为这样会让用户点击两次目标元素才能触发该元素上绑定的事件。
+
+仍以上面的场景来举例，在 ScrollView 中，如果存在 `TextInput` 组件与 `Button` 组件：
+
+- 当我们把 `keyboardShouldPersistTaps` 设置为 `always` 时：
+  - 点击视图空白区域，键盘不收起
+  - 点击按钮，按钮事件正常触发，键盘不会收起
+- 当我们把 `keyboardShouldPersistTaps` 设置为 `handle` 时：
+  - 点击视图空白区域，键盘收起
+  - 点击按钮，按钮事件正常触发，键盘不会收起
+
+因此，如果在表单场景下，会有很多 TextInput 框与按钮，因该将该值设置为 `handle` 来优化交互体验。
