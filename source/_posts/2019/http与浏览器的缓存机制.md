@@ -86,3 +86,42 @@ Cache-Control: max-age=31536000
 ```html
 Cache-Control: must-revalidate
 ```
+
+# 2. ETag
+
+ETag 是在响应头中存放的一个字段，用于校验服务器资源是否过期，从而判断是否启用缓存，对于访问服务器的静态资源来说，ETag 可以表示为静态文件的 Hash。
+
+如果给定URL中的资源更改，则一定要生成新的Etag值。 因此Etags类似于指纹，也可能被某些服务器用于跟踪。 比较etags能快速确定此资源是否变化，但也可能被跟踪服务器永久存留。
+
+ETag 通常用于实现两种功能：
+
+1. 检测资源是否变更，如未变更，则采用缓存资源
+2. 防止资源请求过程中发生“空中碰撞”
+
+## 2.1 检测资源是否变更
+
+通常用户首次发起请求时，服务器端返回的响应报文的响应头部中会包含 ETag 的信息，如：
+
+![](https://i.loli.net/2021/06/21/ScHltx59j6kAXyn.png)
+
+这一信息将被客户端所记录，并且在后续的请求中会在请求报文的头部添加一个 `if-none-match` 的字段，该请求发送到服务器端时，会检测与服务器端 ETag 是否匹配，如果匹配到，说明资源未发生变更，此时会返回 304 状态码，客户端则会读取缓存资源，如：
+
+![](https://i.loli.net/2021/06/21/4YDweO9yNboTFQ3.png)
+
+## 2.2 防止 “空中碰撞”
+
+在`ETag`和 [`If-Match`](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/If-Match) 头部的帮助下，您可以检测到"空中碰撞"的编辑冲突。
+
+例如，当编辑MDN时，当前的wiki内容被散列，并在响应中放入`Etag`：
+
+```
+ETag: "33a64df551425fcc55e4d42a148795d9f25f89d4
+```
+
+将更改保存到Wiki页面（发布数据）时，[`POST`](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Methods/POST)请求将包含有ETag值的[`If-Match`](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/If-Match)头来检查是否为最新版本。
+
+```
+If-Match: "33a64df551425fcc55e4d42a148795d9f25f89d4"
+```
+
+如果哈希值不匹配，则意味着文档已经被编辑，抛出[`412`](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Status/412)前提条件失败错误。
