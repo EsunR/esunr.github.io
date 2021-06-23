@@ -255,6 +255,20 @@ function uniqueByRecursive(arr) {
 ]
 ```
 
+## 5.2 排序后用原地算法去重（仅适用于数字）
+
+```js
+var removeDuplicates = function (nums) {
+  var sortedIndex = 0;
+  for (n of nums) {
+    if (sortedIndex == 0 || n > nums[i - 1]) {
+      nums[sortedIndex++] = n;
+    }
+  }
+  return i;
+}
+```
+
 # 6. 总结
 
 数组去重并非是难题，但是里面坑比较多，需要注意以下几点：
