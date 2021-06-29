@@ -1,3 +1,12 @@
+---
+title: Vue3新特性初探与对比
+tags: [Vue]
+categories:
+  - Front
+  - Vue
+date: 2021-05-15 22:09:57
+---
+
 # 1. Vue3 新特性
 
 Vue3 的一些特性：
