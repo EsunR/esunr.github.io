@@ -290,7 +290,7 @@ end
 - `name` `version` `description` `license` `author` `platform` 是指模块的基础信息
 - `homepage` 是项目的主页，我们可以将其设置为 npm 包地址，如果不设置在 `pod install` 时会报错
 - `source` 是项目源代码地址，我们要将其改为 github 源代码托管的地址
-- `source_files` 指源码的路径，这里的路径是以当前 podspec 文件为基准的相对路径，需要设置为你开发的 Native Module 的路径，也就是 `.h`、`.m`、`.swif` 等文件的路径，对于默认生成的模块，`.h` 与 `.m` 都在当前 podspec 文件的路径下，**因此这里要改为 `/**/*.{h,m}`，否则模块在 js 引用时会报错**。
+- `source_files` 指源码的路径，这里的路径是以当前 podspec 文件为基准的相对路径，需要设置为你开发的 Native Module 的路径，也就是 `.h`、`.m`、`.swif` 等文件的路径，对于默认生成的模块，`.h` 与 `.m` 都在当前 podspec 文件的路径下，因此这里要改为 `/**/*.{h,m}`，否则模块在 js 引用时会报错。
 - `dependency` 为当前 Native Module 需要引用的第三方的包
 
 # 4. 参考教程
