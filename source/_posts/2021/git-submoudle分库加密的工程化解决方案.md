@@ -299,4 +299,166 @@ gulp.task(
 );
 ```
 
+# 完整代码
+
+```js
+var gulp = require('gulp');
+var through = require('through2');
+var merge = require('merge2');
+var ts = require('gulp-typescript');
+var minify = require('gulp-minify');
+var clean = require('gulp-clean');
+var git = require('gulp-git');
+var tsProject = ts.createProject({
+  noImplicitAny: true,
+  target: 'es6',
+  jsx: 'react',
+  declaration: true,
+  moduleResolution: 'node',
+});
+
+const MUST_IGNORE_FILES = [
+  '!./node_modules/**',
+  '!./dist/**',
+  '!./.git/**',
+  '!./.idea/**',
+  '!./gulpfile.js',
+  '!./package.json',
+  '!./yarn.lock',
+  '!./CHANGELOG.md',
+];
+const ENCRYPT_REPOSITORY_URL = 'git@123.59.xx.xxx:fe/components_encrypt.git'; // 目标更新仓库
+const ENCRYPT_REPOSITORY_BATCH = 'dev'; // 目标更新仓库的分支名（注：该分支不能在 GitLab 中设置为 protected 状态）
+
+function pullDev(cb) {
+  git.pull('origin', 'dev', function () {
+    cb();
+  });
+}
+
+function pullTypes(cb) {
+  git.clone('git@123.59.xx.xxx:fe/common_types.git', { args: '@types' }, function () {
+    cb();
+  });
+}
+
+function cleanTypes(cb) {
+  gulp.src('@types', { allowEmpty: true }).pipe(clean());
+  cb();
+}
+
+function transTsx() {
+  // 添加 ts-ignore 强行阻止编译校验
+  const tsNoCheck = gulp.src(['./**/*.tsx', './**/*.ts', ...MUST_IGNORE_FILES]).pipe(
+    through.obj(function (file, encode, cb) {
+      var result = file.contents.toString();
+      result = '// @ts-nocheck\n' + result;
+      file.contents = Buffer.from(result);
+      this.push(file);
+      cb();
+    }),
+  );
+  var tsResult = tsNoCheck.pipe(tsProject());
+  // 生成 js 文件和 d.ts 文件
+  return merge([
+    tsResult.js
+      .pipe(
+        minify({
+          ext: {
+            src: '.js',
+            min: '.js',
+          },
+          noSource: true,
+        }),
+      )
+      .pipe(
+        // 编译混淆后的 js 文件禁用 eslint 检查
+        through.obj(function (file, encode, cb) {
+          var result = file.contents.toString();
+          result = '/* eslint-disable */' + result;
+          file.contents = Buffer.from(result);
+          this.push(file);
+          cb();
+        }),
+      )
+      .pipe(gulp.dest('dist')),
+    tsResult.dts.pipe(gulp.dest('dist')),
+  ]);
+}
+
+function moveOtherFile() {
+  return gulp
+    .src(['./**/*.*', '!./**/*.tsx', '!./**/*.ts', '!./@types/**', ...MUST_IGNORE_FILES], {
+      nodir: true,
+    })
+    .pipe(gulp.dest('dist'));
+}
+
+function cleanDist(cb) {
+  gulp.src('dist', { allowEmpty: true }).pipe(clean());
+  cb();
+}
+
+function initEncryptRepository(cb) {
+  git.init({ cwd: './dist' }, function (err) {
+    if (err) throw err;
+    cb();
+  });
+}
+
+function addOriginEncryptRepositoryUrl(cb) {
+  git.addRemote('origin', ENCRYPT_REPOSITORY_URL, { cwd: './dist' }, function (err) {
+    if (err) throw err;
+    cb();
+  });
+}
+
+function checkoutEncryptRepositoryDevBatch(cb) {
+  git.checkout(ENCRYPT_REPOSITORY_BATCH, { args: '-b', cwd: './dist' }, function (err) {
+    if (err) throw err;
+    cb();
+  });
+}
+
+function addEncryptRepositoryChanges(cb) {
+  return gulp.src('./dist/*').pipe(
+    git.add({ args: '-f', cwd: './dist' }, function (err) {
+      if (err) throw err;
+    }),
+  );
+}
+
+function commitEncryptRepositoryChanges(cb) {
+  return gulp.src('./dist/*').pipe(
+    git.commit('ci: update source', { cwd: './dist' }, function (err) {
+      if (err) throw err;
+    }),
+  );
+}
+
+function pushEncryptRepositoryChanges(cb) {
+  git.push('origin', ENCRYPT_REPOSITORY_BATCH, { args: '-u -f', cwd: './dist' }, function (err) {
+    if (err) {
+      if (err) throw err;
+    } else {
+      cb();
+    }
+  });
+}
+
+gulp.task(
+  'publish',
+  gulp.series(
+    initEncryptRepository,
+    addOriginEncryptRepositoryUrl,
+    checkoutEncryptRepositoryDevBatch,
+    addEncryptRepositoryChanges,
+    commitEncryptRepositoryChanges,
+    pushEncryptRepositoryChanges,
+  ),
+);
+
+gulp.task('build', gulp.series(cleanDist, pullDev, pullTypes, transTsx, moveOtherFile, cleanTypes));
+```
+
 最终我们可以在控制台使用 `npx gulp build && npx gulp publish` 来编译并且同步更新我们的代码，我们可以使用 ci 来监听代码库的变更，如果发生变更，ci 就自动切换到 `encrypt` 分支来执行该指令，对代码进行编译并同步到加密库。
