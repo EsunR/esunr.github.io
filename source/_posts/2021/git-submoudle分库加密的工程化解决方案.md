@@ -1,8 +1,9 @@
 ---
 title: Git Submodules 分库加密的工程化解决方案
-tags: []
+tags: [git, gulp]
 categories:
   - Front
+  - 构建工具
 date: 2021-07-03 14:21:33
 ---
 
