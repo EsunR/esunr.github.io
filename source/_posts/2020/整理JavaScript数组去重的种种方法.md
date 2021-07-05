@@ -138,8 +138,10 @@ function uniqueByFor(arr) {
 ```js
 function uniqueByIndexOf(arr) {
   let result = [];
-  if (prev.indexOf(current) === -1) {
-    result.push(current);
+  for(let i = 0; i < arr.length; i++){
+    if (result.indexOf(current) === -1) {
+      result.push(current);
+    }
   }
   return result;
 }
@@ -258,14 +260,19 @@ function uniqueByRecursive(arr) {
 ## 5.2 排序后用原地算法去重（仅适用于数字）
 
 ```js
-var removeDuplicates = function (nums) {
-  var sortedIndex = 0;
-  for (n of nums) {
-    if (sortedIndex == 0 || n > nums[i - 1]) {
-      nums[sortedIndex++] = n;
+function uniqBySort(nums) {
+  const sortedNums = nums.sort();
+  // 当前索引位置的元素期望是不重复的元素，同时改变量表示不重复元素的个数
+  let noRepeatIndex = nums.length ? 1 : 0;
+  for (let i = 0; i < sortedNums.length; i++) {
+    const current = sortedNums[i];
+    // 如果当前元素比 noRepeatIndex-1 位置的元素要大，就将其放置到 noRepeatIndex 的位置上，并将 noRepeatIndex 向后指
+    if (current > sortedNums[noRepeatIndex - 1]) {
+      sortedNums[noRepeatIndex] = current;
+      noRepeatIndex++;
     }
   }
-  return i;
+  return sortedNums.slice(0, noRepeatIndex);
 }
 ```
 
