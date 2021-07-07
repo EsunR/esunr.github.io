@@ -1,0 +1,210 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="PHP语法基础"><meta name="keywords" content="PHP"><meta name="author" content="EsunR"><meta name="copyright" content="EsunR"><title>PHP语法基础 | EsunR-Blog</title><link rel="shortcut icon" href="/melody-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script><meta name="generator" content="Hexo 4.2.0"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-变量"><span class="toc-number">1.</span> <span class="toc-text">1. 变量</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-变量定义"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 变量定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-预定义变量"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 预定义变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-可变变量"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 可变变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-变量传值"><span class="toc-number">1.4.</span> <span class="toc-text">1.4 变量传值</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-常量"><span class="toc-number">2.</span> <span class="toc-text">2. 常量</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-常量的定义"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 常量的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-系统常量"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 系统常量</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-数据类型"><span class="toc-number">3.</span> <span class="toc-text">3. 数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-八种数据类型"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 八种数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-类型转换"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 类型转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-类型判断"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 类型判断</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-数字类型"><span class="toc-number">3.4.</span> <span class="toc-text">3.4 数字类型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-运算"><span class="toc-number">4.</span> <span class="toc-text">4. 运算</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-连接运算符"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 连接运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-错误抑制符"><span class="toc-number">4.2.</span> <span class="toc-text">4.2 错误抑制符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-三元运算符"><span class="toc-number">4.3.</span> <span class="toc-text">4.3 三元运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4-逻辑运算"><span class="toc-number">4.4.</span> <span class="toc-text">4.4 逻辑运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-5-位运算符"><span class="toc-number">4.5.</span> <span class="toc-text">4.5 位运算符</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-循环"><span class="toc-number">5.</span> <span class="toc-text">5. 循环</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-函数"><span class="toc-number">6.</span> <span class="toc-text">5. 函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-数组"><span class="toc-number">7.</span> <span class="toc-text">6. 数组</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1-数组"><span class="toc-number">7.1.</span> <span class="toc-text">6.1 数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-2-关联数组"><span class="toc-number">7.2.</span> <span class="toc-text">6.2 关联数组</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info-top"><div class="author-info__avatar text-center"><img src="http://img.cdn.esunr.xyz/github_avatar.jpeg"></div><div class="author-info__name text-center">EsunR</div><div class="author-info__description text-center">永存谦卑，永持敬畏</div></div><div class="author-info-bottom"><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">101</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">68</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">23</span></a></div></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(http://img.cdn.esunr.xyz/aeb2048ff782b9dc4d1bbf2870b38581..jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">EsunR-Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> Search</span></a><a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span></div><div id="post-info"><div id="post-title">PHP语法基础</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-12-12</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Back/">Back</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Back/PHP/">PHP</a><span class="post-meta__separator">|</span><i class="fa fa-comment-o post-meta__icon" aria-hidden="true"></i><a href="/2019/12/PHP%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80/#disqus_thread"><span class="disqus-comment-count" data-disqus-identifier="2019/12/PHP语法基础/"></span></a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="1-变量"><a href="#1-变量" class="headerlink" title="1. 变量"></a>1. 变量</h1><h2 id="1-1-变量定义"><a href="#1-1-变量定义" class="headerlink" title="1.1 变量定义"></a>1.1 变量定义</h2><p>PHP 中的变量不需要任何赋值关键字，直接使用 <code>$</code> 即可创建一个变量：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$var1;      <span class="comment">// 定义变量</span></span><br><span class="line">$var2 = <span class="number">1</span>;  <span class="comment">// 定义并赋值</span></span><br><span class="line"><span class="keyword">echo</span> $var2; <span class="comment">// 输出变量</span></span><br></pre></td></tr></table></figure>
+
+<p>定义变量后如果不适用就需要删除变量：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unset</span>($var2);</span><br><span class="line"><span class="keyword">echo</span>($var2);  <span class="comment">// Udefined variable</span></span><br></pre></td></tr></table></figure>
+
+<p>变量定义规则：</p>
+<ul>
+<li>必须以 <code>$</code> 开始</li>
+<li>变量可以有数字、字母、下划线，但是不能以数字开头，如 <code>$1var</code></li>
+<li>PHP 允许使用中文变量</li>
+</ul>
+<h2 id="1-2-预定义变量"><a href="#1-2-预定义变量" class="headerlink" title="1.2 预定义变量"></a>1.2 预定义变量</h2><ul>
+<li>$_GET</li>
+<li>$_POST</li>
+<li>$_REQUEST</li>
+<li>$GLOBALS</li>
+<li>$_SERVER：服务器信息</li>
+<li>$_SESSION</li>
+<li>$_COOKIE</li>
+<li>$_ENV</li>
+<li>$_FILES</li>
+</ul>
+<h2 id="1-3-可变变量"><a href="#1-3-可变变量" class="headerlink" title="1.3 可变变量"></a>1.3 可变变量</h2><p>如果 <code>$</code> 后紧跟一个带有 <code>$</code> 的变量，变量的值为另一个变量的名字，则可以通过第一个 <code>$</code> 取到相应变量的值，如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$a = <span class="string">'b'</span></span><br><span class="line">$b = <span class="string">'result'</span></span><br><span class="line"><span class="keyword">echo</span> $$a      <span class="comment">// 'result'</span></span><br></pre></td></tr></table></figure>
+
+<p>原理：<code>$a</code> =&gt; ‘b’， <code>$</code> 与 <code>&#39;b&#39;</code> 绑定 =&gt; <code>$b</code> =&gt; ‘result’</p>
+<h2 id="1-4-变量传值"><a href="#1-4-变量传值" class="headerlink" title="1.4 变量传值"></a>1.4 变量传值</h2><p>值传递：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$a = <span class="number">1</span>;</span><br><span class="line">$b = $a;  </span><br><span class="line"></span><br><span class="line">$b = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">echo</span> $a, $b;    <span class="comment">// 1,2</span></span><br></pre></td></tr></table></figure>
+
+<p>引用传递：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$a = <span class="number">1</span>;</span><br><span class="line">$b = &amp;$a;</span><br><span class="line"></span><br><span class="line">$b = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">echo</span> $a, $b   <span class="comment">// 2, 2</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="2-常量"><a href="#2-常量" class="headerlink" title="2. 常量"></a>2. 常量</h1><h2 id="2-1-常量的定义"><a href="#2-1-常量的定义" class="headerlink" title="2.1 常量的定义"></a>2.1 常量的定义</h2><p>两种方式：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">define(<span class="string">'常量名'</span>, 常量值, [是否区分大小写]); </span><br><span class="line"><span class="keyword">const</span> 常量名 = 值;  <span class="comment">// php 5.3+</span></span><br></pre></td></tr></table></figure>
+
+<p>特殊常量仅能使用 <code>define()</code> ，如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">define(<span class="string">'-_-'</span>, <span class="string">'smile'</span>);</span><br><span class="line"><span class="comment">// const -_- = 'smile' 错误</span></span><br></pre></td></tr></table></figure>
+
+<p><code>define</code> 与 <code>const</code> 定义常量的区别再于 <strong>访问权限</strong> 。</p>
+<p>对于特殊常量我们需要使用 <code>constant()</code>：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">define(<span class="string">'-_-'</span>, <span class="string">'smile'</span>);</span><br><span class="line"><span class="comment">// echo -_- 错误</span></span><br><span class="line"><span class="keyword">echo</span> constant(<span class="string">'-_-'</span>) <span class="comment">// 'smile'</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-系统常量"><a href="#2-2-系统常量" class="headerlink" title="2.2 系统常量"></a>2.2 系统常量</h2><p>常用常量：</p>
+<ul>
+<li>PHP_VERSION</li>
+<li>PHP_INT_MAX</li>
+<li>PHP_INT_SIZE：表示整型所占用的字节数，值为4，PHP中整型允许负数</li>
+</ul>
+<blockquote>
+<p>整数类型由 4 个字节存放，也就是 32 位，转化为十进制后可以表达的最大数为 <code>4294967295</code> ，但是 PHP 的的 <code>PHP_INT_MAX</code> 只有 <code>2147483647</code>，这是因为 PHP 需要用一个符号位来表示负数，因此实际上用来表示数字的占 31 位。</p>
+</blockquote>
+<blockquote>
+<p>在 64 位的 PHP 中，PHP_INT_SIZE 为 8，相应的 PHP_INT_MAX 也更大。</p>
+</blockquote>
+<p>魔术常量：</p>
+<ul>
+<li>__DIR__：当前被执行脚本所在的绝对路径</li>
+<li>__FILE__：当前被执行脚本的绝对路径（带名字）</li>
+<li>__NAMESPACE__：当前所属的行数</li>
+<li>__CLASS__：当前所属的类</li>
+<li>__METHOD__：当前所属的方法</li>
+</ul>
+<h1 id="3-数据类型"><a href="#3-数据类型" class="headerlink" title="3. 数据类型"></a>3. 数据类型</h1><p>data type 在 PHP 中指的是数据本身的类型，而不是变量的类型，PHP是一种弱语言类型，本身没有数据类型。</p>
+<h2 id="3-1-八种数据类型"><a href="#3-1-八种数据类型" class="headerlink" title="3.1 八种数据类型"></a>3.1 八种数据类型</h2><p>PHP 的数据类型可分为三大类八小类。</p>
+<p><strong>简单/基本数据类型（4个小类）：</strong></p>
+<ul>
+<li>整型 int/integer：4个字节存储，如果超出存储范围，会被转为浮点型存储</li>
+<li>浮点型 float/double：8个字节存储</li>
+<li>字符串型 string：根据系统长度分配</li>
+<li>布尔类型 bool/boolean</li>
+</ul>
+<p><strong>复合数据类型（2小类）：</strong></p>
+<ul>
+<li>资源类型 resource：存放资源数据（PHP 外部数据，如数据库、文件）</li>
+<li>空类型 NULL：只有一个值就是 NULL </li>
+</ul>
+<h2 id="3-2-类型转换"><a href="#3-2-类型转换" class="headerlink" title="3.2 类型转换"></a>3.2 类型转换</h2><p>PHP 中有两种类型的转换方式：</p>
+<p>自动转换：系统自行转换，效率较低</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$a = <span class="string">'abc1.1.1'</span>;</span><br><span class="line">$b = <span class="string">'1.1.1abc'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> $a + $b; <span class="comment">// 1.1</span></span><br></pre></td></tr></table></figure>
+
+<p>强制转换：根据自己的需要将目标类型转换</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$a = <span class="string">'abc1.1.1'</span>;</span><br><span class="line">$b = <span class="string">'1.1.1abc'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> (float)$a, (float)$b; <span class="comment">// 01.1</span></span><br><span class="line"><span class="keyword">echo</span> $a; <span class="comment">// 'abc1.1.1'</span></span><br></pre></td></tr></table></figure>
+
+<p>同时还可以使用 <code>settype()</code> 方法对变量进行强制转换，这会对原来的值产生影响:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$b = <span class="string">'1.1.1abc'</span>;</span><br><span class="line">settype($b, <span class="string">'int'</span>);</span><br><span class="line"><span class="keyword">echo</span> $b; <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="http://img.cdn.esunr.xyz/markdown/20191212104623.png" alt=""></p>
+<p>其他类型转数据值的说明：</p>
+<ul>
+<li>布尔 true 为 1，false 为0</li>
+<li>字符串数据有自己的规则<ul>
+<li>以字母开头的字符，永远为0</li>
+<li>数字开头的字符，取碰到字符前的数字部分</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-3-类型判断"><a href="#3-3-类型判断" class="headerlink" title="3.3 类型判断"></a>3.3 类型判断</h2><p>使用 <code>is_</code> 判断，结果返回一个布尔值，但由于 Bool 类型不能用 <code>echo</code> 来查看，所以要使用 <code>var_dump</code> 结构来查看：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$a = <span class="string">'123'</span>;</span><br><span class="line">var_dump(is_int($a)); <span class="comment">// false</span></span><br><span class="line">var_dump(is_string($a)); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>gettype()</code> 方法也可以用来获取类型，得到是该类型对应的字符串：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$a = <span class="string">'123'</span>;</span><br><span class="line"><span class="keyword">echo</span> gettype($a); <span class="comment">// string</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-4-数字类型"><a href="#3-4-数字类型" class="headerlink" title="3.4 数字类型"></a>3.4 数字类型</h2><p>不同的进制表示方法如下：</p>
+<ul>
+<li><code>$a = 120;</code> 十进制</li>
+<li><code>$a = 0b110;</code> 二进制，以 <code>0b</code> 开头</li>
+<li><code>$a = 0120;</code> 八进制，以 <code>0</code> 开头</li>
+<li><code>$a = 0x120;</code> 十六进制，以 <code>0x</code> 开头</li>
+</ul>
+<p>对于浮点型型，计算可能不准确：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$f = <span class="number">2.1</span>;</span><br><span class="line">var_dump($f / <span class="number">3</span> == <span class="number">0.7</span>); <span class="comment">// bool(false)</span></span><br></pre></td></tr></table></figure>
+
+<p>同时还可以使用如下的方法判断数据是否为空：</p>
+<ul>
+<li><code>empty()</code>: 判断数据的值是否为空，如空字符串、null、空数组、布尔值为 false 的、未定义的变量，返回都是 <code>true</code></li>
+<li><code>isset()</code>：判断数据存储的变量值本身是否存在，如变量值为 null 的、变量定义却未赋值的、未定义的变量，返回都是 <code>false</code></li>
+<li><code>is_null</code>：与 <code>isset</code> 的定义正好相反</li>
+</ul>
+<h1 id="4-运算"><a href="#4-运算" class="headerlink" title="4. 运算"></a>4. 运算</h1><h2 id="4-1-连接运算符"><a href="#4-1-连接运算符" class="headerlink" title="4.1 连接运算符"></a>4.1 连接运算符</h2><p>使用 <code>.</code> 可以将变量连接起来：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$a = <span class="string">'hello'</span>;</span><br><span class="line">$b = <span class="number">123</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> $a . $b; <span class="comment">// hello 123</span></span><br><span class="line"></span><br><span class="line">$a .= $b;</span><br><span class="line"><span class="keyword">echo</span> $a; <span class="comment">// hello 123</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="4-2-错误抑制符"><a href="#4-2-错误抑制符" class="headerlink" title="4.2 错误抑制符"></a>4.2 错误抑制符</h2><p>使用 <code>@</code> 可以抑制报错，使代码继续向后执行：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$a = <span class="number">233</span>;</span><br><span class="line">@( $a / <span class="number">0</span> );</span><br><span class="line"><span class="keyword">echo</span> $a; <span class="comment">// 233</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="4-3-三元运算符"><a href="#4-3-三元运算符" class="headerlink" title="4.3 三元运算符"></a>4.3 三元运算符</h2><p>支持</p>
+<h2 id="4-4-逻辑运算"><a href="#4-4-逻辑运算" class="headerlink" title="4.4 逻辑运算"></a>4.4 逻辑运算</h2><p>与 Javascript 用法一致</p>
+<h2 id="4-5-位运算符"><a href="#4-5-位运算符" class="headerlink" title="4.5 位运算符"></a>4.5 位运算符</h2><ul>
+<li><code>&amp;</code> 按位与，两个位都未1，结果为1，否则为0</li>
+<li><code>|</code> 按位或，两个有一个为1，结果为1</li>
+<li><code>~</code> 按位非，一个位如果为1则变成0，否则反之</li>
+<li><code>^</code> 按位异或，两个相同则为0，不同则为1</li>
+<li><code>&lt;&lt;</code> 按位左移，整个位（32位）</li>
+<li><code>&gt;&gt;</code> 按位右移</li>
+</ul>
+<p>举例1：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$a = <span class="number">5</span>; </span><br><span class="line">$b = <span class="number">-5</span>;</span><br><span class="line">var_dump($a &amp; $b); <span class="comment">// int(1)</span></span><br></pre></td></tr></table></figure>
+
+<p>原理：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> 5 的源码：00000101  </span><br><span class="line">-5 的源码：11111010  </span><br><span class="line"> &amp; 的运算：00000001</span><br></pre></td></tr></table></figure>
+
+<p>举例2：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$a = <span class="number">-5</span>;</span><br><span class="line">var_dump($a &gt;&gt; <span class="number">2</span>); <span class="comment">// int(-2)</span></span><br></pre></td></tr></table></figure>
+
+<p>原理：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-5   11111011</span><br><span class="line">&gt;&gt;1  11111110 &#x2F;&#x2F; 运算结果：补码</span><br><span class="line">-1   11111101 &#x2F;&#x2F; 反码</span><br><span class="line">取反  10000010 &#x2F;&#x2F; 原码：-2</span><br></pre></td></tr></table></figure>
+
+<h1 id="5-循环"><a href="#5-循环" class="headerlink" title="5. 循环"></a>5. 循环</h1><p>for 循环：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>($i = <span class="number">0</span>; $i &lt; <span class="number">3</span>; $i++)&#123;</span><br><span class="line">  <span class="keyword">echo</span> $i . <span class="string">"&lt;br&gt;"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">0</span><br><span class="line">1</span><br><span class="line">2</span><br></pre></td></tr></table></figure>
+
+<p>foreach 循环：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$x = <span class="keyword">array</span>(<span class="string">"one"</span>,<span class="string">"two"</span>,<span class="string">"three"</span>);</span><br><span class="line"><span class="keyword">foreach</span> ($x <span class="keyword">as</span> $value)&#123;</span><br><span class="line">  <span class="keyword">echo</span> $value . <span class="string">"&lt;br&gt;"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">one</span><br><span class="line">two</span><br><span class="line">three</span><br></pre></td></tr></table></figure>
+
+<p>while 循环：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>($i&lt;=<span class="number">5</span>)&#123;</span><br><span class="line">  <span class="keyword">echo</span> <span class="string">"The number is "</span> . $i . <span class="string">"&lt;br&gt;"</span>;</span><br><span class="line">  $i++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">The number is 1</span><br><span class="line">The number is 2</span><br><span class="line">The number is 3</span><br><span class="line">The number is 4</span><br><span class="line">The number is 5</span><br></pre></td></tr></table></figure>
+
+<p>do…while 循环：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">  $i++;</span><br><span class="line">  <span class="keyword">echo</span> <span class="string">"The number is "</span> . $i . <span class="string">"&lt;br&gt;"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">while</span> ($i&lt;=<span class="number">5</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">The number is 2</span><br><span class="line">The number is 3</span><br><span class="line">The number is 4</span><br><span class="line">The number is 5</span><br><span class="line">The number is 6</span><br></pre></td></tr></table></figure>
+
+<h1 id="5-函数"><a href="#5-函数" class="headerlink" title="5. 函数"></a>5. 函数</h1><p>创建函数：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">functionName</span><span class="params">($name)</span></span>&#123;</span><br><span class="line">  <span class="keyword">echo</span> $name;</span><br><span class="line">&#125;</span><br><span class="line">functionName(<span class="string">"huahua"</span>); <span class="comment">// 'huahua'</span></span><br></pre></td></tr></table></figure>
+
+<p>默认参数：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setHeight</span><span class="params">($minheight=<span class="number">50</span>)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">echo</span> <span class="string">"The height is : $minheight &lt;br&gt;"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="6-数组"><a href="#6-数组" class="headerlink" title="6. 数组"></a>6. 数组</h1><h2 id="6-1-数组"><a href="#6-1-数组" class="headerlink" title="6.1 数组"></a>6.1 数组</h2><p>创建数组：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$cars = <span class="keyword">array</span>(<span class="string">"porsche"</span>,<span class="string">"BMW"</span>,<span class="string">"Volvo"</span>);</span><br><span class="line"><span class="keyword">echo</span> $cars[<span class="number">0</span>];</span><br><span class="line">var_dump ($cars);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">porsche</span><br><span class="line"></span><br><span class="line">array(3) &#123;</span><br><span class="line">  [0]&#x3D;&gt;</span><br><span class="line">  string(7) &quot;porsche&quot;</span><br><span class="line">  [1]&#x3D;&gt;</span><br><span class="line">  string(3) &quot;BMW&quot;</span><br><span class="line">  [2]&#x3D;&gt;</span><br><span class="line">  string(5) &quot;Volvo&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>php 中的数组是值类型的。</p>
+</blockquote>
+<h2 id="6-2-关联数组"><a href="#6-2-关联数组" class="headerlink" title="6.2 关联数组"></a>6.2 关联数组</h2><p>创建关联数组：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$age = <span class="keyword">array</span>(<span class="string">"Bill"</span>=&gt;<span class="string">"35"</span>,<span class="string">"Steve"</span>=&gt;<span class="string">"37"</span>,<span class="string">"Elon"</span>=&gt;<span class="string">"43"</span>);</span><br><span class="line"><span class="keyword">echo</span> $age[<span class="string">'Elon'</span>]; <span class="comment">// 43</span></span><br></pre></td></tr></table></figure>
+
+<p>从 PHP 5.4 起可以使用：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$array = [</span><br><span class="line">    <span class="string">"foo"</span> =&gt; <span class="string">"bar"</span>,</span><br><span class="line">    <span class="string">"bar"</span> =&gt; <span class="string">"foo"</span>,</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+
+<p>遍历关联数组：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">foreach</span> ($age <span class="keyword">as</span> $x=&gt;$x_value) &#123;</span><br><span class="line">  <span class="keyword">echo</span> <span class="string">"Key="</span> . $x . <span class="string">", Value="</span> . $x_value;</span><br><span class="line">  <span class="keyword">echo</span> <span class="string">"&lt;br&gt;"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></article><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/PHP/">PHP</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/12/Vue%E9%80%92%E5%BD%92%E7%BB%84%E4%BB%B6%E2%80%94%E2%80%94%E6%A0%91%E5%BD%A2%E7%BB%84%E4%BB%B6%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8F%82%E8%80%83/"><i class="fa fa-chevron-left">  </i><span>Vue递归组件——树形组件的实现参考</span></a></div><div class="next-post pull-right"><a href="/2019/12/PHP%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E6%8C%87%E5%BC%95/"><span>PHP 开发环境搭建指引</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="disqus_thread"></div><script>var unused = null;
+var disqus_config = function () {
+  this.page.url = 'https://esunr.github.io/2019/12/PHP%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80/';
+  this.page.identifier = '2019/12/PHP语法基础/';
+  this.page.title = 'PHP语法基础';
+}
+var d = document, s = d.createElement('script');
+s.src = "https://" + 'esunr-blog' +".disqus.com/embed.js";
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);</script><script id="dsq-count-scr" src="https://esunr-blog.disqus.com/count.js" async></script></div></div><footer class="footer-bg" style="background-image: url(http://img.cdn.esunr.xyz/aeb2048ff782b9dc4d1bbf2870b38581..jpg)"><div class="layout" id="footer"><div class="copyright">&copy;2017 - 2021 By EsunR</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>Powered by</span> <a href="https://github.com/wzpan/hexo-generator-search" target="_blank" rel="noopener" style="color:#49B1F5;">hexo-generator-search</a></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>
