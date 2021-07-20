@@ -2,7 +2,8 @@
 title: http与浏览器的缓存机制
 tags: [网络原理]
 categories:
-  - Other
+  - Base
+  - 网络原理
 date: 2019-11-26 23:50:07
 ---
 
