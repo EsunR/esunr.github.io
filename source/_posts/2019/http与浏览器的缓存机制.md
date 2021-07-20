@@ -1,6 +1,6 @@
 ---
 title: http与浏览器的缓存机制
-tags: []
+tags: [网络原理]
 categories:
   - Other
 date: 2019-11-26 23:50:07
@@ -14,14 +14,16 @@ date: 2019-11-26 23:50:07
 
 缓存分为两种类型，分为 **强制缓存** 与 **协商缓存**：
 
-对于强制缓存，请求数据会默认存放于磁盘上，每次只要请求相同的 url，就会启用本地的缓存而不向服务器建立连接。
+对于强制缓存，浏览器会根据上次请求获取的 `Cache-Controller` 或 `Expires(http 1.0 规范)` 来判断截止当前请求发起时，本地的缓存资源是否过期，如果本地缓存的资源未过期，就会启用本地的缓存而不向服务器建立连接，此时虽然没有建立服务器端的连接，但仍会收到 200 的状态码，但是会被标记为 `from cache`。
 
-然而协商缓存是通过与服务器对比请求资源的信息来判断缓存资源是否过期，如果过期就重新获取资源，没有过期就启用本地的缓存资源而不再向服务器下载该资源。判断资源是否过期的依据方式由多种，比如可以通过判断服务器上静态资源的更新时间与本地缓存资源的更新时间是否一致来判定，还可以设置一个固定的过期时间，等等。
+然而协商缓存是通过上次请求的 `Etag` 或 `Last-Modified` 与服务器对比请求资源的信息来判断缓存资源是否过期，如果过期就重新获取资源，没有过期就启用本地的缓存资源而不再向服务器下载该资源，此时会收到 304 的状态码，标记为 `not modified`。协商缓存要比强缓存流程要多一些，具体过程入下：
+
+![](https://i.loli.net/2021/07/20/e1cLN3xQdi6aDh4.png)
 
 如果不使用缓存，那么浏览器每发起一个请求就会从服务器重新获取一遍资源，对于大多数服务器来说，是不会启用这一方式的，只有用户使用 `ctrl + F5` 刷新页面时才会重新请求资源。
 
 
-# 1. Cache-control 头
+# 1. Cache-control
 
 在 Http/1.1 Header 的 `Cache-control` 字段可以存放缓存相关的信息，以 Express 框架为例，我们可以使用 `req.set` 来设置 Http Header，从而自定义请求缓存：
 
@@ -91,7 +93,7 @@ Cache-Control: must-revalidate
 
 ETag 是在响应头中存放的一个字段，用于校验服务器资源是否过期，从而判断是否启用缓存，对于访问服务器的静态资源来说，ETag 可以表示为静态文件的 Hash。
 
-如果给定URL中的资源更改，则一定要生成新的Etag值。 因此Etags类似于指纹，也可能被某些服务器用于跟踪。 比较etags能快速确定此资源是否变化，但也可能被跟踪服务器永久存留。
+如果给定URL中的资源更改，则一定要生成新的 Etag 值。 因此 Etag 类似于指纹，也可能被某些服务器用于跟踪。 比较 Etag 能快速确定此资源是否变化，但也可能被跟踪服务器永久存留。
 
 ETag 通常用于实现两种功能：
 
@@ -125,3 +127,8 @@ If-Match: "33a64df551425fcc55e4d42a148795d9f25f89d4"
 ```
 
 如果哈希值不匹配，则意味着文档已经被编辑，抛出[`412`](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Status/412)前提条件失败错误。
+
+# 3. Last-Modify
+
+The **`Last-Modified`**  是一个响应首部，其中包含源头服务器认定的资源做出修改的日期及时间。 它通常被用作一个验证器来判断接收到的或者存储的资源是否彼此一致。由于精确度比  [`ETag`](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/ETag) 要低，所以这是一个备用机制。包含有  [`If-Modified-Since`](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/If-Modified-Since) 或 [`If-Unmodified-Since`](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/If-Unmodified-Since) 首部的条件请求会使用这个字段。
+
