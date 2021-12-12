@@ -199,7 +199,7 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=screen -d -m ~/apps/wyc/wyc_linux_arm -token=mjxopf92
+ExecStart=screen -d -m ~/apps/wyc/wyc_linux_arm -token=<token>
 PrivateTmp=true
 
 [Install]
