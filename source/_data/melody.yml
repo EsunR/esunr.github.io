@@ -131,9 +131,9 @@ cdn:
 
 # Post info settings
 # ---------------
-avatar: http://img.cdn.esunr.xyz/github_avatar.jpeg
+avatar: https://img.cdn.esunr.xyz/blog_avatar.jpeg
 
-top_img: http://img.cdn.esunr.xyz/aeb2048ff782b9dc4d1bbf2870b38581..jpg # true false or url of img
+top_img: https://img.cdn.esunr.xyz/blog_bg.jpg # true false or url of img
 
 post_meta:
   date_type: created # created or updated
