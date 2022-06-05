@@ -22,7 +22,15 @@ jobs:
           cmd: install
       
       - name: Check yarn & node version
-        run: echo "Node version is `node -v`" && echo "Yarn version is `yarn -v`"
+        run: |
+          echo "Node version is `node -v`"
+          echo "Yarn version is `yarn -v`"
       
       - name: Build & Deploy
-        run: rm -rf .deploy_git && yarn clean && yarn build && yarn deploy
+        run: |
+          git config --local user.name "EsunR"
+          git config --local user.email "641411169@qq.com"
+          rm -rf .deploy_git
+          yarn clean
+          yarn build
+          yarn deploy
