@@ -15,9 +15,3 @@ jobs:
         uses: borales/actions-yarn@v1.22.18
         with:
           cmd: install
-
-      - name: Build blog codes
-        uses: actions/setup-node@v3
-        with:
-          node-version: "10"
-        run: echo "Node version is `node -v`" && echo "Yarn version is `yarn -v`"
