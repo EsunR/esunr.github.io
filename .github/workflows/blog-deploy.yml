@@ -4,7 +4,7 @@ on:
     branches:
       - "source"
 jobs:
-  check-bats-version:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -16,7 +16,8 @@ jobs:
         with:
           cmd: install
 
-      - uses: actions/setup-node@v3
+      - name: Build blog codes
+        uses: actions/setup-node@v3
         with:
           node-version: "10"
         run: echo "Node version is `node -v`" && echo "Yarn version is `yarn -v`"
