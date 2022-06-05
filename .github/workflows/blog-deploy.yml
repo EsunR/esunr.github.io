@@ -10,22 +10,26 @@ jobs:
       - uses: actions/checkout@v3
         with:
           ref: "source"
-      
+
+      - uses: actions/labeler@v4
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Setup node
         uses: actions/setup-node@v3
         with:
           node-version: "10"
-      
+
       - name: Setup yarn & Install node_modules
         uses: borales/actions-yarn@v2.3.0
         with:
           cmd: install
-      
+
       - name: Check yarn & node version
         run: |
           echo "Node version is `node -v`"
           echo "Yarn version is `yarn -v`"
-      
+
       - name: Build & Deploy
         run: |
           git config --global user.name "EsunR"
