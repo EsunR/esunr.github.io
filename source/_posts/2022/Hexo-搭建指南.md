@@ -169,7 +169,7 @@ git init
 
 然后在 Github 中创建一个新项目仓库，名称必须为 `<你的github用户名>.github.io`，创建完成后按照指引将你的博客代码上传到 github。
 
-# 3.2 开启 Github Pages
+## 3.2 开启 Github Pages
 
 在执行这一步之前，先创建一个没有任何代码的新分支，命名为 `release`：
 
@@ -187,7 +187,7 @@ git push --set-upstream origin release # 上传 release 分支
 
 我们切回 `master` 分支，之后执行 `yarn build` 将生成的 `public` 目录下的文件复制一份，然后重新切回 `release` 分支，将刚才复制的内容粘贴到 `release` 分支下，并上传代码。如果没有操作失误的话，访问 `<你的github用户名>.github.io` 即可看到你的博客了。
 
-# 3.3 使用 hexo deploy 指令
+## 3.3 使用 hexo deploy 指令
 
 在上一步，我们演示了如何手动去将代码部署到 Github Pages 上，实际上 Hexo 提供了一个自动化的指令来帮助我们完成这一繁杂的过程，那就是使用 [hexo deploy](https://hexo.io/zh-cn/docs/one-command-deployment) 指令。
 
