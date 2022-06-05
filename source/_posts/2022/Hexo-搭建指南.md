@@ -1,5 +1,5 @@
 ---
-title: Hexo 搭建指南
+title: Hexo 快速搭建指南
 tags: []
 categories:
   - Front
