@@ -212,4 +212,84 @@ deploy:
 
 # 4. 使用 Github Action 自动化部署
 
-回顾一下上面的步骤，我们即使使用了 `hexo deploy` 指令，其实也很麻烦，需要我们在本地等漫长的编译过程，编译完了还要更新代码到 github 仓库上。
+回顾一下上面的步骤，我们即使使用了 `hexo deploy` 指令，其实也很麻烦，需要我们在本地等漫长的编译过程，编译完了还要更新代码到 github 仓库上。为了简化这一流程，就可以选择使用 Github Action 来帮我们做自动化部署。
+
+Github Action 可以实现在一个行为触发之后再执行一些其他的行为，利用这个能力我们就可以实现当我们写完一篇文章后，将代码 Push 到 Github 仓库的这一刻，让 Github 来帮我们完成编译以及部署这个流程，也就是实现持续集成（CI）、持续交付（CD）的这个效果。
+
+关于 Github Action，详细教程可以查看 [官方文档](https://docs.github.com/cn/actions)。按照文档中所描述的，只要我们在代码中添加一层 `.github/workflows` 目录，并且在目录下创建一个 `yml` 文件来描述具体的行为，就可以实现开启 Github Action。
+
+如下是一个编写好的部署 hexo 博客的 yml 文件，你可以将其写入到 `.github/workflows/blog-deploy.yml` 文件中：
+
+```yml
+name: Deploy hexo blog
+on:
+  push:
+    branches:
+      - "master"
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: "master"
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "14"
+
+      - name: Setup yarn & Install node_modules
+        uses: borales/actions-yarn@v2.3.0
+        with:
+          cmd: install
+
+      - name: Check yarn & node version
+        run: |
+          echo "Node version is `node -v`"
+          echo "Yarn version is `yarn -v`"
+
+      - name: Build & Deploy
+        run: |
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+          sed -i'' "s~git@github.com:~https://${{ secrets.GH_TOKEN }}@github.com/~" _config.yml
+          rm -rf .deploy_git
+          yarn clean
+          yarn build
+          yarn deploy
+```
+
+保存后提交代码后，就可以在你的博客的 Github 项目仓库里的 Actions 标签页里找到创建好的 workflow 了，并且当你 push 代码时，这个工作流就会被触发：
+
+![](https://s2.loli.net/2022/06/05/7a1uWv2npsr4lIj.png)
+
+但其实它最终会失败的，因为我们还有一步没有完成。在上面的脚本中使用了一个 Github Action 的 [secrets 上下文](https://docs.github.com/cn/actions/learn-github-actions/contexts#secrets-context)，即 `${{ secrets.GH_TOKEN }}` 这里。
+
+`${{}}` 是 Github Action 中的特定模板语法，可以获取到一些 Github 相关的内置的系统变量（姑且这么说吧），但又区区别与 Github Action 的环境变量。我们这里获取的 `secrets.GH_TOKEN` 是 Github Personal access token，获取这个 token 的目的是为了让当前的 Github Action 工作流有向我们的项目推送代码的权限。
+
+首先我们要获取这个 Token，你可以在你的用户头像菜单里选择 `Setting`，进入设置后选择 `Developer settings`，再选择 `Persona access token` 就可以看到它了：
+
+![](https://s2.loli.net/2022/06/05/UDtl18ExRyO24nK.png)
+
+点击右上角的 `Generate new token` 按钮生成新的 Token，填写一个你比较容易区分的备注后，勾选 `repo` 和 `workflow` 权限，并将 `Expiration` 过期时间选为 `No expiration`：
+
+![](https://s2.loli.net/2022/06/05/Ar3V247LEmTUofS.png)
+
+> 这个 Token 相当重要，千万不能泄露，如过泄露立刻重置该 token ！！！
+
+点击 `Generate token` 按钮后，就会生成一个 `ghp` 开头的 token，你需要在此复制该 token（后面不能再查看了，只能重新生成）:
+
+![](https://s2.loli.net/2022/06/05/Uk4xcMfPdsDHmYg.png)
+
+复制该 token 后，进入到博客仓库的设置中，选择 `Secrets - Actions`，点击 `New repository secret` 按钮生成一个密钥信息：
+
+![](https://s2.loli.net/2022/06/05/dx3XuegCo7UGAPb.png)
+
+我们将密钥名称写为 `GH_TOKEN`，值填入刚才复制的 Github token：
+
+![](https://s2.loli.net/2022/06/05/RGYbpPB4CDLS5kc.png)
+
+> 这里所新建的 secret 字段，就可以被 Github Action yml 配置中的 `secret` 上下文对象所获取到。
+
+至此 Github Action 工作流就可以正常使用了，你可以愉快的开始写你的博客啦，你的每次提交 Github Action 都会帮你进行自动部署，enjoy yourself ~
