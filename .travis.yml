@@ -7,7 +7,7 @@ cache:
     - node_modules
 branches:
   only:
-    - source
+    - source_bac
 script:
   - rm -rf .deploy_git
   - hexo clean
