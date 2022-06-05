@@ -266,7 +266,7 @@ jobs:
 
 但其实它最终会失败的，因为我们还有一步没有完成。在上面的脚本中使用了一个 Github Action 的 [secrets 上下文](https://docs.github.com/cn/actions/learn-github-actions/contexts#secrets-context)，即 `${{ secrets.GH_TOKEN }}` 这里。
 
-`${{}}` 是 Github Action 中的特定模板语法，可以获取到一些 Github 相关的内置的系统变量（姑且这么说吧），但又区区别与 Github Action 的环境变量。我们这里获取的 `secrets.GH_TOKEN` 是 Github Personal access token，获取这个 token 的目的是为了让当前的 Github Action 工作流有向我们的项目推送代码的权限。
+`${{ xxx }}` 是 Github Action 中的特定模板语法，可以获取到一些 Github 相关的内置的系统变量（姑且这么说吧），但又区区别与 Github Action 的环境变量。我们这里获取的 `secrets.GH_TOKEN` 是 Github Personal access token，获取这个 token 的目的是为了让当前的 Github Action 工作流有向我们的项目推送代码的权限。
 
 首先我们要获取这个 Token，你可以在你的用户头像菜单里选择 `Setting`，进入设置后选择 `Developer settings`，再选择 `Persona access token` 就可以看到它了：
 
