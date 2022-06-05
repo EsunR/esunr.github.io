@@ -6,7 +6,6 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    environment: production
     steps:
       - uses: actions/checkout@v3
         with:
@@ -32,6 +31,8 @@ jobs:
           echo "Yarn version is `yarn -v`"
 
       - name: Build & Deploy
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           git config --global user.name "EsunR"
           git config --global user.email "641411169@qq.com"
