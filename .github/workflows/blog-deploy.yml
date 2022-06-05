@@ -11,13 +11,18 @@ jobs:
         with:
           ref: "source"
       
-      - name: Setup node env
+      - name: Setup node
         uses: actions/setup-node@v3
         with:
           node-version: "10"
       
-      - name: Setup yarn env & Install node_modules
+      - name: Setup yarn & Install node_modules
         uses: borales/actions-yarn@v2.3.0
+        with:
+          cmd: install
       
       - name: Check yarn & node version
         run: echo "Node version is `node -v`" && echo "Yarn version is `yarn -v`"
+      
+      - name: Build & Deploy
+        run: rm -rf .deploy_git && yarn clean && yarn build && yarn deploy
