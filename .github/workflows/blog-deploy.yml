@@ -11,10 +11,6 @@ jobs:
         with:
           ref: "source"
 
-      - uses: actions/labeler@v4
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Setup node
         uses: actions/setup-node@v3
         with:
