@@ -12,6 +12,6 @@ jobs:
           ref: "source"
 
       - name: Install node_modules
-        uses: borales/actions-yarn@v1.22.18
+        uses: borales/actions-yarn@v2.3.0
         with:
           cmd: install
