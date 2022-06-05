@@ -28,9 +28,9 @@ jobs:
       
       - name: Build & Deploy
         run: |
-          git config --local user.name "EsunR"
-          git config --local user.email "641411169@qq.com"
-          git config --local --list
+          git config --global user.name "EsunR"
+          git config --global user.email "641411169@qq.com"
+          git config --global --list
           rm -rf .deploy_git
           yarn clean
           yarn build
