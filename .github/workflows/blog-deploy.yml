@@ -35,6 +35,8 @@ jobs:
           git config --global user.name "EsunR"
           git config --global user.email "641411169@qq.com"
           git config --global --list
+          echo ${{ secrets.GITHUB_TOKEN }}
+          sed -i'' "s~git@github.com:~https://${{ secrets.GITHUB_TOKEN }}@github.com/~" _config.yml
           rm -rf .deploy_git
           yarn clean
           yarn build
