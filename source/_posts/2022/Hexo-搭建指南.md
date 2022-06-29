@@ -240,7 +240,7 @@ jobs:
           node-version: "14"
 
       - name: Setup yarn & Install node_modules
-        uses: borales/actions-yarn@v2.3.0
+        uses: borales/actions-yarn@v3.0.0
         with:
           cmd: install
 
