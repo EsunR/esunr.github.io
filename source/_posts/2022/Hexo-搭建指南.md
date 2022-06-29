@@ -292,4 +292,4 @@ jobs:
 
 > 这里所新建的 secret 字段，就可以被 Github Action yml 配置中的 `secret` 上下文对象所获取到。
 
-至此 Github Action 工作流就可以正常使用了，你可以愉快的开始写你的博客啦，你的每次提交 Github Action 都会帮你进行自动部署，enjoy yourself ~
+至此 Github Action 工作流就可以正常使用了，你可以愉快的开始写你的博客啦，你的每次提交 Github Action 都会帮你进行自动部署，enjoy yourself ~~
