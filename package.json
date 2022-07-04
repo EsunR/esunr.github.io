@@ -6,13 +6,15 @@
     "build": "hexo generate",
     "clean": "hexo clean",
     "deploy": "hexo deploy",
-    "server": "hexo server"
+    "server": "hexo server",
+    "new": "sh ./script/create-post.sh"
   },
   "hexo": {
-    "version": "4.2.0"
+    "version": "6.2.0"
   },
   "dependencies": {
-    "hexo": "^4.0.0",
+    "hexo": "^6.0.0",
+    "hexo-auto-category": "^0.2.1",
     "hexo-deployer-git": "^2.0.0",
     "hexo-generator-archive": "^1.0.0",
     "hexo-generator-category": "^1.0.0",
@@ -24,5 +26,8 @@
     "hexo-renderer-marked": "^2.0.0",
     "hexo-renderer-stylus": "^1.1.0",
     "hexo-server": "^1.0.0"
+  },
+  "devDependencies": {
+    "hexo-cli": "^4.3.0"
   }
 }
