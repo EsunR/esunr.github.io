@@ -4,11 +4,14 @@
     "type": "split",
     "children": [
       {
-        "id": "dca53215fce26a93",
+        "id": "1f149357624402f9",
         "type": "leaf",
         "state": {
-          "type": "empty",
-          "state": {}
+          "type": "diff-view",
+          "state": {
+            "file": ".obsidian/workspace",
+            "staged": false
+          }
         }
       }
     ],
@@ -98,7 +101,7 @@
     "direction": "horizontal",
     "width": 300
   },
-  "active": "dca53215fce26a93",
+  "active": "1f149357624402f9",
   "lastOpenFiles": [
     "source/_obsidian/Post Template.md",
     "_posts/前端/Vue/Vuex Typescript 支持.md",
