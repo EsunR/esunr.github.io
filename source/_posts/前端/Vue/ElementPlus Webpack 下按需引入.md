@@ -11,7 +11,7 @@ date: 2022-07-05 19:40:57
 ---
 # 1. 引入方案
 
-官方说明：https://element-plus.gitee.io/zh-CN/guide/quickstart.html#%E6%8C%89%E9%9C%80%E5%AF%BC%E5%85%A5
+官方说明：[链接](https://element-plus.gitee.io/zh-CN/guide/quickstart.html#%E6%8C%89%E9%9C%80%E5%AF%BC%E5%85%A5)
 
 我们需要在 Webpack 配置里添加两个 Plugin：
 

@@ -108,6 +108,7 @@
   "active": "55e1185875a38bf2",
   "lastOpenFiles": [
     "_posts/前端/Vue/ElementPlus Webpack 下按需引入.md",
+    "_posts/前端/Vue/使用ElementUISelect组件的value-key属性，让绑定值可以为一个对象.md",
     "_posts/前端/Vue/Vuex Typescript 支持.md",
     "_posts/前端/Vue/Vue中销毁keep-alive缓存组件及缓存组件的管理.md",
     "_posts/前端/Vue/实现vuex与组件data之间的数据同步更新.md",
@@ -115,7 +116,6 @@
     "source/_obsidian/Post Template.md",
     "_posts/后端/未命名.md",
     "_posts/前端/Vue/Vue中的MVVM实现原理简析.md",
-    "_posts/前端/Vue/Vue使用中的各种小技巧.md",
-    "_posts/项目日志/基于Three-js实现的跳一跳小游戏开发日志.md"
+    "_posts/前端/Vue/Vue使用中的各种小技巧.md"
   ]
 }
