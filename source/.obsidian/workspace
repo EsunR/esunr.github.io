@@ -4,11 +4,15 @@
     "type": "split",
     "children": [
       {
-        "id": "08d51962b4801c94",
+        "id": "55e1185875a38bf2",
         "type": "leaf",
         "state": {
-          "type": "empty",
-          "state": {}
+          "type": "markdown",
+          "state": {
+            "file": "_posts/前端/Vue/ElementPlus Webpack 下按需引入.md",
+            "mode": "source",
+            "source": false
+          }
         }
       }
     ],
@@ -64,7 +68,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "_posts/前端/Vue/ElementPlus Webpack 下按需引入.md"
+              }
             }
           },
           {
@@ -73,6 +79,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "_posts/前端/Vue/ElementPlus Webpack 下按需引入.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -98,17 +105,17 @@
     "direction": "horizontal",
     "width": 300
   },
-  "active": "08d51962b4801c94",
+  "active": "55e1185875a38bf2",
   "lastOpenFiles": [
-    "source/_obsidian/Post Template.md",
+    "_posts/前端/Vue/ElementPlus Webpack 下按需引入.md",
     "_posts/前端/Vue/Vuex Typescript 支持.md",
+    "_posts/前端/Vue/Vue中销毁keep-alive缓存组件及缓存组件的管理.md",
+    "_posts/前端/Vue/实现vuex与组件data之间的数据同步更新.md",
+    "_posts/前端/Vue/对Vue2-2中监听子组件事件的理解.md",
+    "source/_obsidian/Post Template.md",
     "_posts/后端/未命名.md",
     "_posts/前端/Vue/Vue中的MVVM实现原理简析.md",
     "_posts/前端/Vue/Vue使用中的各种小技巧.md",
-    "_posts/项目日志/基于Three-js实现的跳一跳小游戏开发日志.md",
-    "_posts/项目日志/基于Canvas的FlappyBird小游戏开发总结.md",
-    "_posts/前端/Vue/对Vue2-2中监听子组件事件的理解.md",
-    "_posts/前端/Vue/实现vuex与组件data之间的数据同步更新.md",
-    "_posts/前端/Vue/使用ElementUISelect组件的value-key属性，让绑定值可以为一个对象.md"
+    "_posts/项目日志/基于Three-js实现的跳一跳小游戏开发日志.md"
   ]
 }
