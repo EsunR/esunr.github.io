@@ -2,14 +2,14 @@ name: Deploy hexo blog
 on:
   push:
     branches:
-      - "source"
+      - "source_code"
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: "source"
+          ref: "source_code"
 
       - name: Setup node
         uses: actions/setup-node@v3
