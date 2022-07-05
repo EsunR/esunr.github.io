@@ -7,8 +7,12 @@
         "id": "e80f454c0791b933",
         "type": "leaf",
         "state": {
-          "type": "empty",
-          "state": {}
+          "type": "markdown",
+          "state": {
+            "file": "_posts/前端/Vue/Vuex Typescript 支持.md",
+            "mode": "source",
+            "source": false
+          }
         }
       }
     ],
@@ -49,22 +53,33 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 340
   },
   "right": {
     "id": "fbd6973c65d95808",
     "type": "split",
     "children": [
       {
-        "id": "37898f187dba434f",
+        "id": "2ed8d6f9e10dd0f9",
         "type": "tabs",
         "children": [
           {
-            "id": "59cfe2bd42b4257b",
+            "id": "c9521b7ba65de6f2",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "_posts/前端/Vue/Vuex Typescript 支持.md"
+              }
+            }
+          },
+          {
+            "id": "f009ae7a15368b0b",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
+                "file": "_posts/前端/Vue/Vuex Typescript 支持.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -74,14 +89,33 @@
                 "unlinkedCollapsed": true
               }
             }
+          },
+          {
+            "id": "60954e4137147729",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {}
+            }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "active": "e80f454c0791b933",
-  "lastOpenFiles": []
+  "lastOpenFiles": [
+    "_posts/前端/Vue/Vuex Typescript 支持.md",
+    "_posts/后端/未命名.md",
+    "_posts/前端/Vue/Vue中的MVVM实现原理简析.md",
+    "_posts/前端/Vue/Vue使用中的各种小技巧.md",
+    "_posts/项目日志/基于Three-js实现的跳一跳小游戏开发日志.md",
+    "_posts/项目日志/基于Canvas的FlappyBird小游戏开发总结.md",
+    "_posts/前端/Vue/对Vue2-2中监听子组件事件的理解.md",
+    "_posts/前端/Vue/实现vuex与组件data之间的数据同步更新.md",
+    "_posts/前端/Vue/使用ElementUISelect组件的value-key属性，让绑定值可以为一个对象.md",
+    "_posts/前端/Vue/Vue递归组件——树形组件的实现参考.md"
+  ]
 }

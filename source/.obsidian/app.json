@@ -1,5 +1,6 @@
 {
   "legacyEditor": false,
   "livePreview": true,
-  "trashOption": "system"
+  "trashOption": "system",
+  "promptDelete": false
 }
