@@ -74,10 +74,11 @@ new_post_name: :category/:title
 
 但是这里有一个问题，就是只有 hexo 在执行 `hexo generate` 或者 `hexo server` 时候才会去触发 `categories` 的生成，那么每次我们创建文章都要经历这样的工作流：
 
-1. 创建分类目录，写文章（不用关心 `categories` 写什么）；
-2. 执行 `npx hexo generate` 在构建博客的时候触发 `hexo-auto-category` 插件的自动矫正 `categories` 功能；
-3. 检查文章中的 `categories` 是否正确；
-4. 添加 git 工作区变更，并提交并推送代码到 github。
+1. 创建分类目录，写文章，文件名推荐与文章标题一致（不用关心 `categories` 写什么）；
+2. 填写 `title`、`date`、`tag` 等元信息（这个文章后续再讨论如何省去这一步）;
+3. 执行 `npx hexo generate` 在构建博客的时候触发 `hexo-auto-category` 插件的自动矫正 `categories` 功能；
+4. 检查文章中的 `categories` 是否正确；
+5. 添加 git 工作区变更，并提交并推送代码到 github。
 
 为了简化这些工作，我们可以使用 git hook，在我们每次执行 `commit` 前都自动运行 `npx hexo generate` 触发自动生成 `categories` 的行为，并将生成后的变更自动添加到本次提交中，然后一同 push 到 github 上去。这里可以使用 husky 来很方便的设置这样一个 git hook。
 
@@ -86,6 +87,8 @@ new_post_name: :category/:title
 > Husky 采用了更简单的一种方式，让管理 GitHook 更加现代化
 > 
 > 关于 Husky 的使用可以参考我之前的文章[《使用 husky 每次提交时进行代码检查》](https://blog.esunr.xyz/2022/05/d36522b1089c.html)
+
+你可以按照如下步骤快速完成设置：
 
 1. 安装 huksy：`npm install husky --save-dev`
 2. 执行 huksy 初始化指令：`npx husky install`
@@ -98,3 +101,48 @@ new_post_name: :category/:title
 
 npx hexo generate && git add .
 ```
+
+如果提交代码的时候，终端出现类似的构建过程，就说明由 husky 创建的  git hook 生效了：
+
+![](https://s2.loli.net/2022/07/06/vcMfioCqpDtsFQd.png)
+
+这样你新建一篇博客的工作流就简化为：
+
+1. 创建分类目录，写文章；
+2. 填写 `title`、`date`、`tag` 等元信息;
+3. 添加 git 工作区变更，并提交并推送代码到 github。
+
+这样就解决了令人头疼的文章分类问题~
+
+# 3. 使用 Obsidian 来编写和管理文章
+
+> Obsidian 是目前个人感觉使用起来最舒服的基于 Markdown 的笔记管理工具，好处不多言，用了就知道。
+
+## 3.1 将 Hexo 项目导入 Obsidian
+
+这一步很简单，打开 Obsidian 后，它会默认打开上次的存储库，这个时候你需要点击左下角的 `打开其他库` icon 来调出欢迎面板：
+
+![](https://s2.loli.net/2022/07/06/QekZfSFhYlPwRim.png)
+
+然后在欢迎面板打开你的 Hexo 项目即可：
+
+![](https://s2.loli.net/2022/07/06/YuTzAZeRvICmrEw.png)
+
+由于 hexo 的文章只存在于 `source` 目录下，我们需要让 Obsidian 忽略其他文件的内容以优化性能以及减少不必要的搜索结果。具体的操作是在 `设置-文件与链接-Exclude Files`，将需要忽略的文件添加进去（尤其是 node_modules）：
+
+![](https://s2.loli.net/2022/07/06/8kN4a7H6XSAJzMo.png)
+
+## 3.2 使用 Obsidian Git 插件
+
+我们将 Hexo 项目导入到 Obsidian 之后就可以写作了，但是当写作完成之后还面临着提交代码、推送代码到 Github 上这一操作。如果我们在用额外的终端来进行这些操作的话就太割裂了，因此我们可以使用 Obsidian Git 插件来在 Obsidian 内就可以实现 git commit 以及 push 的操作。
+
+Obsidian Git 属于第三方插件，要想使用它必须在设置中关闭安全模式：
+
+![](https://s2.loli.net/2022/07/06/YmbFpJyDTazhCfd.png)
+
+然后浏览插件库，搜索 Obsidian Git 并点击安装，安装完成之后根据自己需要的设置进行配置即可。
+
+如果想要查看当前的工作区、暂存区，可以使用快捷键 `command + p` 打开命令面板，输入 `open source control view` 就可以打开 Git 面板了，这里的面板跟 VSCode 的面板操作类似，并且我它会自动帮你生成 commit 信息（你可以自行在 Obsidian Git 设置面板里配置默认的 commit 信息）：
+
+![](https://s2.loli.net/2022/07/06/jDtmglLPznXrsx8.png)
+
