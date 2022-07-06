@@ -4,12 +4,12 @@
     "type": "split",
     "children": [
       {
-        "id": "55e1185875a38bf2",
+        "id": "ea380cd2d2962f27",
         "type": "leaf",
         "state": {
           "type": "markdown",
           "state": {
-            "file": "_posts/前端/Vue/ElementPlus Webpack 下按需引入.md",
+            "file": "source/_posts/其他/Hexo + Obsidian + iCloud 完美的编辑与同步方案.md",
             "mode": "source",
             "source": false
           }
@@ -40,16 +40,25 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
-                "matchingCase": false,
-                "explainSearch": false,
-                "collapseAll": false,
+                "query": "hexo",
+                "matchingCase": true,
+                "explainSearch": true,
+                "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical"
               }
             }
+          },
+          {
+            "id": "527378dabe3f038f",
+            "type": "leaf",
+            "state": {
+              "type": "file-tree-view",
+              "state": {}
+            }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "horizontal",
@@ -69,17 +78,17 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/前端/Vue/ElementPlus Webpack 下按需引入.md"
+                "file": "source/_posts/其他/Hexo + Obsidian + iCloud 完美的编辑与同步方案.md"
               }
             }
           },
           {
-            "id": "f009ae7a15368b0b",
+            "id": "ba2ba2730059cb78",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/前端/Vue/ElementPlus Webpack 下按需引入.md",
+                "file": "source/_posts/其他/Hexo + Obsidian + iCloud 完美的编辑与同步方案.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -89,33 +98,24 @@
                 "unlinkedCollapsed": true
               }
             }
-          },
-          {
-            "id": "b02d97fb23b65636",
-            "type": "leaf",
-            "state": {
-              "type": "git-view",
-              "state": {}
-            }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "horizontal",
     "width": 300
   },
-  "active": "55e1185875a38bf2",
+  "active": "ea380cd2d2962f27",
   "lastOpenFiles": [
-    "_posts/前端/Vue/ElementPlus Webpack 下按需引入.md",
-    "_posts/前端/Vue/使用ElementUISelect组件的value-key属性，让绑定值可以为一个对象.md",
-    "_posts/前端/Vue/Vuex Typescript 支持.md",
-    "_posts/前端/Vue/Vue中销毁keep-alive缓存组件及缓存组件的管理.md",
-    "_posts/前端/Vue/实现vuex与组件data之间的数据同步更新.md",
-    "_posts/前端/Vue/对Vue2-2中监听子组件事件的理解.md",
-    "source/_obsidian/Post Template.md",
-    "_posts/后端/未命名.md",
-    "_posts/前端/Vue/Vue中的MVVM实现原理简析.md",
-    "_posts/前端/Vue/Vue使用中的各种小技巧.md"
+    "source/_posts/其他/Hexo + Obsidian + iCloud 完美的编辑与同步方案.md",
+    "source/_posts/其他/Hexo-搭建指南.md",
+    "source/_posts/其他/Chrome配置SwitchyOmega指南.md",
+    "source/_posts/后端/Go/BeeGo快速使用指南.md",
+    "source/_posts/后端/Go/2019年GoWeb三款主流框架：Gin、Beego、Iris选型对比.md",
+    "source/_posts/未分类/测试的文本.md",
+    "source/_posts/前端/React/从零开始创建一个React-Native-Native-Modules.md",
+    "node_modules.nosync/amdefine/README.md",
+    "node_modules.nosync/abbrev/README.md",
+    "node_modules.nosync/@types/babel-types/README.md"
   ]
 }

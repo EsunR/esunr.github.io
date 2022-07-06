@@ -1,6 +1,6 @@
 ---
 title: Hexo 快速搭建指南
-tags: []
+tags: [Hexo]
 categories:
   - 其他
 date: 2022-06-05 12:06:47
@@ -8,7 +8,7 @@ date: 2022-06-05 12:06:47
 
 # 1. 安装与使用 Hexo
 
-hexo 官方网站：https://hexo.io/zh-cn/
+hexo 官方网站：[链接](https://hexo.io/zh-cn/)
 
 ## 1.1 安装
 
@@ -117,7 +117,7 @@ systemctl start nginx # 开启 nginx
 systemctl status nginx # 查看 nginx 状态
 ```
 
-官方完整安装文档：https://www.nginx.com/resources/wiki/start/topics/tutorials/install/#official-debian-ubuntu-packages
+官方完整安装文档：(链接)[https://www.nginx.com/resources/wiki/start/topics/tutorials/install/#official-debian-ubuntu-packages]
 
 ### 查看/修改 Nginx 配置
 
@@ -292,4 +292,4 @@ jobs:
 
 > 这里所新建的 secret 字段，就可以被 Github Action yml 配置中的 `secret` 上下文对象所获取到。
 
-至此 Github Action 工作流就可以正常使用了，你可以愉快的开始写你的博客啦，你的每次提交 Github Action 都会帮你进行自动部署，enjoy yourself ~~
+至此 Github Action 工作流就可以正常使用了，你可以愉快的开始写你的博客啦，你的每次提交 Github Action 都会帮你进行自动部署，enjoy yourself ~

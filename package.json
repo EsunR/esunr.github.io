@@ -8,7 +8,8 @@
     "deploy": "hexo deploy",
     "server": "hexo server",
     "new": "sh ./script/create-post.sh",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "icloud-no-sync": "mv node_modules node_modules.nosync && ln -s node_modules.nosync/ node_modules"
   },
   "hexo": {
     "version": "6.2.0"
