@@ -132,7 +132,44 @@ npx hexo generate && git add .
 
 ![](https://s2.loli.net/2022/07/06/8kN4a7H6XSAJzMo.png)
 
-## 3.2 使用 Obsidian Git 插件
+同时，在你的 hexo 项目的 .gitignore 文件中加入如下内容：
+
+```
+.obsidian/workspace
+```
+
+> .obsidian 文件本身是可以同步的，当前存储库的插件以及相关的配置都会下载在这个文件夹中，因此将其同步到 git 记录中也是非常有用的，假如你切换设备就不需要重新为当前的存储库重新配置 Obsidian 了。
+
+## 3.2 使用 Obsidian 模板快速创建文章
+
+Obsidian 是支持创建新文件时插入模板的，这就意味着我们可以不用重复写 Hexo 博客文的 [Front-matter](https://hexo.io/zh-cn/docs/front-matter.html) 部分。
+
+> Front-matter 是文件最上方以 `---` 分隔的区域，用于指定个别文件的变量，举例来说：
+> 
+> \---
+> title: Hello World
+> date: 2013/7/13 20:46:25
+> \---
+
+首先我们要创建模板，我们可以在 `source` 目录下创建 `_obsidian` 文件夹，并创建一篇 `Post Template` 的文章（md文件），内容为：
+
+```
+---
+title: {{title}}
+date: {{date}}
+tags: []
+---
+```
+
+然后进入到 Obsidian 的设置面板，选择『核心插件』，并启用『模板』功能。同时点击旁边的配置按钮，进入到模板配置的设置中，将配置信息设置为：
+
+![](https://s2.loli.net/2022/07/06/GcWpeZHJIumFEs1.png)
+
+之后，我们再创建新文章的时候，只需要点击侧边栏的『插入模板』按钮就可以快速生成 Front-matter 信息：
+
+![](https://s2.loli.net/2022/07/06/aV4GeoxKZLMWg2j.png)
+
+## 3.3 使用 Obsidian Git 插件
 
 我们将 Hexo 项目导入到 Obsidian 之后就可以写作了，但是当写作完成之后还面临着提交代码、推送代码到 Github 上这一操作。如果我们在用额外的终端来进行这些操作的话就太割裂了，因此我们可以使用 Obsidian Git 插件来在 Obsidian 内就可以实现 git commit 以及 push 的操作。
 
@@ -147,3 +184,30 @@ Obsidian Git 属于第三方插件，要想使用它必须在设置中关闭安�
 ![](https://s2.loli.net/2022/07/06/jDtmglLPznXrsx8.png)
 
 当然你也可以懒得看 source control view，自己直接用 `command+p` 打开命令面板，分别执行 `git commit` 命令与 `git push` 即可。
+
+## 3.4 使用 File Tree 插件
+
+Obsidian 很不好的一点就是会把所有的文件都列在左侧的文件列表中，但是对于我们的 Hexo 项目写文章来说，我们只会修改 `_post` 目录下的文件，因此我们希望左侧的文件列表中只显示 `_post` 文件夹，但是目前为止 Obsidian 并没有推出类似『聚焦』到某一文件夹内的功能。
+
+好在 Obsidian 强大的插件库中有一个 `File Tree Alternative Plugin` 第三方插件可以满足这一需求。按照 Obsidian Git 相同的方法去下载这个第三方插件，下载完成之后我们会发现左侧菜单出现了一个 `File Tree` 的 Tab 页，点击后就可以看到文件以树形的结构呈现：
+
+![](https://s2.loli.net/2022/07/06/83QJC6ohSzFpqVK.png)
+
+我们展开 `source` 文件夹，并右键 `_post` 文件夹，选择 `Focuse on Folder` 后，左侧的文件列表中就只会显示 `_post` 文件夹中的内容了：
+
+![](https://s2.loli.net/2022/07/06/61qjEJyv3pwmsWt.jpg)
+
+# 4. 使用 iCloud 同步
+
+如果你是苹果系用户，完全可以通过 iCloud 将 Hexo 项目作为 Obsidian 库同步到各个设备上，让每个设备都可以通过 Obsidian 实时查看和编辑笔记。
+
+你只需要将你的 Hexo 项目复制到 iCloud 的 Obsidian 文件夹即可，但是需要注意的一点是，你项目的 `node_modules` 也同步到 iCloud 上的话就太恐怖了。为了避免这一情况，我们需要将 `node_modules` 命名为 `node_modules.nosync` 这样就不会被 iCloud 同步。但是我们又需要 `node_modules` 来让项目正常运行，因此我们可以使用软链来创建一个 `node_modules` 软链到 `node_modules.nosync` 就能一举两得。简化成终端指令可以为：
+
+```sh
+# 重命名 node_modules
+mv node_modules node_modules.nosync
+
+# 创建 node_modules 软链
+ln -s node_modules.nosync/ node_modules
+```
+
