@@ -12,5 +12,6 @@
   ],
   "attachmentFolderPath": "/",
   "newFileLocation": "folder",
-  "newFileFolderPath": "source/_posts/未分类"
+  "newFileFolderPath": "source/_posts/未分类",
+  "vimMode": false
 }

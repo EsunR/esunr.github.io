@@ -1,7 +1,7 @@
 {
   "ribbonIcon": true,
   "showRootFolder": false,
-  "showFilesFromSubFolders": true,
+  "showFilesFromSubFolders": false,
   "searchFunction": true,
   "allSearchOnlyInFocusedFolder": true,
   "showFilesFromSubFoldersButton": true,
