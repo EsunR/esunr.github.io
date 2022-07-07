@@ -1,6 +1,5 @@
 ---
 title: 使用Flask-Sqlachemy操作数据库对象
-permalink: 使用Flask-Sqlachemy操作数据库对象
 tags:
   - Python
   - ORM

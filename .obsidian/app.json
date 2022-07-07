@@ -8,7 +8,8 @@
     "node_modules.nosync/",
     "script/",
     "themes/",
-    "scaffolds/"
+    "scaffolds/",
+    "public/"
   ],
   "attachmentFolderPath": "/",
   "newFileLocation": "folder",
