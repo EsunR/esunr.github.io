@@ -13,7 +13,7 @@ timezone: "Asia/Shanghai"
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://esunr.github.io
+url: https://blog.esunr.xyz
 root: /
 permalink: :year/:month/:hash.html
 permalink_defaults:
@@ -28,7 +28,7 @@ archive_dir: archives
 category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
-skip_render:
+skip_render: "google086d7365c1be4dca.html"
 
 # Writing
 new_post_name: :category/:title # File name of new posts
@@ -74,7 +74,7 @@ meta_generator: true
 date_format: YYYY-MM-DD
 time_format: HH:mm:ss
 ## Use post's date for updated date unless set in front-matter
-updated_option: 'date'
+updated_option: "date"
 
 # Pagination
 ## Set per_page to 0 to disable pagination
@@ -85,6 +85,7 @@ pagination_dir: page
 ## include:/exclude: options only apply to the 'source/' folder
 include:
 exclude:
+  - "_obsidian"
 ignore:
 
 # Extensions
@@ -106,5 +107,16 @@ search:
 
 # Docs: https://github.com/xu-song/hexo-auto-category
 auto_category:
- enable: true
- depth: 
+  enable: true
+  depth:
+
+# Docs: https://github.com/hexojs/hexo-generator-sitemap
+sitemap:
+  path:
+    - sitemap.xml
+    - sitemap.txt
+  template: ./sitemap_tmp/sitemap_template.xml
+  template_txt: ./sitemap_tmp/sitemap_template.txt
+  rel: false
+  tags: true
+  categories: true
