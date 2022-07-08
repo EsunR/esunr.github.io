@@ -1,6 +1,6 @@
 $(function () {
   var initTop = 0
-  $('.toc-child').hide()
+  // $('.toc-child').hide()
 
   // main of scroll
   $(window).scroll(throttle(function (event) {
@@ -143,7 +143,7 @@ $(function () {
 
     if (currentId === '') {
       $('.toc-link').removeClass('active')
-      $('.toc-child').hide()
+      // $('.toc-child').hide()
     }
 
     // fix #286 since hexo v5.0.0 will
@@ -173,7 +173,7 @@ $(function () {
         // excluding the currently active one
         .closest('.toc-item').siblings('.toc-item')
         // Hide their respective list of subsections
-        .find('.toc-child').hide()
+        // .find('.toc-child').hide()
     }
   }
 })

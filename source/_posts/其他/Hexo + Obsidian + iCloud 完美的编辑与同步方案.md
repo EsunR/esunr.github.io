@@ -2,6 +2,8 @@
 title: Hexo + Obsidian + Git 完美的博客部署与编辑方案
 tags:
   - Hexo
+  - Obsidian
+  - 自动化
 categories:
   - 其他
 date: 2022-07-06 15:10:52
