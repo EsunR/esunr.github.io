@@ -23,7 +23,7 @@ menu:
 
 # Favicon
 # ---------------
-favicon: /melody-favicon.ico
+favicon: favicon.ico
 
 # PWA
 # See https://github.com/JLHwung/hexo-offline
@@ -89,13 +89,13 @@ katex:
 
 # Toggle fireworks (IE >= 10)
 # ---------------
-fireworks: false
+fireworks: true
 
 # Analysis
 # ---------------
-baidu_analytics:
+baidu_analytics: aaa6c3c6f530f0ca7c2afc57d8da90de
 
-google_analytics:
+google_analytics: 3824623619
 
 # Tencent_analytics ID
 tencent_analytics:
@@ -142,7 +142,7 @@ post_meta:
 
 # Please see doc for more details: https://molunerfinn.com/hexo-theme-melody-doc/#/additional-package-support?id=word-counting
 wordcount:
-  enable: false
+  enable: true
 
 toc:
   enable: true
@@ -186,8 +186,8 @@ slide:
 # Share System
 # ---------------
 addThis:
-  enable: false
-  #pubid:
+  enable: true
+  pubid: ra-62c7f2684e36ba34
 
 # sharejs:
 # enable: false
@@ -265,11 +265,23 @@ busuanzi:
 #links:
 #Name: url
 
+# canvas_ribbon
+# See: https://github.com/hustcc/ribbon.js
+canvas_ribbon:
+  enable: false
+  size: 150
+  alpha: 0.6
+  zIndex: -1
+  click_to_change: false
+
 # Follow Me Button
 follow:
-  enable: false
+  enable: true
   url: "https://github.com/EsunR"
   text: "Github"
+
+# controls the sidebar showing or hidden in different pages
+sidebar_display: post # all/index/post/index-none/post-none/hidden
 
 # Ads
 # ---------------
