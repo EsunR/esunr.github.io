@@ -1,3 +1,18 @@
+---
+title: 前端 Lint 工具使用指南
+tags:
+  - lint
+  - eslint
+  - stylelint
+  - commitlint
+  - 前端工程化
+  - 代码检查
+categories:
+  - 前端
+  - 前端工程化
+date: 2022-07-11 14:11:22
+---
+
 # 1. ESLint
 
 [官网](https://eslint.org/)
@@ -71,6 +86,25 @@ module.exports = {
 
 - 如果你想用其他的规则并且想用 Prettier，那么就使用 `eslint-config-prettier` 与其他规则配合使用；
 - 如果你的代码规范不那么严格（就是懒），仅仅需要 Prettier 的规范即可，那么仅仅安装并配置一个 `eslint-plugin-prettier` 即可。
+
+## 1.4 与 Husky 集成
+
+使用 `lint-staged` + `husky` 的配置对每次代码进行提交检查是一个好习惯，你可以先看[《使用 husky 每次提交时进行代码检查》](https://blog.esunr.xyz/2022/05/d36522b1089c.html)这篇文章来快速了解 husky 的使用。
+
+安装完 `lint-staged` 和 `husky` 后，在 `package.json` 中添加：
+
+```json
+"lint-staged": {  
+	"src/**/*.{js,vue,ts}": "eslint --cache --fix",
+	"src/**/*": "prettier --write"
+}
+```
+
+在 `pre-commit` hook 中添加：
+
+```sh
+npx lint-staged
+```
 
 # 2. Stylelint
 
@@ -159,4 +193,70 @@ module.exports = {
 }
 ```
 
+## 2.4 与 husky 集成
+
+stylelint 仍推荐与 `lint-staged` 和 `husky` 集成，在 `lint-staged` 规则里写入：
+
+```json
+{
+  "*.css": "stylelint",
+  "*.scss": "stylelint --syntax=scss" // 如果需要 scss 校验的话
+}
+```
+
 # 3. CommitLint
+
+[官网](https://commitlint.js.org/#/?id=getting-started)
+
+## 3.1 安装
+
+```sh
+npm install @commitlint/cli @commitlint/config-conventional -D
+```
+
+## 3.2 配置
+
+创建一个 `commitlint.config.js` 文件来配置 commitlint 的规则，以下是官方推荐的一行配置：
+
+```sh
+echo "module.exports = {extends: ['@commitlint/config-conventional']}" > commitlint.config.js
+```
+
+## 3.3 生成标准化的 commit
+
+可以使用 [commitzen](https://github.com/commitizen/cz-cli) 来帮助生成标准化的 commit，从而通过 commitlint 的校验。
+
+安装：
+
+```sh
+npm install commitzen -D
+```
+
+在 `package.json` 中添加 `scripts`：
+
+```json
+"scripts": {
+	"commit": "cz"
+}
+```
+
+然后每次提交代码时，将 `git commit -m "xxx"` 替换为 `npm run commit` 然后按照 cli 指令输入内容即可。
+
+## 3.3 与 husky 集成
+
+创建 `commit-msg` hook 并添加内容：
+
+```sh
+cat <<EEE > .husky/commit-msg
+#!/bin/sh
+. "\$(dirname "\$0")/_/husky.sh"
+
+npx --no -- commitlint --edit "\${1}"
+EEE
+```
+
+为 hook 添加执行权限：
+
+```sh
+chmod a+x .husky/commit-msg
+```
