@@ -236,7 +236,17 @@ npm install commitizen -D
 
 ```json
 "scripts": {
-	"commit": "cz"
+  "commit": "cz"
+}
+```
+
+同时，在 `package.json` 中添加 `config`：
+
+```json
+"config": {
+  "commitizen": {
+    "path": "cz-conventional-changelog"
+  }
 }
 ```
 
