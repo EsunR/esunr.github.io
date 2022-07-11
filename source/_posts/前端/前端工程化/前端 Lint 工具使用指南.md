@@ -229,7 +229,7 @@ echo "module.exports = {extends: ['@commitlint/config-conventional']}" > commitl
 安装：
 
 ```sh
-npm install commitzen -D
+npm install commitizen -D
 ```
 
 在 `package.json` 中添加 `scripts`：
