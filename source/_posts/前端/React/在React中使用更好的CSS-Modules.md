@@ -2,7 +2,7 @@
 title: babel-plugin-react-css-modules使用指南：在React中更好的使用CSS-Modules
 tags:
   - React
-  - Webpack
+  - webpack
 categories:
   - 前端
   - React

@@ -2,7 +2,7 @@
 title: 使用 Vercel 全自动部署个人网站
 tags:
   - Vercel
-  - CICD
+  - cicd
   - 前端工程化
   - 自动部署
 categories:
@@ -17,7 +17,7 @@ Vercel 是一个全自动的 Web 应用部署、预览、上线平台。他类�
 
 - 支持应用模板，可以帮助开发人员快速搭建一个应用并完成上线流程；
 - 支持 Github 项目导入与联动；
-- Gtihub Action 是 CICD 流水线，而 Vercel 只专注于项目部署，其他的事情，比如 npm 自动发包、持续集成测试，不是 Vercel 的业务范围；
+- Github Action 是 CICD 流水线，而 Vercel 只专注于项目部署（静态托管），以及提供 [Serverless Function](https://vercel.com/docs/concepts/functions/serverless-functions)，其他的事情，比如 npm 自动发包、持续集成测试，不是 Vercel 的业务范围；
 - 支持零配置部署到全球的边缘网络，访问速度比 Github Page 快得多，无需关心 CDN、HTTPS，Vercel 会帮你做好这一切；
 - Vercel 可以部署多种环境，出了项目主要的生产环境之外，它可以将你的其他分支视为预览分支进行部署（当然这些预览环境会加上对应的响应头防止被搜索引擎收录）
 

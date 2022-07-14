@@ -1,7 +1,7 @@
 ---
 title: Webpack快速配置参考
 tags:
-  - Webpack
+  - webpack
 categories:
   - 前端
   - 前端工程化

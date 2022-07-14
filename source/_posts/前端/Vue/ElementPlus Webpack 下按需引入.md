@@ -1,7 +1,7 @@
 ---
 title: ElementPlus Webpack 下按需引入
 tags:
-  - Webpack
+  - webpack
   - Vue
   - Element-Plus
 categories:

@@ -5,6 +5,7 @@
 - if (is_category()) pageTitle = _p('page.category') + ': ' + page.category
 - if (is_month()) pageTitle += ': ' + page.month + '/' + page.year
 - if (is_year()) pageTitle += ': ' + page.year
+- if (is_post()) pageTitle = page.title
 - pageTitle ? pageTitle += ' | ' + config.title : pageTitle = config.title
 
 - var pageDescription = page.description || page.title || config.description || ''
@@ -24,7 +25,7 @@ html(lang=config.language)
     meta(name="keywords" content=pageKeywords)
     meta(name="author" content=pageAuthor)
     meta(name="copyright" content=pageCopyright)
-    title= pageTitle
+    title=pageTitle
     !=favicon_tag(config.favicon || theme.favicon || '/melody-favicon.ico')
     if theme.stylesheets !== undefined && theme.stylesheets.length > 0
       each url in theme.stylesheets
