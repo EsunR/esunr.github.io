@@ -17,7 +17,7 @@ date: 2022-07-11 14:11:22
 
 [官网](https://eslint.org/)
 
-ESLint 可以静态分析你的代码，得以让你快速发现代码中的错误部分。它内置雨大多数文本编辑器中，你还可以将 ESLint 作为持续集成管道的一部分，在持续集成的过程中帮你检查代码。
+ESLint 可以静态分析你的代码，得以让你快速发现代码中的错误部分。它内置于大多数文本编辑器中，你还可以将 ESLint 作为持续集成管道的一部分，在持续集成的过程中帮你检查代码。
 
 ## 1.1 安装
 
@@ -87,7 +87,28 @@ module.exports = {
 - 如果你想用其他的规则并且想用 Prettier，那么就使用 `eslint-config-prettier` 与其他规则配合使用；
 - 如果你的代码规范不那么严格（就是懒），仅仅需要 Prettier 的规范即可，那么仅仅安装并配置一个 `eslint-plugin-prettier` 即可。
 
-## 1.4 与 Husky 集成
+## 1.4 与 Typescript 集成
+
+如果你的项目是 typescript 搭建的，那么你需要一份 typescript 的规则集以及 parser，推荐使用 `@typescript-eslint/parser` 与 `@typescript-eslint/eslint-plugin`：
+
+```sh
+yarn add --dev @typescript-eslint/parser @typescript-eslint/eslint-plugin
+```
+
+.eslintrc.js:
+
+```js
+module.exports = {
+  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
+  parser: '@typescript-eslint/parser',
+  plugins: ['@typescript-eslint'],
+  root: true,
+};
+```
+
+更多信息可以参考[官方指南](https://typescript-eslint.io/docs/)
+
+## 1.5 与 Husky 集成
 
 使用 `lint-staged` + `husky` 的配置对每次代码进行提交检查是一个好习惯，你可以先看[《使用 husky 每次提交时进行代码检查》](https://blog.esunr.xyz/2022/05/d36522b1089c.html)这篇文章来快速了解 husky 的使用。
 
