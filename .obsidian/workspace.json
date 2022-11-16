@@ -1,0 +1,149 @@
+{
+  "main": {
+    "id": "dca5beb728cec925",
+    "type": "split",
+    "children": [
+      {
+        "id": "8590393eaf31b750",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "6a4ecace4bdb8df6",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "source/_posts/其他/Hexo + Obsidian + iCloud 完美的编辑与同步方案.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "057a7aa8eace6a09",
+    "type": "split",
+    "children": [
+      {
+        "id": "b5e4c545c8780337",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d2741abd566e6f1d",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "ce5f68c961eaa0e6",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "95b28b88a2c87039",
+            "type": "leaf",
+            "state": {
+              "type": "file-tree-view",
+              "state": {}
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "f7729dd9a265d74b",
+    "type": "split",
+    "children": [
+      {
+        "id": "abc4cd5c2b489a6a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "41f38759908ac62c",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "source/_posts/其他/Hexo + Obsidian + iCloud 完美的编辑与同步方案.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "1b284bca90c12e2f",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "source/_posts/其他/Hexo + Obsidian + iCloud 完美的编辑与同步方案.md"
+              }
+            }
+          },
+          {
+            "id": "41064a4a927e0131",
+            "type": "leaf",
+            "state": {
+              "type": "diff-view",
+              "state": {
+                "file": ".obsidian/appearance.json",
+                "staged": false
+              }
+            }
+          },
+          {
+            "id": "d682abf44d8e17b5",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {}
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "horizontal",
+    "width": 343.5
+  },
+  "active": "d682abf44d8e17b5",
+  "lastOpenFiles": [
+    "source/tags/index.md",
+    "source/_posts/CICD/Docker/Docker 常用指令整理.md",
+    "source/_posts/CICD/K8S/K8S 快速入门指南.md",
+    "source/_posts/面试/网络原理关前端面试题整理.md",
+    "source/_posts/面试/字节跳动面试记录.md",
+    "source/_posts/面试/业精于勤-基础前端面试题整理.md",
+    "source/_posts/面试/360面试总结.md",
+    "source/_posts/Linux/Linux 常用指令整理.md",
+    "source/_posts/Linux/图片格式转换神器imagemagick7的安装与使用.md",
+    "source/_posts/Git/Git 修改已提交的 commit 中的信息.md"
+  ]
+}

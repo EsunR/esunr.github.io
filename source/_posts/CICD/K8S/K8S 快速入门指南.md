@@ -1,11 +1,16 @@
 ---
 title: K8S 快速入门指南
-tags: []
+tags:
+  - K8S
+  - 快速入门
 categories:
   - CICD
   - K8S
 date: 2022-09-15 14:42:48
 ---
+
+> 视频：[Kubernetes (K8S) 3 小时快速上手 + 实践，无废话纯干货](https://www.bilibili.com/video/BV1Tg411P7EB/?vd_source=b233b2041b0c7ce85a2c9111063e461f)
+
 # 1. 安装 minikube
 
 ## 指定 kubectl 使用的配置文件
