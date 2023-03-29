@@ -58,7 +58,9 @@ Clash 的订阅链接**绝对不能泄露**，否则就会被别人白嫖代理�
 
 ## 2.3 IOS
 
-注册美区账号，APP Store 搜索 Choc 并购买下载
+~~注册美区账号，APP Store 搜索 Choc 并购买下载~~
+
+注册美区账号，APP Store 搜索 Stash 并购买下载
 
 # 3. 使用
 
@@ -116,7 +118,7 @@ General 面板是 Clash for Windows 独有的，一般不用调整。
 
 > 代理规则与 Clash for Windows 相同，不在赘述
 
-## 3.3 Choc
+## ~~3.3 Choc 不再推荐，推荐使用 Stash~~
 
 ![](https://s2.loli.net/2022/08/02/FmIPugaOUoVWizS.jpg)
 
