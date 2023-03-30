@@ -52,7 +52,7 @@ Clash 的订阅链接**绝对不能泄露**，否则就会被别人白嫖代理�
 
 如果可以使用 Google Play，优先在 Google Play 上下载发行版本，[下载地址](https://play.google.com/store/apps/details?id=com.github.kr328.clash)
 
-如果无法访问 Google Paly，从 Github 下载，[Clash for Android 下载地址](https://github.com/Fndroid/clash_for_windows_pkg/releases)
+如果无法访问 Google Paly，从 Github 下载，[Clash for Android 下载地址](https://github.com/Kr328/ClashForAndroid/releases)
 
 ![](https://s2.loli.net/2022/08/02/kLfzv24TcylutIK.png)
 
@@ -60,7 +60,11 @@ Clash 的订阅链接**绝对不能泄露**，否则就会被别人白嫖代理�
 
 ~~注册美区账号，APP Store 搜索 Choc 并购买下载~~
 
-注册美区账号，APP Store 搜索 Stash 并购买下载
+注册美区账号，APP Store 搜索 Stash 并购买下载（不能使用国内信用卡，需要买礼品卡兑换，自行 Google 关键词 『Stash 兑换码』，30RMB左右，也可以直接购买成品号）
+
+下载时认准 app 图标和开发者：
+
+![](https://s2.loli.net/2023/03/30/bFnDBpZ8mrwdJVv.jpg)
 
 # 3. 使用
 
@@ -84,7 +88,7 @@ Clash 的订阅链接**绝对不能泄露**，否则就会被别人白嫖代理�
 
 ![](https://s2.loli.net/2022/08/02/D4z5sgxmZl8CIAk.png)
 
-举例，如果你想看 B 站港区番剧，你可以手动调整规则列表中的『Bilibili』为香港节点：
+举例，如果你想看 B 站港区番剧，你可以手动调整规则列表中的『Bilibili』为香港节点（看完之后记得切回直连，否则浪费带宽，自己速度还慢，相当于从国外绕回国内）：
 
 ![](https://s2.loli.net/2022/08/02/BjMDuXNqstx1vCS.png)
 
@@ -121,5 +125,11 @@ General 面板是 Clash for Windows 独有的，一般不用调整。
 ## ~~3.3 Choc 不再推荐，推荐使用 Stash~~
 
 ![](https://s2.loli.net/2022/08/02/FmIPugaOUoVWizS.jpg)
+
+> 代理规则与 Clash for Windows 相同，不在赘述
+
+## 3.4 Stash
+
+![](https://s2.loli.net/2023/03/30/DU2hXSufmpgVJtN.jpg)
 
 > 代理规则与 Clash for Windows 相同，不在赘述
