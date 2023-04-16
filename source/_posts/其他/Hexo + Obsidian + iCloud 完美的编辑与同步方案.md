@@ -199,7 +199,7 @@ Obsidian 很不好的一点就是会把所有的文件都列在左侧的文件�
 
 ![](https://s2.loli.net/2022/07/06/61qjEJyv3pwmsWt.jpg)
 
-# 4. 使用 iCloud 同步
+# 4. 使用 iCloud 同步（不推荐，因为 Obsidian 文件嵌套很深，iCloud 同步会很灾难）
 
 如果你是苹果系用户，完全可以通过 iCloud 将 Hexo 项目作为 Obsidian 库同步到各个设备上，让每个设备都可以通过 Obsidian 实时查看和编辑笔记。
 
