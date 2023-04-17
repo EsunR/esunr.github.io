@@ -104,6 +104,8 @@ new_post_name: :category/:title
 npx hexo generate && git add .
 ```
 
+> 如果手动创建记得为 pre-commit 文件添加执行权限 `chmod +x pre-commit`
+
 如果提交代码的时候，终端出现类似的构建过程，就说明由 husky 创建的  git hook 生效了：
 
 ![](https://s2.loli.net/2022/07/06/vcMfioCqpDtsFQd.png)

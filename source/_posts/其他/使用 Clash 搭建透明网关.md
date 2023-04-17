@@ -56,3 +56,14 @@ systemctl disable systemd-resolved
 ```
 
 配置完成后就可以进入设备的 wifi 设置，修改网关地址（路由器地址）为你的 Linux 设备在局域网中的 IP 地址，同时将 DNS 服务也设置为 Linux 设备的 IP 地址，这样设置好的设备就可以进行科学上网了。
+
+# 3. 已知问题
+
+如果禁用了系统的 dns 服务，会导致在 clash 服务启动之前的所有服务的 dns 查找都崩溃，比如 nginx、frpc 等。解决方法是在 clash 服务启动之后再启动其他的服务。
+
+此外，如果使用了 homeassistant，Homekit 插件也会因为 Clash 对 DNS 的干扰，导致配件无响应。解决方法是先启动 Homeassistant，然后再启动 Clash。
+
+参考教程：
+
+- [Clash 旁路由透明网关](https://lvv.me/posts/2022/09/12_clash_as_router/)
+- https://little-star.love/posts/5d083060
