@@ -3,7 +3,6 @@ Thumbs.db
 db.json
 *.log
 node_modules
-node_modules.nosync
 public/
 .deploy*/
 themes/*/.gitignore
@@ -11,3 +10,4 @@ themes/*/.gitignore
 # Obsidian
 .obsidian/workspace
 .obsidian/workspace.json
+.trash

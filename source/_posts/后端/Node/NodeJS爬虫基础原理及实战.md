@@ -426,5 +426,3 @@ urlArr.reduce((rs, url) => {
 `initialValue`可选
 
 作为第一次调用 `callback`函数时的第一个参数的值。 如果没有提供初始值，则将使用数组中的第一个元素。 在没有初始值的空数组上调用 reduce 将报错。
-
-> 参考公开课：https://www.bilibili.com/video/av75510075?t=5
