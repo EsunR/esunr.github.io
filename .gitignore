@@ -6,6 +6,8 @@ node_modules
 node_modules.nosync
 public/
 .deploy*/
+themes/*/.gitignore
+
+# Obsidian
 .obsidian/workspace
 .obsidian/workspace.json
-themes/*/.gitignore
