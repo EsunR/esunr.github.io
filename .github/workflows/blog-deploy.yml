@@ -25,6 +25,11 @@ jobs:
         run: |
           echo "Node version is `node -v`"
           echo "Yarn version is `yarn -v`"
+      
+      - name: Extract branch name
+        shell: bash
+        run: echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >>$GITHUB_OUTPUT
+        id: extract_branch
 
       - name: Build & Deploy
         run: |
@@ -36,3 +41,10 @@ jobs:
           yarn clean
           yarn build
           yarn deploy
+
+      - name: Webhook
+        uses: joelwmale/webhook-action@master
+        with:
+          url: ${{ secrets.WEBHOOK_URL }}
+          method: POST
+          payload: '{"isManual":false,"projectId":1,"caseUrls":[{"value":"https://blog.esunr.xyz/","note":"首页"},{"value":"https://blog.esunr.xyz/2023/04/fbc3f997c608.html","note":"文章详情页"},{"value":"https://blog.esunr.xyz/categories/","note":"文章分类页"}],"reportCount":3,"tags":["online"],"branch":"${{ steps.extract_branch.outputs.branch }}","platform":"desktop","onlyCategories":["performance"],"customerSetting":{}}'
