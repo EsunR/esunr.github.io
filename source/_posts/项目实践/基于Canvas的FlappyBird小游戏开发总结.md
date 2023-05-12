@@ -4,7 +4,7 @@ tags:
   - Canvas
   - 项目实战
 categories:
-  - 项目日志
+  - 项目实践
 date: 2019-05-15 22:05:26
 ---
 [Github 源码地址](https://github.com/EsunR/FlappyBird-Canvas)  
