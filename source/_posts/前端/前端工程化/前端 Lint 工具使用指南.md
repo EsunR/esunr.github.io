@@ -37,7 +37,9 @@ module.exports = {
         "eslint:recommended"
     ],
     "parserOptions": {
+	    // ECMAScript 语言版本，默认为 5
         "ecmaVersion": 2018,
+        // 模块引用类型，默认为 script，如果使用 ESModule，设置为 module
         "sourceType": "module"
     }
 }
@@ -68,24 +70,36 @@ module.exports = {
 
 ```js
 module.exports = {
-    extends: ["prettier"],
     plugins: ["prettier"],
     parserOptions: {
         ecmaVersion: 2018,
         sourceType: "module",
     },
     rules: {
-        "prettier/prettier": "error",
-        "arrow-body-style": "off",
-        "prefer-arrow-callback": "off",
+        "prettier/prettier": "error"
     },
 };
 ```
 
-简单来说你可以这样做决定：
+最好的做法是将 `eslint-config-prettier` 和 `eslint-plugin-prettier` 共同使用，前者会消除掉 eslint 中对格式的校验部分，后者可以将 prettier 的设置作为代码的格式校验规则并应用到 eslint 中：
 
-- 如果你想用其他的规则并且想用 Prettier，那么就使用 `eslint-config-prettier` 与其他规则配合使用；
-- 如果你的代码规范不那么严格（就是懒），仅仅需要 Prettier 的规范即可，那么仅仅安装并配置一个 `eslint-plugin-prettier` 即可。
+```js
+module.exports = {
+  extends: ["prettier"],
+  plugins: ["prettier"],
+  parserOptions: {
+    ecmaVersion: 2018,
+    sourceType: "module",
+  },
+  rules: {
+    "prettier/prettier": "error",
+    "arrow-body-style": "off",
+    "prefer-arrow-callback": "off",
+  },
+};
+```
+
+> 关闭 arrow-body-stlye 和 prefer-arrow-callback 的规则，否则会 [出问题](https://github.com/prettier/eslint-plugin-prettier#arrow-body-style-and-prefer-arrow-callback-issue)
 
 ## 1.4 与 Typescript 集成
 
