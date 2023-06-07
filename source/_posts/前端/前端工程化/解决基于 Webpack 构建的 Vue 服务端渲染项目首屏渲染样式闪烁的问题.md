@@ -46,7 +46,7 @@ user-page.xxx.css
 - 具名子包（namedChunk）
 - 随机命名子包
 
-`main.xxx.js` 这种入口文件，以及 `home-page.xxx.js` 这样异步引入同时并使用 [MagicComments](https://webpack.docschina.org/api/module-methods/#magic-comments) 进行命名的包，被称为『具名子包』；而类似 `73e8df2.xxx.js` 这种文件名是由一串随机哈希组成的文件，我们将其称为『随机命名子包』。
+`main.xxx.js` 这种入口文件，以及 `home-page.xxx.js` 这样异步引入同时并使用 [Comments](https://webpack.docschina.org/api/module-methods/#magic-comments) 进行命名的包，被称为『具名子包』；而类似 `73e8df2.xxx.js` 这种文件名是由一串随机哈希组成的文件，我们将其称为『随机命名子包』。
 
 通常这两种包是存在依赖关系的，随机命名子包其实就是从命名子包中拆分出来的代码，或者是多个命名子包共用的某一部分代码，依赖关系示例如下：
 
@@ -179,7 +179,7 @@ function getPreloadLinkByChunkNames(chunkNames) {
 				+ `<link rel="stylesheet" as="style" href="${file}">`;
 		}
 	});
-	return links;
+	return links.join("");
 }
 
 /**
@@ -243,3 +243,154 @@ export default {
 ```
 
 > `fields` 可以支持 `["errors", "warnings", "assets", "hash", "publicPath", "namedChunkGroups"]`，更多配置可以查看 [官方示例](https://github.com/FormidableLabs/webpack-stats-plugin/blob/main/test/scenarios/webpack5/webpack.config.js)
+
+之后会在编译的产出目录下生成一个 `stats.json` 文件，其内容如下：
+
+```json
+{
+	"publicPath": "/",
+	"namedChunkGroups": {
+		"main": {
+			"name": "main",
+			"chunks": [
+				3213,
+				122,
+				333
+			],
+			"asstes": [
+				{
+					"name": "assets/js/runtimechunk~main.xxx.js"
+				},
+				{
+					"name": "assets/js/73e9df.xxx.js"
+				},
+				{
+					"name": "assets/css/main.xxx.css"
+				},
+				{
+					"name": "assets/js/29fe22.xxx.js"
+				},
+			],
+			"filteredAssets": 0,
+		    "assetsSize": null,
+		    "auxiliaryAssets": [],
+		    "filteredAuxiliaryAssets": 0,
+		    "auxiliaryAssetsSize": null,
+		    "children": {},
+		    "childAssets": {},
+		    "isOverSizeLimit": false
+		},
+		"layout": {
+			"name": "main",
+			"chunks": [
+				// ... ...
+			],
+			"asstes": [
+				{
+					"name": "assets/js/2312e2.xxx.js"
+				},
+				{
+					"name": "assets/css/3490e1.xxx.css"
+				},
+				{
+					"name": "assets/js/3490e1.xxx.js"
+				},
+				{
+					"name": "assets/css/ef2312.xxx.css"
+				},
+				{
+					"name": "assets/js/ef2312.xxx.js"
+				},
+				{
+					"name": "assets/css/layout.xxx.css"
+				},
+				{
+					"name": "assets/js/29fe22.xxx.js"
+				},
+			],
+			// ... ...
+		},
+		"home-page": {
+			"name": "home-page",
+			"chunks": [
+				// ... ...
+			],
+			"asstes": [
+				// ... ...
+			],
+			// ... ...
+		}
+	}
+}
+```
+
+如上， `stats.json` 生成的就是各个『具名子包』与其『随机命名子包』的依赖关系。在上一章节的简单推断中，我们可以通过 webpack 的 Magic Comments 为每个页面生成具名子包，然后通过路由的 meta 信息来推断出当前页面会引用到哪些『具名子包』，那么在服务端渲染时，我们就可以通过 `stats.json` 文件将已知的『具名子包』作为条件，推断出所有的『随机命名子包』。然后我们将所有的静态资源进行拼接，就可以无需等待 runtimechunk 和入口文件的执行，直接预加载好静态资源了，不仅能在首屏就渲染出样式，在一定程度上也能提升前端页面性能指标中的 `SI` 与 `TTI` 指标。
+
+结合 `stats.json` 在服务端渲染时提前拼接出资源标签的代码实例实现如下：
+
+```js
+// server.js
+const { appContent, router } = createSSRApp()
+
+// 判断当前页面应该加载的 js
+function getPreloadLinkByChunkNames(chunkNames, stats) {
+	// 获取到 webpack 中配置的 publicPath
+	const PUBLIC_PATH = stats.publicPath;
+	const cssAssets = [];
+	const jsAssets = [];
+	chunkNames.forEach(name => {
+		const currentCssAssets = [];
+		const currentJsAssets = [];
+		//  根据具名子包，查询到所依赖的资源
+		stats.namedChunkGroups[name]?.assets.forEach(item => {
+			if (item.name.endsWith('.css')) {
+                currentCssAssets.push(`${PUBLIC_PATH}${item.name}`);
+            }
+            else if (item.name.endsWith('.js')) {
+                currentJsAssets.push(`${PUBLIC_PATH}${item.name}`);
+            }
+		});
+		cssAssets.push(...currentCssAssets);
+		jsAssets.push(...currentJsAssets);
+	});
+	
+	// 资源去重
+	const assets = Array.from(new Set([...cssAssets, ...jsAssets]));
+	
+	// 生成资源标签
+	const links = cssAssets.map(asset => {
+		if(assets.assets('.css')) {
+			// preload 能够使页面更快的加载 css 资源
+			return `<link rel="preload" as="style" href="${file}">`
+				+ `<link rel="stylesheet" as="style" href="${file}">`;
+		}
+		if (file.endsWith('.js')) {
+			return `<script defer="defer" src="${file}"></script>`;
+		}
+	});
+	return links.join("");
+}
+
+/**
+ * 根据路由的 meta 获取当前页面的具名 chunk
+ * 比如当用户访问 `/home` 页面，根据上面路由的定义
+ * currentPageChunkNames 得到的值就是 ['layout', 'home-page']
+ */
+const currentPageChunkNames = router.currentRoute.value.matched.map(
+	item => item.meta?.chunkName
+);
+
+// 读取生成的 stats.json
+const stats = JSON.parse(fs.readFileSync(/** ... ... */, 'utf-8'))
+const preloadLinks = getPreloadLinkByChunkNames(currentPageChunkNames, stats);
+
+// 读取模板
+const template = fs.readFileSync(/** ... ... */, 'utf-8')
+const html = template.toString()
+	.replate('<!-- preload-links -->', ${preloadLinks})
+	.replace('<!-- app-html -->', `${appContent}`);
+// 向客户端发送渲染出的 html
+res.send(html)
+```
+
+综上，我们成功解决了服务端首屏渲染的样式闪烁问题，拿到资源标签后我们页可以按需进行预加载或者其他操作。如果还想进一步提升性能，也可以将 CSS 资源直接读取，内联到 HTML 页面中，这样能进一步的提升页面的渲染速度，但是过多的内联也会让加载 HTML 资源过重，是去 CDN 的优势，总之性能优化方面的取舍还需要根据业务场景进行具体的判断。
