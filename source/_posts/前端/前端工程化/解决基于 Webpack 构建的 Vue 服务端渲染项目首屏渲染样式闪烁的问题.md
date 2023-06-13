@@ -358,14 +358,14 @@ function getPreloadLinkByChunkNames(chunkNames, stats) {
 	const assets = Array.from(new Set([...cssAssets, ...jsAssets]));
 	
 	// 生成资源标签
-	const links = cssAssets.map(asset => {
-		if(assets.assets('.css')) {
+	const links = assets.map(asset => {
+		if(asset.endsWith('.css')) {
 			// preload 能够使页面更快的加载 css 资源
-			return `<link rel="preload" as="style" href="${file}">`
-				+ `<link rel="stylesheet" as="style" href="${file}">`;
+			return `<link rel="preload" as="style" href="${asset}">`
+				+ `<link rel="stylesheet" as="style" href="${asset}">`;
 		}
-		if (file.endsWith('.js')) {
-			return `<script defer="defer" src="${file}"></script>`;
+		if (asset.endsWith('.js')) {
+			return `<script defer="defer" src="${asset}"></script>`;
 		}
 	});
 	return links.join("");
