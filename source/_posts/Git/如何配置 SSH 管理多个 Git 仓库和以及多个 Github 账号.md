@@ -1,7 +1,14 @@
 ---
+title: 如何配置 SSH 管理多个 Git 仓库和以及多个 Github 账号
+tags:
+  - git
+  - Github
+  - SSH
 categories:
   - Git
+date: 2023-06-21 16:30:29
 ---
+
 # 1. Why SSH ?
 
 在使用 github 时或者免密登录到远程服务器时，总要使用到 SSH 这个工具来创建密钥并进行连接，那什么是 SSH 呢，我们先来看一下它的简单定义：
