@@ -1,8 +1,16 @@
 ---
+title: 使用 volta 与 corepack 规范团队在不同项目中使用的 node 版本与 npm 包管理器
+tags:
+  - npm
+  - volta
+  - node
+  - corepack
 categories:
   - 前端
   - 前端工程化
+date: 2023-07-06 18:22:39
 ---
+
 # 0. 前言
 
 在前端开发团队中，经常存在多个新老项目同时开发的情况，这些项目他们的 node 版本可能不一样，项目中所使用的包管理器也不一样。比如一些老的项目可能使用低版本 node 并使用 npm 安装项目依赖，而一些新的项目则会使用高版本 node 与 pnpm/yarn 来安装项目依赖。
