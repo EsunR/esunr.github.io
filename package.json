@@ -2,6 +2,7 @@
   "name": "hexo-site",
   "version": "0.0.0",
   "private": true,
+  "packageManager": "yarn@1.22.19",
   "scripts": {
     "build": "hexo generate",
     "clean": "hexo clean",
@@ -34,5 +35,8 @@
   "devDependencies": {
     "hexo-cli": "^4.3.0",
     "husky": "^8.0.1"
+  },
+  "volta": {
+    "node": "16.20.1"
   }
 }
