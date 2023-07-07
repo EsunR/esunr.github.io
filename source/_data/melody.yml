@@ -132,9 +132,9 @@ cdn:
 
 # Post info settings
 # ---------------
-avatar: https://img.cdn.esunr.xyz/blog_avatar.jpeg
+avatar: https://esunr-webapp.cdn.bcebos.com/blog/avatar.jpeg?x-bce-process=image/resize,m_lfit,w_200/format,f_auto
 
-top_img: https://img.cdn.esunr.xyz/blog_bg.jpg # true false or url of img
+top_img: https://api.dujin.org/bing/1920.php # true false or url of img
 
 post_meta:
   date_type: created # created or updated
