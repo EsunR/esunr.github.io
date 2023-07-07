@@ -134,7 +134,8 @@ cdn:
 # ---------------
 avatar: https://esunr-webapp.cdn.bcebos.com/blog/avatar.jpeg?x-bce-process=image/resize,m_lfit,w_200/format,f_auto
 
-top_img: https://api.dujin.org/bing/1920.php # true false or url of img
+# top_img: https://api.dujin.org/bing/1920.php # true false or url of img
+top_img: https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto # true false or url of img
 
 post_meta:
   date_type: created # created or updated
