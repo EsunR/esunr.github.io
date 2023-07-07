@@ -1,5 +1,5 @@
 $(function () {
-  $('a.social-icon.search').on('click', function () {
+  $('span.social-icon.search').on('click', function () {
     $('body').css('width', '100%')
     $('body').css('overflow', 'hidden')
     $('.search-dialog').velocity('stop')

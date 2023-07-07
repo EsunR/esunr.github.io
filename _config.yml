@@ -5,8 +5,8 @@
 # Site
 title: EsunR-Blog
 subtitle: "不忘初心， 一生浪漫"
-description: "永存谦卑，永持敬畏"
-keywords: [EsunR, Blog, 博客]
+description: "EsunR-Blog是由EsunR维护的博客平台，分享在前端开发、Git、Vue.js、Webpack、OAuth、Linux等各个领域的知识和经验。浏览这里的深入文章，了解不同主题的见解，并及时了解行业的最新趋势和技术。"
+keywords: [EsunR-Blog,EsunR,前端开发,Git,Github,SSH,Vue.js,Webpack,服务端渲染,OAuth,Linux,deb卸载,Clash,面试问题,XSS攻击,Hexo,Melody,个人博客,Web开发,编程,技术]
 author: EsunR
 language: zh
 timezone: "Asia/Shanghai"
