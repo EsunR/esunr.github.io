@@ -1,7 +1,14 @@
 ---
+title: 极米投影仪通过 HomeAssistant 与 NodeRed 接入 Homekit
+tags:
+  - HomeAssistant
+  - HomeKit
+  - 极米投影仪
 categories:
   - 其他
+date: 2023-07-20 16:17:18
 ---
+
 是不是每次都找不到遥控器而烦恼？是不是想要语音控制投影仪的关闭和开启？
 
 如果你是苹果用户，那么本文将教你实现如何让极米投影仪（其他电视设备同理）接入到苹果 HomeKit 生态，实现搭配 HomePod 使用 Siri 唤醒或关闭投影仪，并且可以直接使用 IOS 集成在系统控制中心的电视遥控器来直接控制投影仪，超级方便！
