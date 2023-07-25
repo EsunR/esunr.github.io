@@ -5,7 +5,7 @@ tags:
   - S3
   - CloudFront
   - CDN
-description: >-
+description:
   本文介绍了如何使用AWS CloudFront CDN服务加速S3存储桶中的内容。首先，在AWS S3创建存储桶并设置公共读权限，然后在AWS
   CloudFront创建分配并选择S3存储桶分配的域作为源，即可获得CDN分配的域名用于访问加速内容。本文还介绍了如何使用自定义域名以及如何清理缓存，以便及时更新资源。最终，使用CDN的优势是显著提高了网站或应用程序中的资源加载速度。
 categories:
