@@ -1,7 +1,18 @@
 ---
+title: 创建 AWS S3 公共存储桶并添加 CloudFront CDN 加速域名
+tags:
+  - AWS
+  - S3
+  - CloudFront
+  - CDN
+description: >-
+  本文介绍了如何使用AWS CloudFront CDN服务加速S3存储桶中的内容。首先，在AWS S3创建存储桶并设置公共读权限，然后在AWS
+  CloudFront创建分配并选择S3存储桶分配的域作为源，即可获得CDN分配的域名用于访问加速内容。本文还介绍了如何使用自定义域名以及如何清理缓存，以便及时更新资源。最终，使用CDN的优势是显著提高了网站或应用程序中的资源加载速度。
 categories:
   - 云原生
+date: 2023-07-25 14:37:54
 ---
+
 # 1. 创建 AWS S3 存储桶
 
 进入 [S3 控制台](https://s3.console.aws.amazon.com/s3/home)，点击 `创建存储桶（Bucket）`，地区优先选择用户多的位置，输入桶名称后直接点击确认创建。
