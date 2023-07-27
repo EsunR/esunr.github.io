@@ -74,3 +74,6 @@
 
 # 3. 使用 Lambda@Edge 实现 ImageHandler
 
+### Lambda@Edge 简介
+
+Lambda@Edge 是 AWS 的边缘计算服务，不同于普通的 Lambda 函数，Lambda@Edge 借助 CloudFront 可以部署在全球的边缘节点上，当用户访问与其物理位置最近的 CloudFront 节点时就会触发部署在其上面的 Lambda@Edge 函数。
