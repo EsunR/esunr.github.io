@@ -1,7 +1,16 @@
 ---
+title: 使用 Lambda 函数实现 AWS S3 的图片裁剪、质量调整、自动 webp
+tags:
+  - aws
+  - lambda
+  - lambda@edge
+  - s3
+  - webp
 categories:
   - 云原生
+date: 2023-07-31 20:54:06
 ---
+
 > 本文章只是讲实现方案，并不会涉及具体的代码上线，如果你想参考代码以及详细的部署流程，可以参考该项目：[s3-image-handler](https://github.com/EsunR/s3-image-handler)
 
 # 1. 前言
