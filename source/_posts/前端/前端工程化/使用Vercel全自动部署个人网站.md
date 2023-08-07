@@ -49,9 +49,11 @@ Vercel 是一个全自动的 Web 应用部署、预览、上线平台。他类�
 
 完成后点击 `Deploy` 即可开始部署，完成后便可前往项目控制台查看 Vercel 为你分配的域名了：
 
+> 注意：Vercel 默认分配的域名 `*.vercel.app` [已经被大陆封禁](https://github.com/orgs/vercel/discussions/803)，新的项目如果要访问则必须按下面的步骤绑定自己的域名，如果仍无法访问，则需要在绑定域名时将 CNAME 设置为 `cname-china.vercel-dns.com.`
+
 ![](https://s2.loli.net/2022/07/11/BW91HG3pF7lUCcL.png)
 
-当然，在项目设置中可以帮你你自己的域名：
+在项目设置中绑定自己的域名：
 
 ![](https://s2.loli.net/2022/07/11/HV2dbZUJtchgOK9.png)
 
