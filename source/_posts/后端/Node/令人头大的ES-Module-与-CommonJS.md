@@ -118,7 +118,7 @@ module.exports = {
 const mod = require("./mod.js")
 console.log(mod.data); // 1
 mod.modifyData() // (1) 执行该语句后，mod.js 中的变量 data 会被修改
-console.log(mod.a); // 由于导出模块时，data 是一个基本类型值，module.exports 对象对变量 data 进行了一个浅拷贝，所以输出值仍然是 1
+console.log(mod.data); // 由于导出模块时，data 是一个基本类型值，module.exports 对象对变量 data 进行了一个浅拷贝，所以输出值仍然是 1
 mod.printData(); // 打印出 mod.js 内部的变量 data，由于前面被语句 (1) 修改了，所以输出 100
 ```
 
@@ -172,7 +172,7 @@ module.exports = {
 const mod = require("./mod.js")
 
 exports.printData = function() {
-  console.log(mod.a);
+  console.log(mod.data);
 }
 ```
 
@@ -185,7 +185,7 @@ mod.data = 100
 utils.printData() // 100
 ```
 
-其实我觉得大可不必想的这么复杂，对于 CJS 我们要清楚其只是导出了一个 `module.exports` 对象，对于这个对象中
+> 本质上，使用 `module.exports` 导出的就是一个对象，那么对于这个对象上所有的引用与修改都遵循 JavaScript 对于一个对象的处理方式。
 
 ## 3.2 ES Module
 
@@ -201,10 +201,10 @@ export function addData() {
 
 ```js
 // index.js
-import { a, modifyData } from "./module.js";
+import { data, addData } from "./module.js";
 
 console.log(data); // 1
-addData()
+addData();
 console.log(data); // 2
 data = 100 // TypeError: Assignment to constant variable.
 ```
@@ -228,7 +228,7 @@ CJS 在模块引用时有一个重要的特性就是 **加载时执行**，的�
 如果在模块内部又再次遇到 `require` 语句，会将当前的代码缓存住，同时检查该模块是否有被引用过（也就是是否存在缓存），这就需要分为两种情况：
 
 1. 如果 require 的模块之前未被引用过，则暂停当前模块的解析，进入新的模块，并执行新模块内部的代码
-2. 如果 require 的模块之前被因用过，则无视该 require 语句，继续向下执行
+2. 如果 require 的模块之前被引用过，则无视该 require 语句，继续向下执行
 
 这种引用方式，可以让 CJS 避免循环引用造成代的码锁死，但是也会造成引用顺序不当从而导致某些模块的变量未被创建就本引用的问题。
 
@@ -299,7 +299,7 @@ export function bar() {
 }
 ```
 
-代码可以正常执行，会输入随机概率个 `执行完毕`。
+代码可以正常执行，会输出随机概率个 `执行完毕`。
 
 然而如果换成 CJS 的写法，代码是无法运行的：
 
@@ -320,9 +320,10 @@ foo();
 // b_cjs.js
 const foo = require("./a_cjs.js").foo;
 function bar() {
+  console.log(foo); // 代码按顺序加载到该行时，a_cjs.js 此时尚未导出 foo 函数，所以此处的取值是 undefined，会导致下方代码无法运行（如果跳入随机）
   // 设置一定概率跳出循环，避免堆栈溢出
   if (Math.random() > 0.5) {
-    foo(); // 代码按顺序加载到该行时，由于 a_cjs.js 为执行完毕，所以此处的取值是 undefined，代码无法执行
+    foo(); // TypeError: foo is not a function
   }
 }
 module.exports = {

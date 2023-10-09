@@ -292,16 +292,24 @@ npm install commitizen -D
 创建 `commit-msg` hook 并添加内容：
 
 ```sh
-cat <<EEE > .husky/commit-msg
 #!/bin/sh
 . "\$(dirname "\$0")/_/husky.sh"
 
 npx --no -- commitlint --edit "\${1}"
-EEE
 ```
 
 为 hook 添加执行权限：
 
 ```sh
 chmod a+x .husky/commit-msg
+```
+
+如果使用 husky 4，则在 package.json 中添加：
+
+```json
+"husky": {
+	"hooks": {
+		"commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+	}
+}
 ```

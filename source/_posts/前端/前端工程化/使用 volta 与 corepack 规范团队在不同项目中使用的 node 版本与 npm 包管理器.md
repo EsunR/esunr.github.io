@@ -103,7 +103,49 @@ error: Uninstalling node is not supported yet.
 
 因此需要到 `~/.volta/tools/image` 手动删除已经下载的 npm 或者 yarn 等，[参考](https://github.com/volta-cli/volta/issues/1431#issuecomment-1409424063)。
 
-## 1.4 volta 的原理
+## 1.4 volta 对于二级制包的管理
+
+在使用 npm 全局安装二进制包时，如 `npm install pm2`（或 `votla install pm2`），volta 为了保证在切换 node 版本后这些二进制包仍能够使用，volta 会固定其依赖的 node 版本为其安装时 volta 设置的默认 node 版本。
+
+如果想要指定 volta 对于安装二进制包时锁定的 node 版本依赖，可以在安装时修改 volta 的默认 node 版本号，或者使用 `volta run` 指令：
+
+```sh
+volta run --node 14 npm i -g pm2
+```
+
+如果要想查看系统内安装的 npm 二级制包所依赖的具体 node 版本号，可以使用 `volta list all` 查看：
+
+```sh
+volta list all
+
+⚡️ User toolchain:
+
+	Node runtimes:
+		v12.22.12
+		v14.21.3
+		v18.17.1 (default)
+	
+	Package managers:
+		Yarn:
+			v1.22.19
+			v4.0.0-rc.48 (default)
+	
+	Packages:
+		pm2@5.3.0 (default)
+			binary tools: pm2, pm2-dev, pm2-docker, pm2-runtime
+			platform:
+				runtime: node@18.18.0
+				package manager: npm@built-in
+		serve@14.2.0 (default)
+			binary tools: serve
+			platform:
+				runtime: node@14.21.3
+				package manager: npm@built-in
+```
+
+> PS：`volta list` 指令列出的 `Tool binaries available` 列表中包后面跟的 `(default)` 表示为工具本身的版本，而不是以来的 node 版本。[Issues](https://github.com/volta-cli/volta/issues/1226)
+
+## 1.5 volta 的原理
 
 volta 的原理并不复杂，本质上就是通过覆写二进制文件的执行指令到 volta 的处理程序中，然后 volta 就可以调用正确的 node 版本，或者调用全局安装的二进制文件并为其指定 node 版本。
 
@@ -134,7 +176,7 @@ lrwxr-xr-x  1 username  staff    39B Jul  5 19:12 serve -> /Users/username/.volt
 
 因此 volta 背后自动切换 node 版本以及管理全局包的魔法实际上就是：当使用 Volta 时，npm、node以及其他全局包的这些二进制文件被重定向到 `.volta/bin` 目录下的对应可执行文件，而这些可执行文件实际上都是 `.volta/bin/volta-shim` 所创建的软连接。 volta-shim 本身是一个特殊的脚本，他主要做了如下这些事情：
 
-- 如果是 node、npm、yarn 等指令，监测当前工作控件是否被 `volta pin` 指定了 node 版本和包管理器的版本，如果是，则将指令定向到目标版本；
+- 如果是 node、npm、yarn 等指令，监测当前工作空间是否被 `volta pin` 指定了 node 版本和包管理器的版本，如果是，则将指令定向到目标版本；
 - 如果是 serve 这种由 npm 安装的可执行文件，则定向到该可执行文件，并且**使用安装该可执行文件时的 node 版本** 来执行该指令。
 
 # 2. Corepack
