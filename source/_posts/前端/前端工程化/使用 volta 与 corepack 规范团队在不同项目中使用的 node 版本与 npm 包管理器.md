@@ -48,7 +48,7 @@ volta install node@18
 你可以使用 `volta list all` 查看当前 volta 所已经安装的内容：
 
 ```
-⚡️ User toolchain:
+User toolchain:
 
     Node runtimes:
         v14.21.3 (default)
