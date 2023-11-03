@@ -62,3 +62,11 @@ Vercel 是一个全自动的 Web 应用部署、预览、上线平台。他类�
 如果你想切换默认部署的分支，可以将 Production Branch 设置为别的分支即可：
 
 ![](https://s2.loli.net/2022/07/11/DszltROMCBhI6bH.png)
+
+## 2.3 同步更新
+
+如果你想要同步项目作者的更新，可以使用 Github 的 Sync fork 功能。
+
+进入到你 Fork 的项目仓库，点击 `Sync fork` 按钮后确认 `Update branch`：
+
+![](https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202311031547649.png)
