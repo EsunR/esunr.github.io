@@ -97,11 +97,133 @@ import { useNamespace } from '@element-plus/hooks'
 
 # 2. 组件开发
 
-## 代码 lint
+## 2.1 代码 lint
 
-## 组件规范
+> 本章节不会详细介绍 lint 工具的使用，而是对 ElementPlus 中 lint 工具的使用方案进行拆解，如果你还不太了解前端 lint 工具的基础使用，可以参考这篇文章：[《前端 Lint 工具使用指南》](https://blog.esunr.xyz/2022/07/72bea7fe8c23.html)
 
-## 样式处理
+### eslint
+
+在根目录的 `.eslintrc.json` 配置中可以看到 ElementPlus 引入了一个 eslint 的扩展 `@element-plus/eslint-config`，这是一个项目的子包，实际上引用的是 `internal/eslint-config` 目录。该目录的 `index.js` 通过引用 `eslint-define-config` 这个 npm 包，创建了一套 eslint 配置，因此可以被 eslint 的配置文件所引用，ElementPlus 将总的 eslint 配置放在这里管理。
+
+> `.eslintrc.json` 还配置了一个 `root: true` 这个配置在 monorepo 的项目中非常有用，可以让子包继承配置，意思是当前的 eslint 配置作为根配置，其他所有子包都从该配置的基础上进行应用或变更。
+> 
+> 如果有的子包需要在该规则上添加新的规则，则只需要在该子包的目录下创建一个新的 eslint 配置文件，该配置文件的内容就会与根配置文件的内容进行合并；如果不想让子包的 eslint 配置继承根配置文件中的规则，那么页只需要为子包中的 eslint 配置加上 `root: true` 的配置项即可。
+
+我们来拆解一下它的 eslint 配置：
+
+`plugins`插件，eslint 的插件提供了额外的校验功能，ElementPlus 装载了如下几个插件：
+
+- @typescript-eslint：来自 `@typescript-eslint/eslint-plugin` TypeScript 的 eslint 插件，启用后才能配置各种 ts 的校验规则；
+- prettier：来自 `eslint-plugin-prettier` 用于将 prettier 规则也作为 eslint 的校验条件，开启对应的规则后，如果代码不符合 prettier 的规范，eslint 会发出警告；
+- unicorn：来自 `eslint-plugin-unicorn` 一个强大的 Eslint 规则集；
+
+`extends` 继承，不同于插件，extends 可以继承一些 eslint 配置，这些配置我们可以从 npm 上下载，比如 `eslint-config-prettier` 就提供了一个配置，可以关闭 eslint 与 prettier 相冲的校验。一些 eslint 插件也提供了对应的配置，如果我们直接继承这些插件提供的 eslint 配置，就无需手动启用插件以及配置插件规则，ElementPlus 中继承了以下的几个规则集：
+
+- eslint:recommended：eslint 的推荐配置；
+- plugin:import/recommended：来自 `eslint-plugin-import`，用来规范模块的引入语法；
+- plugin:jsonc/recommended-with-jsonc：来自 `eslint-plugin-jsonc`，用来规范 JSON 文件；
+- plugin:markdown/recommended：来自 `eslint-plugin-markdown`，用来规范 markdown 文件；
+- plugin:vue/vue3-recommended：来自 `eslint-plugin-vue`，用来规范 vue 文件；
+- plugin:@typescript-eslint/recommended：来自 `@typescript-eslint/eslint-plugin`，用来规范 ts 文件；
+- prettier：来自 `eslint-config-prettier`，用来与 `eslint-plugin-prettier` 相结合，开启 prettier 的校验，并关闭一些会与 eslint 冲突的配置。
+
+`setting` 设置，这里用于设置一下 `eslint-plugin-import` 的作用范围。
+
+`overrides` 覆写，通过 override 配置可以为某些文件单独配置一些 eslint 规则，有写插件如 `eslint-plugin-jsonc` 也需要使用该配置项指定某些文件需要使用该插件提供的解析器进行解析，是一个非常重要的配置项。
+
+`rules` 规则，该配置项就是由项目的开发人员撰写，手动开启或关闭一些 eslint 或者是插件提供的配置，以供开发人员更加灵活的使用。
+
+### commitlint
+
+为了规范每次提交的 Commit Message，ElementPlus 使用了 commitlint 进行代码提交信息的 lint。commitlint 需要与 husky 结合使用，在 commit 行为发生之前进行 lint 校验，保证 commit message 的风格一致。更多关于 commitlint 相关的使用可以参考 [这里](https://blog.esunr.xyz/2022/07/72bea7fe8c23.html#3-CommitLint)，这一部分不再过多讲解。
+
+## 2.2 组件开发
+
+准备工作完成后，我们现在可以来拆解 ElementPlus 的组件源码了，以 Button 组件为例，我们看 ElemenPlus 是如何定义组件并将其暴露到外部的，以及组件如何在开发环境中进行调试。
+
+### 组件入口
+
+进入 `pacakges/components/button/index.ts` 文件，这就是 ElButton 的入口文件：
+
+```ts
+import { withInstall, withNoopInstall } from '@element-plus/utils'
+import Button from './src/button.vue'
+import ButtonGroup from './src/button-group.vue'
+
+export const ElButton = withInstall(Button, {
+  ButtonGroup,
+})
+export const ElButtonGroup = withNoopInstall(ButtonGroup)
+export default ElButton
+
+export * from './src/button'
+export * from './src/constants'
+export type { ButtonInstance, ButtonGroupInstance } from './src/instance'
+```
+
+一目了然的内容是，这个文件对外导出了 button.vue 和 button-group.vue 两个组件，然后由对外暴露了组建的一些常量、以及 types 声明。重点我们来看一下 `withInstall` 和 `withNoopInstall` 有什么用。
+
+withInstall 方法中为组件挂载了一个 install 方法，这是为了将组件注册为一个 vue 插件，可以让 vue 使用 [app.use()](https://cn.vuejs.org/api/application.html#app-use) 方法挂载该插件，如当我们使用 `app.use(ElButton)` 时，我们可以在任意项目中使用 `el-button` 组件，这是因为该方法将组件注册为插件后，被 app 调用后就自动为全局注册了该组件。具体的代码逐行分析如下：
+
+```ts
+export const withInstall = <T, E extends Record<string, any>>(
+  // 需要被注册为插件的组件
+  main: T,
+  // 该组件身上被挂载的组件，如 ElButtonGroup 可以被挂载为 ElButton.ButtonGroup
+  extra?: E
+) => {
+  // SFCWithInstall 为 SFC 组件与 Vue.Plugin 类型的交叉类型，用于声明并挂载 install 方法
+  ;(main as SFCWithInstall<T>).install = (app): void => {
+    // 注册组件与扩展组件到 app 示例上 
+    for (const comp of [main, ...Object.values(extra ?? {})]) {
+      app.component(comp.name, comp)
+    }
+  }
+  
+  // 如果存在扩展组件，则将扩展组件挂载到主组件上
+  if (extra) {
+    for (const [key, comp] of Object.entries(extra)) {
+      ;(main as any)[key] = comp
+    }
+  }
+  // 返回被注册为插件的组件
+  return main as SFCWithInstall<T> & E
+}
+```
+
+withNoopInstall 方法则是一个将扩展组件（如 ElButtonGroup）注册为一个空 vue 插件的方法（因为在主组件时已经注册了扩展组件，所以不需要重复注册），防止在 install 时报错：
+
+```ts
+export declare const NOOP: () => void;
+export const withNoopInstall = <T>(component: T) => {
+  ;(component as SFCWithInstall<T>).install = NOOP
+
+  return component as SFCWithInstall<T>
+}
+```
+
+### classname
+
+在观察组件源码的时候，我们会看到 ElementPlus 组件的几乎所有类名都是由 `useNamespace`  这个 hook 导出的方法生成的，这是因为组件的类名需要严格按照 [BEM](https://juejin.cn/post/6844903672162304013) 规范，简单来说，就是必须按照 `block__element-modifier` 这种命名规则，比如 `el-button--primary`、`el-table__cell`。除此之外，组件还会有 `is-disabled` 这种修饰状态的类。
+
+useNamespace 这个 hook 就是用来按照规范生成各种类名的，其可以结构出如下几个方法：
+
+- b(blockSuffix = '')：生成有 blockSuffix 的类名，如 el- button-group，什么都不传就可以生成只有 block 的类名如 el-button
+- e(element?: string)：生成有 element 的类名，如 el-table__cell
+- m(modifier?: string)：生成有 modifier 的类名，如 el-button--primary
+- be(blockSuffix?: string, element?: string)：生成有 blockSuffix 和 element 的类名
+- em(element?: string, modifier?: string)：生成有 element 和 modifier 的类名
+- bm(blockSuffix?: string, modifier?: string)：生成有 blockSuffix 和 modifier 的类名
+- bem(blockSuffix?: string, element?: string, modifier?: string)：生成有 blockSuffix、element 和 modifier 的类名
+- is(name: string, ...args: \[boolean | undefined\] | \[\])：生成有 is- 的类名，如 is-disabled，是否生成该类由传入的参数决定
+- cssVar(object: Record<string, string>)：生成 css 变量样式，如 {--el-key: value}
+- cssVarBlock(object: Record<string, string>)：生成包含 blok 的 css 变量样式，如 {--el-button-key: value}
+- cssVarName(name: string)：生成 css 变量名，如 --el-xxx
+- cssVarBlockName(name: string)：生成包含 block 的 css 变量名，如 --el-button-xxx
+
+`useNamespace` 的代码实现并不复杂，只是简单的拼接字符串。但其中的 namespace 概念需要单独说一下：默认情况下，namespace 就是 `el`，但是实际的代码实现中，namespace 是通过依赖注入获取的，这使得 ElementPlus 支持自定义组件库的 namespace，比如你可以通过 `app.provide(namespaceContextKey, 'xxx')` 来自定义组件库的 namespace，这样就可以生成 `xxx-button` 这样的类名了。
+
+## 2.3 样式处理
 
 # 3. 构建方案
 
