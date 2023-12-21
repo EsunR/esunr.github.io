@@ -1,8 +1,15 @@
 ---
+title: 在 Webpack 中同时使用 ts-loader 和 babel-loader
+tags:
+  - Webpack
+  - Babel
+  - TypeScript
 categories:
   - 前端
   - Javascript
+date: 2023-12-21 14:41:27
 ---
+
 # 1. 为什么要同时使用 ts-loader 和 babel-loader
 
 在使用 Webpack 构建 TypeScript 项目时，我们通常会使用 `ts-loader` 来加载 ts 代码，`ts-loader` 会根据目标 `tsconfig.json` 文件调用 TypeScript Compiler 来对 ts 文件进行编译。
