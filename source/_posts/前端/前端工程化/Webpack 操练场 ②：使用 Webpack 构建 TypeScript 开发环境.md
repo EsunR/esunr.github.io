@@ -9,7 +9,7 @@ date: 2023-12-26 17:38:52
 ---
 # 使用 Webpack 构建 TypeScript 开发环境
 
-对应代码：`/templates/html-ts`
+对应代码：https://github.com/EsunR/webpack-playground/tree/main/templates/html-ts
 
 ## 准备 TypeScript 环境
 

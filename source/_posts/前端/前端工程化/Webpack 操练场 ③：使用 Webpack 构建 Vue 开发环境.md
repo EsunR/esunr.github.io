@@ -9,7 +9,7 @@ date: 2023-12-26 17:39:33
 ---
 # 使用 Webpack 构建 Vue 开发环境
 
-对应代码 `/templates/vue`
+对应代码：https://github.com/EsunR/webpack-playground/tree/main/templates/vue
 
 > 本章节示例的 Vue 环境为 Vue3，基于 TypeScript 构建
 
