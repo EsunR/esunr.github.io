@@ -1,5 +1,5 @@
 ---
-title: Webpack 操练场：第一个 Webpack 应用
+title: Webpack 操练场 ①：第一个 Webpack 应用
 tags:
   - webpack
 categories:
