@@ -94,7 +94,7 @@ ignore:
 theme: melody
 
 # Deployment
-## Docs: https://hexo.io/docs/deployment.html
+## Docs: https://hexo.io/zh-cn/docs/one-command-deployment.html#Git
 deploy:
   type: git
   repo: git@github.com:EsunR/esunr.github.io.git
