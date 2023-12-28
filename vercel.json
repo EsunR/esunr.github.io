@@ -5,5 +5,12 @@
       "source_code": false,
       "esunr_xyz_archive": true
     }
-  }
+  },
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "destination": "https://blog.esunr.site/$1",
+      "permanent": true
+    }
+  ]
 }
