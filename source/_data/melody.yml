@@ -94,9 +94,10 @@ fireworks: true
 
 # Analysis
 # ---------------
-baidu_analytics: aaa6c3c6f530f0ca7c2afc57d8da90de
+baidu_analytics: 31bd12722efcf47cb7d0d576bf150215
 
-google_analytics: 3824623619
+google_analytics:
+google_analytics_MeasurementID: G-3RG97DCL3N
 
 # Tencent_analytics ID
 tencent_analytics:
