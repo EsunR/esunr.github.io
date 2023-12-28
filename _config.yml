@@ -13,7 +13,7 @@ timezone: "Asia/Shanghai"
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://blog.esunr.site
+url: https://blog.esunr.xyz
 root: /
 permalink: :year/:month/:hash.html
 permalink_defaults:

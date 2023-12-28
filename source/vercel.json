@@ -2,7 +2,8 @@
   "git": {
     "deploymentEnabled": {
       "master": false,
-      "source_code": true
+      "source_code": false,
+      "esunr_xyz_archive": true
     }
   }
 }

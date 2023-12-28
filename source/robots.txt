@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
-
-Sitemap: https://blog.esunr.site/sitemap.xml
+Disallow: /vercel.json
+Sitemap: https://blog.esunr.xyz/sitemap.xml
