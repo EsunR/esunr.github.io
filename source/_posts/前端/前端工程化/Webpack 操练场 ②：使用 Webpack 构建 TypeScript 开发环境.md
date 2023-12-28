@@ -189,4 +189,4 @@ declare module '*.webp' {
 
 ## ts-loader 结合 babel-loader
 
-参考：[《在 Webpack 中同时使用 ts-loader 和 babel-loader》](https://blog.esunr.xyz/2023/12/88456067f15c.html)
+参考：[《在 Webpack 中同时使用 ts-loader 和 babel-loader》](https://blog.esunr.site/2023/12/88456067f15c.html)

@@ -11,7 +11,7 @@ date: 2022-07-06 15:10:52
 
 # 1. 前言
 
-在之前的文章[《Hexo 快速搭建指南》](https://blog.esunr.xyz/2022/06/64163235c30f.html)中，重点讲解了如何搭建以及部署博客。但是在后期写博客的过程中，有可能遇到很多麻烦，比如：
+在之前的文章[《Hexo 快速搭建指南》](https://blog.esunr.site/2022/06/64163235c30f.html)中，重点讲解了如何搭建以及部署博客。但是在后期写博客的过程中，有可能遇到很多麻烦，比如：
 
 - 我不想手动维护文章的 Categorys，我想以文件目录的形式管理文章分类
 - VSCode 编写 Markdown 文件不爽，我想用其他的编辑器来写 Markdown
@@ -88,7 +88,7 @@ new_post_name: :category/:title
 > 
 > Husky 采用了更简单的一种方式，让管理 GitHook 更加现代化
 > 
-> 关于 Husky 的使用可以参考我之前的文章[《使用 husky 每次提交时进行代码检查》](https://blog.esunr.xyz/2022/05/d36522b1089c.html)
+> 关于 Husky 的使用可以参考我之前的文章[《使用 husky 每次提交时进行代码检查》](https://blog.esunr.site/2022/05/d36522b1089c.html)
 
 你可以按照如下步骤快速完成设置：
 

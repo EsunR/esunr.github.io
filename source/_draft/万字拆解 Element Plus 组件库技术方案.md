@@ -99,7 +99,7 @@ import { useNamespace } from '@element-plus/hooks'
 
 ## 2.1 代码 lint
 
-> 本章节不会详细介绍 lint 工具的使用，而是对 ElementPlus 中 lint 工具的使用方案进行拆解，如果你还不太了解前端 lint 工具的基础使用，可以参考这篇文章：[《前端 Lint 工具使用指南》](https://blog.esunr.xyz/2022/07/72bea7fe8c23.html)
+> 本章节不会详细介绍 lint 工具的使用，而是对 ElementPlus 中 lint 工具的使用方案进行拆解，如果你还不太了解前端 lint 工具的基础使用，可以参考这篇文章：[《前端 Lint 工具使用指南》](https://blog.esunr.site/2022/07/72bea7fe8c23.html)
 
 ### eslint
 
@@ -135,7 +135,7 @@ import { useNamespace } from '@element-plus/hooks'
 
 ### commitlint
 
-为了规范每次提交的 Commit Message，ElementPlus 使用了 commitlint 进行代码提交信息的 lint。commitlint 需要与 husky 结合使用，在 commit 行为发生之前进行 lint 校验，保证 commit message 的风格一致。更多关于 commitlint 相关的使用可以参考 [这里](https://blog.esunr.xyz/2022/07/72bea7fe8c23.html#3-CommitLint)，这一部分不再过多讲解。
+为了规范每次提交的 Commit Message，ElementPlus 使用了 commitlint 进行代码提交信息的 lint。commitlint 需要与 husky 结合使用，在 commit 行为发生之前进行 lint 校验，保证 commit message 的风格一致。更多关于 commitlint 相关的使用可以参考 [这里](https://blog.esunr.site/2022/07/72bea7fe8c23.html#3-CommitLint)，这一部分不再过多讲解。
 
 ## 2.2 组件开发
 

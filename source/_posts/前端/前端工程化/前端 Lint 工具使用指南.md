@@ -124,7 +124,7 @@ module.exports = {
 
 ## 1.5 与 Husky 集成
 
-使用 `lint-staged` + `husky` 的配置对每次代码进行提交检查是一个好习惯，你可以先看[《使用 husky 每次提交时进行代码检查》](https://blog.esunr.xyz/2022/05/d36522b1089c.html)这篇文章来快速了解 husky 的使用。
+使用 `lint-staged` + `husky` 的配置对每次代码进行提交检查是一个好习惯，你可以先看[《使用 husky 每次提交时进行代码检查》](https://blog.esunr.site/2022/05/d36522b1089c.html)这篇文章来快速了解 husky 的使用。
 
 安装完 `lint-staged` 和 `husky` 后，在 `package.json` 中添加：
 

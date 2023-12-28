@@ -158,7 +158,7 @@ name 属性可以定义元数据的类型，content 属性可以定义这些元�
 
 * `viewport`，设置浏览器视口
 
-  详情查看：[从移动端适配探讨响应式布局与 view-port](https://blog.esunr.xyz/2019/11/%E4%BB%8E%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%80%82%E9%85%8D%E8%B0%88%E8%B0%88%E5%93%8D%E5%BA%94%E5%BC%8F%E5%B8%83%E5%B1%80%E4%B8%8Eview-port/)
+  详情查看：[从移动端适配探讨响应式布局与 view-port](https://blog.esunr.site/2019/11/%E4%BB%8E%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%80%82%E9%85%8D%E8%B0%88%E8%B0%88%E5%93%8D%E5%BA%94%E5%BC%8F%E5%B8%83%E5%B1%80%E4%B8%8Eview-port/)
 
 * uc强制竖屏
   

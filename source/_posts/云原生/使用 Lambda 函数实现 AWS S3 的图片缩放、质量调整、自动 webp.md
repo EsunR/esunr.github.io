@@ -115,7 +115,7 @@ Lambda@Edge 可以部署在以上四个 CloudFront 资源请求的时间点，**
 
 ## 使用 Lambda@Edge 实现 ImageHandler
 
-首先，我们要将 S3 接入 CloudFront，这样才能进一步接入 Lambda@Edge，关于具体如何接入，可以参考 [这篇文章](https://blog.esunr.xyz/2023/07/cd2440f9b860.html)。
+首先，我们要将 S3 接入 CloudFront，这样才能进一步接入 Lambda@Edge，关于具体如何接入，可以参考 [这篇文章](https://blog.esunr.site/2023/07/cd2440f9b860.html)。
 
 将 S3 接入 CloudFront 之后，我们再来看一下 CloudFront 的工作机制，与所有的 CDN 服务一样，当 CloudFront 没有缓存时，就会触发回源，如果有缓存且缓存没有失效，就不会触发回源，而是直接从服务器节点获取资源：
 

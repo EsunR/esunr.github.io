@@ -98,7 +98,7 @@ npm version patch -m "Release version %s" # 『%s』代表当前版本号
 
 在一些项目中，会用 `CHANGELOG.md` 来标注每个版本的变更内容，这个文件通常是使用专门的工具生成的，比如 [conventional-changelog](https://github.com/conventional-changelog/conventional-changelog)，但是自动生成的条件必须满足：
 
-1. 使用标准的 commit 规范，通常在默认情况下使用 [Angular 的提交规范](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines)，这样 `conventional-changelog` 就会知道你每次提交做了什么，是新增了一个 fetature，还是修复了一些 bug，亦或是其他。你可以使用 `@commitlint/cli` + `husky` 对你的代码进行提交检查，同时也可以使用 `commitizen` 来生成标准化的 commit，关于这些，你可以参考[这篇文章](https://blog.esunr.xyz/2022/07/72bea7fe8c23.html#3-CommitLint)。
+1. 使用标准的 commit 规范，通常在默认情况下使用 [Angular 的提交规范](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines)，这样 `conventional-changelog` 就会知道你每次提交做了什么，是新增了一个 fetature，还是修复了一些 bug，亦或是其他。你可以使用 `@commitlint/cli` + `husky` 对你的代码进行提交检查，同时也可以使用 `commitizen` 来生成标准化的 commit，关于这些，你可以参考[这篇文章](https://blog.esunr.site/2022/07/72bea7fe8c23.html#3-CommitLint)。
 2. 在每次生成一个新的版本后，在当前的提交上要创建一个 tag，tag 的名称为版本号，比如 `v1.0.0`，这点如果你使用 `npm version` 来生成版本号的话就无需担心这一点。
 
 一个标准的 commit 历史如下：
