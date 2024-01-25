@@ -1,10 +1,13 @@
 ---
 title: 手动实现 JavaScript 类的继承
-date: 2024-01-14 20:21:41
 tags:
   - 面试题
   - JavaScript
   - 面向对象
+categories:
+  - 前端
+  - Javascript
+date: 2024-01-14 20:21:41
 ---
 # 原型链继承
 
