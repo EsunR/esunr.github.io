@@ -1,8 +1,13 @@
 ---
+title: TypeScript 类型体操精讲
+tags:
+  - Typescript
 categories:
   - 前端
   - Javascript
+date: 2024-02-19 15:42:06
 ---
+
 ## 实现 Pick
 
 [Source](https://github.com/type-challenges/type-challenges/blob/main/questions/00004-easy-pick/README.zh-CN.md)
