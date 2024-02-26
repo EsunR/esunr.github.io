@@ -1,9 +1,10 @@
 ---
-title: 数据报告海报生成方案技术调研
+title: 数据报告海报生成图片、PDF方案的技术调研
 tags:
   - 可视化
   - PDF
   - HTML2Canvas
+  - jsPDF
 categories:
   - 前端
   - 技术调研
@@ -319,7 +320,7 @@ pdf.output('pdfobjectnewwindow');
 
 官方给出的方案是通过 `setFont` 方法让用户加载自定义字体，具体参考 [官方文档的《Use of UTF-8/TTF》章节](https://artskydj.github.io/jsPDF/docs/index.html)。
 
-但是，如何挑选合适的字体又是一个比较深的问题。首先，使用开源字体是一个比较常用的方案，关于中文开源字体的选择，可以参考[这个网站](https://drxie.github.io/OSFCC/)，这里我们推荐使用 Adobe 的[思源黑体](https://github.com/adobe-fonts/source-han-sans)，其在 Github 完全开源，是可以免费使用并允许二次开发的。
+选择开源字体在项目中使用是一个比较常用的方案，这里我们推荐使用 Adobe 的[思源黑体](https://github.com/adobe-fonts/source-han-sans)，其在 Github 完全开源，是可以免费使用并允许二次开发的，关于如何挑选思源黑体的各个版本可以参考：[《带你看懂思源字体的各个版本都有什么区别》](https://blog.esunr.site/2024/02/d54f000429f5.html)
 
 我们这里直接挑选思源黑体的中文字体集，并下载 `.ttf` 格式的可变字体：[下载地址 (16.9M)](https://github.com/adobe-fonts/source-han-sans/blob/release/Variable/TTF/Subset/SourceHanSansCN-VF.ttf)。
 
