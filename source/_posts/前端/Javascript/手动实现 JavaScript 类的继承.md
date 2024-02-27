@@ -66,6 +66,8 @@ console.log(Cat.__proto__ === Animal); // false
 - 无法实现多继承
 - prototype 被覆写，很多属性的指向将会是错误的，如 `constructor`
 
+> [[面试中遇到的高频问题整理#new 一个对象发生了什么]]
+
 # 构造函数继承
 
 这种继承方式强行将父类构造函数中的所有属性都绑定给实例化后的子类实例，从而让子类继承了父类的属性。
@@ -272,6 +274,8 @@ console.log({
 }); // { name: 'unknown', age: '2 month' }
 ```
 
+> 实现 Object.create：[[面试中遇到的高频问题整理#实现 Object.create]]
+
 # 寄生组合式继承
 
 组合式继承其实已经是一个比较完善的类继承方案了，但是缺点是会实例化两次 super 类。为了解决这个问题，我们可以使用寄生式组合的方法去连接子类与 Super 类之间的原型链，从而优化掉组合式继承中为了连接原型链而进行的第二次实例化。
@@ -337,7 +341,7 @@ Cat.prototype.bark = function () {
 inherit(Cat, Animal);
 
 const cat = new Cat("YiDianDian", "2 month");
-cat.eat(); // throw error: eat is not a function
+cat.bark(); // throw error: bark is not a function
 ```
 
 为了解决这个问题，我们可以使用 `Object.defineProperty` 在 `inherit` 方法中覆盖子类的 `prototype` 前将子类已有的原型链上的属性挂载给创建的空对象上：
@@ -406,4 +410,48 @@ console.log(cat instanceof Animal); // true
 console.log(cat.constructor); // [Function: Cat]
 console.log(cat.__proto__.__proto__ === Animal.prototype); // true
 console.log(Cat.__proto__ === Animal); // false
+```
+
+# 使用 Proxy 实现继承
+
+[来源](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy#%E6%89%A9%E5%B1%95%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0)
+
+```js
+function extend(sup, base) {
+  var descriptor = Object.getOwnPropertyDescriptor(
+    base.prototype,
+    "constructor",
+  );
+  base.prototype = Object.create(sup.prototype);
+  var handler = {
+    construct: function (target, args) {
+      var obj = Object.create(base.prototype);
+      this.apply(target, obj, args);
+      return obj;
+    },
+    apply: function (target, that, args) {
+      sup.apply(that, args);
+      base.apply(that, args);
+    },
+  };
+  var proxy = new Proxy(base, handler);
+  descriptor.value = proxy;
+  Object.defineProperty(base.prototype, "constructor", descriptor);
+  return proxy;
+}
+
+var Person = function (name) {
+  this.name = name;
+};
+
+var Boy = extend(Person, function (name, age) {
+  this.age = age;
+});
+
+Boy.prototype.sex = "M";
+
+var Peter = new Boy("Peter", 13);
+console.log(Peter.sex); // "M"
+console.log(Peter.name); // "Peter"
+console.log(Peter.age); // 13
 ```
