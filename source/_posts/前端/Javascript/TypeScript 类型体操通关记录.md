@@ -1,5 +1,5 @@
 ---
-title: TypeScript 类型体操精讲
+title: TypeScript 类型体操通关记录
 tags:
   - Typescript
 categories:
@@ -7,8 +7,9 @@ categories:
   - Javascript
 date: 2024-02-19 15:42:06
 ---
+# 1. 简单
 
-## 实现 Pick
+## Pick
 
 [Source](https://github.com/type-challenges/type-challenges/blob/main/questions/00004-easy-pick/README.zh-CN.md)
 
@@ -47,7 +48,7 @@ type MyPick<T, K extends keyof T> = {
 
 因此，使用 `K extends keyof T` 可以限定泛型的第二个参数位必须传入目标对象的 key，使用 `[key in K]: T[key]` 来定义一个新的类型声明对象的 Key 和 Value 的类型定义，从而实现 `Pick` 函数。
 
-## 实现 Exclude
+## Exclude
 
 [Source](https://github.com/type-challenges/type-challenges/blob/main/questions/00043-easy-exclude/README.zh-CN.md)
 
@@ -394,6 +395,39 @@ type Includes<Value extends any[], Item> =
 ```ts
 type Includes<Value extends any[], Item> =
   Value extends [Value[0], ...infer Rest]
-    ? IsEqual<Value[0], U> extends true ? true : Includes<Rest, Item>
+    ? IsEqual<Value[0], Item> extends true ? true : Includes<Rest, Item>
     : false;
+```
+
+## Push
+
+[Source](https://github.com/type-challenges/type-challenges/blob/main/questions/03057-easy-push/README.zh-CN.md)
+
+在类型系统里实现通用的 `Array.push` 。
+
+例如：
+
+```ts
+type Result = Push<[1, 2], '3'> // [1, 2, '3']
+```
+
+答案：
+
+```ts
+type Push<T extends any[], U> = [...T, U]
+```
+
+相同题目 [Shift](https://github.com/type-challenges/type-challenges/blob/main/questions/03060-easy-unshift/README.zh-CN.md#unshift--) 不再记录。
+
+## Parameters
+
+[Source](https://github.com/type-challenges/type-challenges/blob/main/questions/03312-easy-parameters/README.zh-CN.md)
+
+TypeScript 内置工具类型 Parameters 可以提取函数的参数类型。
+
+例如：
+
+```ts
+type T2 = Parameters<(arg: string) => any>; // [arg: string]
+type Arg = T2[0] // string
 ```
