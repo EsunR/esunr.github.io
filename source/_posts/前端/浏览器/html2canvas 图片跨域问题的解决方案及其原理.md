@@ -181,7 +181,7 @@ curl 'https://esunr-webapp.cdn.bcebos.com/express-vue-template/playground/mounta
 
 此外还有一种情况需要额外注意，在浏览器缓存中，**相同一级域名下的图片缓存，在子域名之间是会互相复用的**，比如在域名 `local.baidu.com` 访问了图片 `mountain.webp`，那么在域名 `local2.baidu.com` 下访问相同的图片 `mountain.webp` 时，就会去获取第一次访问 `local.baidu.com` 时创建的缓存，即使两个域名的 img 标签都添加了 `corssorigin` 属性，但拿到的缓存图片响应头中的 `Access-Control-Allow-Origin` 是错误的，就仍然会造成 CORS 错误，流程图如下：
 
-![](https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202403281525905.png)
+![](https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202403281653329.png)
 
 ### 解决方案
 
@@ -245,3 +245,36 @@ html2canvas(renderAreaRef.value, {
 但是经过尝试后，Canvas 上会绘制出来一张空白图片，因此这个方案可能暂时不适用：
 
 ![](https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202403281647507.png)
+
+但是如果使用 css 属性 `backgroundImage` 来加载图片却可以使用该方法：
+
+```js
+html2canvas(renderAreaRef.value, {
+  allowTaint: html2canvasOptions.allowTaint,
+  useCORS: html2canvasOptions.useCORS,
+  onclone: (doc) => {
+    const images = doc.querySelectorAll('.need-print-img');
+    images.forEach((img) => {
+      const backgroundImageUrl = (
+        img as HTMLDivElement
+      ).style.backgroundImage.replace(/url\((['"])?(.*?)\1\)/gi, '$2');
+      const newImageUrl = `${backgroundImageUrl}&timestamp=${new Date().valueOf()}`;
+
+      // 使用跨域请求预加载 image 图片
+      const _img = new Image();
+      _img.crossOrigin = 'anonymous';
+      _img.src = newImageUrl;
+
+      (img as HTMLDivElement).style.backgroundImage = `url(${_img.src})`;
+    });
+  },
+})
+  .then((canvas) => {
+    const img = canvas.toDataURL('image/png');
+    // TODO: 导出图片
+  })
+  .catch((e) => {
+    ElMessage.error('生成图片失败，查看控制台错误');
+    console.error(e);
+  });
+```
