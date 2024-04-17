@@ -278,3 +278,5 @@ html2canvas(renderAreaRef.value, {
     console.error(e);
   });
 ```
+
+但是使用 css 来展示图片既不合常规，也会导致 html2canvas 渲染模糊，总之还是不太推荐。
