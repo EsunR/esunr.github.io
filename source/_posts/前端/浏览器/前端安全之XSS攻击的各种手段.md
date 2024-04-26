@@ -39,3 +39,12 @@ const template = `
 
 为了避免此类情况的发生，可以使用 [@nuxt/devalue](https://github.com/nuxt-contrib/devalue) 或者 [serialize-javascript](https://www.npmjs.com/package/serialize-javascript) 解决。
 
+# a 标签的 XSS 攻击
+
+后台可以对某张卡片添加链接，前端将链接绑定在 a 标签的 href 上，但是 a 标签的 href 是可以执行 JavaScript 语句的：
+
+```html
+<a href="JavaScript:;"></a>
+```
+
+参考：https://security.stackexchange.com/questions/11985/will-javascript-be-executed-which-is-in-an-href
