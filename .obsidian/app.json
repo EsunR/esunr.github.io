@@ -1,18 +1,1 @@
-{
-  "legacyEditor": false,
-  "livePreview": true,
-  "trashOption": "system",
-  "promptDelete": true,
-  "userIgnoreFilters": [
-    "node_modules/",
-    "node_modules.nosync/",
-    "script/",
-    "themes/",
-    "scaffolds/",
-    "public/"
-  ],
-  "attachmentFolderPath": "/",
-  "newFileLocation": "folder",
-  "newFileFolderPath": "source/_posts/未分类",
-  "vimMode": false
-}
+{}
