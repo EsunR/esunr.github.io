@@ -6,8 +6,9 @@ categories:
 date: 2024-05-08 16:42:06
 tags:
 ---
-
 # 获取未经压缩的 Webpack 打包产出
+
+为了获取 webpack 的原始产出，我们要对 webpack 配置进行如下操作：
 
 1. 移除 babel-loader；
 2. `optimization.minimize` 设置为 false 以关闭 teser 对代码的压缩；
