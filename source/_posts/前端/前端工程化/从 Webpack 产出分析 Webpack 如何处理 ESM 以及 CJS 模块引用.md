@@ -1,8 +1,12 @@
 ---
+title: 从 Webpack 产出分析 Webpack 如何处理 ESM 以及 CJS 模块引用
 categories:
   - 前端
   - 前端工程化
+date: 2024-05-08 16:42:06
+tags:
 ---
+
 # 获取未经压缩的 Webpack 打包产出
 
 1. 移除 babel-loader；
