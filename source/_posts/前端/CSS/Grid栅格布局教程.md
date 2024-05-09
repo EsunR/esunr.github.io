@@ -52,7 +52,7 @@ Grid 栅格布局类似于表格布局，可以快速将页面分割为多个部
 
 实现效果：
 
-![](http://img.cdn.esunr.xyz/markdown/20200227150150.png)
+![20240508232510.png|350](https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240508232510.png)
 
 上述示例中我们将 `grid-template-row` 与 `grid-template-columns` 的值采用了简写的方式设为了平分为三等分，同时还可以，使用 px、百分比等作为单位，如：
 
@@ -68,7 +68,23 @@ Grid 栅格布局类似于表格布局，可以快速将页面分割为多个部
 }
 ```
 
+![|350](https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240508233000.png)
+
 > 你可以使用固定的轨道尺寸创建网格，比如使用像素单位。你也可以使用比如百分比或者专门为此目的创建的新单位 fr来创建有弹性尺寸的网格。 -MDN
+
+未定义行高或者列高，元素宽度会根据 grid 进行拉伸，但是高度为默认:
+
+```css
+.wrapper {
+  border: 1px solid #000000;
+  display: grid;
+  /** 只定义一行高度，其余行不指定 */
+  grid-template-rows: 100px;
+  grid-template-columns: 100px 100px;
+}
+```
+
+![20240508233349.png|350](https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240508233349.png)
 
 # 2. 重复 repeat
 
@@ -107,9 +123,9 @@ Grid 栅格布局类似于表格布局，可以快速将页面分割为多个部
 
 效果：
 
-![](http://img.cdn.esunr.xyz/markdown/20200227153424.png)
+![20240508233704.png|350](https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240508233704.png)
 
-# 2. 自动填充
+# 2. 自动填充 repeat auto-fill
 
 Grid 中引入了自动填充的特性，在设置容器的行高与列宽时，使用 `repeat()` 第一个参数如果传入 `auto-fill` 第二个参数填入一定的数值，那么回自动拿着这个数值重复 n 遍，以填满整个栅格容器。
 
@@ -126,7 +142,7 @@ Grid 中引入了自动填充的特性，在设置容器的行高与列宽时，
 }
 ```
 
-![](http://img.cdn.esunr.xyz/markdown/20200227155500.png)
+![20240508234005.png|350](https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240508234005.png)
 
 例2：
 
@@ -141,7 +157,7 @@ Grid 中引入了自动填充的特性，在设置容器的行高与列宽时，
 }
 ```
 
-![](http://img.cdn.esunr.xyz/markdown/20200227155644.png)
+![image.png|350](https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240508234154.png)
 
 例3：
 
@@ -158,9 +174,9 @@ Grid 中引入了自动填充的特性，在设置容器的行高与列宽时，
 }
 ```
 
-![](http://img.cdn.esunr.xyz/markdown/20200227155757.png)
+![image.png|350](https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240508234255.png)
 
-# 3. 取值范围
+# 3. 取值范围 minmax
 
 在设置行高与宽高时，还可以通过 `minmax` 来设置值的取值范围。
 
@@ -177,7 +193,7 @@ Grid 中引入了自动填充的特性，在设置容器的行高与列宽时，
 }
 ```
 
-![](http://img.cdn.esunr.xyz/markdown/20200227162624.png)
+![image.png|350](https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240508234417.png)
 
 例2：
 
@@ -192,7 +208,9 @@ Grid 中引入了自动填充的特性，在设置容器的行高与列宽时，
 }
 ```
 
-![](http://img.cdn.esunr.xyz/markdown/20200227162711.png)
+![image.png|550](https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240508234551.png)
+
+> 为了不让第三行元素溢出，前两行元素的高度自动设定为 73px
 
 # 4. 间距 gap
 
@@ -230,7 +248,7 @@ Grid 中引入了自动填充的特性，在设置容器的行高与列宽时，
 }
 ```
 
-![](http://img.cdn.esunr.xyz/markdown/20200227163427.png)
+![image.png|350](https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240508234733.png)
 
 例2，column-gap：
 
@@ -246,11 +264,11 @@ Grid 中引入了自动填充的特性，在设置容器的行高与列宽时，
 }
 ```
 
-![](http://img.cdn.esunr.xyz/markdown/20200227163613.png)
+![image.png|350](https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240508234918.png)
 
 > 可以使用复合样式：gap: [行间距] [列间距]
 
-# 5. 定位
+# 5. 定位 grid-row grid-column
 
 在栅格化布局中，元素最外层的 div 容器负责划分区域，那么元素内层的 div 就为实体内容，我们可以根据划分好的网格将元素定位至网格的任意位置。
 
@@ -287,10 +305,30 @@ Grid 中引入了自动填充的特性，在设置容器的行高与列宽时，
 
 效果：
 
-![](http://img.cdn.esunr.xyz/markdown/20200227172737.png)
+![image.png|350](https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240508235147.png)
 
+```css
+.wrapper {
+	width: 300px;
+	height: 300px;
+	border: 1px solid #000000;
+	display: grid;
+	grid-template-rows: repeat(3, 1fr);
+	grid-template-columns: repeat(3, 1fr);
+}
 
-![](http://img.cdn.esunr.xyz/markdown/20200227173527.png)
+.wrapper > div {
+	background-color: pink;
+	grid-row-start: 2;
+	grid-row-end: 3;
+	grid-column-start: 2;
+	grid-column-end: 3;
+}
+```
+
+效果：
+
+![image.png|350](https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240508235424.png)
 
 此外布局的定位还可以使用分隔符 `/` 简写，分隔符的前后分别代表起始边与结束边，如上面的定位可以改写为：
 
@@ -325,9 +363,7 @@ Grid 中引入了自动填充的特性，在设置容器的行高与列宽时，
 }
 ```
 
-![](http://img.cdn.esunr.xyz/markdown/20200227180105.png)
-
-![](http://img.cdn.esunr.xyz/markdown/20200227180601.png)
+![image.png|350](https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240508235618.png)
 
 如果我们使用了 `repeat` 来创建边，那命名的方式稍有区别，在命名后使用该边时，要后缀时那一行或者哪一列的边：
 
@@ -350,7 +386,7 @@ Grid 中引入了自动填充的特性，在设置容器的行高与列宽时，
 }
 ```
 
-![](http://img.cdn.esunr.xyz/markdown/20200227181246.png)
+![image.png|350](https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240508235618.png)
 
 # 7. 偏移 span
 
@@ -375,7 +411,7 @@ Grid 中引入了自动填充的特性，在设置容器的行高与列宽时，
 }
 ```
 
-![](http://img.cdn.esunr.xyz/markdown/20200227191817.png)
+![image.png|350](https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240508235830.png)
 
 # 8. 区域定位 grid-area
 
@@ -421,7 +457,7 @@ Grid 中引入了自动填充的特性，在设置容器的行高与列宽时，
 
 ![](http://img.cdn.esunr.xyz/markdown/20200228165341.png)
 
-# 9. 区域命名 
+# 9. 区域命名 grid-template-areas
 
 可以使用 `grid-template-areas` 为区域进行命名，每行之间用不同的字符串相间隔，每列之间用空格相隔。
 
@@ -483,7 +519,7 @@ footer{
 
 效果：
 
-![](http://img.cdn.esunr.xyz/markdown/20200228174629.png)
+![image.png|650](https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240509000205.png)
 
 同时，使用 `grid-template-areas` 对栅格区域进行命名时，每条边也会自动被添加命名，以我们命名的 header 区域来说，其边的自动命名规则如下：
 
@@ -501,7 +537,7 @@ footer{
 }
 ```
 
-# 10. 栅格的流动
+# 10. 栅格的流动 grid-auto-flow
 
 栅格的默认流动方式为从左到右从上到下，如：
 
@@ -516,7 +552,7 @@ footer{
 }
 ```
 
-![](http://img.cdn.esunr.xyz/markdown/20200228182206.png)
+![image.png|350](https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240509000422.png)
 
 `grid-auto-flow` 可以改变栅格的浮动方向，默认值为 `row` 改为 `column` 之后可以沿着列的方向浮动：
 
@@ -527,7 +563,7 @@ footer{
 }
 ```
 
-![](http://img.cdn.esunr.xyz/markdown/20200228182414.png)
+![image.png|350](https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240509000441.png)
 
 此外，`grid-auto-flow` 属性值的第二个值可以填写 `dense` 指定填充的位置修改为如果最后一个定位元素前还有空位，那就填充到其前方。
 
@@ -557,7 +593,7 @@ footer{
 }
 ```
 
-![](http://img.cdn.esunr.xyz/markdown/20200228183408.png)
+![image.png|350](https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240509000557.png)
 
 添加 `dense` 后：
 
@@ -586,11 +622,11 @@ footer{
 }
 ```
 
-![](http://img.cdn.esunr.xyz/markdown/20200228183455.png)
+![image.png|350](https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240509000624.png)
 
 > 如果是使用区域定位，那么区域定位元素前如果有空位，后面的元素会默认填充在前面的空位上。
 
-# 11. 栅格的整体对其方式的处理
+# 11. 栅格的整体对其方式的处理 justify-content align-content
 
 与 Flex 布局一样的是，Grid 布局也同样可以是用 `justify-content` 进行整体栅格的对其。
 
@@ -608,7 +644,7 @@ footer{
 }
 ```
 
-![](http://img.cdn.esunr.xyz/markdown/20200228184442.png)
+![image.png|350](https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240509001327.png)
 
 示例 2：
 
@@ -620,16 +656,15 @@ footer{
   display: grid;
   grid-template-rows: repeat(1, 50px);
   grid-template-columns: repeat(3, 50px);
-  grid-auto-flow: row dense;
   justify-content: space-evenly;
 }
 ```
 
-![](http://img.cdn.esunr.xyz/markdown/20200228184617.png)
+![image.png|350](https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240509001359.png)
 
 此外，由于 Grid 布局是二维布局，还可以使用 `align-content` 来进行垂直方向上的居中对其（针对于 Flex 这种一维布局时没有垂直方向的，所以该属性在 Flex 布局中无效）。
 
-# 12. 栅格内元素的整体控制
+# 12. 栅格内元素的整体控制 justify-items align-items
 
 `justify-items` 与 `align-items` 在 Grid 布局中同样生效。
 
@@ -660,7 +695,7 @@ footer{
 }
 ```
 
-![](http://img.cdn.esunr.xyz/markdown/20200228185452.png)
+![image.png|350](https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240509002138.png)
 
 示例 1：改变 `justify-items` 属性
 
@@ -670,7 +705,7 @@ footer{
 }
 ```
 
-![](http://img.cdn.esunr.xyz/markdown/20200228185543.png)
+![image.png|350](https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240509002202.png)
 
 示例 2：改变 `align-items` 属性
 
@@ -680,9 +715,9 @@ footer{
 }
 ```
 
-![](http://img.cdn.esunr.xyz/markdown/20200228185731.png)
+![image.png|350](https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240509002238.png)
 
-# 12. 栅格内单一元素对其方式的处理
+# 12. 栅格内单一元素对其方式的处理 align-self justify-self
 
 除了上述对栅格内所有元素进进行统一的对其方式处理外，还可以利用 `justify-self` 与 `align-self` 进行对栅格内单一元素的对其方式的处理。如我们想要单独将第一个元素进行上下左右居中，就可以写为：
 
@@ -707,7 +742,7 @@ footer{
 }
 ```
 
-![](http://img.cdn.esunr.xyz/markdown/20200228190707.png)
+![image.png|350](https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240509002411.png)
 
 # 14. 组合简写栅格的对其方式
 

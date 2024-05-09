@@ -1,5 +1,6 @@
 [
   "obsidian-git",
   "table-editor-obsidian",
-  "image-converter"
+  "image-converter",
+  "obsidian-image-auto-upload-plugin"
 ]
