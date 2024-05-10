@@ -352,3 +352,23 @@ git submodule update --init --recursive
 ```sh
 git submodule foreach git pull origin <branch>
 ```
+
+# 7. upstream
+
+当你在 Github 上 Fork 别人的项目，同时保持与 Fork 项目的同步更新时，可以将目标项目设置为 `upstream`，这样就能做到保持更新了，他们的关系如下图：
+
+![202405091350390.png|496](https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202405091350390.png)
+
+设置 upstream:
+
+```sh
+git remote add upstream <git_repository_url>
+```
+
+从 upstream 更新代码到当前分支：
+
+```sh
+git pull upstream <upstream_brach_name>
+```
+
+[更多参考](https://gb.yekai.net/concepts/origin-vs-upstream)
