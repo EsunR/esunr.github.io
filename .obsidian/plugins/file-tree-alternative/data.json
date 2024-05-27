@@ -1,14 +1,15 @@
 {
   "openViewOnStart": true,
   "ribbonIcon": true,
-  "showRootFolder": false,
+  "showRootFolder": true,
   "showFilesFromSubFolders": true,
   "searchFunction": true,
   "allSearchOnlyInFocusedFolder": false,
   "showFilesFromSubFoldersButton": true,
   "revealActiveFileButton": false,
   "excludedExtensions": "",
-  "excludedFolders": "node_modules",
+  "hideAttachments": false,
+  "attachmentsFolderName": "attachments",
   "folderIcon": "default",
   "folderCount": true,
   "folderCountOption": "notes",
@@ -23,5 +24,6 @@
   "fileNameIsHeader": false,
   "folderNote": false,
   "deleteFileOption": "trash",
-  "showFileNameAsFullPath": false
+  "showFileNameAsFullPath": false,
+  "bookmarksEvents": false
 }

@@ -103,7 +103,7 @@ error: Uninstalling node is not supported yet.
 
 因此需要到 `~/.volta/tools/image` 手动删除已经下载的 npm 或者 yarn 等，[参考](https://github.com/volta-cli/volta/issues/1431#issuecomment-1409424063)。
 
-## 1.4 volta 对于二级制包的管理
+## 1.4 volta 对于二进制包的管理
 
 在使用 npm 全局安装二进制包时，如 `npm install pm2`（或 `votla install pm2`），volta 为了保证在切换 node 版本后这些二进制包仍能够使用，volta 会固定其依赖的 node 版本为其安装时 volta 设置的默认 node 版本。
 
@@ -113,7 +113,7 @@ error: Uninstalling node is not supported yet.
 volta run --node 14 npm i -g pm2
 ```
 
-如果要想查看系统内安装的 npm 二级制包所依赖的具体 node 版本号，可以使用 `volta list all` 查看：
+如果要想查看系统内安装的 npm 二进制包所依赖的具体 node 版本号，可以使用 `volta list all` 查看：
 
 ```sh
 volta list all
@@ -143,7 +143,7 @@ volta list all
 				package manager: npm@built-in
 ```
 
-> PS：`volta list` 指令列出的 `Tool binaries available` 列表中包后面跟的 `(default)` 表示为工具本身的版本，而不是以来的 node 版本。[Issues](https://github.com/volta-cli/volta/issues/1226)
+> PS：`volta list` 指令列出的 `Tool binaries available` 列表中包后面跟的 `(default)` 表示为工具本身的版本，而不是依赖的 node 版本。[Issues](https://github.com/volta-cli/volta/issues/1226)
 
 ## 1.5 volta 的原理
 
