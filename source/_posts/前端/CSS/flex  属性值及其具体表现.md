@@ -5,6 +5,8 @@ categories:
   - CSS
 date: 2024-06-14 10:38:25
 tags:
+  - CSS
+  - flex
 ---
 
 # 1. flex-basis
