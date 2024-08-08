@@ -55,7 +55,7 @@ module.exports = {
 };
 ```
 
-> 如果 extends 的配置太多，搞不清最终的配置长啥样，可以使用 pnpm exec eslint --print-config .eslintrc.cjs 可以查看最终的 eslint 配置。
+> 如果 extends 的配置太多，搞不清最终的配置长啥样，可以使用 `pnpm exec eslint --print-config .eslintrc.cjs` 可以查看最终的 eslint 配置。
 
 ## 准备 Vue 环境
 
