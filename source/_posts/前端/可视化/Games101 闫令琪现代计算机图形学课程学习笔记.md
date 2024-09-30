@@ -9,7 +9,7 @@ categories:
   - 可视化
 date: 2024-08-18 18:28:30
 ---
-# Lecture 03 Transformation
+# Lecture 03. 变换（二维与三维）
 
 [课件](https://sites.cs.ucsb.edu/~lingqi/teaching/resources/GAMES101_Lecture_03.pdf)
 
@@ -105,7 +105,7 @@ date: 2024-08-18 18:28:30
 
 在数学上，如果一个矩阵的逆等于它的转置，这个矩阵叫做正交矩阵。
 
-# Lecture 4 Transformation Count
+# Lecture 04. 变换（模型、视图、投影）
 
 - [视频](https://www.bilibili.com/video/BV1X7411F744?p=4&vd_source=b233b2041b0c7ce85a2c9111063e461f)
 - [课件](https://sites.cs.ucsb.edu/~lingqi/teaching/resources/GAMES101_Lecture_04.pdf)
