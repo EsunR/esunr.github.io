@@ -25,7 +25,7 @@ html(lang=config.language)
     meta(name="keywords" content=pageKeywords)
     meta(name="author" content=pageAuthor)
     meta(name="copyright" content=pageCopyright)
-    link(rel='canonical', href=(config.url + '/' + page.path).replace('index.html', ''))
+    //- link(rel='canonical', href=(config.url + '/' + page.path).replace('index.html', ''))
     title=pageTitle
     !=favicon_tag(config.favicon || theme.favicon || '/melody-favicon.ico')
     if theme.stylesheets !== undefined && theme.stylesheets.length > 0
