@@ -36,3 +36,15 @@ pnpm -C path/to/workspace # md，这里又可以不用 `./` 写相对路径
 ```sh
 ./path/to/package pnpm run dev
 ```
+
+# pnpm link
+
+`pnpm link --global` 会将当前的包软链接到全局的 pnpm 存储目录下（pnpm 的全局存储目录可以通过 `pnpm store path` 获取），用于在本地开发一个包时进行调试。
+
+在目标项目中，使用 `pnpm link --global <package name>` 来安装刚才链接到全局的包，但是注意该包并不会在 package.json 中体现，只能在 node_modules 目录下看到该软链。
+
+如果向在目标项目中移除通过 `link` 安装的包，则使用 `pnpm unlink`，pnpm 会删除当前项目使用 `link` 创建的软链。
+
+如果想要移除本地包在 pnpm 全局存储目录下的链接，可以使用 `pnpm uninstall <package name> --global` 来删除。
+
+> 注意，如果项目使用了 webpack 进行构建，[`resolve.syslinks`](https://webpack.js.org/configuration/resolve/#resolve-symlinks)  会导致软链按照真实路径进行包查找，导致依赖包无法被正常索引到，但是关了 syslinks 又会导致 pnpm 的软链逻辑时效，啥也不是。
