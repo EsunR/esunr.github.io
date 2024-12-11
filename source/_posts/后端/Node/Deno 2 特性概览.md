@@ -1,6 +1,29 @@
 基于视频：[Announcing Deno 2](https://www.youtube.com/watch?v=d35SlRgVxT8&t=626s)
 
-# Package Manager
+# Typescript support
+
+Deno 无需配置即支持 Typescript。
+
+许多 npm 包附带类型，您可以导入它们并直接将它们与类型一起使用：
+
+```ts
+import chalk from "npm:chalk@5";
+```
+
+有些软件包不附带类型，但您可以使用 @eno-types 指令指定它们的类型。例如，使用 @types 包：
+
+```ts
+// @deno-types="npm:@types/express@^4.17"
+import express from "npm:express@^4.17";
+```
+
+Node 附带了许多内置类型，例如 Buffer，它们可能会在 npm 包的类型中引用。要加载这些，您必须将类型引用指令添加到 @types/node 包：
+
+```ts
+/// <reference types="npm:@types/node" />
+```
+
+# Package manager
 
 deno 拥有 npm 一样的包管理指令：
 
@@ -8,9 +31,47 @@ deno 拥有 npm 一样的包管理指令：
 - deno add
 - deno remove
 
-当项目存在 pacakge.josn 时，deno 会在项目中创建 node_modules 来进行依赖缓存。
+当项目存在 pacakge.josn 时，deno 会在项目中创建 node_modules 来进行依赖缓存。如果没有 package.json，deno 会读取 deno.json 并从全局缓存中进行查找或安装。
 
-如果没有 package.json，deno 会读取 deno.json 并从全局缓存中进行查找或安装。
+## 可执行的 npm 脚本
+
+类似 `npx`、`pnpm exec` 指令，deno 也可以直接运行 npm 脚本：
+
+```sh
+deno run <permission flag> npm:<package name>@<version (optional)> <args>
+```
+
+## node_modules 的处理
+
+默认情况下，执行 deno run 的时候，deno 不会创建 node_modules，依赖将安装到全局缓存中，这是 deno 推荐的方式。
+
+如果项目中需要 node_modules，可以在 `deno.json` 中配置：
+
+```json
+{
+  "nodeModulesDir": "auto"
+}
+```
+
+auto 模式会在项目目录下创建 node_modules，并尝试从全局缓存中拉取需要的包到 node_modules 中。
+
+此外，`nodeModulesDir` 也可以被设置为 `manual`，这个模式下执行 `deno run` 时，deno 不会自动安装相关的依赖，用户必须手动调用 `deno install` 或者 `npm install` 来显示指定的进行包安装，安装后的包也会被放在项目的 `node_modules` 中。手动模式是项目使用 package.json 时的默认模式。
+
+## 缓存位置
+
+使用 `deno info` 指令可以输出 deno 的缓存信息：
+
+```
+DENO_DIR location: /Users/xxx/Library/Caches/deno
+Remote modules cache: /Users/xxx/Library/Caches/deno/remote
+npm modules cache: /Users/xxx/Library/Caches/deno/npm
+Emitted modules cache: /Users/xxx/Library/Caches/deno/gen
+Language server registries cache: /Users/xxx/Library/Caches/deno/registries
+Origin storage: /Users/xxx/Library/Caches/deno/location_data
+Web cache storage: /var/folders/0y/7qqcbbvn2k74zkvd46d0582w0000gn/T/deno_cache
+```
+
+默认情况下，deno 使用 DENO_DIR  来缓存下载的依赖。
 
 # JSR
 
@@ -74,3 +135,5 @@ deno 还支持 package.json 和 deno.json 的共存：
 # Deno is fast
 
 ![image.png](https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202412102200369.png)
+
+
