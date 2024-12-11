@@ -1,3 +1,15 @@
+---
+title: Deno 2 特性概览
+tags:
+  - Deno
+  - NodeJS
+  - 服务器
+  - 快速入门
+categories:
+  - 后端
+  - Node
+date: 2024-12-11 20:48:25
+---
 基于视频：[Announcing Deno 2](https://www.youtube.com/watch?v=d35SlRgVxT8&t=626s)
 
 # Typescript support
