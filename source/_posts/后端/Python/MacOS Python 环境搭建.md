@@ -1,7 +1,11 @@
 ---
+title: MacOS Python 环境搭建
+tags:
+  - Python
 categories:
   - 后端
   - Python
+date: 2024-12-12 15:02:51
 ---
 # 1. 环境管理
 
