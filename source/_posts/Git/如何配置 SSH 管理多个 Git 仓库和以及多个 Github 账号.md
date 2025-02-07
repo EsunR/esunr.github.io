@@ -153,30 +153,34 @@ ssh-add id_rsa_company
 继续上面的示例，创建 config 文件后，使用 vim 或者其他任意编辑器编辑 config 文件，输入以下内容：
 
 ```
-Host github
-    User git
-    Hostname github.com
-    PreferredAuthentications publickey
-    IdentityFile ~/.ssh/id_rsa_github
+Host github.com
+User git
+Hostname github.com
+PreferredAuthentications publickey
+IdentityFile ~/.ssh/id_rsa_github
+# 使用 socks 代理
+# ProxyCommand nc -X 5 -x 127.0.0.1:7890 %h %p
 
-Host company-git
-    User git
-    # 替换为你公司的 Git 代码托管平台的服务器
-    Hostname company-git-repo.com
-    # 你公司 SSH 服务的端口号
-    Port 22
-    PreferredAuthentications publickey
-    IdentityFile ~/.ssh/id_rsa_company
+Host company-git-repo.com
+User git
+# 替换为你公司的 Git 代码托管平台的服务器
+Hostname company-git-repo.com
+# 你公司 SSH 服务的端口号
+Port 22
+PreferredAuthentications publickey
+IdentityFile ~/.ssh/id_rsa_company
 ```
 
 config 配置文件中的各项配置意思为：
 
-- Host：指定连接到的主机名，可以随意指定，相当于实际连接目标主机的别名；
+- Host：用户在命令中使用的主机名称（或模式），可以是简化的别名（比如连接到 github.com 可以填写为 `github.com` 也可以填写为 `github`），也可以是支持通配符的模式；
 - User：指定使用的用户名，通常为 git，也可以不指定；
 - Hostname：指定连接到的主机的实际域名或IP地址。如果是向 Github 推送代码，则为 github.com，如果是向公司的 Git 代码托管平台推送代码，则填写公司主机的地址
 - Port：SSH 服务的端口号，默认为 22，可以不写
 - PreferredAuthentications：指定优先使用的身份验证方法，指定为publickey，即使用公钥进行身份认证。
 - IdentityFile：指定要使用的私钥文件路径，即指向你创建的私钥，我们这里分别为不通的 Git 代码托管平台指定了不同的私钥
+
+> 2025.01.17 补充：Host 建议填写完整，经过测试如果连接目标是 `github.com` 但是只填写 `github` 时，`ProxyCommand`  配置会无法生效。
 
 配置完成后，我们登录 Github，将 `id_rsa_github.pub` 的公钥内容复制到 SSH Key 管理面板中；同样的，我们登录公司的 Git 代码托管平台上，将 `id_rsa_company.pub` 中的公钥内容复制到对应的管理 SSH Key 的位置（这个位置通常在个人信息设置中，可能被称为 『SSH Key 管理』或者『公钥管理』等名称）
 
