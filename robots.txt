@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /vercel.json
+Sitemap: https://blog.esunr.site/sitemap.xml
