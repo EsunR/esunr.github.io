@@ -184,6 +184,77 @@ Apr  1 16:03:40 cloud sshguard[2897]: Attack from "160.191.52.73" on service 110
 Apr  1 16:03:40 cloud sshguard[2897]: Blocking "160.191.52.73/32" for 120 secs (3 attacks in 1 secs, after 1 abuses over 1 secs.)
 ```
 
+# 4. 其他手段
+
+除了防火墙和登录次数限制之外，还可以使用二步认证（2FA）来要求登录者在登录的时候输入动态 Token，采取了这个手段之后能够进一步避免密码泄露的风险。
+
+以 Ubuntu 系统为例，首先安装 Google 的验证器插件：
+
+```sh
+apt install libpam-google-authenticator
+```
+
+然后命令行输入 `google-authenticator` 初始化验证器，然后依次选择：
+
+```
+Do you want authentication tokens to be time-based (y/n) y
+
+Do you want me to update your "~/.google_authenticator" file (y/n) y
+
+Do you want to disallow multiple uses of the same authentication
+token? This restricts you to one login about every 30s, but it increases
+your chances to notice or even prevent man-in-the-middle attacks (y/n) y
+
+By default, a new token is generated every 30 seconds by the mobile app.
+In order to compensate for possible time-skew between the client and the server,
+we allow an extra token before and after the current time. This allows for a
+time skew of up to 30 seconds between the authentication server and client. Suppose you
+experience problems with poor time synchronization. In that case, you can increase the window
+from its default size of 3 permitted codes (one previous code, the current
+code, the next code) to 17 permitted codes (the eight previous codes, the current
+code, and the eight next codes). This will permit a time skew of up to 4 minutes
+between client and server.
+Do you want to do so? (y/n) n
+
+If the computer that you are logging into isn't hardened against brute-force
+login attempts, you can enable rate-limiting for the authentication module.
+By default, this limits attackers to no more than three login attempts every 30s.
+Do you want to enable rate-limiting (y/n) y
+```
+
+然后命令行中会出现一个如下图的二维码，手机安装 Google Authenticator 应用后点击添加按钮并扫描这个二维码：
+
+![image.png|459](https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202504141054898.png)
+
+然后需要配置 OpenSSH 以使用 2FA/PAM。首先编辑 `/etc/pam.d/sshd` 配置，然后再文件尾部添加：
+
+```
+. . .
+# Standard Un*x password updating.
+@include common-password
+auth required pam_google_authenticator.so nullok
+auth required pam_permit.so
+```
+
+最后一行末尾的 `nullok` 表示这个身份验证方法是可选的。这允许没有 OATH-TOTP 令牌的用户依然可以仅使用他们的 SSH 密钥登录。一旦所有用户都配置了 OATH-TOTP 令牌，你可以移除这一行中的 `nullok`，从而强制启用多因素认证（MFA）。
+
+第二行中的 `pam_permit.so` 是必须的，它用于允许那些没有使用 MFA 令牌的用户继续进行身份验证。
+
+在登录时，每种认证方法都需要返回 `SUCCESS` 才能通过认证。如果用户没有使用 MFA 工具，使用 `nullok` 选项会使交互式键盘认证返回 `IGNORE`。这时，`pam_permit.so` 会返回 `SUCCESS`，从而允许认证继续进行。
+
+接下来，我们将配置SSH以支持这种身份验证，编辑 `/etc/ssh/sshd_config` 文件，将 `ChallengeResponseAuthentication` 修改为 `yes`：
+
+```
+# Change to yes to enable challenge-response passwords (beware issues with
+# some PAM modules and threads)
+ChallengeResponseAuthentication yes  
+AuthenticationMethods publickey,password publickey,keyboard-interactive
+```
+
+> 在高版本的 SSH 中，可能没有上面两个配置项，那么只需要将 `KbdInteractiveAuthentication` 设置为 `true` 即可。
+
+保存并关闭文件后，使用 `systemctl restart sshd.service` 可以重启 ssh 服务以生效。使用重启指令后并不会使当前的用户会话退出，此时可以另外开启一个会话，测试一下 2FA 是否可以使用，确保没有问题后就可以退出会话了。
+
 # 3. 引用参考
 
 - https://arthurchiao.art/blog/deep-dive-into-iptables-and-netfilter-arch-zh/

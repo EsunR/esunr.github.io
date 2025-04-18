@@ -118,3 +118,163 @@ resize2fs /dev/mapper/pve-root
 这里推荐使用 DDNS GO 来搭建 DDNS 服务：https://github.com/jeessy2/ddns-go
 
 这样我们内部就有了一个 IPv6 访问的入口了，我们可以从外网通过 ssh 等服务来接入内网服务。配合 iKuai 的防火墙功能，我们可以只开放跳板机的 IPv6 网络访问，就能控制外部的网络入口了。当然这就也要求跳板机的安全行足够高，可以配合防火墙 + fail2ban + 2FA 认证来进一步加固跳板机的访问权限，具体可以参考我的这篇文章：[《使用防火墙与 fail2ban 防止公网服务器被攻击》](https://blog.esunr.site/2025/04/387549224301.html#fail2ban)。
+
+### 透明网关
+
+参考：[《使用 Mihomo(Clash) 搭建透明网关，使局域网设备科学上网》](https://blog.esunr.site/2025/04/ec8dc9f7a09d.html)
+
+### 端口转发
+
+内网转发的意义在于，你可以通过 DDNS 绑定跳板机的 IPv6 地址，然后从跳板机上进行端口转发，从而访问局域网其他设备的服务，这样也有助于在公网限制开放的端口数量，从而提升安全性。
+
+可以使用 [lucky](https://github.com/gdy666/lucky) 面板可视化的配置内网转发。
+
+比如 PVE 的 win10 虚拟机开启了 3389 端口，那么就可以开放一个跳板机 13389 的端口，映射到 win10 主机 IP 上的 3389 端口，映射的目标 IP 也可以使用内网 IPv4。
+
+# 5. 硬件直通
+
+在虚拟机的环境下，一般是通过桥接或者虚拟化来连接物理设备的，但是在这种情况下部分硬件是不能够很好的发挥作用的，比如你想利用显卡硬解视频、HDMI 输出画面，那么就需要将这些硬件设备直通给虚拟机使用，这个过程就叫做硬件直通。
+
+### windows 单显卡直通
+
+> 该方式不借助 sriov 虚拟化，是直接将显卡 PCI 直通给了 windows 系统，其他虚拟机无法共用。原版教程：[https://www.right.com.cn/forum/thread-8413927-1-1.html](https://www.right.com.cn/forum/thread-8413927-1-1.html)
+
+PVE 启动内核IOMMU支持：
+
+```sh
+#修改引导内核
+vim /etc/default/grub
+
+# 修改内容
+GRUB_CMDLINE_LINUX_DEFAULT="quiet intel_iommu=on iommu=pt pcie_acs_override=downstream"
+```
+
+更新 GRUB 配置  
+
+```sh
+update-grub
+```
+
+屏蔽驱动：
+
+```sh
+vim /etc/modprobe.d/pve-blacklist.conf  
+
+# 添加内容
+# block INTEL driver  
+blacklist i915  
+blacklist snd_hda_intel  
+blacklist snd_hda_codec_hdmi  
+  
+#允许不安全的设备中断  
+options vfio_iommu_type1 allow_unsafe_interrupts=1
+```
+
+更新 initramfs 并重启：  
+
+```sh
+update-initramfs -u -k all  
+reboot
+```
+
+增加 module：
+
+```sh
+vim /etc/modules 
+
+# 添加内容
+vfio  
+vfio_iommu_type1  
+vfio_pci  
+vfio_virqfd  
+
+#新版PVE8.3自动增加的  
+coretemp
+```
+
+将设备加入进 vfio：
+
+```sh
+# 查看设备 ID
+lspci -D -nnk | grep VGA
+0000:00:02.0 VGA compatible controller [0300]: Intel Corporation Alder Lake-N [UHD Graphics] [8086:46d1]
+
+# id就是：8086:46d1，在你的PVE上运行，看得到的id是多少，因为下面vfio.conf修改为你自己的id。
+```
+
+```sh
+vim /etc/modprobe.d/vfio.conf  
+
+# 输入内容，将 id 替换为上面查询的 ID
+options vfio-pci ids=8086:46d1
+```
+
+下载 N100 vbios（用于让虚拟机识别显卡硬件）：[https://github.com/gangqizai/igd/tree/main](https://github.com/gangqizai/igd/tree/main)，将 `gen12_gop.rom` 和 `gen12_igd.rom` 复制到 `/use/share/kvm/` 目录下。
+
+手动修改你的wind10虚拟机参数，只看重点部分是否相同：
+
+```sh
+# 100 替换为虚拟机的 ID
+vim /etc/pve/qemu-server/100.conf  
+
+# 核对一下内容
+agent: 1  
+  
+#重点，作用是设置虚拟机与hostpci直通添加下面一行。  
+args: -set device.hostpci0.addr=02.0 -set device.hostpci0.x-igd-gms=0x2 -set device.hostpci0.x-igd-opregion=on  
+  
+#重点，BIOS选“OVMF(UEFI)”，不能选SeaBIOS  
+bios: ovmf  
+boot: order=scsi0;ide0;net0  
+cores: 3  
+  
+#重点，处理器选“host”  
+cpu: host  
+  
+#重点，直通显卡BIOS加载  
+hostpci0: 0000:00:02.0,legacy-igd=1,romfile=gen12_igd.rom
+  
+#重点，直通显卡自带的HDMI声卡，不然HDMI接电视没有声音
+hostpci1: 0000:00:1f.3
+  
+ide0: none,media=cdrom  
+  
+#机型选“pc-i440fx-8.0”  
+machine: pc-i440fx-8.0  
+  
+#新版PVE8.3“pc-i440fx-8.1”（不能选q35）  
+#machine: pc-i440fx-8.1  
+  
+memory: 16384  
+meta: creation-qemu=8.1.5,ctime=1719398459  
+name: win10-ip56  
+net0: virtio=BC:24:11:4B:FF:CE,bridge=vmbr0  
+numa: 0  
+onboot: 1  
+ostype: win10  
+scsi0: local-lvm:vm-100-disk-1,iothread=1,size=200G,ssd=1  
+scsihw: virtio-scsi-single  
+smbios1: uuid=97a88487-8081-4213-923f-34fc4756a37b  
+sockets: 1  
+startup: order=30  
+unused0: local-lvm:vm-100-disk-0  
+usb0: host=3-4  
+#AX211 USB蓝牙直通  
+usb1: host=8087:0033  
+usb2: host=3-1.4  
+usb3: host=24ae:1008  
+usb4: host=4-3  
+usb5: host=062a:4101  
+usb6: host=4-4  
+usb7: host=3-5  
+usb8: host=2-2  
+usb9: host=3-1  
+#重点，关闭虚拟VGA显卡，用intel直通显卡显示。  
+vga: none  
+vmgenid: 959ded06-690b-41c4-bbbb-8d4bcc5dfa09
+```
+
+进入 windows 后前往 intel 官网下载处理器对应的显卡驱动，比如 N100 可以使用：[https://www.intel.cn/content/www/cn/zh/download/785597/intel-arc-iris-xe-graphics-windows.html?wapkw=n100](https://www.intel.cn/content/www/cn/zh/download/785597/intel-arc-iris-xe-graphics-windows.html?wapkw=n100)
+
+
+
