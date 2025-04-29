@@ -137,7 +137,7 @@ resize2fs /dev/mapper/pve-root
 
 ### windows 单显卡直通
 
-> 该方式不借助 sriov 虚拟化，是直接将显卡 PCI 直通给了 windows 系统，其他虚拟机无法共用。原版教程：[https://www.right.com.cn/forum/thread-8413927-1-1.html](https://www.right.com.cn/forum/thread-8413927-1-1.html)
+> 该方式不借助 sriov 虚拟化，是直接将显卡 PCI 直通给了 windows 系统，其他虚拟机无法共用。但是该方法相对比较简单，而且设置完成后 HDMI 能够直接直通显示虚拟机画面，无需额外设置。原版教程：[https://www.right.com.cn/forum/thread-8413927-1-1.html](https://www.right.com.cn/forum/thread-8413927-1-1.html)
 
 PVE 启动内核IOMMU支持：
 
@@ -274,7 +274,86 @@ vga: none
 vmgenid: 959ded06-690b-41c4-bbbb-8d4bcc5dfa09
 ```
 
-进入 windows 后前往 intel 官网下载处理器对应的显卡驱动，比如 N100 可以使用：[https://www.intel.cn/content/www/cn/zh/download/785597/intel-arc-iris-xe-graphics-windows.html?wapkw=n100](https://www.intel.cn/content/www/cn/zh/download/785597/intel-arc-iris-xe-graphics-windows.html?wapkw=n100)
+进入 windows 虚拟机后如果显示设备异常，可以前往 intel 官网下载处理器对应的显卡驱动，比如 N100 可以使用：[https://www.intel.cn/content/www/cn/zh/download/785597/intel-arc-iris-xe-graphics-windows.html?wapkw=n100](https://www.intel.cn/content/www/cn/zh/download/785597/intel-arc-iris-xe-graphics-windows.html?wapkw=n100)
 
+### 硬盘直通
 
+> 参考教程：https://foxi.buduanwang.vip/virtualization/1754.html/
 
+如果宿主主机有第二块硬盘，希望直通给虚拟机使用，这种情况下推荐使用 PVE 磁盘控制器的方式直通。
+
+如果我们直接在虚拟机硬件设置中选择添加硬盘，只会显示 PVE 的系统硬盘，是不会显示其他硬盘的，因此首先我们要找到其他硬盘的硬件挂载地址，在控制台输入：
+
+```sh
+ls -la /dev/disk/by-id/|grep -v dm|grep -v lvm|grep -v part
+```
+
+会输出所有挂载内容，如：
+
+```sh
+root@pve:~# ls -la /dev/disk/by-id/|grep -v dm|grep -v lvm|grep -v part
+total 0
+drwxr-xr-x 2 root root 540 Apr 28 16:39 .
+drwxr-xr-x 6 root root 120 Mar  3 15:52 ..
+lrwxrwxrwx 1 root root  13 Apr 28 16:39 nvme-eui.01000000010000005cd2e431fee65251 -> ../../nvme2n1
+lrwxrwxrwx 1 root root  13 Mar  3 15:52 nvme-eui.334843304aa010020025385800000004 -> ../../nvme1n1
+lrwxrwxrwx 1 root root  13 Apr 28 17:36 nvme-eui.334843304ab005400025385800000004 -> ../../nvme0n1
+lrwxrwxrwx 1 root root  13 Apr 28 16:39 nvme-INTEL_SSDPE2KX020T8_BTLJ039307142P0BGN -> ../../nvme2n1
+lrwxrwxrwx 1 root root  13 Mar  3 15:52 nvme-SAMSUNG_MZWLL800HEHP-00003_S3HCNX0JA01002 -> ../../nvme1n1
+lrwxrwxrwx 1 root root  13 Apr 28 17:36 nvme-SAMSUNG_MZWLL800HEHP-00003_S3HCNX0JB00540 -> ../../nvme0n1
+lrwxrwxrwx 1 root root   9 Mar  3 15:52 scsi-35000c500474cd7eb -> ../../sda
+lrwxrwxrwx 1 root root   9 Mar  3 15:52 wwn-0x5000c500474cd7eb -> ../../sda
+```
+
+可以列出所有的硬盘，nvme 开头的是 nvme 硬盘，ata 开头是走 sata 或者 ata 通道的设备，scsi 是 scsi 设备-阵列卡 raid 或者是直通卡上的硬盘。
+
+找到目标硬盘后，使用下面的指令来挂载硬盘到虚拟机上：
+
+```sh
+qm set <虚拟机 ID> --sata1 /dev/disk/by-id/<设备>
+```
+
+比如：`qm set 101 --sata1 /dev/disk/by-id/nvme-INTEL_SSDPE2KX020T8_BTLJ039307142P0BGN`，`--sata1` 表示协议以及序列号，对于pve来说，sata最多有6个设备。如果要使用sata类型直通，请勿超过sata5。
+
+如果需要取消直通，可以使用命令 `qm set <vmid> --delete sata1`。
+
+此外，还有 PCI 直通的方式，但是比这种挂载方式麻烦，感兴趣的自己看原教程。
+
+# 6. 其他
+
+### 磁盘扩容
+
+选中要修改的磁盘大小后，选择磁盘操作 - 调整大小：
+
+![image.png|400](https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202504291133415.png)
+
+调整完成之后还需要手动将新增加的磁盘容量分配给系统才能正常使用，以 Ubuntu 为例：
+
+使用 `lsblk` 指令查看分区，会输出如下内容：
+
+```
+NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+// ... ...
+sda      8:0    0   120G  0 disk 
+├─sda1   8:1    0     1M  0 part 
+├─sda2   8:2    0   513M  0 part /boot/efi
+└─sda3   8:3    0  79.5G  0 part /
+sdb      8:16   0 931.5G  0 disk 
+└─sdb1   8:17   0 931.5G  0 part /mnt/hdd
+```
+
+`sda` 和 `sdb` 分别表示插入主机的两块 SCSI/SATA 磁盘，`sda1` `sda2` `sda3` 表示磁盘上的三个分区。我们这次扩容的是 `sda` 磁盘，扩充到了 120G，但是磁盘上的系统分区 `sda3` 只有 80G，我们需要将扩充的 40G 空间分配给系统分区。
+
+可以按照如下指令完成分区分配和重写分区表：
+
+```sh
+# 安装分区工具
+apt install -y cloud-guest-utils
+
+# 将空闲分区分配给 sda3
+# 这条命令会把 `/dev/sda3` 的结束扇区自动移到磁盘末尾，覆盖所有空余空间​
+growpart /dev/sda 3
+
+# 将 ext4 文件系统扩展到新分区大小
+resize2fs /dev/sda3
+```
