@@ -357,3 +357,23 @@ growpart /dev/sda 3
 # 将 ext4 文件系统扩展到新分区大小
 resize2fs /dev/sda3
 ```
+
+如果 `lsblk` 输出类似：
+
+```sh
+sda                         8:0    0   16G  0 disk 
+├─sda1                      8:1    0    1M  0 part 
+├─sda2                      8:2    0  1.8G  0 part /boot
+└─sda3                      8:3    0 14.2G  0 part 
+  └─ubuntu--vg-ubuntu--lv 252:0    0  8.2G  0 lvm  /
+```
+
+说明当前操作系统采用了 lvm（逻辑卷管理）方式，相对于 part，我们还要对逻辑分区进行扩展，从而使用所有的 sda3 上的空间：
+
+```sh
+# 将剩余空间都分配给 ubuntu-lv 逻辑分区
+lvextend -l +100%FREE /dev/ubuntu-vg/ubuntu-lv
+
+# 将 ext4 文件系统扩展到新分区大小
+resize2fs /dev/ubuntu-vg/ubuntu-lv
+```
