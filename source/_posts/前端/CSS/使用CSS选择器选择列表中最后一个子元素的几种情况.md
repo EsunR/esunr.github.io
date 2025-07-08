@@ -1,6 +1,7 @@
 ---
 title: 使用CSS选择器选择列表中最后一个子元素的几种情况
-tags: []
+tags:
+  - CSS
 categories:
   - 前端
   - CSS
