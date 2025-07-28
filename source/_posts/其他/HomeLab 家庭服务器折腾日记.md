@@ -131,7 +131,56 @@ resize2fs /dev/mapper/pve-root
 
 比如 PVE 的 win10 虚拟机开启了 3389 端口，那么就可以开放一个跳板机 13389 的端口，映射到 win10 主机 IP 上的 3389 端口，映射的目标 IP 也可以使用内网 IPv4。
 
-# 5. 硬件直通
+# 5. Openwrt 旁路由
+
+直接使用 Ubuntu + mihomo 内核实现的透明网关配置好后只能代理 TCP 包，UDP 包的代理设置会出现各种各样的问题，所以就没法加速游戏的数据包。与其说折腾内核，不如直接加入一个 OpenWrt 的旁路由系统，配合 nikki 插件（一个比 OpenClash 更易用的插件）来实现 UDP 和 TCP 的代理，达到游戏、网页访问都能加速的目的。
+
+OpenWrt 系统的安装：
+
+OpenWrt 可以选择使用 [immortalwrt](https://firmware-selector.immortalwrt.org/) 和 [krwt](https://openwrt.ai/) 这些第三方的整合系统，在满足了大部分的需求时也不会夹带私货。大部分视频博主的教程选用了 immortalwrt，因此后续的流程也是用 immoralwrt 做演示。
+
+安装时推荐选择 SQUASHFS-COMBINED-EFI.IMG.GZ 格式的镜像，然后在本地解压后上传到 pve（MacOS 解压会报错，需要使用 unzip -d 指令来解压）。
+
+[安装流程参考](https://optimus-xs.github.io/posts/install-openwrt-in-pve/)
+
+创建虚拟机时先不使用镜像，同时删除硬盘，并分配 CPU 和内存。
+
+虚拟机创建好后，进入 PVE 终端执行镜像转化指令：
+
+```
+qm importdisk <你的 vm id> /var/lib/vz/template/iso/xxx.img local
+```
+
+导入完成后，虚拟机的硬件列表里会出现硬盘，将其转化为 SATA。
+
+然后配置启动引导项，将硬盘移动到最前方，然后就完成了 OpenWrt 的安装。
+
+安装完成之后进入系统，编辑 `/etc/config/network` 设置 IP、DNS、Gateway 这几项，设置参考：
+
+```
+config interface 'lan'
+	option device 'br-lan'
+	option proto 'static'
+	option ipaddr '192.168.1.2'
+	option netmask '255.255.255.0'
+	option gateway '192.168.1.1'
+	option ip6assign '60'
+	list dns '192.168.1.1'
+```
+
+进入 immortalwrt 后，安装 luci 主题：
+
+```sh
+opkg install luci
+```
+
+安装 nikki：
+
+```sh
+wget -O - https://github.com/nikkinikki-org/OpenWrt-nikki/raw/refs/heads/main/feed.sh | ash
+```
+ 
+# 6. 硬件直通
 
 在虚拟机的环境下，一般是通过桥接或者虚拟化来连接物理设备的，但是在这种情况下部分硬件是不能够很好的发挥作用的，比如你想利用显卡硬解视频、HDMI 输出画面，那么就需要将这些硬件设备直通给虚拟机使用，这个过程就叫做硬件直通。
 
@@ -319,7 +368,7 @@ qm set <虚拟机 ID> --sata1 /dev/disk/by-id/<设备>
 
 此外，还有 PCI 直通的方式，但是比这种挂载方式麻烦，感兴趣的自己看原教程。
 
-# 6. 其他
+# 7. 其他
 
 ### 磁盘扩容
 

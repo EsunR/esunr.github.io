@@ -195,4 +195,4 @@ date: 2025-07-08 10:49:26
 
 但是需要注意的是，虽然浏览器很早就支持了 `nth-child`、`nth-last-child`，但是对于 `of <selector>` 语法是 CSS4 才支持的，Chrome 需大于 111（2023年发布），Safari 需 大于 9（2015年发布），IE 则完全不支持，兼容列表如下：
 
-![image.png|400](https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202507081047021.png)
+![image.png|700](https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202507081047021.png)
