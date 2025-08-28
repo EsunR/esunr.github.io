@@ -114,4 +114,4 @@ git clone https://gitlab.com/newbit/rootAVD.git
 
 但是你可能会发现这些抓包工具在设置了代理、安装了证书后还是没法抓包，这可能与 Android Studio 的网络代理模式相关 [issues](https://github.com/avwo/whistle/issues/1248)。
 
-为了解决这个问题，首先需要将 Android Studio 模拟器设置中的代理进行关闭，然后安装这个软件：[AppProxy](https://github.com/ys1231/appproxy)，在软件中创建一个 VPN 代理来连接到代理工具，并在配置选项卡中勾选应用即可。
+为了解决这个问题，首先需要将 Android Studio 模拟器设置中的代理进行关闭，然后安装这个软件：[AppProxy](https://github.com/ys1231/appproxy)，在软件中创建一个 VPN 代理来连接到代理工具，代理服务器地址写为 `10.0.2.2`，这是 Android Studio 访问宿主机网络的地址，并在配置选项卡中勾选应用即可。
