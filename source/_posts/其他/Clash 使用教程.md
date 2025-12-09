@@ -82,7 +82,7 @@ Clash 的订阅链接**绝对不能泄露**，否则就会被别人白嫖代理�
 
 ## 2.3 IOS
 
-#### Stash（不支持 Reality 节点，暂不推荐）
+#### Stash
 
 注册美区账号，APP Store 搜索 Stash 并购买下载（不能使用国内信用卡，需要买礼品卡兑换，自行 Google 关键词 『Stash 兑换码』，30RMB左右，也可以直接购买成品号）
 
@@ -91,10 +91,6 @@ Clash 的订阅链接**绝对不能泄露**，否则就会被别人白嫖代理�
 ![](https://s2.loli.net/2023/03/30/bFnDBpZ8mrwdJVv.jpg)
 
 #### ShadowRocket
-
-~~更新速度更快，但是不支持直接复用 clash 的规则，如果不会折腾还是只推荐使用 stash~~
-
-> 目前在 iOS 上使用 Reality 节点订阅的方式只有 ShadowRocket
 
 注册美区账号，APP Store 搜索 ShadowRocket 并购买下载。
 
@@ -154,7 +150,7 @@ General 面板是 Clash for Windows 独有的，一般不用调整。
 
 ![](https://s2.loli.net/2023/05/19/2gbI6PoX5BDqaJQ.png)
 
-切换为 Meta 内核，并启用系统代理与开机自启：
+切换为 ~~Meta~~(新版为 Mihomo) 内核，并启用系统代理与开机自启：
 
 ![](https://s2.loli.net/2023/05/19/xoJyAZ4l9iXgHKc.png)
 
