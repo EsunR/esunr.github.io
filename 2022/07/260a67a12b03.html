@@ -1,0 +1,230 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="npm 标准化发包方案调研"><meta name="keywords" content="npm,cicd"><meta name="author" content="EsunR"><meta name="copyright" content="EsunR"><title>npm 标准化发包方案调研 | EsunR-Blog</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.9.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css?version=1.9.0"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="dns-prefetch" href="https://hm.baidu.com"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?31bd12722efcf47cb7d0d576bf150215";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-3RG97DCL3N"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-3RG97DCL3N');</script><script src="https://v1.hitokoto.cn/?encode=js&amp;charset=utf-8&amp;select=.footer_custom_text" defer></script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  hexoVersion: '6.2.0'
+} </script><meta name="generator" content="Hexo 6.2.0"></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E4%BC%A0%E7%BB%9F%E7%9A%84%E5%8F%91%E5%8C%85%E6%A8%A1%E5%BC%8F"><span class="toc-text">1. 传统的发包模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E7%89%88%E6%9C%AC%E5%8F%91%E5%B8%83"><span class="toc-text">1.1 版本发布</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E7%89%88%E6%9C%AC%E8%BF%AD%E4%BB%A3"><span class="toc-text">1.2 版本迭代</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-1-npm-%E7%89%88%E6%9C%AC%E8%A7%84%E8%8C%83"><span class="toc-text">1.2.1 npm 版本规范</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-2-%E4%BD%BF%E7%94%A8-npm-version-%E5%8F%98%E6%9B%B4%E7%89%88%E6%9C%AC%E5%8F%B7"><span class="toc-text">1.2.2 使用 npm version 变更版本号</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-CHANGELOG-%E7%9A%84%E7%94%9F%E6%88%90"><span class="toc-text">1.3 CHANGELOG 的生成</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-standard-version"><span class="toc-text">2. standard-version</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E5%AE%89%E8%A3%85"><span class="toc-text">2.1 安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E4%BD%BF%E7%94%A8"><span class="toc-text">2.2 使用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-semantic-release"><span class="toc-text">3. semantic-release</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8"><span class="toc-text">3.1 安装与使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-%E6%89%8B%E5%8A%A8%E9%85%8D%E7%BD%AE"><span class="toc-text">3.2 手动配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-text">3.3 注意事项</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://esunr-webapp.cdn.bcebos.com/blog/avatar.jpeg?x-bce-process=image/resize,m_lfit,w_200/format,f_auto" alt="avatar"></div><div class="author-info__name text-center">EsunR</div><div class="author-info__description text-center">EsunR-Blog是由EsunR维护的博客平台，分享在前端开发、Git、Vue.js、Webpack、OAuth、Linux等各个领域的知识和经验。浏览这里的深入文章，了解不同主题的见解，并及时了解行业的最新趋势和技术。</div><div class="follow-button"><a target="_blank" rel="noopener" href="https://github.com/EsunR">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">172</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">155</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">26</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">EsunR-Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"><span class="site-page social-icon search"><i class="fa fa-search"></i><span> Search</span></span></span></div><div id="post-info"><div id="post-title">npm 标准化发包方案调研</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2022-07-14</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E5%89%8D%E7%AB%AF/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96/">前端工程化</a><span class="post-meta__separator">|</span><i class="fa fa-comment-o post-meta__icon" aria-hidden="true"></i><a href="/2022/07/260a67a12b03.html#disqus_thread"><span class="disqus-comment-count" data-disqus-identifier="2022/07/260a67a12b03.html"></span></a><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">4.2k</span><span class="post-meta__separator">|</span><span>Reading time: 14 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="1-传统的发包模式"><a href="#1-传统的发包模式" class="headerlink" title="1. 传统的发包模式"></a>1. 传统的发包模式</h1><h2 id="1-1-版本发布"><a href="#1-1-版本发布" class="headerlink" title="1.1 版本发布"></a>1.1 版本发布</h2><p>传统的发包模式指用户在本地进行发包、版本升级的操作，因此所有的 cli 都是在本地执行。当我们写好一个 npm package 之后，并且登录好 npm 后，就可以执行以下指令直接发布第一版：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm publish --access public</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-2-版本迭代"><a href="#1-2-版本迭代" class="headerlink" title="1.2 版本迭代"></a>1.2 版本迭代</h2><p>当进行了一些变更之后，可以手动去变更 <code>package.json</code> 的版本号，当然这是一种非常低效且不优雅的做法，<strong>手动变更版本号存在太多不确定的因素</strong>，比如改错版本号或跳过某个版本号；同时，一般我们在生成一个新的版本后要打一个 tag 对当前版本进行留档，纯手动操作的话会有很多的工作量。因此我们需要一个更加『靠谱』的迭代版本号的方案。</p>
+<h3 id="1-2-1-npm-版本规范"><a href="#1-2-1-npm-版本规范" class="headerlink" title="1.2.1 npm 版本规范"></a>1.2.1 npm 版本规范</h3><p>在谈论如何优雅的进行迭代版本号之前，我们先来了解一下 npm 采用的<a target="_blank" rel="noopener" href="https://docs.npmjs.com/about-semantic-versioning">语义化版本号</a>：</p>
+<p>npm 的语义化版本，共三位，以’.’隔开，从左至右依次代表：</p>
+<ul>
+<li>主版本（major）</li>
+<li>次要版本（minor）</li>
+<li>补丁版本（patch）</li>
+</ul>
+<p>举例来说：1(major).0(minor).0(patch)</p>
+<p>当然有时某些包还存在预览版本，预览版本的版本号要与前三位版本号使用 <code>-</code> 进行间隔，如：</p>
+<ul>
+<li>1.0.0-1</li>
+<li>1.0.0-alpha.1</li>
+<li>1.0.0-beta.1</li>
+<li>1.0.0-rc.1</li>
+</ul>
+<blockquote>
+<p><code>alhpa</code> / <code>beta</code> / <code>rc</code> 这些并不是 npm 官方定义的 prerelease 前缀，你可以使用任何前缀，甚至 <code>niconiconi</code>，如何添加这些前缀，我们后面会讨论到。</p>
+</blockquote>
+<p>对于版本变更的规范，推荐采用以下策略：</p>
+<table>
+<thead>
+<tr>
+<th>代码状态</th>
+<th>等级</th>
+<th>规则</th>
+<th>版本样例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>首次发布</td>
+<td>新品发布</td>
+<td>以1.0.0开始</td>
+<td>1.0.0</td>
+</tr>
+<tr>
+<td>bug 修复，向后兼容</td>
+<td>补丁版本发布</td>
+<td>变更第三位数字</td>
+<td>1.0.1</td>
+</tr>
+<tr>
+<td>新功能，向后兼容</td>
+<td>次版本发布</td>
+<td>变更第二位数字，并且第三位数字重置为 0</td>
+<td>1.1.0</td>
+</tr>
+<tr>
+<td>重大变更，不向后兼容</td>
+<td>主版本发布</td>
+<td>变更第一位数字，并且第二位和第三位数字重置为 0</td>
+<td>2.0.0</td>
+</tr>
+</tbody></table>
+<h3 id="1-2-2-使用-npm-version-变更版本号"><a href="#1-2-2-使用-npm-version-变更版本号" class="headerlink" title="1.2.2 使用 npm version 变更版本号"></a>1.2.2 使用 npm version 变更版本号</h3><p>npm 提供了 <a target="_blank" rel="noopener" href="https://docs.npmjs.com/cli/v6/commands/npm-version"><code>npm version</code></a> 指令可以辅助我们来进行版本迭代，假设我们现在的版本是 <code>1.0.0</code>，使用 <code>npm version</code> 的各个参数进行版本升级，得到的结果如下：</p>
+<p>对于一般的迭代，使用 <code>major</code> / <code>minor</code> / <code>patch</code> 即可：</p>
+<ul>
+<li>npm version major =&gt; 2.0.0</li>
+<li>npm version minor =&gt; 1.1.0</li>
+<li>npm version patch =&gt; 1.0.1</li>
+</ul>
+<p>如果你要发布预览版本（prerelease）的 package，你可以使用 <code>premajor</code> / <code>preminor</code> / <code>prepatch</code> 并结合 <code>prerelease</code> 来升级预览版本号：</p>
+<ul>
+<li>npm version premajor =&gt; 2.0.0-0 <code>发型一版重大变更预览版本的 package</code><ul>
+<li>npm version prerelease =&gt; 2.0.0-1 <code>增加当前预览版本的版本号</code><ul>
+<li>npm version major =&gt; 2.0.0 <code>正式发布</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>npm version preminor =&gt; 1.1.0-0<ul>
+<li>npm version prerelease =&gt; 1.1.0-1<ul>
+<li>npm version minor =&gt; 1.1.0</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>npm version prepatch =&gt; 1.0.1-0<ul>
+<li>npm version prerelease =&gt; 1.0.1-1<ul>
+<li>npm version patch =&gt; 1.0.1</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>如果你想为预览版的版本号添加 <code>alpha</code> / <code>beta</code> 这样的前缀的话，可以使用 <code>--preid</code> 参数，我们依旧以 <code>1.0.0</code>  为初始版本，使用 <code>npm version</code> 进行预览版的版本变更示例如下：</p>
+<ul>
+<li>npm version prepatch –preid alpha =&gt; 1.0.1-alpha.0<ul>
+<li>npm version prerelease  =&gt; 1.0.1-alpha.1<ul>
+<li>npm version patch –preid alpha =&gt; 1.0.1 <code>⚠️ 如果要发布当前 preid 的正式版，执行正式版并发布指令时需要后缀 --preid 参数</code></li>
+<li>npm version patch =&gt; 1.0.2 <code>如果不后缀就会直接迭代到下一版本</code></li>
+<li>npm version prepatch –preid beta =&gt; 1.0.2-beta.1 <code>如果切换了 preid 就会重新生成一个新版本，而不是在当前版本迭代版本号</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>需要注意的是，当你执行 <code>npm version</code> 指令时，<strong>当前的工作区必须是干净的</strong>，否则会执行失败；且当执行成功后，会自动生成一个 commit（commit message 默认为版本号），<strong>同时在这次自动生成的 commit 上打一个 tag</strong>，tag 名称即为以 <code>v</code> 开头的版本号名称，如果你想修改默认的 commit message，你可以使用如下指令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm version patch -m <span class="string">&quot;Release version %s&quot;</span> <span class="comment"># 『%s』代表当前版本号</span></span><br></pre></td></tr></table></figure>
+
+<p>此外，对于你发布的 prerelease 版本的 package 需要注意以下两点：</p>
+<ol>
+<li>当用户进行首次安装你的包时，且此时你的包最新的版本为一个 prerelease 版本，那么用户就会安装这个 prerelease 版本；如果用户只想安装稳定版，那么可以通过 <code>npm install xxx@version</code>，比如 <code>npm install xxx@1</code> 或 <code>npm install xxx@&quot;&gt;1.0.0&quot;</code> 这样的指令安装的包不会安装到 prerelease 版本。</li>
+<li>但是，当用户当前安装的是一个正式版本的包时，使用 <code>npm update</code> 去更新你的包，是不会主动更新到 prerelease 版本的；但如果正式版用户想要升级为 prerelease 版，可以通过执行 <code>npm install package@latest</code> 来安装最新的版本（包含预览版）。</li>
+</ol>
+<h2 id="1-3-CHANGELOG-的生成"><a href="#1-3-CHANGELOG-的生成" class="headerlink" title="1.3 CHANGELOG 的生成"></a>1.3 CHANGELOG 的生成</h2><p>在一些项目中，会用 <code>CHANGELOG.md</code> 来标注每个版本的变更内容，这个文件通常是使用专门的工具生成的，比如 <a target="_blank" rel="noopener" href="https://github.com/conventional-changelog/conventional-changelog">conventional-changelog</a>，但是自动生成的条件必须满足：</p>
+<ol>
+<li>使用标准的 commit 规范，通常在默认情况下使用 <a target="_blank" rel="noopener" href="https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines">Angular 的提交规范</a>，这样 <code>conventional-changelog</code> 就会知道你每次提交做了什么，是新增了一个 fetature，还是修复了一些 bug，亦或是其他。你可以使用 <code>@commitlint/cli</code> + <code>husky</code> 对你的代码进行提交检查，同时也可以使用 <code>commitizen</code> 来生成标准化的 commit，关于这些，你可以参考<a href="https://blog.esunr.site/2022/07/72bea7fe8c23.html#3-CommitLint">这篇文章</a>。</li>
+<li>在每次生成一个新的版本后，在当前的提交上要创建一个 tag，tag 的名称为版本号，比如 <code>v1.0.0</code>，这点如果你使用 <code>npm version</code> 来生成版本号的话就无需担心这一点。</li>
+</ol>
+<p>一个标准的 commit 历史如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">commit xxxxxxx (tag: v1.1.0)</span><br><span class="line">Author xxx</span><br><span class="line">Date   xxx</span><br><span class="line">1.1.0</span><br><span class="line"></span><br><span class="line">commit xxxxxxx</span><br><span class="line">Author xxx</span><br><span class="line">Date   xxx</span><br><span class="line">fix: fix a bug</span><br><span class="line"></span><br><span class="line">commit xxxxxxx</span><br><span class="line">Author xxx</span><br><span class="line">Date   xxx</span><br><span class="line">feat: add new fetaure 2</span><br><span class="line"></span><br><span class="line">commit xxxxxxx</span><br><span class="line">Author xxx</span><br><span class="line">Date   xxx</span><br><span class="line">feat: add new fetaure 1</span><br><span class="line"></span><br><span class="line">commit xxxxxxx (tag: v1.0.1)</span><br><span class="line">Author xxx</span><br><span class="line">Date   xxx</span><br><span class="line">1.0.1</span><br><span class="line"></span><br><span class="line">commit xxxxxxx</span><br><span class="line">Author xxx</span><br><span class="line">Date   xxx</span><br><span class="line">fix: fix a bug</span><br><span class="line"></span><br><span class="line">commit xxxxxxx (tag: v1.0.0)</span><br><span class="line">Author xxx</span><br><span class="line">Date   xxx</span><br><span class="line">1.0.0</span><br><span class="line"></span><br><span class="line">commit xxxxxxx</span><br><span class="line">Author xxx</span><br><span class="line">Date   xxx</span><br><span class="line">feat: base function</span><br><span class="line"></span><br><span class="line">commit xxxxxxx</span><br><span class="line">Author xxx</span><br><span class="line">Date   xxx</span><br><span class="line">chore: first commit</span><br></pre></td></tr></table></figure>
+
+<p><code>conventional-changelog</code> 读取到这样的 commit 历史后，就可以生成如下的 CHANGELOG：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">## 1.0.1 (2022-xx-xx)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="section">### Bug Fixes</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">*</span> fix a bug</span><br><span class="line"></span><br><span class="line"><span class="section">### Features</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">*</span> add new fetaure 1</span><br><span class="line"><span class="bullet">*</span> add new fetaure 2</span><br><span class="line"></span><br><span class="line"><span class="section">## 1.0.1 (2022-xx-xx)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="section">### Bug Fixes</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">*</span> fix a bug</span><br><span class="line"></span><br><span class="line"><span class="section">## 1.0.0 (2022-xx-xx)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="section">### Features</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">*</span> base function</span><br></pre></td></tr></table></figure>
+
+<p>如果你的 commit 符合以上两点要求，你可以安装 <code>conventional-changelog-cli</code>：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install conventional-changelog-cli -D</span><br></pre></td></tr></table></figure>
+
+<p>运行 cli 指令生成 CHANGELOG：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx conventional-changelog -p angular -i CHANGELOG.md -s -r 0</span><br></pre></td></tr></table></figure>
+
+<p>之后版本变更后想生成新的 CHANGELOG 就只需要再执行一遍上面的指令即可。但是还有一种更简便的方式，就是使用 npm 的 <code>version</code> 钩子来在更新版本号时候自动触发 CHANGELOG 生成，只需要在 <code>package.json</code> 中添加以下 script：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;conventional-changelog -p angular -i CHANGELOG.md -s &amp;&amp; git add CHANGELOG.md&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>添加之后，在我们执行 <code>npm version</code> 时，一旦版本号变更成功就会触发 <code>version</code> script 生成 CHANGELOG，并将生成的 <code>CHANGELOG.md</code> 添加到暂存区，然后 <code>npm version</code> 继续执行，暂存区的代码进行提交，并创建一个 tag。</p>
+<p><strong>总之，将所有的流程配置好之后，完整的工作流如下：</strong></p>
+<ol>
+<li>编辑代码，添加新功能或者修复 bug；</li>
+<li>完成某个功能后进行 commit，commit 要符合<a target="_blank" rel="noopener" href="https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines">Angular 的提交规范</a>；</li>
+<li>继续完成其他的功能，并每完成一个功能后及时提交标准化的 commit，直到你想要发版为止；</li>
+<li>执行 <code>npm version xxx</code> 生成新的版本号，这时 CHANGELOG 和版本号都会自动进行迭代；</li>
+<li>执行 <code>npm publish --access public</code> 进行版本发布。</li>
+</ol>
+<h1 id="2-standard-version"><a href="#2-standard-version" class="headerlink" title="2. standard-version"></a>2. standard-version</h1><p><a target="_blank" rel="noopener" href="https://github.com/conventional-changelog/standard-version">standard-version</a> 是 conventional-changelog 推荐使用的标准化 npm 版本生成工具，它可以取代 <code>npm version</code> 指令，并提供更简便、语义化的调用方式；</p>
+<p>同时，它也集成了 conventional-chagelog，在生成版本号时会自动创建 CHANGELOG，可以省去我们自己配置 conventional-chagelog-cli 的过程；</p>
+<p>此外它还提供了配置文件，你可以很方便的自定义 CHANGELOG 的输出。</p>
+<h2 id="2-1-安装"><a href="#2-1-安装" class="headerlink" title="2.1 安装"></a>2.1 安装</h2><p>standard-version 可以安装到全局来替代 <code>npm version</code> 指令，但最好还是安装到本地项目中，方便其他开发人员使用，可以用 <code>npx</code> 指令来执行它：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install standard-version -D</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-使用"><a href="#2-2-使用" class="headerlink" title="2.2 使用"></a>2.2 使用</h2><p>使用 standard-version 的前提还是要有标准化的 commit 链，就像上面我们在 CHANGELOG 生成中所描述的那样。当你完成了一系列的代码变更后，就可以执行 <code>npx standard-version</code> 来生成一个版本（如果是首次发布则需要执行 <code>npx standard-version --first-release</code>），执行之后 standard-version 会做如下的事情：</p>
+<ol>
+<li>读取 <code>package.json</code> 查询当前包的版本号，如果没有查询到，就将最后一个 tag 的版本号视作当前的版本号；</li>
+<li>依据你的 commit 信息，来决定下一个版本号（这一过程被称为 <code>bump version</code>），然后修改 <code>package.json</code>、<code>package-lock.json</code> 等需要迭代版本号的文件中的版本号字段；</li>
+<li>依据你的 commit 信息生成或更新 <code>CHANGELOG.md</code> 文件；</li>
+<li>使用新的版本号为名称，创建一个 tag 进行留档。</li>
+</ol>
+<p>在使用 <code>npx standard-version</code> 来迭代版本时，你无需关心是迭代 major、minor、patch 位的版本号，<code>standard-version</code> 会自动根据你的版本号来决定下一个版本号需要迭代哪一位，比如：当发现自上次版本号生成以来，提交的代码中的 commmit message 中仅有 <code>fix</code> 类型的提交，那么就只会迭代 patch 位的版本号；但如果发现自上次生成版本号以来，携带有 <code>feat</code> 类型的提交，那么就会去迭代 minor 位的版本号。</p>
+<p>当然你也可以强行指定升级哪一位版本号，比如：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npx standard-version --release-as minor</span><br><span class="line">npx standard-version --release-as patch</span><br><span class="line">npx standard-version --release-as major</span><br></pre></td></tr></table></figure>
+
+<p>亦或是你想要迭代版本号为 prerelease 版本，那么就要使用下面的指令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx standard-version --prerelease alpha</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-semantic-release"><a href="#3-semantic-release" class="headerlink" title="3. semantic-release"></a>3. semantic-release</h1><p>目前 standard-version 这个项目已经被标记为 deprecated，意味着后续不再维护，同时也意味着这种模式下的包管理方式正在逐渐『落后』。standard-version 在官方文档中也指明了两条出路，如果你是 github 用户的话，作者推荐使用 <a target="_blank" rel="noopener" href="https://github.com/googleapis/release-please">release-please</a> 进行代替；同时，作者也在文中提到了 <a target="_blank" rel="noopener" href="https://github.com/semantic-release/semantic-release">semantic-release</a>，它也是一个语义化的 npm 包版本管理方案。</p>
+<p>不论是 release-please 还是 semantic-release 也好，他们都解决了 standard-version 的一个痛点，<strong>那就是 standard-version 的工作流基于本地</strong>，开发人员需要本地进行版本迭代、npm 发布的行为。但是由于 CICD 的流行，似乎在 CI 上进行 npm 包的版本迭代与发布更为合适，这样就不会造成多个开发人员并行开发时版本冲突的问题了。<strong>release-please 与 semantic-release 的目的都是将人为干预的版本迭代和发包行为，转移到标准化的、可持续的 CI 平台上完成</strong>。</p>
+<blockquote>
+<p>机器永远比人类靠谱</p>
+</blockquote>
+<p><img src="https://github.com/semantic-release/semantic-release/raw/master/media/bender.png" alt=""></p>
+<p>鉴于 semantic-release 比 release-please 得到的关注更多，因此我们重点探讨 semantic-release。</p>
+<h2 id="3-1-安装与使用"><a href="#3-1-安装与使用" class="headerlink" title="3.1 安装与使用"></a>3.1 安装与使用</h2><p>semantic-release 也提供了 cli 工具，可以快速的帮你完成安装和配置工作，以 Github 为例，你只需要进入到你的项目目录下，输入：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx semantic-release-cli setup</span><br></pre></td></tr></table></figure>
+
+<p>交互式命令行就会询问你的 NPM 账号、密码、二步验证，从而获取你的 NPM token（用于在流水线发包）；之后会引导你进行 Github 授权，目的是为了在你的目标项目的 <a target="_blank" rel="noopener" href="https://docs.github.com/cn/actions/security-guides/encrypted-secrets">Secrets</a> 中写入 <code>NPM_TOKEN</code> 的环境变量。</p>
+<p>之后你就可以创建你的 Github Action 来轻松的进行发包，发布的 yml 文件示例如下：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">Publish</span> <span class="string">package</span> <span class="string">to</span> <span class="string">NPM</span></span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="attr">push:</span></span><br><span class="line">    <span class="attr">branches:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">master</span></span><br><span class="line">  <span class="attr">pull_request:</span></span><br><span class="line">    <span class="attr">branches:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">master</span></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">publish:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/checkout@v2</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Setup</span> <span class="string">pnpm</span> <span class="string">env</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">pnpm/action-setup@v2</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">version:</span> <span class="number">6.32</span><span class="number">.16</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Setup</span> <span class="string">node</span> <span class="string">env</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/setup-node@v3</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">node-version:</span> <span class="number">14</span></span><br><span class="line">          <span class="attr">cache:</span> <span class="string">&#x27;pnpm&#x27;</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Install</span> <span class="string">node_modules</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">pnpm</span> <span class="string">install</span> <span class="string">--frozen-lockfile</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Build</span> <span class="string">module</span></span><br><span class="line">        <span class="comment"># 进行包构建</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">pnpm</span> <span class="string">build</span></span><br><span class="line">        </span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Run</span> <span class="string">publish</span> <span class="string">script</span></span><br><span class="line">        <span class="comment"># 进行包发布</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">pnpm</span> <span class="string">release</span></span><br><span class="line">        <span class="attr">env:</span></span><br><span class="line">          <span class="attr">NPM_TOKEN:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.NPM_TOKEN</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">GITHUB_TOKEN:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.GITHUB_TOKEN</span> <span class="string">&#125;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>这样，当你的代码向 master 分支合入后，就会自动触发 npm 的发布行为，自动生成 tag、以及你 Github 项目的 Release。</p>
+<p>值得注意的是，semantic-release 在初始化好之后就将你 <code>package.json</code> 中的版本号重置为 <code>0.0.0-development</code>，并且在后续的迭代中，这个版本号都不会有任何改变。这是因为 semantic-release 确定版本号的方法是从 tag 列表中获取最新的版本号，而并非是从 <code>packageFiles</code> 中获取版本号。这样的好处就是版本号不跟代码中的任何文件进行强关联，那么在 CI 迭代版本时也不会去修改源代码，造成 CI push 代码的行为。</p>
+<h2 id="3-2-手动配置"><a href="#3-2-手动配置" class="headerlink" title="3.2 手动配置"></a>3.2 手动配置</h2><p>上面我们讨论了使用 <code>semantic-release-cli</code> 快速接入 Github 项目的方案，但是再实际的生产环境下是非常复杂的，也许你使用的是 GitLab 亦或是其他平台，那么这时候往往需要我们手动进行配置。</p>
+<p>首先我们需要在项目中安装 <code>semantic-release</code>：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install semantic-release -D</span><br></pre></td></tr></table></figure>
+
+<p>之后我们就可以使用 <code>npx semantic-release</code> 指令进行版本发布了，但是在此之前不得不提一下，semantic-release 大部分功能是由插件实现的，比如 npm 发包是由 @semantic-release/npm 插件实现的，在默认情况下 semantic-release 自动开启四个插件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;@semantic-release/commit-analyzer&quot;</span><br><span class="line">&quot;@semantic-release/release-notes-generator&quot;</span><br><span class="line">&quot;@semantic-release/npm&quot;</span><br><span class="line">&quot;@semantic-release/github&quot;</span><br></pre></td></tr></table></figure>
+
+<p>当你使用 <code>npx semantic-release</code> 指令时 semantic-release 会经过多个阶段，在每个阶段的执行过程中 semantic-release 会做一些事情，比如生成 tag、推送tag、编写 git notes 等，同时 semantic-release 的插件也会被触发，从而来『插手』做一些事情。在默认的情况下，<code>npx semantic-release</code> 会执行以下流程：</p>
+<ol>
+<li>加载配置，确定哪些插件被启用；</li>
+<li>加载插件；</li>
+<li>执行 <code>verifyConditions</code> 阶段，这一阶段负责<strong>校验用户当前的环境权限</strong>。比如 @semantic-release/npm 插件会检查是否有 .npmrc 配置以及是否有 npm token、@semantic-release/github 插件会检查当前环境是否有资格推送代码以及分支；</li>
+<li>执行 <code>analyzeCommits</code> 阶段，这一阶段负责<strong>确定下一个版本是什么版本</strong>。比如 @semantic-release/commit-analyzer 在这一阶段会根据标准化的 commit 中来判断下一个版本是 major、minor 或 patch ；</li>
+<li>执行 <code>verifyRelease</code> 阶段，这一阶段负责<strong>验证即将发布的版本的参数</strong>（版本、类型、dist-tag 等）；</li>
+<li>执行 <code>generateNotes</code> 阶段，这一阶段负责<strong>生成发布说明的内容</strong>；</li>
+<li>执行 <code>prepare</code> 阶段，这一阶段<strong>负责准备发布，例如创建或更新文件</strong>，比如 <code>package.json</code> 中的版本号修改、tag 的生成就是在这一阶段发生的；</li>
+<li>执行 <code>publish</code> 阶段，这一阶段<strong>负责执行发布相关的指令</strong>，@semantic-release/npm 就会在此发布 package，@semantic-release/github 会在此生成对应的 release；</li>
+<li>执行 <code>addChannel</code> 阶段，这一阶段<strong>负责添加发布渠道</strong>，这里主要是让 @semantic-release/npm 调用 <a target="_blank" rel="noopener" href="https://docs.npmjs.com/cli/dist-tag/">npm dist-tag</a> 指令来为刚刚发布的包标记 <code>@latest</code> 或 <code>@beta</code> 等标签；</li>
+<li>执行 <code>success</code> 阶段，负责通知新版本；</li>
+<li>执行 <code>fail</code> 阶段，负责通知发布失败。</li>
+</ol>
+<p>如果你想要添加更多的插件，可以参考<a target="_blank" rel="noopener" href="https://semantic-release.gitbook.io/semantic-release/usage/plugins">这一章节</a>。</p>
+<h2 id="3-3-注意事项"><a href="#3-3-注意事项" class="headerlink" title="3.3 注意事项"></a>3.3 注意事项</h2><p>需要注意的是，semantic-release 理论上是可以支持所有的 CI 与 Git 托管平台的，但是需要注意一点就是你的 Git 托管平台必须能支持 CI 往上面有权限推送 tag 以及 git notes。</p>
+<p>比如在使用 <a target="_blank" rel="noopener" href="https://www.gerritcodereview.com/">Gerrit Code Review</a> 规范的平台上，推送代码仅支持 <code>git push origin HEAD:refs/for/xxx</code> 就造成无法推送 <code>refs/note/semantic</code>，那么 semantic-release 就会在 <code>publish</code> 阶段崩溃，导致后面的流程无法继续。</p>
+</div></article><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/npm/">npm</a><a class="post-meta__tags" href="/tags/cicd/">cicd</a></div><div class="addthis_inline_share_toolbox pull-right"></div><script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-62c7f2684e36ba34" async></script><nav id="pagination"><div class="prev-post pull-left"><a href="/2022/08/fe708f05110a.html"><i class="fa fa-chevron-left">  </i><span>Clash 使用教程</span></a></div><div class="next-post pull-right"><a href="/2022/07/0cce6064286a.html"><span>使用 Vercel 全自动部署个人网站</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="disqus_thread"></div><script>var unused = null;
+var disqus_config = function () {
+  this.page.url = 'https://blog.esunr.site/2022/07/260a67a12b03.html';
+  this.page.identifier = '2022/07/260a67a12b03.html';
+  this.page.title = 'npm 标准化发包方案调研';
+}
+var d = document, s = d.createElement('script');
+s.src = "https://" + 'esunr-blog' +".disqus.com/embed.js";
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);</script><script id="dsq-count-scr" src="https://esunr-blog.disqus.com/count.js" async></script></div></div><footer class="footer-bg" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div class="layout" id="footer"><div class="copyright">&copy;2017 - 2025 By EsunR</div><div class="framework-info"><span>Driven - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">hitokoto</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.0"></script><script src="/js/fancybox.js?version=1.9.0"></script><script src="/js/sidebar.js?version=1.9.0"></script><script src="/js/copy.js?version=1.9.0"></script><script src="/js/fireworks.js?version=1.9.0"></script><script src="/js/transition.js?version=1.9.0"></script><script src="/js/scroll.js?version=1.9.0"></script><script src="/js/head.js?version=1.9.0"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>Powered by</span> <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

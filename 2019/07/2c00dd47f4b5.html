@@ -1,0 +1,236 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="Gulp快速使用指南"><meta name="keywords" content="快速使用,Gulp"><meta name="author" content="EsunR"><meta name="copyright" content="EsunR"><title>Gulp快速使用指南 | EsunR-Blog</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.9.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css?version=1.9.0"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="dns-prefetch" href="https://hm.baidu.com"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?31bd12722efcf47cb7d0d576bf150215";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-3RG97DCL3N"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-3RG97DCL3N');</script><script src="https://v1.hitokoto.cn/?encode=js&amp;charset=utf-8&amp;select=.footer_custom_text" defer></script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  hexoVersion: '6.2.0'
+} </script><meta name="generator" content="Hexo 6.2.0"></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Gulp%E7%89%B9%E7%82%B9"><span class="toc-text">1. Gulp特点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-API"><span class="toc-text">2. API</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="toc-text">3. 目录结构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E5%AE%89%E8%A3%85gulp"><span class="toc-text">4. 安装gulp</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-%E5%B8%B8%E7%94%A8%E7%9A%84gulp%E6%8F%92%E4%BB%B6"><span class="toc-text">5. 常用的gulp插件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-%E5%90%88%E5%B9%B6%E5%8E%8B%E7%BC%A9js%E4%BB%BB%E5%8A%A1"><span class="toc-text">6. 合并压缩js任务</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1-%E9%85%8D%E7%BD%AE%E4%BB%BB%E5%8A%A1"><span class="toc-text">6.1 配置任务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-2-%E4%B8%8B%E8%BD%BD%E5%92%8C%E4%BD%BF%E7%94%A8%E6%8F%92%E4%BB%B6"><span class="toc-text">6.2 下载和使用插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-3-%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1"><span class="toc-text">6.3 执行任务</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-%E5%90%88%E5%B9%B6%E5%8E%8B%E7%BC%A9css%E4%BB%BB%E5%8A%A1"><span class="toc-text">7. 合并压缩css任务</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-%E7%BA%BF%E6%80%A7%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1"><span class="toc-text">8. 线性执行任务</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-html%E5%8E%8B%E7%BC%A9"><span class="toc-text">9. html压缩</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-%E5%8D%8A%E8%87%AA%E5%8A%A8%E8%BF%9B%E8%A1%8C%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA"><span class="toc-text">10. 半自动进行项目构建</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#11-%E5%85%A8%E8%87%AA%E5%8A%A8%E6%9E%84%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="toc-text">11. 全自动构建项目</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#12-%E6%89%A9%E5%B1%95"><span class="toc-text">12. 扩展</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#12-1-%E4%BD%BF%E7%94%A8-open-%E6%A8%A1%E5%9D%97%E8%87%AA%E5%8A%A8%E6%89%93%E5%BC%80%E6%B5%8F%E8%A7%88%E5%99%A8"><span class="toc-text">12.1 使用 open 模块自动打开浏览器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-2-%E4%BD%BF%E7%94%A8-gulp-load-plugins-%E6%8F%92%E4%BB%B6"><span class="toc-text">12.2 使用 gulp-load-plugins 插件</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://esunr-webapp.cdn.bcebos.com/blog/avatar.jpeg?x-bce-process=image/resize,m_lfit,w_200/format,f_auto" alt="avatar"></div><div class="author-info__name text-center">EsunR</div><div class="author-info__description text-center">EsunR-Blog是由EsunR维护的博客平台，分享在前端开发、Git、Vue.js、Webpack、OAuth、Linux等各个领域的知识和经验。浏览这里的深入文章，了解不同主题的见解，并及时了解行业的最新趋势和技术。</div><div class="follow-button"><a target="_blank" rel="noopener" href="https://github.com/EsunR">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">172</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">155</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">26</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">EsunR-Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"><span class="site-page social-icon search"><i class="fa fa-search"></i><span> Search</span></span></span></div><div id="post-info"><div id="post-title">Gulp快速使用指南</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-07-22</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E5%89%8D%E7%AB%AF/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96/">前端工程化</a><span class="post-meta__separator">|</span><i class="fa fa-comment-o post-meta__icon" aria-hidden="true"></i><a href="/2019/07/2c00dd47f4b5.html#disqus_thread"><span class="disqus-comment-count" data-disqus-identifier="2019/07/2c00dd47f4b5.html"></span></a><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">2.2k</span><span class="post-meta__separator">|</span><span>Reading time: 9 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><blockquote>
+<p>Gulp学习版本为3.9.1</p>
+</blockquote>
+<h1 id="1-Gulp特点"><a href="#1-Gulp特点" class="headerlink" title="1. Gulp特点"></a>1. Gulp特点</h1><ul>
+<li>任务化</li>
+<li>基于流<ul>
+<li>输入流</li>
+<li>输出流</li>
+</ul>
+</li>
+</ul>
+<h1 id="2-API"><a href="#2-API" class="headerlink" title="2. API"></a>2. API</h1><ul>
+<li><code>gulp.src(globs[, options])</code> 输入文件：输入流</li>
+<li><code>gulp.dest(path[, options])</code> 输出文件：输出流</li>
+<li><code>gulp.task(name[, deps], fn)</code> 任务化</li>
+<li><code>gulp.watch(glob[, opts], tasks)</code> 监视</li>
+</ul>
+<h1 id="3-目录结构"><a href="#3-目录结构" class="headerlink" title="3. 目录结构"></a>3. 目录结构</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">|- dist</span><br><span class="line">|- src</span><br><span class="line">    |- js</span><br><span class="line">    |- css</span><br><span class="line">    |- less</span><br><span class="line">|- index.html</span><br><span class="line">|- gulpfile.js</span><br><span class="line">|- package.json</span><br><span class="line">    &#123;</span><br><span class="line">        &quot;name&quot;: &quot;gulp_study&quot;,</span><br><span class="line">        &quot;version&quot;: &quot;1.0.0&quot;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="4-安装gulp"><a href="#4-安装gulp" class="headerlink" title="4. 安装gulp"></a>4. 安装gulp</h1><ul>
+<li>全局安装：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install gulp -g</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>局部安装：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install gulp -S</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置编码</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// gulpfile.js</span></span><br><span class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">&#x27;gulp&#x27;</span>)</span><br><span class="line"><span class="comment">// 注册任务</span></span><br><span class="line">gulp.<span class="title function_">task</span>(<span class="string">&#x27;任务名&#x27;</span>, <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="comment">// 配置任务的操作</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">gulp.<span class="title function_">task</span>(<span class="string">&#x27;default&#x27;</span>, [])</span><br></pre></td></tr></table></figure>
+
+<p>之后我们可以使用 <code>gulp 任务名</code> 来执行某个特定的任务，或者使用 <code>gulp</code> 来执行默认的任务序列<strong>（gulp4 已弃用）</strong></p>
+<h1 id="5-常用的gulp插件"><a href="#5-常用的gulp插件" class="headerlink" title="5. 常用的gulp插件"></a>5. 常用的gulp插件</h1><ul>
+<li><p>sass的编译（<code>gulp-sass</code>）</p>
+</li>
+<li><p>less编译 （<code>gulp-less</code>）</p>
+</li>
+<li><p>重命名（为压缩的文件加’.min’）（<code>gulp-rename</code>）</p>
+</li>
+<li><p>自动添加css前缀（<code>gulp-autoprefixer</code>）</p>
+</li>
+<li><p>压缩css（<code>gulp-minify-css</code>）</p>
+</li>
+<li><p>js代码校验（<code>gulp-jshint</code>）</p>
+</li>
+<li><p>合并js/css文件（<code>gulp-concat</code>）</p>
+</li>
+<li><p>压缩js代码（<code>gulp-uglify</code>）</p>
+</li>
+<li><p>压缩图片（<code>gulp-imagemin</code>）</p>
+</li>
+<li><p>自动刷新页面（<code>gulp-livereload</code>，谷歌浏览器亲测，谷歌浏览器需安装livereload插件）</p>
+</li>
+<li><p>图片缓存，只有图片替换了才压缩（<code>gulp-cache</code>）</p>
+</li>
+<li><p>更改提醒（<code>gulp-notify</code>）</p>
+</li>
+</ul>
+<h1 id="6-合并压缩js任务"><a href="#6-合并压缩js任务" class="headerlink" title="6. 合并压缩js任务"></a>6. 合并压缩js任务</h1><h2 id="6-1-配置任务"><a href="#6-1-配置任务" class="headerlink" title="6.1 配置任务"></a>6.1 配置任务</h2><p>我们在 <code>src/js</code> 文件夹中创建两个js文件，分别对应了两个方法，我们想要将这两个js文件合并为一个文件，需要在 <code>gulpfile.js</code> 文件中定义任务流：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">gulp.<span class="title function_">task</span>(<span class="string">&#x27;js&#x27;</span>, <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 深度遍历</span></span><br><span class="line">    <span class="comment">// return gulp.src(&#x27;src/js/**/*.js&#x27;) </span></span><br><span class="line">    <span class="comment">// 浅度遍历</span></span><br><span class="line">    <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;src/js/*.js&#x27;</span>) <span class="comment">// 找到目标文件，将数据读取到gulp的内存中</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-2-下载和使用插件"><a href="#6-2-下载和使用插件" class="headerlink" title="6.2 下载和使用插件"></a>6.2 下载和使用插件</h2><ol>
+<li>安装插件</li>
+</ol>
+<p>当gulp读取文件到内存中后，会进行一系列操作，这些操作会用到gulp插件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install gulp-concat gulp-uglify gulp-rename --save-dev</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>引入插件</li>
+</ol>
+<p>引入插件：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// gulpfile.js</span></span><br><span class="line"><span class="keyword">var</span> concat = <span class="built_in">require</span>(<span class="string">&#x27;gulp-concat&#x27;</span>)</span><br><span class="line"><span class="keyword">var</span> uglify = <span class="built_in">require</span>(<span class="string">&#x27;gulp-uglify&#x27;</span>)</span><br><span class="line"><span class="keyword">var</span> rename = <span class="built_in">require</span>(<span class="string">&#x27;gulp-rename&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>注册任务</li>
+</ol>
+<p>在引入插件之后我们便可以执行链式调用来配置任务了，每一个操作用 <code>pipe</code> 方法来进行连接：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// gulpfile.js</span></span><br><span class="line">gulp.<span class="title function_">task</span>(<span class="string">&#x27;js&#x27;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;src/js/*.js&#x27;</span>)</span><br><span class="line">        .<span class="title function_">pipe</span>(<span class="title function_">concat</span>(<span class="string">&#x27;build.js&#x27;</span>)) <span class="comment">// 临时合并文件</span></span><br><span class="line">        .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;dist/js/&#x27;</span>)) <span class="comment">// 临时输出文件到本地</span></span><br><span class="line">        .<span class="title function_">pipe</span>(<span class="title function_">uglify</span>())</span><br><span class="line">        .<span class="title function_">pipe</span>(<span class="title function_">rename</span>(&#123; <span class="attr">suffix</span>: <span class="string">&#x27;.min&#x27;</span> &#125;)) <span class="comment">// 重命名</span></span><br><span class="line">        .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;dist/js/&#x27;</span>))</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-3-执行任务"><a href="#6-3-执行任务" class="headerlink" title="6.3 执行任务"></a>6.3 执行任务</h2><p>调用已注册的任务，我们可以得到一个已经合并的文件 <code>build.js</code> 和一个合并并压缩的文件 <code>build.min.js</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gulp js</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>gulp会自动忽略为调用的函数方法</p>
+</blockquote>
+<h1 id="7-合并压缩css任务"><a href="#7-合并压缩css任务" class="headerlink" title="7. 合并压缩css任务"></a>7. 合并压缩css任务</h1><ol>
+<li>下载插件</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install gulp-less gulp-clean-css --save-dev</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>引入和使用插件</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// gulpfile.js</span></span><br><span class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">&#x27;gulp&#x27;</span>)</span><br><span class="line"><span class="keyword">var</span> concat = <span class="built_in">require</span>(<span class="string">&#x27;gulp-concat&#x27;</span>)</span><br><span class="line"><span class="keyword">var</span> rename = <span class="built_in">require</span>(<span class="string">&#x27;gulp-rename&#x27;</span>)</span><br><span class="line"><span class="keyword">var</span> less = <span class="built_in">require</span>(<span class="string">&#x27;gulp-less&#x27;</span>)</span><br><span class="line"><span class="keyword">var</span> cssClean = <span class="built_in">require</span>(<span class="string">&#x27;gulp-clean-css&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 注册转换less的任务</span></span><br><span class="line">gulp.<span class="title function_">task</span>(<span class="string">&#x27;less&#x27;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;src/less/*.less&#x27;</span>)</span><br><span class="line">        .<span class="title function_">pipe</span>(<span class="title function_">less</span>()) <span class="comment">// 编译less文件为css文件</span></span><br><span class="line">        .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;src/css&#x27;</span>)) <span class="comment">// 将less编译为css文件后存放到css文件夹中，等待后续统一合并</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 合并压缩css文件</span></span><br><span class="line">gulp.<span class="title function_">task</span>(<span class="string">&#x27;css&#x27;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;src/css/*.css&#x27;</span>)</span><br><span class="line">        .<span class="title function_">pipe</span>(<span class="title function_">concat</span>(<span class="string">&#x27;build.css&#x27;</span>))</span><br><span class="line">        .<span class="title function_">pipe</span>(<span class="title function_">rename</span>(&#123; <span class="attr">suffix</span>: <span class="string">&#x27;.min&#x27;</span> &#125;))</span><br><span class="line">        .<span class="title function_">pipe</span>(<span class="title function_">cssClean</span>(&#123; <span class="attr">compatibility</span>: <span class="string">&#x27;ie8&#x27;</span> &#125;)) <span class="comment">// 压缩、设置兼容到ie8</span></span><br><span class="line">        .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;dist/css/&#x27;</span>))</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">gulp.<span class="title function_">task</span>(<span class="string">&#x27;default&#x27;</span>, [])</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>执行任务</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt; gulp less</span><br><span class="line">[15:18:39] Using gulpfile D:\<span class="built_in">test</span>\gulp_study\gulpfile.js</span><br><span class="line">[15:18:39] Starting <span class="string">&#x27;less&#x27;</span>...</span><br><span class="line">[15:18:39] Finished <span class="string">&#x27;less&#x27;</span> after 43 ms</span><br><span class="line"></span><br><span class="line">&gt; gulp css</span><br><span class="line">[15:18:46] Using gulpfile D:\<span class="built_in">test</span>\gulp_study\gulpfile.js</span><br><span class="line">[15:18:46] Starting <span class="string">&#x27;css&#x27;</span>...</span><br><span class="line">[15:18:46] Finished <span class="string">&#x27;css&#x27;</span> after 48 ms</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="8-线性执行任务"><a href="#8-线性执行任务" class="headerlink" title="8. 线性执行任务"></a>8. 线性执行任务</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// gulpfile.js</span></span><br><span class="line">... ...</span><br><span class="line">gulp.<span class="title function_">task</span>(<span class="string">&#x27;default&#x27;</span>, [<span class="string">&#x27;js&#x27;</span>, <span class="string">&#x27;less&#x27;</span>, <span class="string">&#x27;css&#x27;</span>])</span><br></pre></td></tr></table></figure>
+
+<p>在用这种方式时，gulp的每个编译任务是移异步进行的，如果将编写任务中的 <code>return</code> 去掉，则编译过程是同步进行的，如：</p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">  gulp.task(&#x27;js&#x27;, function () &#123;</span><br><span class="line"><span class="deletion">-   return gulp.src(&#x27;src/js/*.js&#x27;)</span></span><br><span class="line"><span class="addition">+   gulp.src(&#x27;src/js/*.js&#x27;)</span></span><br><span class="line">      .pipe(concat(&#x27;build.js&#x27;)) // 临时合并文件</span><br><span class="line">      .pipe(gulp.dest(&#x27;dist/js/&#x27;)) // 临时输出文件到本地</span><br><span class="line">      .pipe(uglify())</span><br><span class="line">      .pipe(rename(&#123; suffix: &#x27;.min&#x27; &#125;)) // 重命名</span><br><span class="line">      .pipe(gulp.dest(&#x27;dist/js/&#x27;))</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>但是我们不推荐这么做（占内存，速度慢）</p>
+</blockquote>
+<p>当我们需要逐个执行任务的时候，可以在设置任务的第二个参数位置，去设置它的依赖任务，如我们如果需要设置先执行 <code>less</code> 任务，再执行 <code>css</code> 任务，那么 <code>css</code> 任务的依赖任务就是 <code>less</code> 任务，我们可以进行如下设置：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// gulpfile.js</span></span><br><span class="line">gulp.<span class="title function_">task</span>(<span class="string">&#x27;css&#x27;</span>, [<span class="string">&#x27;less&#x27;</span>], <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;src/css/*.css&#x27;</span>)</span><br><span class="line">    <span class="comment">// ... ...</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+<h1 id="9-html压缩"><a href="#9-html压缩" class="headerlink" title="9. html压缩"></a>9. html压缩</h1><ol>
+<li>下载插件</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install gulp-html --save-dev</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>引入和使用插件</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// glupfile.js</span></span><br><span class="line"><span class="keyword">var</span> htmlMin = <span class="built_in">require</span>(<span class="string">&#x27;gulp-html&#x27;</span>)</span><br><span class="line"><span class="comment">// ... ...</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 注册压缩html的任务</span></span><br><span class="line">gulp.<span class="title function_">task</span>(<span class="string">&#x27;html&#x27;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;index.html&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>(<span class="title function_">htmlMin</span>(&#123; <span class="attr">collapseWhitespace</span>: <span class="literal">true</span> &#125;)) <span class="comment">// 压缩html</span></span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;dist/&#x27;</span>)) <span class="comment">// 输出</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>执行任务</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gulp html</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意路径问题，压缩输出的 html 换到了另外的一个路径下，这个所以导出 html 前，必须将路径配置到 <code>dist</code> 目录下。</p>
+</blockquote>
+<h1 id="10-半自动进行项目构建"><a href="#10-半自动进行项目构建" class="headerlink" title="10. 半自动进行项目构建"></a>10. 半自动进行项目构建</h1><ol>
+<li>下载插件</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install gulp-livereload --save-dev</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>配置编码</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 监视任务</span></span><br><span class="line">gulp.<span class="title function_">task</span>(<span class="string">&#x27;watch&#x27;</span>, [<span class="string">&#x27;default&#x27;</span>], <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// 开启监听</span></span><br><span class="line">  livereload.<span class="title function_">listen</span>();</span><br><span class="line">  <span class="comment">// 确认监听的目标以及绑定相应的任务</span></span><br><span class="line">  gulp.<span class="title function_">watch</span>(<span class="string">&#x27;src/js/*.js&#x27;</span>, [<span class="string">&#x27;js&#x27;</span>]);</span><br><span class="line">  gulp.<span class="title function_">watch</span>([<span class="string">&#x27;src/css/*.css&#x27;</span>, <span class="string">&#x27;src/less/*.less&#x27;</span>], [<span class="string">&#x27;css&#x27;</span>])</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>在设置完监听任务后，需要在监听的任务中再额外增加一个 <code>pipe(livereload())</code> 方法，如：</p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">  gulp.task(&#x27;js&#x27;, function () &#123;</span><br><span class="line">    return gulp.src(&#x27;src/js/*.js&#x27;)</span><br><span class="line">      .pipe(concat(&#x27;build.js&#x27;)) // 临时合并文件</span><br><span class="line">      .pipe(gulp.dest(&#x27;dist/js/&#x27;)) // 临时输出文件到本地</span><br><span class="line">      .pipe(uglify())</span><br><span class="line">      .pipe(rename(&#123; suffix: &#x27;.min&#x27; &#125;)) // 重命名</span><br><span class="line">      .pipe(gulp.dest(&#x27;dist/js/&#x27;))</span><br><span class="line"><span class="addition">+     .pipe(livereload())</span></span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>执行任务</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gulp watch</span><br></pre></td></tr></table></figure>
+
+<p>之后当我们编辑监听中的代码时，就可以自动打包编译，之后再<strong>手动刷新</strong>浏览器后就可以浏览效果，如果想要<strong>自动刷新</strong>看下一节全自动构建项目。</p>
+<h1 id="11-全自动构建项目"><a href="#11-全自动构建项目" class="headerlink" title="11. 全自动构建项目"></a>11. 全自动构建项目</h1><ol>
+<li>安装插件</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install gulp-connect --save-dev</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>引入并使用插件</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> connect = <span class="built_in">require</span>(<span class="string">&#x27;gulp-connect&#x27;</span>)</span><br><span class="line"><span class="comment">// ... ...</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// gulpfile.js</span></span><br><span class="line"><span class="comment">// 注册监视任务（全自动）</span></span><br><span class="line">gulp.<span class="title function_">task</span>(<span class="string">&#x27;server&#x27;</span>, [<span class="string">&#x27;default&#x27;</span>], <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// 配置服务器选项</span></span><br><span class="line">  connect.<span class="title function_">server</span>(&#123;</span><br><span class="line">    <span class="attr">root</span>: <span class="string">&#x27;dist/&#x27;</span>,</span><br><span class="line">    <span class="attr">livereload</span>: <span class="literal">true</span>, <span class="comment">// 实时刷新</span></span><br><span class="line">    <span class="attr">port</span>: <span class="number">5000</span></span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// 确认监听的目标以及绑定相应的任务</span></span><br><span class="line">  gulp.<span class="title function_">watch</span>(<span class="string">&#x27;src/js/*.js&#x27;</span>, [<span class="string">&#x27;js&#x27;</span>]);</span><br><span class="line">  gulp.<span class="title function_">watch</span>([<span class="string">&#x27;src/css/*.css&#x27;</span>, <span class="string">&#x27;src/less/*.less&#x27;</span>], [<span class="string">&#x27;css&#x27;</span>])</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>相似的，在设置完全自动监听的任务后，需要在监听的任务中再额外增加一个 <code>.pipe(connect.reload())</code> 方法，如：</p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">  gulp.task(&#x27;js&#x27;, function () &#123;</span><br><span class="line">    return gulp.src(&#x27;src/js/*.js&#x27;)</span><br><span class="line">      .pipe(concat(&#x27;build.js&#x27;)) // 临时合并文件</span><br><span class="line">      .pipe(gulp.dest(&#x27;dist/js/&#x27;)) // 临时输出文件到本地</span><br><span class="line">      .pipe(uglify())</span><br><span class="line">      .pipe(rename(&#123; suffix: &#x27;.min&#x27; &#125;)) // 重命名</span><br><span class="line">      .pipe(gulp.dest(&#x27;dist/js/&#x27;))</span><br><span class="line"><span class="addition">+     .pipe(connect.reload())</span></span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>执行任务</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gulp server</span><br></pre></td></tr></table></figure>
+
+<h2 id="12-扩展"><a href="#12-扩展" class="headerlink" title="12. 扩展"></a>12. 扩展</h2><h3 id="12-1-使用-open-模块自动打开浏览器"><a href="#12-1-使用-open-模块自动打开浏览器" class="headerlink" title="12.1 使用 open 模块自动打开浏览器"></a>12.1 使用 open 模块自动打开浏览器</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install open --save-dev</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// gulpfile.js</span></span><br><span class="line"><span class="keyword">var</span> open = <span class="built_in">require</span>(<span class="string">&#x27;open&#x27;</span>)</span><br><span class="line"></span><br><span class="line">... ...</span><br><span class="line"></span><br><span class="line"><span class="comment">// 注册监视任务（全自动）</span></span><br><span class="line">gulp.<span class="title function_">task</span>(<span class="string">&#x27;server&#x27;</span>, [<span class="string">&#x27;default&#x27;</span>], <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  ... ...</span><br><span class="line">  <span class="title function_">open</span>(<span class="string">&#x27;http://localhost:5000&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="12-2-使用-gulp-load-plugins-插件"><a href="#12-2-使用-gulp-load-plugins-插件" class="headerlink" title="12.2 使用 gulp-load-plugins 插件"></a>12.2 使用 gulp-load-plugins 插件</h2><ol>
+<li>下载：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install gulp-load-plugins --save-dev</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>引入：</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> $ = <span class="built_in">require</span>(<span class="string">&#x27;gulp-load-plugins&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>之后我们便可以直接使用 <code>$</code> 对象来调用所有的插件方法：</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">&#x27;gulp&#x27;</span>)</span><br><span class="line"><span class="comment">// var concat = require(&#x27;gulp-concat&#x27;)</span></span><br><span class="line"><span class="comment">// var uglify = require(&#x27;gulp-uglify&#x27;)</span></span><br><span class="line"><span class="comment">// var rename = require(&#x27;gulp-rename&#x27;)</span></span><br><span class="line"><span class="comment">// var less = require(&#x27;gulp-less&#x27;)</span></span><br><span class="line"><span class="comment">// var cssClean = require(&#x27;gulp-clean-css&#x27;)</span></span><br><span class="line"><span class="comment">// var htmlMin = require(&#x27;gulp-htmlmin&#x27;)</span></span><br><span class="line"><span class="comment">// var livereload = require(&#x27;gulp-livereload&#x27;)</span></span><br><span class="line"><span class="comment">// var connect = require(&#x27;gulp-connect&#x27;)</span></span><br><span class="line"><span class="comment">// var open = require(&#x27;open&#x27;)</span></span><br><span class="line"><span class="keyword">var</span> $ = <span class="built_in">require</span>(<span class="string">&#x27;gulp-load-plugins&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 注册压缩html的任务</span></span><br><span class="line">gulp.<span class="title function_">task</span>(<span class="string">&#x27;js&#x27;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;src/js/*.js&#x27;</span>)</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">concat</span>(<span class="string">&#x27;build.js&#x27;</span>)) <span class="comment">// 临时合并文件</span></span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;dist/js/&#x27;</span>)) <span class="comment">// 临时输出文件到本地</span></span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">uglify</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">rename</span>(&#123; <span class="attr">suffix</span>: <span class="string">&#x27;.min&#x27;</span> &#125;)) <span class="comment">// 重命名</span></span><br><span class="line">    .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;dist/js/&#x27;</span>))</span><br><span class="line">    .<span class="title function_">pipe</span>($.<span class="title function_">livereload</span>())</span><br><span class="line">    .<span class="title function_">pipe</span>($.connect.<span class="title function_">reload</span>())</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>命名规则：</li>
+</ol>
+<p>使用 <code>$</code> 对象引入的 gulp 插件必须有其对应的命名方法，其规则为：</p>
+<ul>
+<li>忽略连接符前的 gulp，直接写插件名称，如：<code>gulp-concat</code> 插件对应的引入方法为 <code>$.concat</code></li>
+<li>如果有多个连接符，则采用驼峰命名，如：<code>gulp-clean-css</code> 插件对应的引入方法为 <code>$.cleanCss</code></li>
+</ul>
+</div></article><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%BF%AB%E9%80%9F%E4%BD%BF%E7%94%A8/">快速使用</a><a class="post-meta__tags" href="/tags/Gulp/">Gulp</a></div><div class="addthis_inline_share_toolbox pull-right"></div><script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-62c7f2684e36ba34" async></script><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/07/4f5e71e0f2ae.html"><i class="fa fa-chevron-left">  </i><span>React中修改父组件传入的props</span></a></div><div class="next-post pull-right"><a href="/2019/07/6614739b123e.html"><span>使用Flask-Sqlachemy操作数据库对象</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="disqus_thread"></div><script>var unused = null;
+var disqus_config = function () {
+  this.page.url = 'https://blog.esunr.site/2019/07/2c00dd47f4b5.html';
+  this.page.identifier = '2019/07/2c00dd47f4b5.html';
+  this.page.title = 'Gulp快速使用指南';
+}
+var d = document, s = d.createElement('script');
+s.src = "https://" + 'esunr-blog' +".disqus.com/embed.js";
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);</script><script id="dsq-count-scr" src="https://esunr-blog.disqus.com/count.js" async></script></div></div><footer class="footer-bg" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div class="layout" id="footer"><div class="copyright">&copy;2017 - 2025 By EsunR</div><div class="framework-info"><span>Driven - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">hitokoto</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.0"></script><script src="/js/fancybox.js?version=1.9.0"></script><script src="/js/sidebar.js?version=1.9.0"></script><script src="/js/copy.js?version=1.9.0"></script><script src="/js/fireworks.js?version=1.9.0"></script><script src="/js/transition.js?version=1.9.0"></script><script src="/js/scroll.js?version=1.9.0"></script><script src="/js/head.js?version=1.9.0"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>Powered by</span> <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

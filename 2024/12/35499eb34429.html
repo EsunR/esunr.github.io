@@ -1,0 +1,93 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="Deno 2 特性概览"><meta name="keywords" content="快速入门,NodeJS,Deno,服务器"><meta name="author" content="EsunR"><meta name="copyright" content="EsunR"><title>Deno 2 特性概览 | EsunR-Blog</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.9.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css?version=1.9.0"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="dns-prefetch" href="https://hm.baidu.com"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?31bd12722efcf47cb7d0d576bf150215";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-3RG97DCL3N"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-3RG97DCL3N');</script><script src="https://v1.hitokoto.cn/?encode=js&amp;charset=utf-8&amp;select=.footer_custom_text" defer></script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  hexoVersion: '6.2.0'
+} </script><meta name="generator" content="Hexo 6.2.0"></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Typescript-support"><span class="toc-text">Typescript support</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Package-manager"><span class="toc-text">Package manager</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AF%E6%89%A7%E8%A1%8C%E7%9A%84-npm-%E8%84%9A%E6%9C%AC"><span class="toc-text">可执行的 npm 脚本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#node-modules-%E7%9A%84%E5%A4%84%E7%90%86"><span class="toc-text">node_modules 的处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E4%BD%8D%E7%BD%AE"><span class="toc-text">缓存位置</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#JSR"><span class="toc-text">JSR</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Deno-standard-library"><span class="toc-text">Deno standard library</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#JSR-demo"><span class="toc-text">JSR demo</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Workspace-and-monorepo"><span class="toc-text">Workspace and monorepo</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Long-term-support"><span class="toc-text">Long term support</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Deno-is-fast"><span class="toc-text">Deno is fast</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://esunr-webapp.cdn.bcebos.com/blog/avatar.jpeg?x-bce-process=image/resize,m_lfit,w_200/format,f_auto" alt="avatar"></div><div class="author-info__name text-center">EsunR</div><div class="author-info__description text-center">EsunR-Blog是由EsunR维护的博客平台，分享在前端开发、Git、Vue.js、Webpack、OAuth、Linux等各个领域的知识和经验。浏览这里的深入文章，了解不同主题的见解，并及时了解行业的最新趋势和技术。</div><div class="follow-button"><a target="_blank" rel="noopener" href="https://github.com/EsunR">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">172</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">155</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">26</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">EsunR-Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"><span class="site-page social-icon search"><i class="fa fa-search"></i><span> Search</span></span></span></div><div id="post-info"><div id="post-title">Deno 2 特性概览</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2024-12-11</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/Node/">Node</a><span class="post-meta__separator">|</span><i class="fa fa-comment-o post-meta__icon" aria-hidden="true"></i><a href="/2024/12/35499eb34429.html#disqus_thread"><span class="disqus-comment-count" data-disqus-identifier="2024/12/35499eb34429.html"></span></a><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">829</span><span class="post-meta__separator">|</span><span>Reading time: 3 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p>基于视频：<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=d35SlRgVxT8&t=626s">Announcing Deno 2</a></p>
+<h1 id="Typescript-support"><a href="#Typescript-support" class="headerlink" title="Typescript support"></a>Typescript support</h1><p>Deno 无需配置即支持 Typescript。</p>
+<p>许多 npm 包附带类型，您可以导入它们并直接将它们与类型一起使用：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> chalk <span class="keyword">from</span> <span class="string">&quot;npm:chalk@5&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>有些软件包不附带类型，但您可以使用 @eno-types 指令指定它们的类型。例如，使用 @types 包：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// @deno-types=&quot;npm:@types/express@^4.17&quot;</span></span><br><span class="line"><span class="keyword">import</span> express <span class="keyword">from</span> <span class="string">&quot;npm:express@^4.17&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>Node 附带了许多内置类型，例如 Buffer，它们可能会在 npm 包的类型中引用。要加载这些，您必须将类型引用指令添加到 @types/node 包：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// &lt;reference types=&quot;npm:@types/node&quot; /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Package-manager"><a href="#Package-manager" class="headerlink" title="Package manager"></a>Package manager</h1><p>deno 拥有 npm 一样的包管理指令：</p>
+<ul>
+<li>deno install</li>
+<li>deno add</li>
+<li>deno remove</li>
+</ul>
+<p>当项目存在 pacakge.josn 时，deno 会在项目中创建 node_modules 来进行依赖缓存。如果没有 package.json，deno 会读取 deno.json 并从全局缓存中进行查找或安装。</p>
+<h2 id="可执行的-npm-脚本"><a href="#可执行的-npm-脚本" class="headerlink" title="可执行的 npm 脚本"></a>可执行的 npm 脚本</h2><p>类似 <code>npx</code>、<code>pnpm exec</code> 指令，deno 也可以直接运行 npm 脚本：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deno run &lt;permission flag&gt; npm:&lt;package name&gt;@&lt;version (optional)&gt; &lt;args&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="node-modules-的处理"><a href="#node-modules-的处理" class="headerlink" title="node_modules 的处理"></a>node_modules 的处理</h2><p>默认情况下，执行 deno run 的时候，deno 不会创建 node_modules，依赖将安装到全局缓存中，这是 deno 推荐的方式。</p>
+<p>如果项目中需要 node_modules，可以在 <code>deno.json</code> 中配置：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;nodeModulesDir&quot;</span><span class="punctuation">:</span> <span class="string">&quot;auto&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>auto 模式会在项目目录下创建 node_modules，并尝试从全局缓存中拉取需要的包到 node_modules 中。</p>
+<p>此外，<code>nodeModulesDir</code> 也可以被设置为 <code>manual</code>，这个模式下执行 <code>deno run</code> 时，deno 不会自动安装相关的依赖，用户必须手动调用 <code>deno install</code> 或者 <code>npm install</code> 来显示指定的进行包安装，安装后的包也会被放在项目的 <code>node_modules</code> 中。手动模式是项目使用 package.json 时的默认模式。</p>
+<h2 id="缓存位置"><a href="#缓存位置" class="headerlink" title="缓存位置"></a>缓存位置</h2><p>使用 <code>deno info</code> 指令可以输出 deno 的缓存信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">DENO_DIR location: /Users/xxx/Library/Caches/deno</span><br><span class="line">Remote modules cache: /Users/xxx/Library/Caches/deno/remote</span><br><span class="line">npm modules cache: /Users/xxx/Library/Caches/deno/npm</span><br><span class="line">Emitted modules cache: /Users/xxx/Library/Caches/deno/gen</span><br><span class="line">Language server registries cache: /Users/xxx/Library/Caches/deno/registries</span><br><span class="line">Origin storage: /Users/xxx/Library/Caches/deno/location_data</span><br><span class="line">Web cache storage: /var/folders/0y/7qqcbbvn2k74zkvd46d0582w0000gn/T/deno_cache</span><br></pre></td></tr></table></figure>
+
+<p>默认情况下，deno 使用 DENO_DIR  来缓存下载的依赖。</p>
+<h1 id="JSR"><a href="#JSR" class="headerlink" title="JSR"></a>JSR</h1><p>JSR 是 NPM 的继任者，JSR 被设计为只支持 ESM，并不支持 CJS。</p>
+<p>JSR 并不是想完全取代 NPM，可以理解为 JSR 是 NPM 的超集。</p>
+<h1 id="Deno-standard-library"><a href="#Deno-standard-library" class="headerlink" title="Deno standard library"></a>Deno standard library</h1><p>Deno 创建了各种标准库来期望统一 Deno 的开发体验，标准库被分发在 JSR 上，大多以 <code>@std</code> 为包的命名空间，理论上支持 Node 或者其他的 JS 运行时来调用。</p>
+<p>比如：</p>
+<ul>
+<li>@std/testing 取代 jest</li>
+<li>@std/expect 取代 chai</li>
+<li>@std/cli 取代 minimist</li>
+<li>@std/collection 取代 lodash</li>
+</ul>
+<p>Before:</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202412102142385.png" alt="image.png"></p>
+<p>After：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202412102143455.png" alt="image.png"></p>
+<h1 id="JSR-demo"><a href="#JSR-demo" class="headerlink" title="JSR demo"></a>JSR demo</h1><p>使用标准的 fs 模块可以提供快捷的目录遍历功能：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202412102146018.png" alt="image.png|400"></p>
+<p>你可以与 NodeJS 的 fs 模块结合使用：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202412102147183.png" alt="image.png|400"></p>
+<p>如果想要发布包到 jsr，只需要在 jsr 上创建项目并复制需要的 deno.json 文件到本地，并运行 <code>deno publish</code> 即可。</p>
+<p>需要注意，如果发布 jsr 包，则需要在代码中指定依赖包的版本：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202412102152265.png" alt="image.png|400"></p>
+<p>JSR 支持根据代码中书写的 JSDoc 来自动生成在线文档：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202412102153143.png" alt="image.png|400"></p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202412102154590.png" alt="image.png|400"></p>
+<h1 id="Workspace-and-monorepo"><a href="#Workspace-and-monorepo" class="headerlink" title="Workspace and monorepo"></a>Workspace and monorepo</h1><p>deno 的 workspace 与 npm 的相似。</p>
+<p>deno 还支持 package.json 和 deno.json 的共存：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202412102157314.png" alt="image.png|400"></p>
+<h1 id="Long-term-support"><a href="#Long-term-support" class="headerlink" title="Long term support"></a>Long term support</h1><p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202412102158584.png" alt="image.png|400"></p>
+<h1 id="Deno-is-fast"><a href="#Deno-is-fast" class="headerlink" title="Deno is fast"></a>Deno is fast</h1><p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202412102200369.png" alt="image.png"></p>
+</div></article><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/">快速入门</a><a class="post-meta__tags" href="/tags/NodeJS/">NodeJS</a><a class="post-meta__tags" href="/tags/Deno/">Deno</a><a class="post-meta__tags" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a></div><div class="addthis_inline_share_toolbox pull-right"></div><script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-62c7f2684e36ba34" async></script><nav id="pagination"><div class="prev-post pull-left"><a href="/2024/12/1b2d2ba857fe.html"><i class="fa fa-chevron-left">  </i><span>MacOS Python 环境搭建</span></a></div><div class="next-post pull-right"><a href="/2024/11/61e5437d38fa.html"><span>学习屏幕色域、色彩管理相关的知识笔记</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="disqus_thread"></div><script>var unused = null;
+var disqus_config = function () {
+  this.page.url = 'https://blog.esunr.site/2024/12/35499eb34429.html';
+  this.page.identifier = '2024/12/35499eb34429.html';
+  this.page.title = 'Deno 2 特性概览';
+}
+var d = document, s = d.createElement('script');
+s.src = "https://" + 'esunr-blog' +".disqus.com/embed.js";
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);</script><script id="dsq-count-scr" src="https://esunr-blog.disqus.com/count.js" async></script></div></div><footer class="footer-bg" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div class="layout" id="footer"><div class="copyright">&copy;2017 - 2025 By EsunR</div><div class="framework-info"><span>Driven - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">hitokoto</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.0"></script><script src="/js/fancybox.js?version=1.9.0"></script><script src="/js/sidebar.js?version=1.9.0"></script><script src="/js/copy.js?version=1.9.0"></script><script src="/js/fireworks.js?version=1.9.0"></script><script src="/js/transition.js?version=1.9.0"></script><script src="/js/scroll.js?version=1.9.0"></script><script src="/js/head.js?version=1.9.0"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>Powered by</span> <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

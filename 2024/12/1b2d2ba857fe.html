@@ -1,0 +1,100 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="MacOS Python 环境搭建"><meta name="keywords" content="Python"><meta name="author" content="EsunR"><meta name="copyright" content="EsunR"><title>MacOS Python 环境搭建 | EsunR-Blog</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.9.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css?version=1.9.0"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="dns-prefetch" href="https://hm.baidu.com"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?31bd12722efcf47cb7d0d576bf150215";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-3RG97DCL3N"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-3RG97DCL3N');</script><script src="https://v1.hitokoto.cn/?encode=js&amp;charset=utf-8&amp;select=.footer_custom_text" defer></script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  hexoVersion: '6.2.0'
+} </script><meta name="generator" content="Hexo 6.2.0"></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86"><span class="toc-text">1. 环境管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#pyenv"><span class="toc-text">pyenv</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#venv"><span class="toc-text">venv</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pip"><span class="toc-text">pip</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-IDE-%E6%90%AD%E5%BB%BA"><span class="toc-text">2. IDE 搭建</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://esunr-webapp.cdn.bcebos.com/blog/avatar.jpeg?x-bce-process=image/resize,m_lfit,w_200/format,f_auto" alt="avatar"></div><div class="author-info__name text-center">EsunR</div><div class="author-info__description text-center">EsunR-Blog是由EsunR维护的博客平台，分享在前端开发、Git、Vue.js、Webpack、OAuth、Linux等各个领域的知识和经验。浏览这里的深入文章，了解不同主题的见解，并及时了解行业的最新趋势和技术。</div><div class="follow-button"><a target="_blank" rel="noopener" href="https://github.com/EsunR">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">172</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">155</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">26</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">EsunR-Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"><span class="site-page social-icon search"><i class="fa fa-search"></i><span> Search</span></span></span></div><div id="post-info"><div id="post-title">MacOS Python 环境搭建</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2024-12-12</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/Python/">Python</a><span class="post-meta__separator">|</span><i class="fa fa-comment-o post-meta__icon" aria-hidden="true"></i><a href="/2024/12/1b2d2ba857fe.html#disqus_thread"><span class="disqus-comment-count" data-disqus-identifier="2024/12/1b2d2ba857fe.html"></span></a><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">655</span><span class="post-meta__separator">|</span><span>Reading time: 2 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="1-环境管理"><a href="#1-环境管理" class="headerlink" title="1. 环境管理"></a>1. 环境管理</h1><h2 id="pyenv"><a href="#pyenv" class="headerlink" title="pyenv"></a>pyenv</h2><p>pyenv 是用来管理 python 版本的工具。</p>
+<p>功能：</p>
+<ul>
+<li>允许您基于每个用户更改全局 Python 版本。</li>
+<li>提供对每个项目的 Python 版本的支持。</li>
+<li>允许您使用环境变量覆盖 Python 版本。</li>
+<li><ul>
+<li>一次搜索来自多个版本的 Python 的命令。这可能有助于使用 tox 测试跨 Python 版本。</li>
+</ul>
+</li>
+</ul>
+<p>安装：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install pyenv</span><br></pre></td></tr></table></figure>
+
+<p>zsh 环境变量配置：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;export PYENV_ROOT=&quot;$HOME/.pyenv&quot;&#x27;</span> &gt;&gt; ~/.zshrc</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;[[ -d $PYENV_ROOT/bin ]] &amp;&amp; export PATH=&quot;$PYENV_ROOT/bin:$PATH&quot;&#x27;</span> &gt;&gt; ~/.zshrc</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;eval &quot;$(pyenv init -)&quot;&#x27;</span> &gt;&gt; ~/.zshrc</span><br></pre></td></tr></table></figure>
+
+<p>列出可用的 python 版本并安装：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">pyenv install -l</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装指定版本 Python</span></span><br><span class="line">pyenv install 3.10.4</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装最新版本 Python3</span></span><br><span class="line">pyenv install 3</span><br></pre></td></tr></table></figure>
+
+<p>列出当前安装的 Python</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv versions</span><br></pre></td></tr></table></figure>
+
+<p>切换 Python 版本：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 仅当前会话</span></span><br><span class="line">pyenv shell &lt;version&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 位于当前目录或其子目录时选择</span></span><br><span class="line">pyenv <span class="built_in">local</span> &lt;version&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 全局切换</span></span><br><span class="line">pyenv global &lt;version&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 全局切换为系统提供的 python 版本</span></span><br><span class="line">pyenv global system</span><br></pre></td></tr></table></figure>
+
+<p>卸载 python：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv uninstall &lt;version&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="venv"><a href="#venv" class="headerlink" title="venv"></a>venv</h2><p>venv 是 Python 内置的用来创建虚拟环境的包，使用 venv 指令后可以创建一个与系统环境隔绝的 Python 环境，比如当使用 pip 时只会将安装的包安装到虚拟环境中。</p>
+<blockquote>
+<p>Python 3.5 之前使用 pyvenv 来创建虚拟环境</p>
+</blockquote>
+<p>创建虚拟环境：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在当前工作目录下创建 venv 环境，虚拟环境的内容将被保存在 venv 目录下</span></span><br><span class="line">python -m venv venv</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>-m</code> 指令保证 venv 模块从当前的 Python 环境中进行加载</p>
+</blockquote>
+<p>创建虚拟环境之后让虚拟环境生效：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ./vevn/bin/activate</span><br></pre></td></tr></table></figure>
+
+<p>退出虚拟环境：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deactivate</span><br></pre></td></tr></table></figure>
+
+<h2 id="pip"><a href="#pip" class="headerlink" title="pip"></a>pip</h2><p><a target="_blank" rel="noopener" href="https://packaging.python.org/en/latest/tutorials/installing-packages/#source-distributions-vs-wheels">参考</a></p>
+<p>pip 是 Python 的包管理工具，其默认的源是 <a target="_blank" rel="noopener" href="https://pypi.org/">PyPI</a></p>
+<p>使用 pip 安装：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装最新版本</span></span><br><span class="line">python -m pip install <span class="string">&quot;SomeProject&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装特定版本</span></span><br><span class="line">python -m pip install <span class="string">&quot;SomeProject==1.4&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装大于或等于一个版本，且小于另一个版本</span></span><br><span class="line">python -m pip install <span class="string">&quot;SomeProject&gt;=1,&lt;2&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装与特定版本兼容的版本</span></span><br><span class="line">python -m pip install <span class="string">&quot;SomeProject~=1.4.2&quot;</span> <span class="comment"># 在这种情况下，这意味着安装任何版本“==1.4.*”也是“&gt;=1.4.2”的版本</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装多个包</span></span><br><span class="line">python -m pip install &lt;package1&gt; &lt;package2&gt; ...</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果要分发包，则需要使用 <code>setuptools</code> 和 <code>wheel</code></p>
+</blockquote>
+<p>安装 requirements 文件中的依赖项：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+
+<p>创建 requirements.txt：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m pip freeze &gt; requirements.txt</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-IDE-搭建"><a href="#2-IDE-搭建" class="headerlink" title="2. IDE 搭建"></a>2. IDE 搭建</h1><p>VSCode 安装以下插件：</p>
+<ul>
+<li>Python：基础扩展，包含了 Python Debugger、Pylance</li>
+<li>Python Environment Manager：环境管理</li>
+<li>Python Indent：代码缩进增强</li>
+<li>autopep8：格式化工具</li>
+<li>PyLint：Python Lint 工具</li>
+</ul>
+</div></article><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Python/">Python</a></div><div class="addthis_inline_share_toolbox pull-right"></div><script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-62c7f2684e36ba34" async></script><nav id="pagination"><div class="prev-post pull-left"><a href="/2024/12/f48b353e31e6.html"><i class="fa fa-chevron-left">  </i><span>现有的 QQ Bot 实现方案调研</span></a></div><div class="next-post pull-right"><a href="/2024/12/35499eb34429.html"><span>Deno 2 特性概览</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="disqus_thread"></div><script>var unused = null;
+var disqus_config = function () {
+  this.page.url = 'https://blog.esunr.site/2024/12/1b2d2ba857fe.html';
+  this.page.identifier = '2024/12/1b2d2ba857fe.html';
+  this.page.title = 'MacOS Python 环境搭建';
+}
+var d = document, s = d.createElement('script');
+s.src = "https://" + 'esunr-blog' +".disqus.com/embed.js";
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);</script><script id="dsq-count-scr" src="https://esunr-blog.disqus.com/count.js" async></script></div></div><footer class="footer-bg" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div class="layout" id="footer"><div class="copyright">&copy;2017 - 2025 By EsunR</div><div class="framework-info"><span>Driven - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">hitokoto</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.0"></script><script src="/js/fancybox.js?version=1.9.0"></script><script src="/js/sidebar.js?version=1.9.0"></script><script src="/js/copy.js?version=1.9.0"></script><script src="/js/fireworks.js?version=1.9.0"></script><script src="/js/transition.js?version=1.9.0"></script><script src="/js/scroll.js?version=1.9.0"></script><script src="/js/head.js?version=1.9.0"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>Powered by</span> <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

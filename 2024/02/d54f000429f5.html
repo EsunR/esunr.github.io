@@ -1,0 +1,157 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="带你看懂思源字体的各个版本都有什么区别"><meta name="keywords" content=""><meta name="author" content="EsunR"><meta name="copyright" content="EsunR"><title>带你看懂思源字体的各个版本都有什么区别 | EsunR-Blog</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.9.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css?version=1.9.0"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="dns-prefetch" href="https://hm.baidu.com"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?31bd12722efcf47cb7d0d576bf150215";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-3RG97DCL3N"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-3RG97DCL3N');</script><script src="https://v1.hitokoto.cn/?encode=js&amp;charset=utf-8&amp;select=.footer_custom_text" defer></script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  hexoVersion: '6.2.0'
+} </script><meta name="generator" content="Hexo 6.2.0"></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E5%89%8D%E8%A8%80"><span class="toc-text">1. 前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E9%A6%96%E5%85%88%EF%BC%8C%E6%88%91%E4%BB%AC%E5%85%88%E6%9D%A5%E5%88%86%E6%B8%85%E4%B8%80%E4%B8%8B%E4%BB%80%E4%B9%88%E6%98%AF-OTF-%E4%B8%8E-OTC"><span class="toc-text">2. 首先，我们先来分清一下什么是 OTF 与 OTC</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E7%89%B9%E5%AE%9A%E8%AF%AD%E8%A8%80%E7%89%88%E6%9C%AC%E3%80%81%E5%9C%B0%E5%8C%BA%E5%AD%90%E9%9B%86%E7%89%88%E6%9C%AC"><span class="toc-text">3. 特定语言版本、地区子集版本</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E5%AE%9A%E8%AF%AD%E8%A8%80%E7%89%88%E6%9C%AC"><span class="toc-text">特定语言版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%B0%E5%8C%BA%E5%AD%90%E9%9B%86%E7%89%88%E6%9C%AC"><span class="toc-text">地区子集版本</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E5%8F%AF%E5%8F%98%E5%AD%97%E4%BD%93-Variable-Fonts"><span class="toc-text">4. 可变字体 Variable Fonts</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-OpenType-%E4%B8%8E-TrueType"><span class="toc-text">5. OpenType 与 TrueType</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text">其他</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://esunr-webapp.cdn.bcebos.com/blog/avatar.jpeg?x-bce-process=image/resize,m_lfit,w_200/format,f_auto" alt="avatar"></div><div class="author-info__name text-center">EsunR</div><div class="author-info__description text-center">EsunR-Blog是由EsunR维护的博客平台，分享在前端开发、Git、Vue.js、Webpack、OAuth、Linux等各个领域的知识和经验。浏览这里的深入文章，了解不同主题的见解，并及时了解行业的最新趋势和技术。</div><div class="follow-button"><a target="_blank" rel="noopener" href="https://github.com/EsunR">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">172</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">155</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">26</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">EsunR-Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"><span class="site-page social-icon search"><i class="fa fa-search"></i><span> Search</span></span></span></div><div id="post-info"><div id="post-title">带你看懂思源字体的各个版本都有什么区别</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2024-02-23</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E5%89%8D%E7%AB%AF/%E6%8A%80%E6%9C%AF%E8%B0%83%E7%A0%94/">技术调研</a><span class="post-meta__separator">|</span><i class="fa fa-comment-o post-meta__icon" aria-hidden="true"></i><a href="/2024/02/d54f000429f5.html#disqus_thread"><span class="disqus-comment-count" data-disqus-identifier="2024/02/d54f000429f5.html"></span></a><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">2k</span><span class="post-meta__separator">|</span><span>Reading time: 6 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h1><p>思源字体是 Adobe 提供的一套开源字体，包含了 <a target="_blank" rel="noopener" href="https://github.com/adobe-fonts/source-han-sans">思源黑体 source-han-snas</a>，<a target="_blank" rel="noopener" href="https://github.com/adobe-fonts/source-han-serif">思源宋体 source-han-serif</a>，<a target="_blank" rel="noopener" href="https://github.com/adobe-fonts/source-han-mono">思源等宽 source-han-mono</a>。其开源协议允许商业用途，同时允许对其进行修改，因此非常适合使用。</p>
+<p>我们以思源黑体为例，当我们打开其 Release 页面，可能并不知道我们所需要下载什么：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202402231815044.png" alt=""></p>
+<p>官方也提供了一个『简要』的下载说明，也会让人看的一头雾水：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202402231817905.png" alt=""></p>
+<h1 id="2-首先，我们先来分清一下什么是-OTF-与-OTC"><a href="#2-首先，我们先来分清一下什么是-OTF-与-OTC" class="headerlink" title="2. 首先，我们先来分清一下什么是 OTF 与 OTC"></a>2. 首先，我们先来分清一下什么是 OTF 与 OTC</h1><p>OTF 全称 OpenType Font，OTF 全称 OpenType Collection。两者的前缀 OpenType 是一个现代化的字体规范，由微软和 Adobe 开发，它是一个跨平台的字体规范文件，因此对于操作系统来说，通常下载 OT* 的字体。</p>
+<p>OTF 字体文件后缀为 <code>.otf</code>，在 Release 的 OTF 目录下可以找到根据特定语言版本区分的 OTF 文件，同时该目录下单个特定语言版本又包含了从 ExtraLight 到 Heavy 多个字重的字体文件：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202402231841752.png" alt=""></p>
+<p>OTC 字体在思源黑体中后缀为<code>.ttc/.otc</code>，其是对于 OTF 的打包封装，一个字体档中可以存在多个字形，在思源黑体中，OTC 对所有的<strong>特定语言</strong>的<strong>不同字重</strong>的文件进行了打包，从而生成了如下几个文件：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202402231851531.png" alt=""></p>
+<p>OTC 字体的好处是在互联网上进行分发时，用户只需要下载一个文件就可以获取到整个系列的字体来使用，例如 MacOS 中打开 OTC 字体时就可以选择多个字形、字重来进行安装：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202402231906714.png" alt=""></p>
+<p>此外，思源字体还提供了 SuperOTC 版本，该字体版本是将所有的特定语言版本、字重版本的字体文件都打包在一个字体文件中了。</p>
+<h1 id="3-特定语言版本、地区子集版本"><a href="#3-特定语言版本、地区子集版本" class="headerlink" title="3. 特定语言版本、地区子集版本"></a>3. 特定语言版本、地区子集版本</h1><p>当我们下载 OTF 字体时，会发现下载下来的字体是以语言体系为分类命名的，如下：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202402252050159.png" alt=""></p>
+<p>此外还有一个 SubsetOTF，这个文件夹中的字体是以地区为分类命名的，如下：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202402252050251.png" alt=""></p>
+<p>这就是思源字体的两种字形分类方式，按照『特定语言版本』分类，和按照『地区子集』分类，各个分类的具体区别如下：</p>
+<h3 id="特定语言版本"><a href="#特定语言版本" class="headerlink" title="特定语言版本"></a>特定语言版本</h3><table>
+<thead>
+<tr>
+<th>分类</th>
+<th>说明</th>
+<th>字体名</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Japanese</td>
+<td>日文</td>
+<td>SourceHanSans</td>
+</tr>
+<tr>
+<td>Korean</td>
+<td>韩文</td>
+<td>SourceHanSansK</td>
+</tr>
+<tr>
+<td>SimplifiedChinese</td>
+<td>简体中文</td>
+<td>SourceHanSansSC</td>
+</tr>
+<tr>
+<td>TraditionalChinese</td>
+<td>繁体中文</td>
+<td>SourceHanSansTC</td>
+</tr>
+<tr>
+<td>TraditionalChineseHK</td>
+<td>繁体中文（香港）</td>
+<td>SourceHanSansHC</td>
+</tr>
+<tr>
+<td>特定语言版本的思源字体包含了所有地区写法的字形（字符数 65535 个），各个版本的大小一致，区别仅在于默认的语言版本不同，因此下载这个版本的字体是基本不存在『缺字』的情况的。</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>不同语言版本的字形区别很细微，借用 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/526734630">知乎 - 思源黑体版本指南</a> 文中的示例：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202402252200156.png" alt=""></p>
+<p>由于特定语言版本的字体拥有所有的字形，因此可以利用 OpenType 的 locla 特性，在能够侦测语言的环境中自动切换地区字形。举例来说，当我们在 web 页面中中，如果 html  的 <code>lang</code> 属性设置为了 <code>zh-CN</code> 那么我们字体无论使用的是 SourceHanSansK 还是 SourceHanSansTC，字形都会被切换为『简体中文』，也就是 『SourceHanSansSC』的默认字形；类似的，如果设置为了  <code>zh-HK</code>，那么字形就会被切换为『繁体中文（香港）』，也就是『TraditionalChineseHK』的默认字形；但是如果设置的 <code>lang</code> 无法被识别为一个有效的地区，如 <code>en-US</code>，那么不同的字体就会使用默认的语言版本，如 SourceHanSansSC 字体使用『简体中文』，TraditionalChineseHK 使用『繁体中文（香港）』。</p>
+<h3 id="地区子集版本"><a href="#地区子集版本" class="headerlink" title="地区子集版本"></a>地区子集版本</h3><table>
+<thead>
+<tr>
+<th>地区</th>
+<th>说明</th>
+<th>字体名</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CN</td>
+<td>简体中文（大陆）</td>
+<td>SourceHanSansCN</td>
+</tr>
+<tr>
+<td>HK</td>
+<td>繁体中文（香港）</td>
+<td>SourceHanSansHK</td>
+</tr>
+<tr>
+<td>TW</td>
+<td>繁体中文（台湾）</td>
+<td>SourceHanSansTW</td>
+</tr>
+<tr>
+<td>JP</td>
+<td>日文</td>
+<td>SourceHanSansJP</td>
+</tr>
+<tr>
+<td>KR</td>
+<td>韩文</td>
+<td>SourceHanSansKR</td>
+</tr>
+</tbody></table>
+<p>地区子集版本的字体文件仅包含对应地区的字形，比如 JP、KR 仅包含了部分汉字，HK、TW 不包含简体与日文中的部分汉字，标点符号只存在一种该地区规范的字形，示例如下（未加粗的字体表示当前地区子集的字体中不包含该字形）：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202402252218807.png" alt=""></p>
+<p>使用地区子集字体的好处是由于精简了不必要的字形，因此字体文件相对较小，比较适合在网页、嵌入式开发这类对体积敏感的场合使用。</p>
+<h1 id="4-可变字体-Variable-Fonts"><a href="#4-可变字体-Variable-Fonts" class="headerlink" title="4. 可变字体 Variable Fonts"></a>4. 可变字体 Variable Fonts</h1><p>在思源黑体的 Release 目录下，除了 OTF、OTC 字体文件之外，还有一个 Variable 文件夹（在下载资源里为 VF），该目录下的字体没有以字重作为区分，因为其利用了 OpenType 1.8 的可变字体特性。在该特性下，字体没有固定的字重，字体的粗细是可以无极调节的。在 web 中，这种字体可以使用 <code>font-weight</code> 来调整字重，而静态字体是无法通过样式来调整字重的。</p>
+<p>关于更多可变字体的说明，可参考<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8F%AF%E5%8F%98%E5%AD%97%E4%BD%93">维基百科</a>。</p>
+<h1 id="5-OpenType-与-TrueType"><a href="#5-OpenType-与-TrueType" class="headerlink" title="5. OpenType 与 TrueType"></a>5. OpenType 与 TrueType</h1><p>在前面我们介绍 OTF 与 OTC 时已经简单讲了 OpenType 是一种字体规范，当我们在 css 中声明 font-face 时在添加 OTF 字体时也会声明字体格式为 <code>oepntype</code>：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">&quot;otf-SimplifiedChinese-bold&quot;</span>;</span><br><span class="line">	<span class="attribute">src</span>: <span class="built_in">url</span>(<span class="string">&quot;./fonts/otf/SimplifiedChinese/SourceHanSansSC-Bold.otf&quot;</span>)</span><br><span class="line">	  <span class="built_in">format</span>(<span class="string">&quot;opentype&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>同时还存在另外一种字体标准 TrueType，其文件后缀格式为 <code>.ttf</code>，这两种字体标准的关系还要从起发展讲起。</p>
+<p>在最初，计算机字体都是有一个个像素点拼凑的点阵文字，随着计算机分辨率的提升以及印刷技术的发展，Adobe 发明了 PostScript，让计算机可以使用向量描述字体，使得字体变得平滑，此时的字体规范为 PostScript Type1。由于 Adobe 不愿意把 PostScript 提供给 Apple，因此 Apple 和 Microsoft 在 1989 年合作推出了 TrueType，目的就是为了替代 Adobe 的 PostScript Type1 规范。然而到了 1997 年，微软又反水找到了 Adobe 合作，推出了 OpenType 规范，并提交给了 ISO 组织，成为了国际上的通用字体规范标准发展至今。</p>
+<p>到这里你或许会觉得 OpenType 只不过是比 TrueType 更新的一个标准，但事实上还是有亿点复杂的：</p>
+<ul>
+<li>首先，OpenType 是基于 TrueType Open 的，并且被设计为向上兼容，因此可以将 OpenType 看做为 TrueType 的一个扩展标准，而并不是全新的一个标准。</li>
+<li>其次，<strong>现代化的 TrueType 字体都必须遵循 OpenType 规范</strong>，因此对于那些符合 OpenType 规范的 TrueType 字体来说，<code>.ttf</code> 格式的扩展名甚至可以换成 <code>.otf</code>，在 css 中声明 <code>font-family</code> 时对 <code>.ttf</code> 扩展的字体使用 <code>format(&#39;oepntype&#39;)</code> 也是合适的。</li>
+<li>此外，TrueType 在技术实现上使用了二次贝塞尔曲线来描述字体轮廓，而 OpenType 规范下既允许使用二次贝塞尔曲线，又允许使用  PostSCript Type 1 的三次贝塞尔曲线，但不能仅通过扩展名来区分字体轮廓使用了哪种贝塞尔曲线。</li>
+<li>最后，尽管 OpenType 更优越，TrueType 由于进入市场较早，更多人熟悉创建 TrueType 字体的过程，因此无论是资源数量还是流行度上都更占优势。</li>
+</ul>
+<p>最后附上一张图，展示了 TrueType 和 OpenType 的包含关系：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202402252339060.png" alt=""></p>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><ul>
+<li>HW：等宽字体，字符宽度都相同的电脑字体，简单理解为两个英文单次宽度等同于一个中文字符。</li>
+<li>WOFF：Web 开放字体格式，字体文件后缀为 <code>.woff</code>，采用了压缩格式，在网络传输中更占优势，其可以由 TTF 与 OTF 字体封装得来。</li>
+</ul>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://www.ziti163.com/item/2859">https://www.ziti163.com/item/2859</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/26534789">https://zhuanlan.zhihu.com/p/26534789</a></li>
+<li><a target="_blank" rel="noopener" href="https://askanydifference.com/zh-CN/difference-between-opentype-and-truetype/">https://askanydifference.com/zh-CN/difference-between-opentype-and-truetype/</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.mindscmyk.com/2021/02/26/project-knowledge-27-ttf-otf-ttc/">https://www.mindscmyk.com/2021/02/26/project-knowledge-27-ttf-otf-ttc/</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/526734630">https://zhuanlan.zhihu.com/p/526734630</a></li>
+</ul>
+</div></article><div class="post-meta__tag-list"></div><div class="addthis_inline_share_toolbox pull-right"></div><script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-62c7f2684e36ba34" async></script><nav id="pagination"><div class="prev-post pull-left"><a href="/2024/03/d7594c17df2c.html"><i class="fa fa-chevron-left">  </i><span>面试中常见的排序算法总结</span></a></div><div class="next-post pull-right"><a href="/2024/02/a59d62597b50.html"><span>数据报告海报生成图片、PDF方案的技术调研</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="disqus_thread"></div><script>var unused = null;
+var disqus_config = function () {
+  this.page.url = 'https://blog.esunr.site/2024/02/d54f000429f5.html';
+  this.page.identifier = '2024/02/d54f000429f5.html';
+  this.page.title = '带你看懂思源字体的各个版本都有什么区别';
+}
+var d = document, s = d.createElement('script');
+s.src = "https://" + 'esunr-blog' +".disqus.com/embed.js";
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);</script><script id="dsq-count-scr" src="https://esunr-blog.disqus.com/count.js" async></script></div></div><footer class="footer-bg" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div class="layout" id="footer"><div class="copyright">&copy;2017 - 2025 By EsunR</div><div class="framework-info"><span>Driven - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">hitokoto</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.0"></script><script src="/js/fancybox.js?version=1.9.0"></script><script src="/js/sidebar.js?version=1.9.0"></script><script src="/js/copy.js?version=1.9.0"></script><script src="/js/fireworks.js?version=1.9.0"></script><script src="/js/transition.js?version=1.9.0"></script><script src="/js/scroll.js?version=1.9.0"></script><script src="/js/head.js?version=1.9.0"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>Powered by</span> <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

@@ -1,0 +1,442 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="2019年GoWeb三款主流框架：Gin、Beego、Iris选型对比"><meta name="keywords" content="研究报告,Gin,Beego,Iris"><meta name="author" content="EsunR"><meta name="copyright" content="EsunR"><title>2019年GoWeb三款主流框架：Gin、Beego、Iris选型对比 | EsunR-Blog</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.9.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css?version=1.9.0"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="dns-prefetch" href="https://hm.baidu.com"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?31bd12722efcf47cb7d0d576bf150215";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-3RG97DCL3N"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-3RG97DCL3N');</script><script src="https://v1.hitokoto.cn/?encode=js&amp;charset=utf-8&amp;select=.footer_custom_text" defer></script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  hexoVersion: '6.2.0'
+} </script><meta name="generator" content="Hexo 6.2.0"></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E5%B8%B8%E8%A7%81%E6%A1%86%E6%9E%B6"><span class="toc-text">1. 常见框架</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E6%A1%86%E6%9E%B6%E6%8E%92%E5%90%8D"><span class="toc-text">1.1 框架排名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E6%A1%86%E6%9E%B6%E7%89%B9%E6%80%A7"><span class="toc-text">1.2 框架特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="toc-text">1.3 性能测试</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%BA%94%E7%94%A8"><span class="toc-text">2. 应用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E4%B8%BB%E6%9C%BA%E6%9C%8D%E5%8A%A1"><span class="toc-text">2.1 主机服务</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Gin"><span class="toc-text">Gin</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#BeeGo"><span class="toc-text">BeeGo</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Iris"><span class="toc-text">Iris</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E8%B7%AF%E7%94%B1"><span class="toc-text">2.2 路由</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Gin-1"><span class="toc-text">Gin</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#BeeGo-1"><span class="toc-text">BeeGo</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Irisi"><span class="toc-text">Irisi</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-%E4%B8%8A%E4%B8%8B%E6%96%87%E5%AF%B9%E8%B1%A1"><span class="toc-text">2.3 上下文对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C"><span class="toc-text">2.4 数据操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%9F%E7%94%9F"><span class="toc-text">原生</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Gin-2"><span class="toc-text">Gin</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#BeeGo-2"><span class="toc-text">BeeGo</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Iris-1"><span class="toc-text">Iris</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5-%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E"><span class="toc-text">2.5 模板引擎</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%9F%E7%94%9F-1"><span class="toc-text">原生</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Gin-3"><span class="toc-text">Gin</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Beego"><span class="toc-text">Beego</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Iris-2"><span class="toc-text">Iris</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-6-MVC-%E6%9E%B6%E6%9E%84"><span class="toc-text">2.6 MVC 架构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#GIn"><span class="toc-text">GIn</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Beego-1"><span class="toc-text">Beego</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Iris-3"><span class="toc-text">Iris</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://esunr-webapp.cdn.bcebos.com/blog/avatar.jpeg?x-bce-process=image/resize,m_lfit,w_200/format,f_auto" alt="avatar"></div><div class="author-info__name text-center">EsunR</div><div class="author-info__description text-center">EsunR-Blog是由EsunR维护的博客平台，分享在前端开发、Git、Vue.js、Webpack、OAuth、Linux等各个领域的知识和经验。浏览这里的深入文章，了解不同主题的见解，并及时了解行业的最新趋势和技术。</div><div class="follow-button"><a target="_blank" rel="noopener" href="https://github.com/EsunR">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">172</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">155</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">26</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">EsunR-Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"><span class="site-page social-icon search"><i class="fa fa-search"></i><span> Search</span></span></span></div><div id="post-info"><div id="post-title">2019年GoWeb三款主流框架：Gin、Beego、Iris选型对比</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-10-11</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/Go/">Go</a><span class="post-meta__separator">|</span><i class="fa fa-comment-o post-meta__icon" aria-hidden="true"></i><a href="/2019/10/add096f5a3ff.html#disqus_thread"><span class="disqus-comment-count" data-disqus-identifier="2019/10/add096f5a3ff.html"></span></a><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">4.6k</span><span class="post-meta__separator">|</span><span>Reading time: 18 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="1-常见框架"><a href="#1-常见框架" class="headerlink" title="1. 常见框架"></a>1. 常见框架</h1><h2 id="1-1-框架排名"><a href="#1-1-框架排名" class="headerlink" title="1.1 框架排名"></a>1.1 框架排名</h2><ul>
+<li>Gin          31k <strong>[Lite]</strong></li>
+<li>Beego     22k</li>
+<li>Iris           16k</li>
+<li>Echo        15k <strong>[Lite]</strong></li>
+<li>Revel       11k </li>
+<li>Martini    10k <strong>[×]</strong></li>
+<li>buffalo    5k   <strong>[Lite]</strong></li>
+</ul>
+<h2 id="1-2-框架特性"><a href="#1-2-框架特性" class="headerlink" title="1.2 框架特性"></a>1.2 框架特性</h2><p><strong>Gin：</strong></p>
+<p>Gin 是一个用 Go (Golang) 编写的 web 框架。 它是一个类似于 martini 但拥有更好性能的 API 框架, 由于 httprouter，速度提高了近 40 倍。 如果你是性能和高效的追求者, 你会爱上 Gin.</p>
+<p>快速：基于 Radix 树的路由，小内存占用。没有反射。可预测的 API 性能。</p>
+<p>支持中间件：传入的 HTTP 请求可以由一系列中间件和最终操作来处理。 例如：Logger，Authorization，GZIP，最终操作 DB。</p>
+<p>Crash 处理：Gin 可以 catch 一个发生在 HTTP 请求中的 panic 并 recover 它。这样，你的服务器将始终可用。例如，你可以向 Sentry 报告这个 panic！</p>
+<p>JSON 验证：Gin 可以解析并验证请求的 JSON，例如检查所需值的存在。</p>
+<p>路由组：更好地组织路由。是否需要授权，不同的 API 版本…… 此外，这些组可以无限制地嵌套而不会降低性能。</p>
+<p>错误管理：Gin 提供了一种方便的方法来收集 HTTP 请求期间发生的所有错误。最终，中间件可以将它们写入日志文件，数据库并通过网络发送。</p>
+<p>内置渲染：Gin 为 JSON，XML 和 HTML 渲染提供了易于使用的 API。</p>
+<p>可扩展性：新建一个中间件非常简单，去查看示例代码吧。</p>
+<p><a target="_blank" rel="noopener" href="https://gin-gonic.com/zh-cn/docs/">文档链接</a> | 文档详细度：低</p>
+<p><strong>Beego：</strong></p>
+<p>bee 工具是一个为了协助快速开发 beego 项目而创建的项目，通过 bee 您可以很容易的进行 beego 项目的创建、热编译、开发、测试、和部署。</p>
+<p>简单化：RESTful 支持、MVC 模型，可以使用 bee 工具快速地开发应用，包括监控代码修改进行热编译、自动化测试代码以及自动化打包部署。</p>
+<p>智能化：支持智能路由、智能监控，可以监控 QPS、内存消耗、CPU 使用，以及 goroutine 的运行状况，让您的线上应用尽在掌握。</p>
+<p>模块化：beego 内置了强大的模块，包括 Session、缓存操作、日志记录、配置解析、性能监控、上下文操作、ORM 模块、请求模拟等强大的模块，足以支撑你任何的应用。</p>
+<p>高性能：beego 采用了 Go 原生的 http 包来处理请求，goroutine 的并发效率足以应付大流量的 Web 应用和 API 应用，目前已经应用于大量高并发的产品中。</p>
+<p><a target="_blank" rel="noopener" href="https://beego.me/docs/mvc/view/tutorial.md">文档链接</a> | 文档详细度：高</p>
+<p><strong>Iris：</strong></p>
+<ul>
+<li>专注于高性能</li>
+<li>简单流畅的API</li>
+<li>高扩展性</li>
+<li>强大的路由和中间件生态系统<ul>
+<li>使用iris独特的表达主义路径解释器构建RESTful API</li>
+<li>动态路径参数化或通配符路由与静态路由不冲突</li>
+<li>使用重定向选项从URL中删除尾部斜杠</li>
+<li>使用虚拟主机和子域名变得容易</li>
+<li>分组API和静态或甚至动态子域名</li>
+<li>net / http和negroni-like处理程序通过iris.FromStd兼容</li>
+<li>针对任意Http请求错误 定义处理函数</li>
+<li>支持事务和回滚</li>
+<li>支持响应缓存</li>
+<li>使用简单的函数嵌入资源并与go-bindata 保持兼容</li>
+<li>mvc</li>
+</ul>
+</li>
+<li>上下文<ul>
+<li>高度可扩展的试图渲染(目前支持markdown,json,xml，jsonp等等)</li>
+<li>正文绑定器和发送HTTP响应的便捷功能</li>
+<li>限制请求正文</li>
+<li>提供静态资源或嵌入式资产</li>
+<li>本地化i18N</li>
+<li>压缩（Gzip是内置的）</li>
+</ul>
+</li>
+<li>身份验证<ul>
+<li>Basic Authentication</li>
+<li>OAuth, OAuth2 (支持27个以上的热门网站)</li>
+<li>JWT *服务器</li>
+<li>通过TLS提供服务时，自动安装和提供来自<a target="_blank" rel="noopener" href="https://letsencrypt.xn--org-ge9dz74pcw0a/">https://letsencrypt.org的证书</a></li>
+<li>默认为关闭状态</li>
+<li>在关闭，错误或中断事件时注册</li>
+<li>连接多个服务器，完全兼容 net/http#Server</li>
+</ul>
+</li>
+<li>视图系统.支持五种模板引擎 完全兼容 html/template</li>
+<li>Websocket库，其API类似于socket.io [如果你愿意，你仍然可以使用你最喜欢的]</li>
+<li>热重启</li>
+<li>Typescript集成 + Web IDE</li>
+<li>Iris是最具特色的网络框架之一</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://studyiris.com/doc/irisDoc/DynamicPathParameters.html">文档链接1</a> <a target="_blank" rel="noopener" href="https://www.studyiris.com/example/">文档链接2</a> <a target="_blank" rel="noopener" href="https://github.com/kataras/iris/wiki">wiki</a> | 文档详细度：中</p>
+<h2 id="1-3-性能测试"><a href="#1-3-性能测试" class="headerlink" title="1.3 性能测试"></a>1.3 性能测试</h2><ul>
+<li>(1)：在一定的时间内实现的总调用数，越高越好</li>
+<li>(2)：单次操作耗时（ns/op），越低越好</li>
+<li>(3)：堆内存分配 （B/op）, 越低越好</li>
+<li>(4)：每次操作的平均内存分配次数（allocs/op），越低越好</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Benchmark name</th>
+<th>(1)</th>
+<th>(2)</th>
+<th>(3)</th>
+<th>(4)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>BenchmarkGin_GithubAll</strong></td>
+<td><strong>30000</strong></td>
+<td><strong>48375</strong></td>
+<td><strong>0</strong></td>
+<td><strong>0</strong></td>
+</tr>
+<tr>
+<td>BenchmarkAce_GithubAll</td>
+<td>10000</td>
+<td>134059</td>
+<td>13792</td>
+<td>167</td>
+</tr>
+<tr>
+<td>BenchmarkBear_GithubAll</td>
+<td>5000</td>
+<td>534445</td>
+<td>86448</td>
+<td>943</td>
+</tr>
+<tr>
+<td><strong>BenchmarkBeego_GithubAll</strong></td>
+<td><strong>3000</strong></td>
+<td><strong>592444</strong></td>
+<td><strong>74705</strong></td>
+<td><strong>812</strong></td>
+</tr>
+<tr>
+<td>BenchmarkBone_GithubAll</td>
+<td>200</td>
+<td>6957308</td>
+<td>698784</td>
+<td>8453</td>
+</tr>
+<tr>
+<td>BenchmarkDenco_GithubAll</td>
+<td>10000</td>
+<td>158819</td>
+<td>20224</td>
+<td>167</td>
+</tr>
+<tr>
+<td><strong>BenchmarkEcho_GithubAll</strong></td>
+<td><strong>10000</strong></td>
+<td><strong>154700</strong></td>
+<td><strong>6496</strong></td>
+<td><strong>203</strong></td>
+</tr>
+<tr>
+<td>BenchmarkGocraftWeb_GithubAll</td>
+<td>3000</td>
+<td>570806</td>
+<td>131656</td>
+<td>1686</td>
+</tr>
+<tr>
+<td>BenchmarkGoji_GithubAll</td>
+<td>2000</td>
+<td>818034</td>
+<td>56112</td>
+<td>334</td>
+</tr>
+<tr>
+<td>BenchmarkGojiv2_GithubAll</td>
+<td>2000</td>
+<td>1213973</td>
+<td>274768</td>
+<td>3712</td>
+</tr>
+<tr>
+<td>BenchmarkGoJsonRest_GithubAll</td>
+<td>2000</td>
+<td>785796</td>
+<td>134371</td>
+<td>2737</td>
+</tr>
+<tr>
+<td>BenchmarkGoRestful_GithubAll</td>
+<td>300</td>
+<td>5238188</td>
+<td>689672</td>
+<td>4519</td>
+</tr>
+<tr>
+<td>BenchmarkGorillaMux_GithubAll</td>
+<td>100</td>
+<td>10257726</td>
+<td>211840</td>
+<td>2272</td>
+</tr>
+<tr>
+<td>BenchmarkHttpRouter_GithubAll</td>
+<td>20000</td>
+<td>105414</td>
+<td>13792</td>
+<td>167</td>
+</tr>
+<tr>
+<td>BenchmarkHttpTreeMux_GithubAll</td>
+<td>10000</td>
+<td>319934</td>
+<td>65856</td>
+<td>671</td>
+</tr>
+<tr>
+<td>BenchmarkKocha_GithubAll</td>
+<td>10000</td>
+<td>209442</td>
+<td>23304</td>
+<td>843</td>
+</tr>
+<tr>
+<td>BenchmarkLARS_GithubAll</td>
+<td>20000</td>
+<td>62565</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>BenchmarkMacaron_GithubAll</td>
+<td>2000</td>
+<td>1161270</td>
+<td>204194</td>
+<td>2000</td>
+</tr>
+<tr>
+<td><strong>BenchmarkMartini_GithubAll</strong></td>
+<td><strong>200</strong></td>
+<td><strong>9991713</strong></td>
+<td><strong>226549</strong></td>
+<td><strong>2325</strong></td>
+</tr>
+<tr>
+<td>BenchmarkPat_GithubAll</td>
+<td>200</td>
+<td>5590793</td>
+<td>1499568</td>
+<td>27435</td>
+</tr>
+<tr>
+<td>BenchmarkPossum_GithubAll</td>
+<td>10000</td>
+<td>319768</td>
+<td>84448</td>
+<td>609</td>
+</tr>
+<tr>
+<td>BenchmarkR2router_GithubAll</td>
+<td>10000</td>
+<td>305134</td>
+<td>77328</td>
+<td>979</td>
+</tr>
+<tr>
+<td>BenchmarkRivet_GithubAll</td>
+<td>10000</td>
+<td>132134</td>
+<td>16272</td>
+<td>167</td>
+</tr>
+<tr>
+<td>BenchmarkTango_GithubAll</td>
+<td>3000</td>
+<td>552754</td>
+<td>63826</td>
+<td>1618</td>
+</tr>
+<tr>
+<td>BenchmarkTigerTonic_GithubAll</td>
+<td>1000</td>
+<td>1439483</td>
+<td>239104</td>
+<td>5374</td>
+</tr>
+<tr>
+<td>BenchmarkTraffic_GithubAll</td>
+<td>100</td>
+<td>11383067</td>
+<td>2659329</td>
+<td>21848</td>
+</tr>
+<tr>
+<td>BenchmarkVulcan_GithubAll</td>
+<td>5000</td>
+<td>394253</td>
+<td>19894</td>
+<td>609</td>
+</tr>
+</tbody></table>
+<h1 id="2-应用"><a href="#2-应用" class="headerlink" title="2. 应用"></a>2. 应用</h1><h2 id="2-1-主机服务"><a href="#2-1-主机服务" class="headerlink" title="2.1 主机服务"></a>2.1 主机服务</h2><h4 id="Gin"><a href="#Gin" class="headerlink" title="Gin"></a>Gin</h4><p>Gin 拥有灵活的开发环境，在运行时可以选择默认的服务器来运行，也可以选择原生的  <code>http.ListenAndServe(&quot;:8080&quot;, router)</code> 来开启服务，这是因为其本身使用 <code>gin.Default()</code> 创建的 <code>router</code> 对象实现了 Handler 接口，这就以为着其可以选择其他的 HTTP 服务器，如 <a target="_blank" rel="noopener" href="https://github.com/fvbock/endless">fvbock/endless</a> 、 <a target="_blank" rel="noopener" href="https://github.com/braintree/manners">manners</a> 或者原生的 http.Server 内置的 Shutdown 方法进行服务重启。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">r := gin.Default()</span><br><span class="line">_ = r.Run()</span><br><span class="line"><span class="comment">// 或者启动原生服务</span></span><br><span class="line">manners.ListenAndServe(<span class="string">&quot;:8888&quot;</span>, r)</span><br></pre></td></tr></table></figure>
+
+<h4 id="BeeGo"><a href="#BeeGo" class="headerlink" title="BeeGo"></a>BeeGo</h4><p>Beego 提供了一个构建工具，有着标准的开发环境规范，可以一键生成工程目录，并在工程目录使用 <code>run</code> 指令可以直接运行项目，并且支持开发模式下的热更新。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">beego.Run()</span><br></pre></td></tr></table></figure>
+
+<h4 id="Iris"><a href="#Iris" class="headerlink" title="Iris"></a>Iris</h4><p>Iris 的主机有多种拓展功能，包括自定义监听服务、主机配置，同时也支持多主机服务。与 Gin 相似的 iris.Router与 net/http/Handler 功能兼容，它可以在任何net/http服务器上进行调整：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">app := iris.New()</span><br><span class="line">app.Run(iris.Addr(<span class="string">&quot;:8080&quot;</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或者自定义链接方式与端口号</span></span><br><span class="line">l, err := listenerCfg.NewListener(<span class="string">&quot;tcp&quot;</span>, <span class="string">&quot;:8080&quot;</span>)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    app.Logger().Fatal(err)</span><br><span class="line">&#125;</span><br><span class="line">app.Run(iris.Listener(l))</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或者启动原生服务</span></span><br><span class="line">app.Run(iris.Raw(&amp;http.Server&#123;Addr:<span class="string">&quot;:8080&quot;</span>&#125;).ListenAndServe)</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-路由"><a href="#2-2-路由" class="headerlink" title="2.2 路由"></a>2.2 路由</h2><h4 id="Gin-1"><a href="#Gin-1" class="headerlink" title="Gin"></a>Gin</h4><p>Gin 在路由系统上集成了 <a target="_blank" rel="noopener" href="https://github.com/julienschmidt/httprouter">HttpRouter</a> 拥有高性能的优势，同时拥有其丰富的功能，包括组合路由、路由验证、CORS 等。</p>
+<p>简单路由：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">r := gin.Default()</span><br><span class="line">r.GET(<span class="string">&quot;/ping&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(c *gin.Context)</span></span> &#123;</span><br><span class="line">    c.String(http.StatusOK, <span class="string">&quot;pong&quot;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>分层路由：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">someGroup := router.Group(<span class="string">&quot;/someGroup&quot;</span>) &#123;</span><br><span class="line">    someGroup.GET(<span class="string">&quot;/someGet&quot;</span>, getting)</span><br><span class="line">    someGroup.POST(<span class="string">&quot;/somePost&quot;</span>, posting)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://juejin.im/post/5cc7e726f265da03452be820">引用来源</a></p>
+<h4 id="BeeGo-1"><a href="#BeeGo-1" class="headerlink" title="BeeGo"></a>BeeGo</h4><p>BeeGo 的路由功能较为丰富，拥有基础路由、固定路由、正则路由、注解路由、namespace等多个功能，其 REST 风格性较强，且有固定的路由层规范。</p>
+<p>简单路由：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">beego.Get(<span class="string">&quot;/&quot;</span>,<span class="function"><span class="keyword">func</span><span class="params">(ctx *context.Context)</span></span>&#123;</span><br><span class="line">     ctx.Output.Body([]<span class="type">byte</span>(<span class="string">&quot;hello world&quot;</span>))</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>固定路由：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">beego.Router(<span class="string">&quot;/&quot;</span>, &amp;controllers.MainController&#123;&#125;)</span><br><span class="line">beego.Router(<span class="string">&quot;/admin&quot;</span>, &amp;admin.UserController&#123;&#125;)</span><br><span class="line">beego.Router(<span class="string">&quot;/admin/index&quot;</span>, &amp;admin.ArticleController&#123;&#125;)</span><br><span class="line">beego.Router(<span class="string">&quot;/admin/addpkg&quot;</span>, &amp;admin.AddController&#123;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>namespace（分层路由）：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//初始化 namespace</span></span><br><span class="line">ns :=</span><br><span class="line">beego.NewNamespace(<span class="string">&quot;/v1&quot;</span>,</span><br><span class="line">    beego.NSCond(<span class="function"><span class="keyword">func</span><span class="params">(ctx *context.Context)</span></span> <span class="type">bool</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> ctx.Input.Domain() == <span class="string">&quot;api.beego.me&quot;</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;),</span><br><span class="line">    beego.NSBefore(auth),</span><br><span class="line">    beego.NSGet(<span class="string">&quot;/notallowed&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(ctx *context.Context)</span></span> &#123;</span><br><span class="line">        ctx.Output.Body([]<span class="type">byte</span>(<span class="string">&quot;notAllowed&quot;</span>))</span><br><span class="line">    &#125;),</span><br><span class="line">    beego.NSRouter(<span class="string">&quot;/version&quot;</span>, &amp;AdminController&#123;&#125;, <span class="string">&quot;get:ShowAPIVersion&quot;</span>),</span><br><span class="line">    beego.NSRouter(<span class="string">&quot;/changepassword&quot;</span>, &amp;UserController&#123;&#125;),</span><br><span class="line">    beego.NSNamespace(<span class="string">&quot;/shop&quot;</span>,</span><br><span class="line">        beego.NSBefore(sentry),</span><br><span class="line">        beego.NSGet(<span class="string">&quot;/:id&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(ctx *context.Context)</span></span> &#123;</span><br><span class="line">            ctx.Output.Body([]<span class="type">byte</span>(<span class="string">&quot;notAllowed&quot;</span>))</span><br><span class="line">        &#125;),</span><br><span class="line">    ),</span><br><span class="line">    beego.NSNamespace(<span class="string">&quot;/cms&quot;</span>,</span><br><span class="line">        beego.NSInclude(</span><br><span class="line">            &amp;controllers.MainController&#123;&#125;,</span><br><span class="line">            &amp;controllers.CMSController&#123;&#125;,</span><br><span class="line">            &amp;controllers.BlockController&#123;&#125;,</span><br><span class="line">        ),</span><br><span class="line">    ),</span><br><span class="line">)</span><br><span class="line"><span class="comment">//注册 namespace</span></span><br><span class="line">beego.AddNamespace(ns)</span><br></pre></td></tr></table></figure>
+
+<h4 id="Irisi"><a href="#Irisi" class="headerlink" title="Irisi"></a>Irisi</h4><p>简单路由：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.Get(<span class="string">&quot;/&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(ctx iris.Context)</span></span> &#123;</span><br><span class="line">    ctx.HTML(<span class="string">&quot;&lt;h1&gt; Hello from /contact &lt;/h1&gt;&quot;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>分层路由：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">users := app.Party(<span class="string">&quot;/users&quot;</span>, myAuthMiddlewareHandler)</span><br><span class="line"><span class="comment">// http://localhost:8080/users/42/profile</span></span><br><span class="line">users.Get(<span class="string">&quot;/&#123;id:int&#125;/profile&quot;</span>, userProfileHandler)</span><br><span class="line"><span class="comment">// http://localhost:8080/users/inbox/1</span></span><br><span class="line">users.Get(<span class="string">&quot;/inbox/&#123;id:int&#125;&quot;</span>, userMessageHandler)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或者使用嵌套风格</span></span><br><span class="line">app.PartyFunc(<span class="string">&quot;/users&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(users iris.Party)</span></span> &#123;</span><br><span class="line">    users.Use(myAuthMiddlewareHandler)</span><br><span class="line">    <span class="comment">// http://localhost:8080/users/42/profile</span></span><br><span class="line">    users.Get(<span class="string">&quot;/&#123;id:int&#125;/profile&quot;</span>, userProfileHandler)</span><br><span class="line">    <span class="comment">// http://localhost:8080/users/messages/1</span></span><br><span class="line">    users.Get(<span class="string">&quot;/inbox/&#123;id:int&#125;&quot;</span>, userMessageHandler)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-3-上下文对象"><a href="#2-3-上下文对象" class="headerlink" title="2.3 上下文对象"></a>2.3 上下文对象</h2><p>在进行路由匹配之后，可以获取到上下文对象，三套框架都对 Context 进行了封装。</p>
+<p>Gin 与 Iris 对 context 的封装均是为其增加了必要的新功能，同时可以返回原生的 <code>http.Request</code> 对象。但 Beego 的 context 模块是对原生的 <code>http.ResponseWriter</code> 和 <code>http.Request</code> 对象进行了彻底的封装，将其分为两个部分，分别为 Input 对象与 Output 对象，对应的将常用方法进行封装，并不能调出原生的对象。</p>
+<h2 id="2-4-数据操作"><a href="#2-4-数据操作" class="headerlink" title="2.4 数据操作"></a>2.4 数据操作</h2><h4 id="原生"><a href="#原生" class="headerlink" title="原生"></a>原生</h4><p>在原生开发中，Go 支持解析 JSON 格式的数据处理能力：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 解析 JSON</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Unmarshal</span><span class="params">(data []<span class="type">byte</span>, v <span class="keyword">interface</span>&#123;&#125;)</span></span> <span class="type">error</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 生成 JSON</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Marshal</span><span class="params">(v <span class="keyword">interface</span>&#123;&#125;)</span></span> ([]<span class="type">byte</span>, <span class="type">error</span>)</span><br></pre></td></tr></table></figure>
+
+<p>如果使用 <code>simplejson</code> 可以简化 JSON 数据的操作：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">js, err := NewJson([]<span class="type">byte</span>(<span class="string">`&#123;</span></span><br><span class="line"><span class="string">    &quot;test&quot;: &#123;</span></span><br><span class="line"><span class="string">        &quot;array&quot;: [1, &quot;2&quot;, 3],</span></span><br><span class="line"><span class="string">        &quot;int&quot;: 10,</span></span><br><span class="line"><span class="string">        &quot;float&quot;: 5.150,</span></span><br><span class="line"><span class="string">        &quot;bignum&quot;: 9223372036854775807,</span></span><br><span class="line"><span class="string">        &quot;string&quot;: &quot;simplejson&quot;,</span></span><br><span class="line"><span class="string">        &quot;bool&quot;: true</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">&#125;`</span>))</span><br><span class="line"></span><br><span class="line">arr, _ := js.Get(<span class="string">&quot;test&quot;</span>).Get(<span class="string">&quot;array&quot;</span>).Array()</span><br><span class="line">i, _ := js.Get(<span class="string">&quot;test&quot;</span>).Get(<span class="string">&quot;int&quot;</span>).Int()</span><br><span class="line">ms := js.Get(<span class="string">&quot;test&quot;</span>).Get(<span class="string">&quot;string&quot;</span>).MustString()</span><br></pre></td></tr></table></figure>
+
+<h4 id="Gin-2"><a href="#Gin-2" class="headerlink" title="Gin"></a>Gin</h4><p>Gin 可以使用 <code>c.ShouldBind</code>方法，可以将参数自动绑定到 <code>struct</code>.该方法是会检查 Url 查询字符串和 POST 的数据，而且会根据 <code>content-type</code>类型，优先匹配<code>JSON</code>或者 <code>XML</code>,之后才是 <code>Form</code>。</p>
+<p>接收数据：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    route := gin.Default()</span><br><span class="line">    route.POST(<span class="string">&quot;/testing&quot;</span>, (c *gin.Context) &#123;</span><br><span class="line">        <span class="keyword">var</span> person Person <span class="comment">// 定义结构体步骤省略</span></span><br><span class="line">        <span class="comment">// 绑定到 person</span></span><br><span class="line">        <span class="keyword">if</span> c.ShouldBind(&amp;person) == <span class="literal">nil</span> &#123;</span><br><span class="line">            log.Println(person.Name)</span><br><span class="line">            log.Println(person.Address)</span><br><span class="line">            log.Println(person.Birthday)</span><br><span class="line">        &#125;</span><br><span class="line">        c.String(<span class="number">200</span>, <span class="string">&quot;Success&quot;</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">    route.Run(<span class="string">&quot;:8085&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>发送数据：</p>
+<p>Gin 输出这 JSON、 XML、 YAML 三种格式非常方便，直接使用对用方法并赋值一个结构体给它就行了。</p>
+<p>同时还可以使用<code>gin.H</code>。<code>gin.H</code> 是一个很巧妙的设计，你可以像<code>javascript</code>定义<code>json</code>一样，直接一层层写键值对，只需要在每一层加上 <code>gin.H</code>即可：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    r := gin.Default()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// gin.H 本质是 map[string]interface&#123;&#125;</span></span><br><span class="line">    r.GET(<span class="string">&quot;/someJSON&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(c *gin.Context)</span></span> &#123;</span><br><span class="line">        <span class="comment">// 会输出头格式为 application/json; charset=UTF-8 的 json 字符串</span></span><br><span class="line">        c.JSON(http.StatusOK, gin.H&#123;<span class="string">&quot;message&quot;</span>: <span class="string">&quot;hey&quot;</span>, <span class="string">&quot;status&quot;</span>: http.StatusOK&#125;)</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    r.GET(<span class="string">&quot;/moreJSON&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(c *gin.Context)</span></span> &#123;</span><br><span class="line">        <span class="comment">// 直接使用结构体定义</span></span><br><span class="line">        <span class="keyword">var</span> msg <span class="keyword">struct</span> &#123;</span><br><span class="line">            Name    <span class="type">string</span> <span class="string">`json:&quot;user&quot;`</span></span><br><span class="line">            Message <span class="type">string</span></span><br><span class="line">            Number  <span class="type">int</span></span><br><span class="line">        &#125;</span><br><span class="line">        msg.Name = <span class="string">&quot;Lena&quot;</span></span><br><span class="line">        msg.Message = <span class="string">&quot;hey&quot;</span></span><br><span class="line">        msg.Number = <span class="number">123</span></span><br><span class="line">        <span class="comment">// 会输出  &#123;&quot;user&quot;: &quot;Lena&quot;, &quot;Message&quot;: &quot;hey&quot;, &quot;Number&quot;: 123&#125;</span></span><br><span class="line">        c.JSON(http.StatusOK, msg)</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    r.GET(<span class="string">&quot;/someXML&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(c *gin.Context)</span></span> &#123;</span><br><span class="line">        <span class="comment">// 会输出头格式为 text/xml; charset=UTF-8 的 xml 字符串</span></span><br><span class="line">        c.XML(http.StatusOK, gin.H&#123;<span class="string">&quot;message&quot;</span>: <span class="string">&quot;hey&quot;</span>, <span class="string">&quot;status&quot;</span>: http.StatusOK&#125;)</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    r.GET(<span class="string">&quot;/someYAML&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(c *gin.Context)</span></span> &#123;</span><br><span class="line">        <span class="comment">// 会输出头格式为 text/yaml; charset=UTF-8 的 yaml 字符串</span></span><br><span class="line">        c.YAML(http.StatusOK, gin.H&#123;<span class="string">&quot;message&quot;</span>: <span class="string">&quot;hey&quot;</span>, <span class="string">&quot;status&quot;</span>: http.StatusOK&#125;)</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    r.Run(<span class="string">&quot;:8080&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://www.yoytang.com/go-gin-doc.html">引用来源</a></p>
+<p>Gin 支持返回的数据格式有：HTML, String，JSON， XML， YAML</p>
+<h4 id="BeeGo-2"><a href="#BeeGo-2" class="headerlink" title="BeeGo"></a>BeeGo</h4><p>Beego 对与JSON 数据处理则比较复杂，如果接受数据则需要从 <code>context.RequestBody</code> 中取出数据，之后需要使用断言解析数据，实际上，这里的处理方式与原生的是一样的，并未进行功能优化：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> body <span class="keyword">map</span>[<span class="type">string</span>]<span class="keyword">interface</span>&#123;&#125;</span><br><span class="line">_ = json.Unmarshal(ctx.Input.RequestBody, &amp;body) <span class="comment">// 将 json 数据解析到 body 变量中</span></span><br><span class="line">username := body[<span class="string">&quot;name&quot;</span>].(<span class="type">string</span>) <span class="comment">// 使用断言取出单个数据</span></span><br></pre></td></tr></table></figure>
+
+<p>对于返回一个 json 数据，BeeGo 只是将我们创建的 json 结构对象存放于 <code>context.Data</code> 下的 <code>“json”</code> 字段中，然后调用 <code>context.ServeJSON()</code> 方法时，会去获取 <code>c.Data[&quot;json&quot;]</code> 下存放的结构然后将结果转换成 json 的数据格式并发送：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> User <span class="keyword">struct</span> &#123;</span><br><span class="line">    Name <span class="type">string</span> <span class="string">`json:&quot;name&quot;`</span></span><br><span class="line">    Age  <span class="type">int</span>    <span class="string">`json:&quot;age&quot;`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *TestController)</span></span> TestData() &#123;</span><br><span class="line">	user := User&#123;</span><br><span class="line">		Name: <span class="string">&quot;huahua&quot;</span>,</span><br><span class="line">		Age:  <span class="number">18</span>,</span><br><span class="line">	&#125;</span><br><span class="line">	c.Data[<span class="string">&quot;json&quot;</span>] = user</span><br><span class="line">	c.ServeJSON()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>起始在处理 json 这一步，Beego 只是做了非常简单的替换工作，<code>context.ServeJSON()</code> 的方法调用后，取到我们设置的结构体后调用了：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(output *BeegoOutput)</span></span> JSON(data <span class="keyword">interface</span>&#123;&#125;, hasIndent <span class="type">bool</span>, encoding <span class="type">bool</span>) <span class="type">error</span></span><br></pre></td></tr></table></figure>
+
+<p>该方法将结构体通过 <code>json.Marshal()</code> 转成了 json 格式，同时又为响应报文添加了相应响应数据格式信息，之后将数据送出。</p>
+<p>此外，BeeGo 支持返回的数据类型由有：JSON、XML、JSONP</p>
+<h4 id="Iris-1"><a href="#Iris-1" class="headerlink" title="Iris"></a>Iris</h4><p>Irisi 对处理 JSON 数据的方法进行了封装，同时也拥有验证数据的能力。</p>
+<p>发送数据与前两者无差别，都是先定义结构体，然后底层使用 JSON 库的能力对 JSON 数据进行解析并赋值于创建的对象。</p>
+<p>接收数据：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">MyHandler</span><span class="params">(ctx iris.Context)</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> c Company <span class="comment">// 定义结构体省略</span></span><br><span class="line">    <span class="keyword">if</span> err := ctx.ReadJSON(&amp;c); err != <span class="literal">nil</span> &#123;</span><br><span class="line">        ctx.StatusCode(iris.StatusBadRequest)</span><br><span class="line">        ctx.WriteString(err.Error())</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    ctx.Writef(<span class="string">&quot;Received: %#+v\n&quot;</span>, c)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在对于返回数据的处理上，与 Gin 相似，采用了在 <code>iris.Context.JSON()</code> 方法可以将对象转化为 JSON 数据输出。</p>
+<p>返回数据：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">app.Get(<span class="string">&quot;/encode&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(ctx iris.Context)</span></span> &#123;</span><br><span class="line">    peter := User&#123;</span><br><span class="line">        Firstname: <span class="string">&quot;John&quot;</span>,</span><br><span class="line">        Lastname:  <span class="string">&quot;Doe&quot;</span>,</span><br><span class="line">        City:      <span class="string">&quot;Neither FBI knows!!!&quot;</span>,</span><br><span class="line">        Age:       <span class="number">25</span>,</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//手动设置内容类型: ctx.ContentType(&quot;application/javascript&quot;)</span></span><br><span class="line">    ctx.JSON(peter)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://studyiris.com/example/responseWriter/writeRest.html">引用来源</a></p>
+<p>此外，Iris 支持返回的数据格式有：binary, text, json, jsonp, xml, markdown</p>
+<h2 id="2-5-模板引擎"><a href="#2-5-模板引擎" class="headerlink" title="2.5 模板引擎"></a>2.5 模板引擎</h2><h4 id="原生-1"><a href="#原生-1" class="headerlink" title="原生"></a>原生</h4><p>Go web 能力中包含了模板引擎的支持，可以使用 <code>template</code> 包来进行模板处理，使用类似 <code>Parse</code>、<code>ParseFile</code>、<code>Execute</code> 等方法从文件或者字符串加载模板，然后执行类似下图展示的模板的 merge 操作：</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pLmxvbGkubmV0LzIwMTkvMTAvMTEvUEtnYnNWYW0xUXkzd0ZwLnBuZw?x-oss-process=image/format,png" alt=""></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">handler</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">    t := template.New(<span class="string">&quot;some template&quot;</span>) <span class="comment">// 创建一个模板</span></span><br><span class="line">    t, _ = t.ParseFiles(<span class="string">&quot;tmpl/welcome.html&quot;</span>)  <span class="comment">// 解析模板文件</span></span><br><span class="line">    user := GetUser() <span class="comment">// 获取当前用户信息</span></span><br><span class="line">    t.Execute(w, user)  <span class="comment">// 执行模板的 merger 操作</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>原生的模板引擎支持以下的能力：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">- 字段操作：`&#123;&#123;.&#125;&#125;`</span><br><span class="line">- 数据遍历： `&#123;&#123;with …&#125;&#125;…&#123;&#123;end&#125;&#125;`  `&#123;&#123;range …&#125;&#125;&#123;&#123;end&#125;&#125;`</span><br><span class="line">- 条件处理：`if ... else ...`</span><br><span class="line">- 管道符 （基于模板函数）</span><br><span class="line">- 模板函数</span><br><span class="line">- 模板变量</span><br><span class="line">- Must 操作：作用是检测模板是否正确，例如大括号是否匹配，注释是否正确的关闭，变量是否正确的书写。</span><br><span class="line"></span><br><span class="line">- 嵌套模板</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://learnku.com/docs/build-web-application-with-golang/074-template-processing/3198">引用来源</a></p>
+<h4 id="Gin-3"><a href="#Gin-3" class="headerlink" title="Gin"></a>Gin</h4><p>Gin 可以通过配置 <code>LoadHTMLGlob()</code> 或者 <code>LoadHTMLFiles()</code> 启用模板渲染，这两个方法挂载与 <code>gin.Defalut()</code> 生成的 router 对象上，用于设置，模板目录 。匹配完成后可以调用 <code>Context.HTML</code> 进行渲染和数据注入。</p>
+<p>同时，与原生不同的是，Gin 可以使用 <code>gin.H()</code> 来向模板注入 json 格式的数据，而不需要创建额外的结构体。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	router := gin.Default()</span><br><span class="line">	router.LoadHTMLGlob(<span class="string">&quot;templates/*&quot;</span>)</span><br><span class="line">	<span class="comment">//router.LoadHTMLFiles(&quot;templates/template1.html&quot;, &quot;templates/template2.html&quot;)</span></span><br><span class="line">	router.GET(<span class="string">&quot;/index&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(c *gin.Context)</span></span> &#123;</span><br><span class="line">		c.HTML(http.StatusOK, <span class="string">&quot;index.tmpl&quot;</span>, gin.H&#123;</span><br><span class="line">			<span class="string">&quot;title&quot;</span>: <span class="string">&quot;Main website&quot;</span>,</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;)</span><br><span class="line">	router.Run(<span class="string">&quot;:8080&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Gin 的模板引擎支持以下能力：</p>
+<ul>
+<li>使用自定义的 html 模板渲染</li>
+<li>自定义分隔符（模板标签）</li>
+<li>继承原生能力</li>
+</ul>
+<p>相比原生，Gin 定义模板的方式是采用创建全局模板对象（LoadHTMLGlob），然后在上下文对象中使用 <code>c.HTML</code> 去直接调用模板路径下的文件渲染模板。而原生则是在路由的上下文对象中创建 Template 对象，然后在上下文对象中渲染 Template 对象完成渲染工作。</p>
+<p><a target="_blank" rel="noopener" href="https://gin-gonic.com/zh-cn/docs/examples/html-rendering/">引用来源</a></p>
+<h4 id="Beego"><a href="#Beego" class="headerlink" title="Beego"></a>Beego</h4><p>beego 的模板处理引擎采用的是 Go 内置的 <code>html/template</code> 包进行处理，而且 beego 的模板处理逻辑是采用了缓存编译方式，也就是所有的模板会在 beego 应用启动的时候全部编译然后缓存在 map 里面，Beego 的模板引擎支持以下能力：</p>
+<ul>
+<li>自定义模板目录</li>
+<li>自动渲染</li>
+<li>自定义模板标签</li>
+<li>模板数据：模板中的数据是通过在 Controller 中 <code>this.Data</code> 获取的</li>
+<li>自定义模板名称</li>
+<li>layout 设计、LayoutSection：实际上是模板的组合、嵌套</li>
+<li>renderform</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://beego.me/docs/mvc/view/view.md">引用来源</a></p>
+<h4 id="Iris-2"><a href="#Iris-2" class="headerlink" title="Iris"></a>Iris</h4><p>Iris 自身并没有创建一种直接可用的模板引擎，而是交给用户可以选择任意一种模板引擎，且完全兼容 html/template。</p>
+<p>官方推荐使用 Hero 引擎，可以预编译<code>html</code>模板以获取代码，其拥有以下特性：</p>
+<ul>
+<li>高性能.</li>
+<li>非常易用.</li>
+<li>功能强大，支持模板继承和模板include.</li>
+<li>自动编译.</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://github.com/shiyanhui/hero/blob/master/README_CN.md">Hero 文档</a></p>
+<p>同时可以选用 quicktemplate 引擎，其拥有以下特性：</p>
+<ol>
+<li>非常快。 模板转换为Go代码然后编译</li>
+<li><code>Quicktemplate</code>语法非常接近<code>Go</code> - 在开始使用<code>quicktemplate</code>之前无需学习另一种模板语言</li>
+<li>在模板编译期间几乎所有错误都被捕获，因此生产受模板相关错误的影响较小</li>
+<li>使用方便。有关详细信息，请参阅快速入门和示例</li>
+<li>强大。任意<code>Go</code>代码可以嵌入到模板中并与模板混合。小心这个功能 - 不要从模板中查询数据库<code>and/or</code>外部资源，除非你错过<code>Go</code>中的<code>PHP</code>方 式<code>:)</code>这种功能主要用于任意数据转换</li>
+<li>易于使用的模板继承由<code>Go</code>接口提供支持。 请参阅此示例以获取详细信</li>
+<li>模板被编译为单个二进制文件，因此无需将模板文件复制到服务器</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://github.com/valyala/fasttemplate">quicktemplate 文档</a></p>
+<h2 id="2-6-MVC-架构"><a href="#2-6-MVC-架构" class="headerlink" title="2.6 MVC 架构"></a>2.6 MVC 架构</h2><h4 id="GIn"><a href="#GIn" class="headerlink" title="GIn"></a>GIn</h4><p>Gin 不支持 MVC 架构模式，需要开发者自行实现，具有一定的灵活性。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/mydevc/go-gin-mvc">Gin MVC 的实现参考</a></p>
+<h4 id="Beego-1"><a href="#Beego-1" class="headerlink" title="Beego"></a>Beego</h4><p>Beego 是标准的 MVC 框架，对 MVC 有着良好的支持，同时提供了 Model 层的 ORM 引擎。</p>
+<h4 id="Iris-3"><a href="#Iris-3" class="headerlink" title="Iris"></a>Iris</h4><p>Iris对MVC(模型视图控制器)模式有一流的支持，Iris web框架支持请求数据、模型、持久数据和以最快的速度执行的绑定。其模式流程图如下：</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pLmxvbGkubmV0LzIwMTkvMTAvMTEvdWkyVVJXUHdqU0tNZ0RKLnBuZw?x-oss-process=image/format,png" alt=""></p>
+<p><a target="_blank" rel="noopener" href="https://studyiris.com/doc/irisDoc/MoviesMVCApplication.html">Iris MVC 的实现参考</a></p>
+</div></article><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%A0%94%E7%A9%B6%E6%8A%A5%E5%91%8A/">研究报告</a><a class="post-meta__tags" href="/tags/Gin/">Gin</a><a class="post-meta__tags" href="/tags/Beego/">Beego</a><a class="post-meta__tags" href="/tags/Iris/">Iris</a></div><div class="addthis_inline_share_toolbox pull-right"></div><script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-62c7f2684e36ba34" async></script><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/10/d471872a5c16.html"><i class="fa fa-chevron-left">  </i><span>使用 alipay-sdk-nodejs 让 node 应用接入支付宝付款</span></a></div><div class="next-post pull-right"><a href="/2019/09/46ad055bb090.html"><span>BeeGo快速使用指南</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="disqus_thread"></div><script>var unused = null;
+var disqus_config = function () {
+  this.page.url = 'https://blog.esunr.site/2019/10/add096f5a3ff.html';
+  this.page.identifier = '2019/10/add096f5a3ff.html';
+  this.page.title = '2019年GoWeb三款主流框架：Gin、Beego、Iris选型对比';
+}
+var d = document, s = d.createElement('script');
+s.src = "https://" + 'esunr-blog' +".disqus.com/embed.js";
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);</script><script id="dsq-count-scr" src="https://esunr-blog.disqus.com/count.js" async></script></div></div><footer class="footer-bg" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div class="layout" id="footer"><div class="copyright">&copy;2017 - 2025 By EsunR</div><div class="framework-info"><span>Driven - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">hitokoto</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.0"></script><script src="/js/fancybox.js?version=1.9.0"></script><script src="/js/sidebar.js?version=1.9.0"></script><script src="/js/copy.js?version=1.9.0"></script><script src="/js/fireworks.js?version=1.9.0"></script><script src="/js/transition.js?version=1.9.0"></script><script src="/js/scroll.js?version=1.9.0"></script><script src="/js/head.js?version=1.9.0"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>Powered by</span> <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

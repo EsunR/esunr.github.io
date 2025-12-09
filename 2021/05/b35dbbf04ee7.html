@@ -1,0 +1,236 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="网络原理关前端面试题整理"><meta name="keywords" content="面试题"><meta name="author" content="EsunR"><meta name="copyright" content="EsunR"><title>网络原理关前端面试题整理 | EsunR-Blog</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.9.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css?version=1.9.0"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="dns-prefetch" href="https://hm.baidu.com"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?31bd12722efcf47cb7d0d576bf150215";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-3RG97DCL3N"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-3RG97DCL3N');</script><script src="https://v1.hitokoto.cn/?encode=js&amp;charset=utf-8&amp;select=.footer_custom_text" defer></script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  hexoVersion: '6.2.0'
+} </script><meta name="generator" content="Hexo 6.2.0"></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CDN-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">CDN 是什么？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP-%E6%8A%A5%E6%96%87%E7%9A%84%E6%9E%84%E6%88%90%EF%BC%8C%E4%BB%A5%E5%8F%8A%E5%B8%B8%E8%A7%81%E7%9A%84-HTTP-%E5%A4%B4%E9%83%A8%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-text">HTTP 报文的构成，以及常见的 HTTP 头部有哪些？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%B5%E8%84%91%E7%9A%84ip%E6%98%AF%E5%A6%82%E4%BD%95%E5%88%86%E9%85%8D%E7%9A%84"><span class="toc-text">电脑的ip是如何分配的</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%A8ping%E6%8C%87%E4%BB%A4%E5%BE%97%E5%88%B0%E7%9A%84%E7%99%BE%E5%BA%A6ip%E8%83%BD%E7%9B%B4%E6%8E%A5%E8%AE%BF%E9%97%AE%EF%BC%8C%E4%BD%86%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A8ping%E6%8C%87%E4%BB%A4%E5%BE%97%E5%88%B0%E7%9A%84%E7%9F%A5%E4%B9%8Eip%E4%B8%8D%E8%83%BD%E7%9B%B4%E6%8E%A5%E8%AE%BF%E9%97%AE"><span class="toc-text">用ping指令得到的百度ip能直接访问，但为什么用ping指令得到的知乎ip不能直接访问</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#http-1-1-%E4%B8%8E-1-0-%E7%9A%84%E5%8C%BA%E5%88%AB-2-0-%E6%96%B0%E5%A2%9E%E4%BA%86%E4%BB%80%E4%B9%88"><span class="toc-text">http 1.1 与 1.0 的区别 2.0 新增了什么</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%8F%E5%95%86%E7%BC%93%E5%AD%98%E3%80%81%E5%BC%BA%E7%BC%93%E5%AD%98"><span class="toc-text">协商缓存、强缓存</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://esunr-webapp.cdn.bcebos.com/blog/avatar.jpeg?x-bce-process=image/resize,m_lfit,w_200/format,f_auto" alt="avatar"></div><div class="author-info__name text-center">EsunR</div><div class="author-info__description text-center">EsunR-Blog是由EsunR维护的博客平台，分享在前端开发、Git、Vue.js、Webpack、OAuth、Linux等各个领域的知识和经验。浏览这里的深入文章，了解不同主题的见解，并及时了解行业的最新趋势和技术。</div><div class="follow-button"><a target="_blank" rel="noopener" href="https://github.com/EsunR">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">172</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">155</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">26</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">EsunR-Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"><span class="site-page social-icon search"><i class="fa fa-search"></i><span> Search</span></span></span></div><div id="post-info"><div id="post-title">网络原理关前端面试题整理</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2021-05-20</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a><span class="post-meta__separator">|</span><i class="fa fa-comment-o post-meta__icon" aria-hidden="true"></i><a href="/2021/05/b35dbbf04ee7.html#disqus_thread"><span class="disqus-comment-count" data-disqus-identifier="2021/05/b35dbbf04ee7.html"></span></a><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">1.7k</span><span class="post-meta__separator">|</span><span>Reading time: 5 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="CDN-是什么？"><a href="#CDN-是什么？" class="headerlink" title="CDN 是什么？"></a>CDN 是什么？</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/36514327/answer/1604554133">https://www.zhihu.com/question/36514327/answer/1604554133</a></p>
+</blockquote>
+<p>内容分发网络（Content Delivery Network，简称CDN）是建立并覆盖在承载网之上，由分布在不同区域的边缘节点服务器群组成的分布式网络。CDN应用广泛，支持多种行业、多种场景内容加速，例如：图片小文件、大文件下载、视音频点播、直播流媒体、全站加速、安全加速。</p>
+<h1 id="HTTP-报文的构成，以及常见的-HTTP-头部有哪些？"><a href="#HTTP-报文的构成，以及常见的-HTTP-头部有哪些？" class="headerlink" title="HTTP 报文的构成，以及常见的 HTTP 头部有哪些？"></a>HTTP 报文的构成，以及常见的 HTTP 头部有哪些？</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000010345301">https://segmentfault.com/a/1190000010345301</a></p>
+</blockquote>
+<p>HTTP请求报文包含：</p>
+<p><img src="https://i.loli.net/2021/07/20/L3TGp4XUeY91ItE.png" alt=""></p>
+<p>HTTP响应报文包含：</p>
+<p><img src="https://i.loli.net/2021/07/20/fWosAyFYUSdtbTM.png" alt=""></p>
+<p>对于请求头/响应头来说，他们又分为通用首部、请求/响应首部、实体首部：</p>
+<p>通用首部字段：</p>
+<table>
+<thead>
+<tr>
+<th>首部字段名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Cache-Control</td>
+<td>控制缓存的行为</td>
+</tr>
+<tr>
+<td>Connextion</td>
+<td>逐跳首部、连接的管理</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>创建报文的日期时间</td>
+</tr>
+<tr>
+<td>Pragma</td>
+<td>报文指令</td>
+</tr>
+<tr>
+<td>Transfer-Encoding</td>
+<td>指定报文主体的传输编码方式</td>
+</tr>
+</tbody></table>
+<p>请求首部字段</p>
+<table>
+<thead>
+<tr>
+<th>首部字段名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Accept</td>
+<td>用户代理可处理的媒体类型</td>
+</tr>
+<tr>
+<td>Accept-Charset</td>
+<td>优先的字符集</td>
+</tr>
+<tr>
+<td>Accept-Encoding</td>
+<td>优先的内容编码</td>
+</tr>
+<tr>
+<td>Accept-Language</td>
+<td>优先的语言</td>
+</tr>
+<tr>
+<td>Host</td>
+<td>指定资源所在服务器</td>
+</tr>
+<tr>
+<td>If-Match</td>
+<td>比较实体标记（ETag）</td>
+</tr>
+<tr>
+<td>If-Modified-Since</td>
+<td>比较资源的更新时间</td>
+</tr>
+<tr>
+<td>If-None-Match</td>
+<td>比较实体标记（与If-Match相反）</td>
+</tr>
+<tr>
+<td>Referer</td>
+<td>对请求中URI的原始获取方</td>
+</tr>
+<tr>
+<td>User-Agent</td>
+<td>Http客户端程序的信息</td>
+</tr>
+</tbody></table>
+<p>响应首部字段</p>
+<table>
+<thead>
+<tr>
+<th>首部字段名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Accept-Range</td>
+<td>是否接受字节范围请求</td>
+</tr>
+<tr>
+<td>ETag</td>
+<td>资源的匹配信息</td>
+</tr>
+<tr>
+<td>Location</td>
+<td>另客户端重定向至指定URI</td>
+</tr>
+<tr>
+<td>Server</td>
+<td>Http服务器的安装信息</td>
+</tr>
+<tr>
+<td>Vary</td>
+<td>代理服务器缓存的管理信息</td>
+</tr>
+</tbody></table>
+<p>实体首部字段</p>
+<blockquote>
+<p>实体首部字段，就是用来表示实体内容和要求的字段</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>首部字段名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Allow</td>
+<td>资源可支持的Http方法</td>
+</tr>
+<tr>
+<td>Content-Encoding</td>
+<td>实体主体适用的编码方式</td>
+</tr>
+<tr>
+<td>Content-Language</td>
+<td>实体主体的自然语言</td>
+</tr>
+<tr>
+<td>Content-Length</td>
+<td>实体主体的大小（字节）</td>
+</tr>
+<tr>
+<td>Content-Location</td>
+<td>替代对应资源的URI</td>
+</tr>
+<tr>
+<td>Content-Type</td>
+<td>实体主体的媒体类型</td>
+</tr>
+<tr>
+<td>Expires</td>
+<td>实体主体过期的日期时间</td>
+</tr>
+<tr>
+<td>Last-Modified</td>
+<td>资源的最后修改日期时间</td>
+</tr>
+</tbody></table>
+<p>从以上这些之外，还有比如Cookie、Set-Cookie和Content-Disposition等在其他RFC中定义的首部字段也经常被用到。</p>
+<h1 id="电脑的ip是如何分配的"><a href="#电脑的ip是如何分配的" class="headerlink" title="电脑的ip是如何分配的"></a>电脑的ip是如何分配的</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://saucer-man.com/network/43.html">https://saucer-man.com/network/43.html</a></p>
+</blockquote>
+<h1 id="用ping指令得到的百度ip能直接访问，但为什么用ping指令得到的知乎ip不能直接访问"><a href="#用ping指令得到的百度ip能直接访问，但为什么用ping指令得到的知乎ip不能直接访问" class="headerlink" title="用ping指令得到的百度ip能直接访问，但为什么用ping指令得到的知乎ip不能直接访问"></a>用ping指令得到的百度ip能直接访问，但为什么用ping指令得到的知乎ip不能直接访问</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/48724764">https://www.zhihu.com/question/48724764</a></p>
+</blockquote>
+<p>为了加快网站的访问速度，当用户访问知乎的域名后跳转到一个代理服务器上，代理服务器根据请求头的 <code>host</code> 再将请求转发到真正的知乎服务器上，再将资源返回给用户。</p>
+<p>然而通过 ping 指令 <code>ping zhihu.com</code> 得到的 ip 地址只是一个代理服务器的地址，我们用浏览器直接访问这个地址后，由于缺少了必要的请求头，代理服务器将无法得知需要将该请求转发到何处，同时代理服务器本身是不允许用户直接访问的，因此浏览器将会根据代理服务器的设置而显示不同的错误页面（如 400 Bad Request）。</p>
+<h1 id="http-1-1-与-1-0-的区别-2-0-新增了什么"><a href="#http-1-1-与-1-0-的区别-2-0-新增了什么" class="headerlink" title="http 1.1 与 1.0 的区别 2.0 新增了什么"></a>http 1.1 与 1.0 的区别 2.0 新增了什么</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903489596833800">https://juejin.cn/post/6844903489596833800</a></p>
+</blockquote>
+<p><img src="https://i.loli.net/2021/07/20/9Koe7U5wMfrhniE.png" alt=""></p>
+<p>1.0 和 1.1 的区别：</p>
+<ol>
+<li><p><strong>缓存处理</strong>，在HTTP1.0中主要使用header里的If-Modified-Since,Expires来做为缓存判断的标准，HTTP1.1则引入了更多的缓存控制策略例如Entity tag，If-Unmodified-Since, If-Match, If-None-Match等更多可供选择的缓存头来控制缓存策略。</p>
+</li>
+<li><p><strong>带宽优化及网络连接的使用</strong>，HTTP1.0中，存在一些浪费带宽的现象，例如客户端只是需要某个对象的一部分，而服务器却将整个对象送过来了，并且不支持断点续传功能，HTTP1.1则在请求头引入了range头域，它允许只请求资源的某个部分，即返回码是206（Partial Content），这样就方便了开发者自由的选择以便于充分利用带宽和连接。</p>
+</li>
+<li><p><strong>错误通知的管理</strong>，在HTTP1.1中新增了24个错误状态响应码，如409（Conflict）表示请求的资源与资源的当前状态发生冲突；410（Gone）表示服务器上的某个资源被永久性的删除。</p>
+</li>
+<li><p><strong>Host头处理</strong>，在HTTP1.0中认为每台服务器都绑定一个唯一的IP地址，因此，请求消息中的URL并没有传递主机名（hostname）。但随着虚拟主机技术的发展，在一台物理服务器上可以存在多个虚拟主机（Multi-homed Web Servers），并且它们共享一个IP地址。HTTP1.1的请求消息和响应消息都应支持Host头域，且请求消息中如果没有Host头域会报告一个错误（400 Bad Request）。</p>
+</li>
+<li><p><strong>长连接</strong>，HTTP 1.1支持长连接（PersistentConnection）和请求的流水线（Pipelining）处理，在一个TCP连接上可以传送多个HTTP请求和响应，减少了建立和关闭连接的消耗和延迟，在HTTP1.1中默认开启Connection： keep-alive，一定程度上弥补了HTTP1.0每次请求都要创建连接的缺点。</p>
+</li>
+</ol>
+<p>1.1 和 2.0 的区别：</p>
+<ol start="6">
+<li><p><strong>新的二进制格式</strong>（Binary Format），HTTP1.x的解析是基于文本。基于文本协议的格式解析存在天然缺陷，文本的表现形式有多样性，要做到健壮性考虑的场景必然很多，二进制则不同，只认0和1的组合。基于这种考虑HTTP2.0的协议解析决定采用二进制格式，实现方便且健壮。</p>
+</li>
+<li><p><strong>多路复用</strong>（MultiPlexing），即连接共享，即每一个request都是是用作连接共享机制的。一个request对应一个id，这样一个连接上可以有多个request，每个连接的request可以随机的混杂在一起，接收方可以根据request的 id将request再归属到各自不同的服务端请求里面。</p>
+</li>
+<li><p><strong>header压缩</strong>，如上文中所言，对前面提到过HTTP1.x的header带有大量信息，而且每次都要重复发送，HTTP2.0使用encoder来减少需要传输的header大小，通讯双方各自cache一份header fields表，既避免了重复header的传输，又减小了需要传输的大小。</p>
+</li>
+<li><p><strong>服务端推送</strong>（server push），同SPDY一样，HTTP2.0也具有server push功能。</p>
+</li>
+</ol>
+<h1 id="协商缓存、强缓存"><a href="#协商缓存、强缓存" class="headerlink" title="协商缓存、强缓存"></a>协商缓存、强缓存</h1><blockquote>
+<p><a href="https://blog.esunr.site/2019/11/a337085f30b7.html">https://blog.esunr.site/2019/11/a337085f30b7.html</a></p>
+</blockquote>
+</div></article><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a></div><div class="addthis_inline_share_toolbox pull-right"></div><script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-62c7f2684e36ba34" async></script><nav id="pagination"><div class="prev-post pull-left"><a href="/2021/06/bde38e098f0b.html"><i class="fa fa-chevron-left">  </i><span>温故知新,React基础Hook回顾</span></a></div><div class="next-post pull-right"><a href="/2021/05/2d8c057077e7.html"><span>Vue3新特性初探与对比</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="disqus_thread"></div><script>var unused = null;
+var disqus_config = function () {
+  this.page.url = 'https://blog.esunr.site/2021/05/b35dbbf04ee7.html';
+  this.page.identifier = '2021/05/b35dbbf04ee7.html';
+  this.page.title = '网络原理关前端面试题整理';
+}
+var d = document, s = d.createElement('script');
+s.src = "https://" + 'esunr-blog' +".disqus.com/embed.js";
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);</script><script id="dsq-count-scr" src="https://esunr-blog.disqus.com/count.js" async></script></div></div><footer class="footer-bg" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div class="layout" id="footer"><div class="copyright">&copy;2017 - 2025 By EsunR</div><div class="framework-info"><span>Driven - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">hitokoto</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.0"></script><script src="/js/fancybox.js?version=1.9.0"></script><script src="/js/sidebar.js?version=1.9.0"></script><script src="/js/copy.js?version=1.9.0"></script><script src="/js/fireworks.js?version=1.9.0"></script><script src="/js/transition.js?version=1.9.0"></script><script src="/js/scroll.js?version=1.9.0"></script><script src="/js/head.js?version=1.9.0"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>Powered by</span> <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

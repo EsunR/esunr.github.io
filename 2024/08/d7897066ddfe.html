@@ -1,0 +1,167 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="Games101 闫令琪现代计算机图形学入门学习笔记"><meta name="keywords" content="图形学,学习笔记,GAMES101"><meta name="author" content="EsunR"><meta name="copyright" content="EsunR"><title>Games101 闫令琪现代计算机图形学入门学习笔记 | EsunR-Blog</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.9.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css?version=1.9.0"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="dns-prefetch" href="https://hm.baidu.com"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?31bd12722efcf47cb7d0d576bf150215";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-3RG97DCL3N"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-3RG97DCL3N');</script><script src="https://v1.hitokoto.cn/?encode=js&amp;charset=utf-8&amp;select=.footer_custom_text" defer></script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  hexoVersion: '6.2.0'
+} </script><meta name="generator" content="Hexo 6.2.0"></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Lecture-03-%E5%8F%98%E6%8D%A2%EF%BC%88%E4%BA%8C%E7%BB%B4%E4%B8%8E%E4%B8%89%E7%BB%B4%EF%BC%89"><span class="toc-text">Lecture 03. 变换（二维与三维）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%A9%E6%94%BE"><span class="toc-text">缩放</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E8%BD%AC"><span class="toc-text">反转</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%87%E5%8F%98"><span class="toc-text">切变</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%8B%E8%BD%AC%E5%8F%98%E6%8D%A2"><span class="toc-text">旋转变换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B3%E7%A7%BB%E4%B8%8E%E9%BD%90%E6%AC%A1%E5%9D%90%E6%A0%87"><span class="toc-text">平移与齐次坐标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E6%9D%82%E5%8F%98%E6%8D%A2"><span class="toc-text">复杂变换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E7%BB%B4%E7%A9%BA%E9%97%B4%E4%B8%AD%E7%9A%84%E5%BD%A2%E5%8F%98"><span class="toc-text">三维空间中的形变</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A5%E5%85%85%EF%BC%9A%E6%97%8B%E8%BD%AC%E7%9F%A9%E9%98%B5%E7%9A%84%E9%80%86%E6%93%8D%E4%BD%9C"><span class="toc-text">补充：旋转矩阵的逆操作</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Lecture-04-%E5%8F%98%E6%8D%A2%EF%BC%88%E6%A8%A1%E5%9E%8B%E3%80%81%E8%A7%86%E5%9B%BE%E3%80%81%E6%8A%95%E5%BD%B1%EF%BC%89"><span class="toc-text">Lecture 04. 变换（模型、视图、投影）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E7%BB%B4%E5%BD%A2%E5%8F%98-%E2%80%94%E2%80%94-%E7%BC%A9%E6%94%BE%E4%B8%8E%E5%B9%B3%E7%A7%BB"><span class="toc-text">三维形变 —— 缩放与平移</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E7%BB%B4%E5%BD%A2%E5%8F%98-%E2%80%94%E2%80%94-%E6%97%8B%E8%BD%AC"><span class="toc-text">三维形变 —— 旋转</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%86%E5%9B%BE-%E7%9B%B8%E6%9C%BA%E5%8F%98%E6%8D%A2"><span class="toc-text">视图&#x2F;相机变换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A3%E4%BA%A4%E7%9B%B8%E6%9C%BA%E6%8B%8D%E6%91%84%E7%9A%84%E7%89%A9%E4%BD%93%E6%8A%95%E5%BD%B1%E5%9C%A8%E6%98%BE%E7%A4%BA%E8%AE%BE%E5%A4%87%E4%B8%8A"><span class="toc-text">正交相机拍摄的物体投影在显示设备上</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%8F%E8%A7%86%E7%9B%B8%E6%9C%BA%E6%8B%8D%E6%91%84%E7%9A%84%E7%89%A9%E4%BD%93%E6%8A%95%E5%BD%B1%E5%9C%A8%E6%98%BE%E7%A4%BA%E8%AE%BE%E5%A4%87%E4%B8%8A"><span class="toc-text">透视相机拍摄的物体投影在显示设备上</span></a></li></ol></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://esunr-webapp.cdn.bcebos.com/blog/avatar.jpeg?x-bce-process=image/resize,m_lfit,w_200/format,f_auto" alt="avatar"></div><div class="author-info__name text-center">EsunR</div><div class="author-info__description text-center">EsunR-Blog是由EsunR维护的博客平台，分享在前端开发、Git、Vue.js、Webpack、OAuth、Linux等各个领域的知识和经验。浏览这里的深入文章，了解不同主题的见解，并及时了解行业的最新趋势和技术。</div><div class="follow-button"><a target="_blank" rel="noopener" href="https://github.com/EsunR">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">172</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">155</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">26</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">EsunR-Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"><span class="site-page social-icon search"><i class="fa fa-search"></i><span> Search</span></span></span></div><div id="post-info"><div id="post-title">Games101 闫令琪现代计算机图形学入门学习笔记</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2024-08-18</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E5%89%8D%E7%AB%AF/%E5%8F%AF%E8%A7%86%E5%8C%96/">可视化</a><span class="post-meta__separator">|</span><i class="fa fa-comment-o post-meta__icon" aria-hidden="true"></i><a href="/2024/08/d7897066ddfe.html#disqus_thread"><span class="disqus-comment-count" data-disqus-identifier="2024/08/d7897066ddfe.html"></span></a><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">2.3k</span><span class="post-meta__separator">|</span><span>Reading time: 6 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="Lecture-03-变换（二维与三维）"><a href="#Lecture-03-变换（二维与三维）" class="headerlink" title="Lecture 03. 变换（二维与三维）"></a>Lecture 03. 变换（二维与三维）</h1><p><a target="_blank" rel="noopener" href="https://sites.cs.ucsb.edu/~lingqi/teaching/resources/GAMES101_Lecture_03.pdf">课件</a></p>
+<h3 id="缩放"><a href="#缩放" class="headerlink" title="缩放"></a>缩放</h3><p>缩放的数学形式表现：</p>
+<p><code>x&#39;=s*x+0*y</code> <code>y&#39;=0*x+s*y</code></p>
+<p>矩阵形式：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240818183404.png" alt="image.png|400"></p>
+<blockquote>
+<p>矩阵相乘的条件是：前一个矩阵的列数必须等于后一个矩阵的行数。在这种情况下</p>
+</blockquote>
+<h3 id="反转"><a href="#反转" class="headerlink" title="反转"></a>反转</h3><p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240818195950.png" alt="image.png|400"></p>
+<h3 id="切变"><a href="#切变" class="headerlink" title="切变"></a>切变</h3><p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240818200309.png" alt="image.png|400"></p>
+<h3 id="旋转变换"><a href="#旋转变换" class="headerlink" title="旋转变换"></a>旋转变换</h3><p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240818200441.png" alt="image.png|400"></p>
+<p>推导过程：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240818200814.png" alt="image.png|400"></p>
+<p>注意：旋转的中心永远是坐标轴的原点：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240818203235.png" alt="image.png|400"></p>
+<h3 id="平移与齐次坐标"><a href="#平移与齐次坐标" class="headerlink" title="平移与齐次坐标"></a>平移与齐次坐标</h3><p>平移无法直接用矩阵相乘的形式来表达：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240818201050.png" alt="image.png|400"></p>
+<p>虽然我们可以通过矩阵相乘再相加的方式来表示（这种叫做<strong>仿射变换</strong>）平移，但这也就意为这这个变化不是线性变化了：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240818201206.png" alt="image.png|400"></p>
+<p>齐次坐标通过增加一个纬度的方式来解决了这个问题：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240818201646.png" alt="image.png|400"></p>
+<p>三维坐标中的点可以映射在二维坐标中：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240818202225.png" alt="image.png|400"></p>
+<p>仿射变换转为齐次坐标的方式，tx、ty 代表平移 ：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240818202335.png" alt="image.png|400"></p>
+<p>二维的变换都可以改写为齐次坐标，他们的意义是不会因为增加了一个纬度而改变的：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240818202500.png" alt="image.png|400"></p>
+<h3 id="复杂变换"><a href="#复杂变换" class="headerlink" title="复杂变换"></a>复杂变换</h3><p>使用矩阵相乘可以进行复杂的图形变换，但是相乘的顺序很重要：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240818203410.png" alt="image.png|400"></p>
+<p>形变顺序在矩阵相乘公式中是<strong>从左到右运算的</strong>，因此先旋转后平移的矩阵表达式为：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240818203535.png" alt="image.png|400"></p>
+<p>再举一个例子，如果想要改变图形的旋转中心，就可以先将其移动到原点，进行旋转后，再将其移动到原来的位置：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240818204000.png" alt="image.png|400"></p>
+<h3 id="三维空间中的形变"><a href="#三维空间中的形变" class="headerlink" title="三维空间中的形变"></a>三维空间中的形变</h3><p>相同的，在三维空间中如果发生了平移操作，也要转化为齐次坐标进行描述：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240818204156.png" alt="image.png|400"></p>
+<p>三维空间中使用齐次坐标描述仿射变换：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240818204300.png" alt="image.png|400"></p>
+<blockquote>
+<p>上面的公式描述为先进行线性变换，再平移</p>
+</blockquote>
+<h3 id="补充：旋转矩阵的逆操作"><a href="#补充：旋转矩阵的逆操作" class="headerlink" title="补充：旋转矩阵的逆操作"></a>补充：旋转矩阵的逆操作</h3><p>对于旋转操作来说，如果想要旋转负的 θ 角（也就是逆操作），则要将 sinθ 进行取反，取反后的矩阵就正好是原矩阵的转置矩阵。</p>
+<p>因此，我们可以说：在旋转里面，它的逆就等于旋转矩阵的转置：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240818213206.png" alt="image.png|400"></p>
+<p>在数学上，如果一个矩阵的逆等于它的转置，这个矩阵叫做正交矩阵。</p>
+<h1 id="Lecture-04-变换（模型、视图、投影）"><a href="#Lecture-04-变换（模型、视图、投影）" class="headerlink" title="Lecture 04. 变换（模型、视图、投影）"></a>Lecture 04. 变换（模型、视图、投影）</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1X7411F744?p=4&vd_source=b233b2041b0c7ce85a2c9111063e461f">视频</a></li>
+<li><a target="_blank" rel="noopener" href="https://sites.cs.ucsb.edu/~lingqi/teaching/resources/GAMES101_Lecture_04.pdf">课件</a></li>
+</ul>
+<h3 id="三维形变-——-缩放与平移"><a href="#三维形变-——-缩放与平移" class="headerlink" title="三维形变 —— 缩放与平移"></a>三维形变 —— 缩放与平移</h3><p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240818214538.png" alt="image.png|400"></p>
+<h3 id="三维形变-——-旋转"><a href="#三维形变-——-旋转" class="headerlink" title="三维形变 —— 旋转"></a>三维形变 —— 旋转</h3><p>三维旋转比较复杂，我们可以拆分为单独绕某个轴进行旋转：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240818214838.png" alt="image.png|230"></p>
+<p>绕 x 轴旋转相当于 x 轴的坐标不变，所以与 x 相乘的第一行为 [1 0 0 0]：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240818214813.png" alt="image.png|400"></p>
+<p>相同的，绕 z 轴旋转就是 z 轴坐标对应相乘的矩阵行就是 [0 0 1 0]：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240818215416.png" alt="image.png|400"></p>
+<p>绕 y 轴旋转需要注意，sinα 的取值是负的，这是因为 xyz 的顺序决定的：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240818215625.png" alt="image.png|400"></p>
+<p>任意的三维旋转都可以写成绕 x 轴、绕 z 轴、绕 y 轴的旋转的组合：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240818220153.png" alt="image.png|400"></p>
+<p>三个轴的旋转量分别是 α、β、γ，数学上将其称之为<strong>欧拉角</strong>。</p>
+<p>三个轴的旋转行为分别被称为 roll、yaw、pitch：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240818220345.png" alt="image.png|400"></p>
+<p>使用<strong>罗德里格斯旋转公式</strong>可以直接求得在三维空间里的向量绕着某个轴 n 旋转 α 角度后得到的最终向量，而不必将旋转进行 x、y、z 轴上的拆分：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240818220833.png" alt="image.png|400"></p>
+<h3 id="视图-相机变换"><a href="#视图-相机变换" class="headerlink" title="视图/相机变换"></a>视图/相机变换</h3><p>首先要定义相机的相关向量：</p>
+<ul>
+<li>相机的位置使用向量 e；</li>
+<li>相机的朝向使用向量 h；</li>
+<li>由于相机自身可能有旋转角度，因此我们使用一个“向上向量” t 来表示相机的自身旋转状态；</li>
+</ul>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240818223058.png" alt="image.png|400"></p>
+<p>由于相机和被摄物体之间共同发生了旋转就相当于没有发生旋转，因此我们规定相机始终在世界原点，并且相机的初始朝向朝着 Z 轴的负方向（这是为了操作方便而规定的）：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240818223520.png" alt="image.png|400"></p>
+<p>将相机的向量规范为世界坐标的过程：</p>
+<ol>
+<li>将向量 e 放置到世界坐标的原点；</li>
+<li>旋转向量 g 对其到坐标轴的 z 轴；</li>
+<li>旋转向量 t 对其到坐标轴的 y 轴；</li>
+<li>旋转后向量 g x  t 的结果就是 z 轴喽；</li>
+</ol>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240818224417.png" alt="image.png|400"></p>
+<p>具体过程如下：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240818224805.png" alt="image.png|500"></p>
+<p>这里需要注意一下，由于将任意的轴旋转到一个规范化的轴上（向量 g 旋转到 -Z，向量 t 旋转到 Y， g x t 旋转到 X）的这一过程很不好描述，但是将规范化的轴（这个轴可以使用向量来表示，比如  (1,0,0)  表示 X 轴）旋转到某一向量上是比较好描述的，因此我们可以先求出后者。有因为旋转矩阵是一个正交矩阵，它的转置矩阵即是它的逆矩阵，这样我们就可以得到任意旋转轴到规范化轴上的旋转矩阵了。</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wbaoqing/p/5422974.html">关联</a></p>
+<h3 id="正交相机拍摄的物体投影在显示设备上"><a href="#正交相机拍摄的物体投影在显示设备上" class="headerlink" title="正交相机拍摄的物体投影在显示设备上"></a>正交相机拍摄的物体投影在显示设备上</h3><p>正交投影和透视投影如下：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240818230302.png" alt="image.png|400"></p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240818230515.png" alt="image.png|400"></p>
+<p>正交投影的点线都是平行的，大多被用于工程视图，但是我们正常视角下都应该是透视投影。</p>
+<p>对于正交投影来说，丢弃 Z 轴即可得到投影的结果：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240818230740.png" alt="image.png|400"></p>
+<p>不管 x、y 的范围有多大，都将其归一化到 [-1, 1] 的取值范围内，这是约定俗成的，为了方便后续的计算。为了实现归一化，空间中的物体也要做相对应的缩放，其过程为先将物体移到原点，然后对物体缩放到 [-1, 1] 之间：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240818231802.png" alt="image.png|400"></p>
+<blockquote>
+<p>在为了归一化而缩放过程中，可能会导致原有的物体被拉伸，如把原本的一个长方体空间拉伸成一个 1:1 的立方体，那么空间里的物体也会被响应的拉伸，最后完成时还要进行视口的还原。</p>
+</blockquote>
+<p>数学表达如下：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240818232914.png" alt="image.png|400"></p>
+<h3 id="透视相机拍摄的物体投影在显示设备上"><a href="#透视相机拍摄的物体投影在显示设备上" class="headerlink" title="透视相机拍摄的物体投影在显示设备上"></a>透视相机拍摄的物体投影在显示设备上</h3><p>在进行前，我们先回忆一下齐次坐标的性质，在齐次坐标中，<code>(x, y, z, 1)</code> 和 <code>(kx, ky, kz, k != 0)</code> 都表示同一个点，那么 <code>(xz, yz, z², z != 0)</code> 这个齐次坐标在三维空间中同样能表示 <code>(x, y, z)</code>。</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240818234709.png" alt="image.png|400"></p>
+<p>我们前面已经知道了如何求正交相机的投影，那么对于透视相机来说，我们只要将透视相机的空间压缩为正交相机的空间，那么后续的过程都一样了：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240818235418.png" alt="image.png|400"></p>
+<p>根据相似三角形定理，远平面上的点映射到近平面上的点的坐标，就等于相机距离近平面的距离、与相机距离远平面的距离的比值，与原坐标相乘：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240819000004.png" alt="image.png|400"></p>
+<p>坐标点用齐次坐标表示后，可以通过上面得到的公式，得到一个透视空间被压缩为正交空间后的新的坐标，我们可以得到新的坐标的 x 和 y 值，但是无法得到转化后的 z 值。</p>
+<blockquote>
+<p>为什么 z 是 unknown ？</p>
+<ul>
+<li>挤压之后原本在Z方向上均匀分布的点将变得不均匀，疏密程度会发生变化</li>
+<li>各位看清楚，这个相似三角形并不平行于yoz所在平面，n，z分别代表原点到对应点的距离而不是z值！这个相似三角形和z值完全没有关系自然得不到z值！！！</li>
+</ul>
+</blockquote>
+<p>我们可以先将齐次坐标乘以 z，得到一个比较好处理的齐次坐标：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240819001125.png" alt="image.png|400"></p>
+<p>根据结果，我们可以反推出来将透视空间转为正交空间的投影矩阵：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240819002027.png" alt="image.png|400"></p>
+<p>为了求出矩阵的第三行，我们需要利用这个变换过程中的特性：</p>
+<ul>
+<li>任何近平面的点进过转换后，z 轴坐标不会发生改变；</li>
+<li>任何远平面的点经过转换后，z 轴的坐标同样不会发生改变；</li>
+</ul>
+<p>那么我们就可以取近平面上的某一点 (x, y, n)，它的其次坐标为 (x, y, n, 1)，经过变换后的点仍为 (x, y, n, 1)，利用齐次坐标的特性，将其所有项都乘以 n 后得到 (nx, ny, n², n)：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240819005932.png" alt="image.png|167"></p>
+<p>那么我们就可以得到：</p>
+<p>M x (x, y, z, 1) = (nx, ny, n², n)</p>
+<p>进一步我们就可以假设我们要求的矩阵第三行为 [0 0 A B]（n² 与 xy 没有关系，所以与 xy 相乘的数必定是 0）：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240819010210.png" alt="image.png|400"></p>
+<p>进一步计算后得到计算公式：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240819004302.png" alt="image.png|400"></p>
+<p>但是具体的 A、B 是什么我们还未知，可能是 (n, 0) 也可能是 (0, n²)。此时我们还要利用另外一个特性，那就是远平面中心的点在经过转换后，z 轴坐标是不变的，假设这个点是 (0, 0, f)，那么转化为其次坐标后，我们就可以得到公式：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240819004315.png" alt="image.png|400"></p>
+<p>最终得出结果：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/20240819004422.png" alt="image.png|400"></p>
+<p>f 代表近平面的中心点到远平面的中心点之间的距离。</p>
+</div></article><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%9B%BE%E5%BD%A2%E5%AD%A6/">图形学</a><a class="post-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a><a class="post-meta__tags" href="/tags/GAMES101/">GAMES101</a></div><div class="addthis_inline_share_toolbox pull-right"></div><script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-62c7f2684e36ba34" async></script><nav id="pagination"><div class="prev-post pull-left"><a href="/2024/08/8d22b257cdff.html"><i class="fa fa-chevron-left">  </i><span>线性代数的本质</span></a></div><div class="next-post pull-right"><a href="/2024/08/ddeae8544671.html"><span>如何在 CJS 中使用 ES Module</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="disqus_thread"></div><script>var unused = null;
+var disqus_config = function () {
+  this.page.url = 'https://blog.esunr.site/2024/08/d7897066ddfe.html';
+  this.page.identifier = '2024/08/d7897066ddfe.html';
+  this.page.title = 'Games101 闫令琪现代计算机图形学入门学习笔记';
+}
+var d = document, s = d.createElement('script');
+s.src = "https://" + 'esunr-blog' +".disqus.com/embed.js";
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);</script><script id="dsq-count-scr" src="https://esunr-blog.disqus.com/count.js" async></script></div></div><footer class="footer-bg" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div class="layout" id="footer"><div class="copyright">&copy;2017 - 2025 By EsunR</div><div class="framework-info"><span>Driven - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">hitokoto</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.0"></script><script src="/js/fancybox.js?version=1.9.0"></script><script src="/js/sidebar.js?version=1.9.0"></script><script src="/js/copy.js?version=1.9.0"></script><script src="/js/fireworks.js?version=1.9.0"></script><script src="/js/transition.js?version=1.9.0"></script><script src="/js/scroll.js?version=1.9.0"></script><script src="/js/head.js?version=1.9.0"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>Powered by</span> <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

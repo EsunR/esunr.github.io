@@ -1,0 +1,124 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="整理浏览器的自动播放策略"><meta name="keywords" content="HTML5,浏览器"><meta name="author" content="EsunR"><meta name="copyright" content="EsunR"><title>整理浏览器的自动播放策略 | EsunR-Blog</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.9.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css?version=1.9.0"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="dns-prefetch" href="https://hm.baidu.com"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?31bd12722efcf47cb7d0d576bf150215";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-3RG97DCL3N"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-3RG97DCL3N');</script><script src="https://v1.hitokoto.cn/?encode=js&amp;charset=utf-8&amp;select=.footer_custom_text" defer></script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  hexoVersion: '6.2.0'
+} </script><meta name="generator" content="Hexo 6.2.0"></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Chrome-%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E8%87%AA%E5%8A%A8%E6%92%AD%E6%94%BE%E7%AD%96%E7%95%A5"><span class="toc-text">1. Chrome 浏览器的自动播放策略</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%BE%AE%E4%BF%A1%E5%86%85%E7%BD%AE%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%AD%E8%87%AA%E5%8A%A8%E6%92%AD%E6%94%BE"><span class="toc-text">2. 微信内置浏览器中自动播放</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E5%A4%B8%E5%85%8B%E7%9A%84%E8%87%AA%E5%8A%A8%E6%92%AD%E6%94%BE%E7%AD%96%E7%95%A5"><span class="toc-text">3. 夸克的自动播放策略</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-UC"><span class="toc-text">4. UC</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E7%99%BE%E5%BA%A6-APP"><span class="toc-text">4. 百度 APP</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://esunr-webapp.cdn.bcebos.com/blog/avatar.jpeg?x-bce-process=image/resize,m_lfit,w_200/format,f_auto" alt="avatar"></div><div class="author-info__name text-center">EsunR</div><div class="author-info__description text-center">EsunR-Blog是由EsunR维护的博客平台，分享在前端开发、Git、Vue.js、Webpack、OAuth、Linux等各个领域的知识和经验。浏览这里的深入文章，了解不同主题的见解，并及时了解行业的最新趋势和技术。</div><div class="follow-button"><a target="_blank" rel="noopener" href="https://github.com/EsunR">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">172</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">155</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">26</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">EsunR-Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"><span class="site-page social-icon search"><i class="fa fa-search"></i><span> Search</span></span></span></div><div id="post-info"><div id="post-title">整理浏览器的自动播放策略</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2025-03-27</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="post-meta__separator">|</span><i class="fa fa-comment-o post-meta__icon" aria-hidden="true"></i><a href="/2025/03/d7e879038666.html#disqus_thread"><span class="disqus-comment-count" data-disqus-identifier="2025/03/d7e879038666.html"></span></a><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">1.5k</span><span class="post-meta__separator">|</span><span>Reading time: 5 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="1-Chrome-浏览器的自动播放策略"><a href="#1-Chrome-浏览器的自动播放策略" class="headerlink" title="1. Chrome 浏览器的自动播放策略"></a>1. Chrome 浏览器的自动播放策略</h1><blockquote>
+<p>我们将 Chrome 的自动播放策略视为标准策略，与其有出入的我们在文章中会重点提示。</p>
+</blockquote>
+<p>Chrome 66 之后的版本中，只有静音的自动播放是被允许的：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">vide</span> <span class="attr">src</span>=<span class="string">&quot;xxx&quot;</span> <span class="attr">muted</span> <span class="attr">autoplay</span>&gt;</span><span class="tag">&lt;/<span class="name">vide</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>此外出现以下几种情况时，有声的自动播放是被允许的：</p>
+<p>当用户与页面有交互后，可以调用 <code>video.play()</code> 方法来播放视频。或者在交互函数中创建的视频元素，此时创建的视频允许有声自动播放，比如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">onButtonClick</span>(<span class="params"></span>) &#123;</span><br><span class="line">	<span class="keyword">const</span> testContainer = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;#test-container&quot;</span>);</span><br><span class="line">	<span class="keyword">const</span> video = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&quot;video&quot;</span>);</span><br><span class="line">	video.<span class="property">id</span> = <span class="string">&quot;test-video&quot;</span>;</span><br><span class="line">	video.<span class="property">src</span> = <span class="string">&quot;https://b2b-web-vr.cdn.bcebos.com/aichuman/test3/cd0c8a3435c025410a9f0f15b64bce8b.mp4&quot;</span>;</span><br><span class="line">	video.<span class="property">autoplay</span> = <span class="literal">true</span>;</span><br><span class="line">	video.<span class="property">controls</span> = <span class="literal">true</span>;</span><br><span class="line">	testContainer.<span class="title function_">appendChild</span>(video);</span><br><span class="line">	video.<span class="title function_">play</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当网站的“媒体互动指数”超过了阈值，这通常表示用户之前在该网站上曾播放过有声视频，这时视频的有声自动播放是被允许的。</p>
+<p>用户在移动设备上用户将网站添加到主屏幕，或者在桌面上安装了 PWA。</p>
+<h1 id="2-微信内置浏览器中自动播放"><a href="#2-微信内置浏览器中自动播放" class="headerlink" title="2. 微信内置浏览器中自动播放"></a>2. 微信内置浏览器中自动播放</h1><p>在 IOS 微信的内置浏览器中，视频即使是静音状态也无法自动播放，甚至连视频的 <code>loadedmetadata</code> 事件也不会自动触发（在普通浏览器中视频加载出之后即使没有自动播放，<code>loadedmetadata</code> 事件也应该会触发），这就会导致一些视频库，如 YYEVA 的执行失败。</p>
+<p>解决方案：使用 <code>WeixinJSBridgeReady</code> 的回调。</p>
+<p>在微信内置浏览器中，<code>WeixinJSBridgeReady</code> 表示微信提供的 JS bridge 加载完成，在其回调中创建的视频是允许自动播放的，或者直接在其回调中调用视频的 <code>play()</code> 方法也是被允许的，同时这时<strong>视频即使没有设置静音播放也能成功自动播放</strong>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> container = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;#test-container&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> video = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&quot;video&quot;</span>);</span><br><span class="line">video.<span class="property">src</span> = <span class="string">&quot;https://b2b-web-vr.cdn.bcebos.com/aichuman/test3/cd0c8a3435c025410a9f0f15b64bce8b.mp4&quot;</span>;</span><br><span class="line">video.<span class="property">autoplay</span> = <span class="literal">true</span>;</span><br><span class="line">video.<span class="property">controls</span> = <span class="literal">true</span>;</span><br><span class="line">video.<span class="property">playsinline</span> = <span class="literal">true</span></span><br><span class="line"><span class="comment">// video.muted = true; // 即使视频不设置静音太</span></span><br><span class="line"></span><br><span class="line">container.<span class="title function_">appendChild</span>(video);</span><br><span class="line"></span><br><span class="line">video.<span class="title function_">addEventListener</span>(<span class="string">&quot;loadedmetadata&quot;</span>, <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">	<span class="variable language_">console</span>.<span class="title function_">log</span>(</span><br><span class="line">		<span class="string">&quot;The duration and dimensions of the media and tracks are now known.&quot;</span>,</span><br><span class="line">	);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">doPlay</span>(<span class="params"></span>) &#123;</span><br><span class="line">	<span class="title class_">WeixinJSBridge</span>.<span class="title function_">invoke</span>(<span class="string">&#x27;getNetworkType&#x27;</span>, &#123;&#125;, <span class="keyword">function</span> (<span class="params">e</span>) &#123;</span><br><span class="line">		<span class="comment">// 必须在 WeixinJSBridge 的回调函数中调用 `video.play()` 才生效，这是微信的限制</span></span><br><span class="line">		video.<span class="title function_">play</span>();</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在 WeixinJSBridge 加载成功后直接播放</span></span><br><span class="line"><span class="keyword">if</span> (<span class="variable language_">window</span>.<span class="property">WeixinJSBridge</span>) &#123;</span><br><span class="line">	<span class="title function_">doPlay</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 否则，等 WeixinJSBridge 加载成功</span></span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">	<span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;WeixinJSBridgeReady&#x27;</span>, <span class="function">()=&gt;</span>&#123;</span><br><span class="line">		<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;on WeixinJSBridgeReady&quot;</span>)</span><br><span class="line">		<span class="title function_">doPlay</span>()</span><br><span class="line">		<span class="comment">// 你也可以直接在这里调用 video.play()</span></span><br><span class="line">	&#125;, <span class="literal">false</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>或者控制页面中已有的 video 元素：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> video = docuemnt.<span class="title function_">querySelector</span>(<span class="string">&quot;#video&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">doPlay</span>(<span class="params"></span>) &#123;</span><br><span class="line">	<span class="title class_">WeixinJSBridge</span>.<span class="title function_">invoke</span>(<span class="string">&#x27;getNetworkType&#x27;</span>, &#123;&#125;, <span class="keyword">function</span> (<span class="params">e</span>) &#123;</span><br><span class="line">		video.<span class="title function_">play</span>();</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="variable language_">window</span>.<span class="property">WeixinJSBridge</span>) &#123;</span><br><span class="line">	<span class="title function_">doPlay</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">	<span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;WeixinJSBridgeReady&#x27;</span>, <span class="function">()=&gt;</span>&#123;</span><br><span class="line">		<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;on WeixinJSBridgeReady&quot;</span>)</span><br><span class="line">		<span class="title function_">doPlay</span>()</span><br><span class="line">	&#125;, <span class="literal">false</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在 Android 的微信浏览器中同样无法自动播放，并且 <code>WeixinJSBridgeReady</code> 并不会被触发，因此我们没办法进行自动播放（参考了多个网站，都没有在微信做自动播放），只能引导用户手动播放。</p>
+<h1 id="3-夸克的自动播放策略"><a href="#3-夸克的自动播放策略" class="headerlink" title="3. 夸克的自动播放策略"></a>3. 夸克的自动播放策略</h1><p>在 IOS 下：</p>
+<ul>
+<li>视频播放器会被拦截</li>
+<li>静音和非静音视频均不允许自动播放；</li>
+<li>muted 的设置是无效的，即使后续用户播放了视频，也是带有声音的；</li>
+<li>JS 可以直接调用 <code>video.play()</code> 来播放视频，无需用户交互；</li>
+<li>loop 无效；</li>
+<li>多音频和视频播放：<ul>
+<li>有声视频和音频之间会互相暂停；</li>
+<li>被迫暂停后不会触发 pause 事件；</li>
+</ul>
+</li>
+</ul>
+<p>在 Android 下：</p>
+<ul>
+<li>视频播放器会被拦截，yyeva 失效；</li>
+<li>符合标准策略；</li>
+<li>多音频和视频播放：<ul>
+<li>有声视频和音频之间会互相暂停；</li>
+<li>被迫暂停后会触发 pause 事件；</li>
+</ul>
+</li>
+</ul>
+<h1 id="4-UC"><a href="#4-UC" class="headerlink" title="4. UC"></a>4. UC</h1><p>在 iOS 下：</p>
+<ul>
+<li>视频播放器会被拦截；</li>
+<li>静音和非静音视频均不允许自动播放；</li>
+<li>muted 的设置是无效的，即使后续用户播放了视频，也是带有声音的；</li>
+<li>JS 直接调用 <code>video.play()</code> 没有触发报错；</li>
+<li>多音频和视频播放：<ul>
+<li>当一个视频在播放中时，播放另一个视频时会触发 JS 报错；</li>
+<li>当视频在播放中时播放音频，视频会被暂停，反之亦然；</li>
+<li>视频被迫暂停后会触发 pause 事件；</li>
+</ul>
+</li>
+</ul>
+<p>在 Android 下：</p>
+<ul>
+<li>可以使用 <code>renderer=&quot;standard&quot;</code> 防止播放器被浏览器拦截；</li>
+<li>符合标准策略；</li>
+<li>多音频和视频播放：<ul>
+<li>同一个页面如果存在多个音频或视频，其中一个播放后，其他的视频会被暂停，并且不会触发 pause 事件，无论是否有声(yyeva 在播放中会出现突然暂停但是语音仍播放的情况)；</li>
+</ul>
+</li>
+</ul>
+<h1 id="4-百度-APP"><a href="#4-百度-APP" class="headerlink" title="4. 百度 APP"></a>4. 百度 APP</h1><p>在 iOS 下：</p>
+<ul>
+<li>即使视频不静音也能自动播放；</li>
+<li>可以直接在 JS 中调用 <code>video.play()</code>；</li>
+<li>多音频和视频播放：<ul>
+<li>有声视频点击播放，或者出发循环播放时，会暂停所有音频的播放；</li>
+<li>音频的播放不会打断有声视频的播放；</li>
+<li>无声视频和音频之间不会互相干扰播放状态；</li>
+<li>多个有声视频同时播放时，当前播放的有声视频会暂停其他视频的播放；</li>
+<li>视频被迫暂停时会触发 pause 事件；</li>
+</ul>
+</li>
+</ul>
+<p>在 Android 下：</p>
+<ul>
+<li>即使视频不静音也能自动播放；</li>
+<li>可以直接在 JS 中调用 <code>video.play()</code>；</li>
+<li>多音频和视频播放：<ul>
+<li>当多个有声视频同时播放时，最新播放的有声视频会暂停上一个有声视频；</li>
+<li>当视频为 muted 时，视频之间的播放不受影响，即使用户手动将 control 上的静音按钮取消，也仍然能同时播放多个有声视频；</li>
+<li>音频会暂停有声视频的播放，无声视频不受影响；</li>
+</ul>
+</li>
+</ul>
+<p>yyeva 卡住的根因：多个视频同时加载</p>
+</div></article><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/HTML5/">HTML5</a><a class="post-meta__tags" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a></div><div class="addthis_inline_share_toolbox pull-right"></div><script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-62c7f2684e36ba34" async></script><nav id="pagination"><div class="prev-post pull-left"><a href="/2025/03/86472799492a.html"><i class="fa fa-chevron-left">  </i><span>常用在线直播协议的对比与介绍</span></a></div><div class="next-post pull-right"><a href="/2025/03/e7b781889bd1.html"><span>家庭网络开启 IPv6 指南</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="disqus_thread"></div><script>var unused = null;
+var disqus_config = function () {
+  this.page.url = 'https://blog.esunr.site/2025/03/d7e879038666.html';
+  this.page.identifier = '2025/03/d7e879038666.html';
+  this.page.title = '整理浏览器的自动播放策略';
+}
+var d = document, s = d.createElement('script');
+s.src = "https://" + 'esunr-blog' +".disqus.com/embed.js";
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);</script><script id="dsq-count-scr" src="https://esunr-blog.disqus.com/count.js" async></script></div></div><footer class="footer-bg" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div class="layout" id="footer"><div class="copyright">&copy;2017 - 2025 By EsunR</div><div class="framework-info"><span>Driven - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">hitokoto</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.0"></script><script src="/js/fancybox.js?version=1.9.0"></script><script src="/js/sidebar.js?version=1.9.0"></script><script src="/js/copy.js?version=1.9.0"></script><script src="/js/fireworks.js?version=1.9.0"></script><script src="/js/transition.js?version=1.9.0"></script><script src="/js/scroll.js?version=1.9.0"></script><script src="/js/head.js?version=1.9.0"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>Powered by</span> <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

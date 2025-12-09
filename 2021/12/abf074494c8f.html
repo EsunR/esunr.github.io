@@ -1,0 +1,121 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="不花一分钱，把老旧安卓手机改为Linux服务器，并实现内网穿透"><meta name="keywords" content="Linux"><meta name="author" content="EsunR"><meta name="copyright" content="EsunR"><title>不花一分钱，把老旧安卓手机改为Linux服务器，并实现内网穿透 | EsunR-Blog</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.9.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css?version=1.9.0"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="dns-prefetch" href="https://hm.baidu.com"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?31bd12722efcf47cb7d0d576bf150215";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-3RG97DCL3N"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-3RG97DCL3N');</script><script src="https://v1.hitokoto.cn/?encode=js&amp;charset=utf-8&amp;select=.footer_custom_text" defer></script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  hexoVersion: '6.2.0'
+} </script><meta name="generator" content="Hexo 6.2.0"></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0-%E5%89%8D%E8%A8%80"><span class="toc-text">0. 前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Linux-Deploy"><span class="toc-text">1. Linux Deploy</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E5%AE%89%E8%A3%85"><span class="toc-text">1.1 安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-chroot-%E7%8E%AF%E5%A2%83%E4%B8%8B%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-systemctl"><span class="toc-text">1.2 chroot 环境下如何使用 systemctl</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F"><span class="toc-text">2. 内网穿透</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E5%AE%89%E8%A3%85-nginx"><span class="toc-text">2.1 安装 nginx</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E8%9C%BB%E8%9C%93%E6%98%A0%E5%B0%84"><span class="toc-text">2.2 蜻蜓映射</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-%E7%BD%91%E4%BA%91%E7%A9%BF"><span class="toc-text">2.3 网云穿</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://esunr-webapp.cdn.bcebos.com/blog/avatar.jpeg?x-bce-process=image/resize,m_lfit,w_200/format,f_auto" alt="avatar"></div><div class="author-info__name text-center">EsunR</div><div class="author-info__description text-center">EsunR-Blog是由EsunR维护的博客平台，分享在前端开发、Git、Vue.js、Webpack、OAuth、Linux等各个领域的知识和经验。浏览这里的深入文章，了解不同主题的见解，并及时了解行业的最新趋势和技术。</div><div class="follow-button"><a target="_blank" rel="noopener" href="https://github.com/EsunR">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">172</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">155</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">26</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">EsunR-Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"><span class="site-page social-icon search"><i class="fa fa-search"></i><span> Search</span></span></span></div><div id="post-info"><div id="post-title">不花一分钱，把老旧安卓手机改为Linux服务器，并实现内网穿透</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2021-12-11</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E5%85%B6%E4%BB%96/">其他</a><span class="post-meta__separator">|</span><i class="fa fa-comment-o post-meta__icon" aria-hidden="true"></i><a href="/2021/12/abf074494c8f.html#disqus_thread"><span class="disqus-comment-count" data-disqus-identifier="2021/12/abf074494c8f.html"></span></a><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">1.7k</span><span class="post-meta__separator">|</span><span>Reading time: 5 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h1><p>前一阵子，突然想搞个树莓派玩玩，但是一看某宝，之前顶天也就300块钱的树莓派现在竟然四五百起，新款的都到七八百了，闲鱼也都要价要疯了。</p>
+<p>作为不可能多花一分钱给黄牛的我，突然想要家里还有太不用的小米 mix3（淘一台二手手机也比买树莓派强啊），要是能发挥这台手机的性能，那不比树莓派高多了！</p>
+<p>因此经过一番折腾，成功在手机上装上了完整版的 CentOS，并且做了内网穿透，安装了 Home Assistant，并且全程不！花！一！分！钱！</p>
+<p>但是过程还是比较坎坷的，因此整理了一下安装以及内网穿透的流程，在此分享一下。</p>
+<h1 id="1-Linux-Deploy"><a href="#1-Linux-Deploy" class="headerlink" title="1. Linux Deploy"></a>1. Linux Deploy</h1><h2 id="1-1-安装"><a href="#1-1-安装" class="headerlink" title="1.1 安装"></a>1.1 安装</h2><p>Linux Deploy 是一个基于 chroot 让安卓运行完整的 Linux arm 系统的工具，但前提是使用该应用手机必须 Root。</p>
+<blockquote>
+<p>如果你的手机没有 Root，可以使用 Termux，借助 <a target="_blank" rel="noopener" href="https://github.com/termux/proot-distro">proot-distro</a> 这个项目来安装 Linux arm 系统。但是笔者这里没有安装成功，从而转向了 Linux Deploy。</p>
+</blockquote>
+<p>除了 Linux Deploy，你还需要安装：</p>
+<ul>
+<li>BusyBox：提供基础的软件包服务（大概吧这点我也不懂），否则 Linux Deploy 可能会安装失败</li>
+<li>Termux：一个安卓终端，可以调用 ssh 连接，也可以用于辅助我们查看一些系统信息</li>
+</ul>
+<p>这里推荐一个视频安装教程（视频里安装的是 Ubuntu，但是本文章全程用的是 Centos）：</p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1oA411b7Fb">手机安装linux系统-手机秒变服务器（Linux Deploy）</a></p>
+<p>需要注意以下几点：</p>
+<ul>
+<li>安装过程中保证全程科学上网环境</li>
+<li>一定要分配镜像大小，否则在安装过程中可能会漏装一些系统依赖，导致系统无法启动</li>
+<li>extra/ssh 必须显示 done 才说明系统安装并启动成功了</li>
+<li>如果始终无法启动成功系统，尝试安装别的 Linux 发行版本（笔者这里就无法启动 Ubuntu，但是 Centos 就启动成功了）</li>
+<li>用户名记得设置为 <code>root</code></li>
+</ul>
+<p>安装完成之后，打开 Termux，输入 <code>ip addr | grep inet</code> 获取本机在内网环境下的 IP 地址：</p>
+<p><img src="https://s2.loli.net/2021/12/11/Br3QuSoUg52Fmxd.png" alt=""></p>
+<p>之后就可以使用 ssh 指令连接到 Linux Deploy 启动的系统了，比如我这里就是：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh root@192.168.0.138</span><br></pre></td></tr></table></figure>
+
+<p>我们后续的操作都会在终端中进行。</p>
+<h2 id="1-2-chroot-环境下如何使用-systemctl"><a href="#1-2-chroot-环境下如何使用-systemctl" class="headerlink" title="1.2 chroot 环境下如何使用 systemctl"></a>1.2 chroot 环境下如何使用 systemctl</h2><blockquote>
+<p><code>systemctl</code> 服务可以将应用作为系统守护进行，也可以用于设置应用开机自启。</p>
+</blockquote>
+<p>正常来说，我们应该执行 <code>systemctl start &lt;service name&gt;</code> 来启动 service 服务，比如</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start nginx # 启动 nginx</span><br><span class="line">systemctl enable nginx # 将 nginx 设置为开机自启</span><br></pre></td></tr></table></figure>
+
+<p>但是 chroot 环境中无法使用 systemctl，可以用下面的 servicectl 项目代替：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/smaknsk/servicectl">https://github.com/smaknsk/servicectl</a></p>
+<p>首先进行安装：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/smaknsk/servicectl/archive/1.0.tar.gz</span><br><span class="line">tar -xf 1.0.tar.gz -C /usr/local/lib/</span><br><span class="line">ln -s /usr/local/lib/servicectl-1.0/servicectl /usr/local/bin/servicectl</span><br><span class="line">ln -s /usr/local/lib/servicectl-1.0/serviced /usr/local/bin/serviced</span><br></pre></td></tr></table></figure>
+
+<p>安装完成之后就可以使用 <code>servicectl</code> 代替所有的 <code>systemctl</code> 指令了。</p>
+<p><code>servicectl</code> 虽然可以帮助我们设置开机自启，但是其本身也必须在系统启动前启动，然后才能拉起所有设置了开机自启的应用。Linux Deploy 的设置中有一个 <code>初始化</code> 选项，开启后 Linux Deploy 在启动系统后会执行一段用户可以编辑的脚本，该脚本的默认位置在 <code>/etc/rc.locl</code>。</p>
+<p>我们首先要在 Linux 系统中为初始化脚本写入执行权限权限：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 777 /etc/rc.locl</span><br></pre></td></tr></table></figure>
+
+<p>然后编辑该脚本的内容，向内写入 <code>serviced</code>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">/etc/rc.locl</span></span><br><span class="line">serviced</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-内网穿透"><a href="#2-内网穿透" class="headerlink" title="2. 内网穿透"></a>2. 内网穿透</h1><h2 id="2-1-安装-nginx"><a href="#2-1-安装-nginx" class="headerlink" title="2.1 安装 nginx"></a>2.1 安装 nginx</h2><p>安装 nginx 这一步不再多说，基本上都会，安装完成后调用:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">servicectl start nginx</span><br><span class="line">servicectl enable nginx</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-蜻蜓映射"><a href="#2-2-蜻蜓映射" class="headerlink" title="2.2 蜻蜓映射"></a>2.2 蜻蜓映射</h2><p>推荐使用蜻蜓映射来映射 http 服务，因为其可以免费绑定一个你自己的域名，并且支持 https。</p>
+<p>官方网站<a target="_blank" rel="noopener" href="https://flynat.51miaole.com/">https://flynat.51miaole.com/</a></p>
+<p>按照提示安装客户端：</p>
+<p><img src="https://s2.loli.net/2021/12/09/r8D3AYwXaUCyG5k.png" alt=""></p>
+<p>由于这个公司已经很久没有维护该项目，导致它的自动启动指令是无效的，因此我们要自己编写自动启动脚本。</p>
+<p>首先要安装 <code>screen</code> 可以让我们后台启动一个命令行空间来跑应用（类似 nohup，但是 screen 可以让我们随时查看执行应用的屏幕信息，并且内网穿透的应用在开机时使用 nohup 可能无法正常启动）:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install screen</span><br></pre></td></tr></table></figure>
+
+<p>将下面的代码写入到 <code>/usr/lib/systemd/system/flynatc.service</code> 中，注意要将 <code>&lt;username&gt;</code> 和 <code>&lt;token&gt;</code> 分别替换为你自己蜻蜓映射总览页面的用户名与 Token：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"># Centos 7</span><br><span class="line"># 存放位置 /usr/lib/systemd/system</span><br><span class="line"># 开启 servicectl start flynatc</span><br><span class="line"># 关闭 servicectl stop flynatc</span><br><span class="line"># 开机启动 servicectl enable flynatc</span><br><span class="line"># 取消开机启动 servicectl disable flynatc</span><br><span class="line"></span><br><span class="line">[Unit]</span><br><span class="line">Description=Flynat Service</span><br><span class="line">Wants=network-online.target</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line">ExecStart=screen -d -m /usr/local/flynat/flynatc -u &lt;username&gt; -k &lt;token&gt;</span><br><span class="line"># Suppress stderr to eliminate duplicated messages in syslog. NM calls openlog()</span><br><span class="line"># with LOG_PERROR when run in foreground. But systemd redirects stderr to</span><br><span class="line"># syslog by default, which results in logging each message twice.</span><br><span class="line">StandardOutput=syslog</span><br><span class="line">StandardError=null</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+
+<p>启动映射：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">servicectl start flynatc</span><br></pre></td></tr></table></figure>
+
+<p>开启开机自启：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">servicectl enable flynatc</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-3-网云穿"><a href="#2-3-网云穿" class="headerlink" title="2.3 网云穿"></a>2.3 网云穿</h2><p>网云穿也是一个内网穿透服务，其提供了一个免费域名，并且免费域名是不会变的，因此特别适合作为 ssh 服务的穿透工具。</p>
+<p>官网：<a target="_blank" rel="noopener" href="https://xiaomy.net/">https://xiaomy.net/</a></p>
+<p>注册完成之后可以申请一条免费隧道，按照如下设置来映射我们本机的 ssh 服务端口：</p>
+<p><img src="https://s2.loli.net/2021/12/11/D5SMEnZLk9HO6ow.png" alt=""></p>
+<p>然后在你的终端内下载网云穿的内网穿透服务，并将其放到一个你能找到的地方（这里我就放到 <code>~</code> 目录下了）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd ~</span><br><span class="line">wget https://down.xiaomy.net/linux/wyc_linux_arm</span><br><span class="line">chmod 777 ./wyc_linux_arm # 设置软件执行权限</span><br></pre></td></tr></table></figure>
+
+<p>然后调用：<code>./wyc_linux_arm token=&lt;token&gt;</code>（token 就是你控制台中刚才创建的那条隧道的令牌）</p>
+<p><img src="https://s2.loli.net/2021/12/11/CDeg2NuKRY3lFQi.png" alt=""></p>
+<p>服务启动成功后就可以使用 ssh 指令来测试一下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh root@&lt;域名&gt; -p &lt;外网端口&gt;</span><br></pre></td></tr></table></figure>
+
+<p>如果正常连接就可以按照蜻蜓映射那样创建一个 service 脚本到，你可以直接复制下面写好的脚本（记得替换 token）并将其命名为 <code>wcy.service</code>，放到 <code>/usr/lib/systemd/system/</code> 中：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Wcy Service</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line">ExecStart=screen -d -m ~/apps/wyc/wyc_linux_arm -token=&lt;token&gt;</span><br><span class="line">PrivateTmp=true</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+
+<p>启动映射：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">servicectl start wcy</span><br></pre></td></tr></table></figure>
+
+<p>开启开机自启：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">servicectl enable wcy</span><br></pre></td></tr></table></figure>
+</div></article><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Linux/">Linux</a></div><div class="addthis_inline_share_toolbox pull-right"></div><script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-62c7f2684e36ba34" async></script><nav id="pagination"><div class="prev-post pull-left"><a href="/2022/05/5d427e75a94a.html"><i class="fa fa-chevron-left">  </i><span>为第三方 npm 包编写声明文件</span></a></div><div class="next-post pull-right"><a href="/2021/09/ef911b2b102e.html"><span>浅谈 Content Security Policy(CSP) 内容安全策略</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="disqus_thread"></div><script>var unused = null;
+var disqus_config = function () {
+  this.page.url = 'https://blog.esunr.site/2021/12/abf074494c8f.html';
+  this.page.identifier = '2021/12/abf074494c8f.html';
+  this.page.title = '不花一分钱，把老旧安卓手机改为Linux服务器，并实现内网穿透';
+}
+var d = document, s = d.createElement('script');
+s.src = "https://" + 'esunr-blog' +".disqus.com/embed.js";
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);</script><script id="dsq-count-scr" src="https://esunr-blog.disqus.com/count.js" async></script></div></div><footer class="footer-bg" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div class="layout" id="footer"><div class="copyright">&copy;2017 - 2025 By EsunR</div><div class="framework-info"><span>Driven - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">hitokoto</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.0"></script><script src="/js/fancybox.js?version=1.9.0"></script><script src="/js/sidebar.js?version=1.9.0"></script><script src="/js/copy.js?version=1.9.0"></script><script src="/js/fireworks.js?version=1.9.0"></script><script src="/js/transition.js?version=1.9.0"></script><script src="/js/scroll.js?version=1.9.0"></script><script src="/js/head.js?version=1.9.0"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>Powered by</span> <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

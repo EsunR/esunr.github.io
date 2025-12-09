@@ -1,0 +1,81 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="家庭网络开启 IPv6 指南"><meta name="keywords" content="网络原理"><meta name="author" content="EsunR"><meta name="copyright" content="EsunR"><title>家庭网络开启 IPv6 指南 | EsunR-Blog</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.9.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css?version=1.9.0"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="dns-prefetch" href="https://hm.baidu.com"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?31bd12722efcf47cb7d0d576bf150215";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-3RG97DCL3N"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-3RG97DCL3N');</script><script src="https://v1.hitokoto.cn/?encode=js&amp;charset=utf-8&amp;select=.footer_custom_text" defer></script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  hexoVersion: '6.2.0'
+} </script><meta name="generator" content="Hexo 6.2.0"></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%BC%80%E5%90%AF-IPv6"><span class="toc-text">1. 为什么要开启 IPv6</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%A6%82%E4%BD%95%E5%BC%80%E5%90%AF-IPv6"><span class="toc-text">2. 如何开启 IPv6</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-IPv6-%E4%B8%8B%E7%9A%84%E5%AE%89%E5%85%A8%E7%AE%A1%E7%90%86"><span class="toc-text">3. IPv6 下的安全管理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-IPv6-%E5%BA%94%E7%94%A8"><span class="toc-text">4. IPv6 应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DDNS-%E5%8A%A8%E6%80%81%E5%9F%9F%E5%90%8D%E7%BB%91%E5%AE%9A"><span class="toc-text">DDNS 动态域名绑定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%AB%99%E6%89%98%E7%AE%A1"><span class="toc-text">网站托管</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PS5-%E4%B8%B2%E6%B5%81"><span class="toc-text">PS5 串流</span></a></li></ol></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://esunr-webapp.cdn.bcebos.com/blog/avatar.jpeg?x-bce-process=image/resize,m_lfit,w_200/format,f_auto" alt="avatar"></div><div class="author-info__name text-center">EsunR</div><div class="author-info__description text-center">EsunR-Blog是由EsunR维护的博客平台，分享在前端开发、Git、Vue.js、Webpack、OAuth、Linux等各个领域的知识和经验。浏览这里的深入文章，了解不同主题的见解，并及时了解行业的最新趋势和技术。</div><div class="follow-button"><a target="_blank" rel="noopener" href="https://github.com/EsunR">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">172</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">155</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">26</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">EsunR-Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"><span class="site-page social-icon search"><i class="fa fa-search"></i><span> Search</span></span></span></div><div id="post-info"><div id="post-title">家庭网络开启 IPv6 指南</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2025-03-26</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E5%85%B6%E4%BB%96/">其他</a><span class="post-meta__separator">|</span><i class="fa fa-comment-o post-meta__icon" aria-hidden="true"></i><a href="/2025/03/e7b781889bd1.html#disqus_thread"><span class="disqus-comment-count" data-disqus-identifier="2025/03/e7b781889bd1.html"></span></a><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">2.2k</span><span class="post-meta__separator">|</span><span>Reading time: 6 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="1-为什么要开启-IPv6"><a href="#1-为什么要开启-IPv6" class="headerlink" title="1. 为什么要开启 IPv6"></a>1. 为什么要开启 IPv6</h1><p>互联网点对点通信的基础是知晓双方的 IP，然后就可以互相发送数据，然而在传统的 IPv4 网络中，由于 IPv4 资源逐渐稀缺，因此运营商需要借用 NAT 技术将民用网络按照地理位置区块，划分成一个个子网，让子网间共用一个 IPv4 地址。由于 NAT 的层层嵌套，点对点通信变得很困难，运营商也不会为个人分配 IPv4 公网地址。因此如果你想在公网环境下，通过点对点的方式直接访问到家庭网络的设备几乎是不可能的，必须借助内网穿透等方案进行实现。</p>
+<p>然而在 IPv6 时代下，有了足够多的 IPv6 地址，可以为每个人、甚至每个设备都分配一个公网 IPv6 地址，这使得我们可以轻松的访问到我们的家庭网络，随时随地的查看家庭 NAS 上的视频、串流游戏 。此外，对于个人来说也无需购买云服务器了，可以自己在家部署一台 7X24 的服务器来给自己工作、学习使用，并且家庭宽带的上下行速度要比云服务器的快得多，并且还是不限量的。</p>
+<h1 id="2-如何开启-IPv6"><a href="#2-如何开启-IPv6" class="headerlink" title="2. 如何开启 IPv6"></a>2. 如何开启 IPv6</h1><p>如果你的家庭宽带是近几年办理的，那么运营商一般都会给你的光猫打开 IPv6 功能，你一般不需要动就可以在内网拥有一个 IPv6 环境，你可以使用 <a target="_blank" rel="noopener" href="https://test-ipv6.com/">Test-IPv6</a> 来进行测试：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202503261650884.png" alt="image.png|400"></p>
+<p>但是由于运营商的光猫可能设置有 IPv6 防火墙，并且不可更改，我还是建议你去调整一下光猫的设置，将光猫改为桥接模式，使用路由器进行拨号。</p>
+<p>所谓的光猫改桥接就是关闭光猫的 PPPoE（宽带拨号认证服务）、DHCP（内网 IP 分配服务），让你的路由器执行拨号上网、IP分配、NAT 转换等工作，只让光猫进行一个光电信号转换的工作（追求极致的话还可以将光猫替换为猫棒）。这样既能更好的管理 IPv6 功能，也能让你花了大价钱的路由器负担光猫的工作，发挥出宽带的最大性能。</p>
+<blockquote>
+<p>热知识：宽带运营商给你家的宽带一般设计的都用 20% 的冗余，500M 的宽带测速应该在 600M，1000M 的宽带测速应该在 1200M，如果你距离这个速度很远，那么就说明你的家庭网络还有很大的优化空间。</p>
+</blockquote>
+<p>关于如何光猫改桥接，需要自己上网上进行查找，难点在于获取路由器的管理密码以及自己的宽带账户，前者如果按网上找的管理密码都不对的话，可以上万能的某宝付费获取，后者可以咨询运营商。如果比较社牛的话，还可以要求运营商派工程师上门帮你改。这里放一个改桥接的参考视频，不同运营商改桥接的方式都大同小异：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://b23.tv/bbVf1Ye">光猫拨号上网改成桥接教程-哔哩哔哩</a></li>
+</ul>
+<p>改完桥接后，登录路由器的管理界面，找到 IPv6 选项并开启，方式选择 Native，并关闭防火墙（或者找到类似“允许入站”的选项），关于关闭防火墙的安全行问题我们在下一章节讨论。</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202503261705556.png" alt="image.png|400"></p>
+<p>然后我们查看一下设备的网络选项，如果成功分配到了 IPv6 地址，那就说明我们已经处于一个 IPv6 的网络环境了，此时你可以关闭设备的防火墙，开启一个网络服务端口（<strong>注意不能是 80 和 443，这两个端口被运营商禁用</strong>），你就可以在外网使用设备的 IPv6 地址成功访问到设备上部署的服务了。</p>
+<blockquote>
+<p>如果无法访问且地址能 ping 通的话可能是防火墙设置问题。如果无法访问并且 ping 不通的话可能是路由器分配给你设备的 IPv6 地址不在公网范围内，需要咨询运营商，或者在路由器上使用端口转发功能将内网端口转发到路由器 WAN 口的公网 IP 上。</p>
+</blockquote>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202503261713293.png" alt="image.png|400"></p>
+<p>关于 IPv6，有以下几个知识点需要知悉：</p>
+<ul>
+<li>IPv6 的网段：IPv6 地址如果是 2000、2001、2400 开头的，一般为公网地址，可以直接访问。如果是 fe80 网段，就相当于 IPv4 的 192.168.x.x 是一个本地局域网内的地址。</li>
+<li>多个 IPv6 地址：设备一般会生成 3 个 IPv6 地址，一个以 fe80 开头的局域网地址、一个长期的 IPv6 公网地址、一个临时的 IPv6 地址。临时的 IPv6 地址是处于安全性考虑的，可以将这个地址开放给外部进行临时性的调用。</li>
+</ul>
+<h1 id="3-IPv6-下的安全管理"><a href="#3-IPv6-下的安全管理" class="headerlink" title="3. IPv6 下的安全管理"></a>3. IPv6 下的安全管理</h1><p>前面我们关闭了路由器的防火墙，如果不关闭路由器防火墙的话我们无法从外网获访问到内网设备。但关闭了也就意味着你的家庭设备就完全对外开放了（当然有的设备，比如 Windows 会自带防火墙），这是比较危险的。好在是 IPv6 地址足够复杂，是无法依靠穷举找到你家的 IPv6 公网地址并精准锁定到某个设备的。</p>
+<p>如果你的路由器支持精准的防火墙设置，如使用了 OpenWrt，那是最好的，你可以精准的控制对外公开的 IPv6 地址和端口号。但是大多数人用的并非 OpenWrt，那么我建议你最好做好网络管理，以我希望暴露在公网上的 Ubuntu 主机为例，无必要注意以下几点：</p>
+<ul>
+<li>保护好你的 IPv6 地址：绝对不能轻易的将你的设备 IPv6 地址暴露出去，或者在非可信任的网络中访问你的 IPv6 地址，因为这样别人就能沿着你的公网地址对你的设备进行攻击，除非你很肯定设备暴露在公网上是完全安全的；</li>
+<li>开启设备防火墙：以 Ubuntu 为例，必须要开启 ufw，这是一个防火墙的前端管理工具，能够帮我们更好的控制 iptables。<ul>
+<li>ufw 默认会禁用所有端口，如果你希望公开端口，则需要使用 <code>ufw allow [端口]</code> 来进行开启；</li>
+<li>我们在内网环境下通常是安全的，因此可以对内网 IP 开放所有端口，使用 <code>sudo ufw allow proto any from 192.168.0.0/16</code> 允许 192.168.x.x 网段的所有设备访问任意端口；</li>
+<li>可以使用 1Panel 来可视化的管理防火墙配置；</li>
+</ul>
+</li>
+<li>端口管理：不要将常见的端口对外暴露，比如 mysql 的 3306 端口，因为端口扫描的成本是很低的，应该使用高位端口从而一定程度的避免扫描；</li>
+<li>高敏服务加强密码管理：比如 ssh 的远程访问，可以使用高强度密码 + Google 验证器的方式来防止被侵入；<h1 id="4-IPv6-应用"><a href="#4-IPv6-应用" class="headerlink" title="4. IPv6 应用"></a>4. IPv6 应用</h1></li>
+</ul>
+<h3 id="DDNS-动态域名绑定"><a href="#DDNS-动态域名绑定" class="headerlink" title="DDNS 动态域名绑定"></a>DDNS 动态域名绑定</h3><p>运营商分配的公网地址一般是动态的，如果我们直接记着一个 IPv6 进行连接那么过一段时间这个地址可能就失效的。但是我们自己的域名是不会变的，因此只要在设备的公网 IPv6 地址发生变化时去修改域名绑定的 IP，我们只访问不变的域名即可。这个方案就叫做 DDNS 域名动态绑定。</p>
+<p>DDNS-GO 是一个带有 WebUI 的域名动态绑定工具，填写你的 DNS 服务商 AK SK 信息后，DDNS GO 就会在后台不断监听网卡的 IPv6 地址变动，一旦发生变动就会调用 DNS 服务商的 API 来变更域名的绑定信息。</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202503271514153.png" alt="image.png|400"></p>
+<h3 id="网站托管"><a href="#网站托管" class="headerlink" title="网站托管"></a>网站托管</h3><p>与 IPv4 服务器的网站托管没有什么区别，但是需要注意的是 <strong>运营商会禁用掉 80 和 443 端口</strong>，从客户端访问后会从运营商层面进行拦截，因此本机的 Nginx、防护墙不会收到任何入站的日志。</p>
+<h3 id="PS5-串流"><a href="#PS5-串流" class="headerlink" title="PS5 串流"></a>PS5 串流</h3><ol>
+<li>安装 PS Remote Play 或 PxPlay，并保证 PS5 的网络详情中，网络类型在 NAT2 或 NAT1。</li>
+<li>先在本地连接配对过一次，并完成认证；</li>
+<li>在路由器设置中，将 PS5 设置为静态 IP，并开启路由器的 DMZ 功能（一般在端口转发模块中），输入 PS5 的内网 IPv4 地址。这一步相当于将 PS5 的所有端口都映射到了路由器的 IPv6 公网地址上，这样我们才能在公网连接到 PS5；</li>
+<li>在公网远程连接 PS5；</li>
+</ol>
+</div></article><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86/">网络原理</a></div><div class="addthis_inline_share_toolbox pull-right"></div><script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-62c7f2684e36ba34" async></script><nav id="pagination"><div class="prev-post pull-left"><a href="/2025/03/d7e879038666.html"><i class="fa fa-chevron-left">  </i><span>整理浏览器的自动播放策略</span></a></div><div class="next-post pull-right"><a href="/2025/01/9c6b435d0485.html"><span>veben-admin 项目设计鉴赏</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="disqus_thread"></div><script>var unused = null;
+var disqus_config = function () {
+  this.page.url = 'https://blog.esunr.site/2025/03/e7b781889bd1.html';
+  this.page.identifier = '2025/03/e7b781889bd1.html';
+  this.page.title = '家庭网络开启 IPv6 指南';
+}
+var d = document, s = d.createElement('script');
+s.src = "https://" + 'esunr-blog' +".disqus.com/embed.js";
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);</script><script id="dsq-count-scr" src="https://esunr-blog.disqus.com/count.js" async></script></div></div><footer class="footer-bg" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div class="layout" id="footer"><div class="copyright">&copy;2017 - 2025 By EsunR</div><div class="framework-info"><span>Driven - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">hitokoto</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.0"></script><script src="/js/fancybox.js?version=1.9.0"></script><script src="/js/sidebar.js?version=1.9.0"></script><script src="/js/copy.js?version=1.9.0"></script><script src="/js/fireworks.js?version=1.9.0"></script><script src="/js/transition.js?version=1.9.0"></script><script src="/js/scroll.js?version=1.9.0"></script><script src="/js/head.js?version=1.9.0"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>Powered by</span> <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

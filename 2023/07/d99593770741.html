@@ -1,0 +1,221 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="使用 volta 与 corepack 规范团队在不同项目中使用的 node 版本与 npm 包管理器"><meta name="keywords" content="npm,volta,node,corepack"><meta name="author" content="EsunR"><meta name="copyright" content="EsunR"><title>使用 volta 与 corepack 规范团队在不同项目中使用的 node 版本与 npm 包管理器 | EsunR-Blog</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.9.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css?version=1.9.0"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="dns-prefetch" href="https://hm.baidu.com"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?31bd12722efcf47cb7d0d576bf150215";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-3RG97DCL3N"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-3RG97DCL3N');</script><script src="https://v1.hitokoto.cn/?encode=js&amp;charset=utf-8&amp;select=.footer_custom_text" defer></script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  hexoVersion: '6.2.0'
+} </script><meta name="generator" content="Hexo 6.2.0"></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0-%E5%89%8D%E8%A8%80"><span class="toc-text">0. 前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Volta"><span class="toc-text">1. Volta</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E5%AE%89%E8%A3%85"><span class="toc-text">1.1 安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E4%BD%BF%E7%94%A8-volta-%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E4%BE%9D%E8%B5%96%E7%9A%84-node"><span class="toc-text">1.2 使用 volta 管理项目依赖的 node</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-volta-%E5%8D%B8%E8%BD%BD%E4%B8%8D%E4%BD%BF%E7%94%A8%E7%9A%84-node-%E5%92%8C%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8"><span class="toc-text">1.3 volta 卸载不使用的 node 和包管理器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-volta-%E5%AF%B9%E4%BA%8E%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%8C%85%E7%9A%84%E7%AE%A1%E7%90%86"><span class="toc-text">1.4 volta 对于二进制包的管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-volta-%E7%9A%84%E5%8E%9F%E7%90%86"><span class="toc-text">1.5 volta 的原理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Corepack"><span class="toc-text">2. Corepack</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E5%AE%89%E8%A3%85"><span class="toc-text">2.1 安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E4%BD%BF%E7%94%A8-corepack-%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E4%BD%BF%E7%94%A8%E7%9A%84%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8"><span class="toc-text">2.2 使用 corepack 管理项目使用的包管理器</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Volta-%E4%B8%8E-Corepack-%E7%BB%93%E5%90%88%E4%BD%BF%E7%94%A8"><span class="toc-text">3. Volta 与 Corepack 结合使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9D%9E%E8%A6%81%E4%BD%BF%E7%94%A8-Corepack-%EF%BC%9F"><span class="toc-text">3.1 为什么非要使用 Corepack ？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-Volta-%E4%B8%8E-Corepack-%E4%B9%8B%E9%97%B4%E7%9A%84%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98"><span class="toc-text">3.2 Volta 与 Corepack 之间的冲突问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MacOS-%E7%9A%84%E5%AE%89%E8%A3%85%E6%B5%81%E7%A8%8B"><span class="toc-text">MacOS 的安装流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux-%E7%9A%84%E5%AE%89%E8%A3%85%E6%B5%81%E7%A8%8B"><span class="toc-text">Linux 的安装流程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-%E4%BD%8E%E7%89%88%E6%9C%AC-node-%E9%A1%B9%E7%9B%AE%E4%B8%AD%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8-corepack"><span class="toc-text">3.3 低版本 node 项目中无法使用 corepack</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://esunr-webapp.cdn.bcebos.com/blog/avatar.jpeg?x-bce-process=image/resize,m_lfit,w_200/format,f_auto" alt="avatar"></div><div class="author-info__name text-center">EsunR</div><div class="author-info__description text-center">EsunR-Blog是由EsunR维护的博客平台，分享在前端开发、Git、Vue.js、Webpack、OAuth、Linux等各个领域的知识和经验。浏览这里的深入文章，了解不同主题的见解，并及时了解行业的最新趋势和技术。</div><div class="follow-button"><a target="_blank" rel="noopener" href="https://github.com/EsunR">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">172</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">155</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">26</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">EsunR-Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"><span class="site-page social-icon search"><i class="fa fa-search"></i><span> Search</span></span></span></div><div id="post-info"><div id="post-title">使用 volta 与 corepack 规范团队在不同项目中使用的 node 版本与 npm 包管理器</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-07-06</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E5%89%8D%E7%AB%AF/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96/">前端工程化</a><span class="post-meta__separator">|</span><i class="fa fa-comment-o post-meta__icon" aria-hidden="true"></i><a href="/2023/07/d99593770741.html#disqus_thread"><span class="disqus-comment-count" data-disqus-identifier="2023/07/d99593770741.html"></span></a><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">4.6k</span><span class="post-meta__separator">|</span><span>Reading time: 16 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h1><p>在前端开发团队中，经常存在多个新老项目同时开发的情况，这些项目他们的 node 版本可能不一样，项目中所使用的包管理器也不一样。比如一些老的项目可能使用低版本 node 并使用 npm 安装项目依赖，而一些新的项目则会使用高版本 node 与 pnpm/yarn 来安装项目依赖。</p>
+<p>如果 node 版本不统一，带来的问题可能就是整个项目无法运行；而如果包管理器不统一，带来的则可能是 <code>package-lock.json</code>、<code>yarn.lock</code>、<code>pnpm-lock.yaml</code> 在每个成员电脑上都不一致的灾难。</p>
+<blockquote>
+<p>之所以是灾难，因为很多项目本地明明运行的好好的，然而在其他人电脑上或者线上却无法正常运行，这都很有可能是因为 lock 文件没有对其导致安装了错误版本的依赖包！</p>
+</blockquote>
+<p>为了解决这个问题，本文将向你展示如何使用 volta 来管理 node 版本，并用 corepack 来管理包管理器，团队只需要准备相同的环境，对当前的项目进行简单改造，就可以实现在每个项目中自动切换 node 版本与包管理器版本！</p>
+<h1 id="1-Volta"><a href="#1-Volta" class="headerlink" title="1. Volta"></a>1. Volta</h1><p>Volta 官网描述为一款无障碍的 JavaScript 工具管理器，与 nvm、n 类似的，可以用来管理 Node 版本，但同时又有以下优势：</p>
+<ul>
+<li>可以根据项目 <code>package.json</code> 声明的 volta 配置来根据不同的项目自动切换 node 版本；</li>
+<li>volta 也可以直接管理 pnpm 与 yarn（不推荐，建议如果使用高版本的node，使用后面的 corepack 来管理包管理器）；</li>
+<li>当使用 volta 安装的 node 来执行全局安装时，切换 node 版本后，全局安装的包仍然存在，并且其运行时所依赖的 node 版本会被固定为安装该包时使用的 node 版本；</li>
+</ul>
+<h2 id="1-1-安装"><a href="#1-1-安装" class="headerlink" title="1.1 安装"></a>1.1 安装</h2><p>volta 安装只需要执行一行命令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://get.volta.sh | bash</span><br></pre></td></tr></table></figure>
+
+<p>之后便可以使用 volta 来安装不通版本的 node：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">volta install node@18</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>若想要切换 node 版本，也只需使用 <code>volta install</code> 指令即可</p>
+</blockquote>
+<p>你可以使用 <code>volta list all</code> 查看当前 volta 所已经安装的内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">User toolchain:</span><br><span class="line"></span><br><span class="line">    Node runtimes:</span><br><span class="line">        v14.21.3 (default)</span><br><span class="line">        v16.20.1</span><br><span class="line">        v18.16.1</span><br><span class="line">        v20.3.1</span><br><span class="line"></span><br><span class="line">    Package managers:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    Packages:</span><br><span class="line">        serve@14.2.0 (default)</span><br><span class="line">            binary tools: serve</span><br><span class="line">            platform:</span><br><span class="line">                runtime: node@14.21.3</span><br><span class="line">                package manager: npm@built-in</span><br></pre></td></tr></table></figure>
+
+<p>这些内容分为三部分：</p>
+<ul>
+<li>Node runtimes：你已经安装的 node 版本，显示 default 即为你当前全局使用的 node 版本；</li>
+<li>Package managers：你已经安装的包管理器（这一部分的管理与 corepack 冲突，后面再具体讨论）；</li>
+<li>Packages：使用 <code>npm install --global</code> 安装的全局包，volta 会在此列出，并固定其运行时版本；</li>
+</ul>
+<h2 id="1-2-使用-volta-管理项目依赖的-node"><a href="#1-2-使用-volta-管理项目依赖的-node" class="headerlink" title="1.2 使用 volta 管理项目依赖的 node"></a>1.2 使用 volta 管理项目依赖的 node</h2><p>假如你之前使用的是 nvm，如果你想要为不通的项目来规范 node 版本，那么需要在项目目录通过创建 <code>.nvmrc</code> 写入 node 版本，并要求开发者在进入项目时使用 <code>nvm use</code> 来对其当前使用的 node 版本。这个操作如果想要自动化，就需要编写一个自动化脚本来实现（<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/57110542/how-to-write-a-nvmrc-file-which-automatically-change-node-version">参考</a>）。</p>
+<p>但是对于 volta 来说，这个步骤是及其简单并且完全自动化的。当要求全团队使用 volta 后，可以直接在项目目录（package.json 的目录下）使用如下指令，将当前项目所使用的 node 版本固定为 node v18 的 LTS 版本：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">volta pin node@18</span><br></pre></td></tr></table></figure>
+
+<p>之后，你就会发现项目的 package.json 中被添加上一段：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;volta&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">	<span class="attr">&quot;node&quot;</span><span class="punctuation">:</span> <span class="string">&quot;18.16.1&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>之后当用户进入到当前项目中时，volta 就会检测到 package.json 中声明的 node 版本，并且切换至该 node 版本。</p>
+<h2 id="1-3-volta-卸载不使用的-node-和包管理器"><a href="#1-3-volta-卸载不使用的-node-和包管理器" class="headerlink" title="1.3 volta 卸载不使用的 node 和包管理器"></a>1.3 volta 卸载不使用的 node 和包管理器</h2><p>当你尝试使用 <code>volta uninstall yarn</code> 或者 <code>volta uninstall node</code> 时，会出现暂无法支持卸载的提示：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error: Uninstalling node is not supported yet.</span><br></pre></td></tr></table></figure>
+
+<p>因此需要到 <code>~/.volta/tools/image</code> 手动删除已经下载的 npm 或者 yarn 等，<a target="_blank" rel="noopener" href="https://github.com/volta-cli/volta/issues/1431#issuecomment-1409424063">参考</a>。</p>
+<h2 id="1-4-volta-对于二进制包的管理"><a href="#1-4-volta-对于二进制包的管理" class="headerlink" title="1.4 volta 对于二进制包的管理"></a>1.4 volta 对于二进制包的管理</h2><p>在使用 npm 全局安装二进制包时，如 <code>npm install pm2</code>（或 <code>votla install pm2</code>），volta 为了保证在切换 node 版本后这些二进制包仍能够使用，volta 会固定其依赖的 node 版本为其安装时 volta 设置的默认 node 版本。</p>
+<p>如果想要指定 volta 对于安装二进制包时锁定的 node 版本依赖，可以在安装时修改 volta 的默认 node 版本号，或者使用 <code>volta run</code> 指令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">volta run --node 14 npm i -g pm2</span><br></pre></td></tr></table></figure>
+
+<p>如果要想查看系统内安装的 npm 二进制包所依赖的具体 node 版本号，可以使用 <code>volta list all</code> 查看：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">volta list all</span><br><span class="line"></span><br><span class="line">⚡️ User toolchain:</span><br><span class="line"></span><br><span class="line">	Node runtimes:</span><br><span class="line">		v12.22.12</span><br><span class="line">		v14.21.3</span><br><span class="line">		v18.17.1 (default)</span><br><span class="line">	</span><br><span class="line">	Package managers:</span><br><span class="line">		Yarn:</span><br><span class="line">			v1.22.19</span><br><span class="line">			v4.0.0-rc.48 (default)</span><br><span class="line">	</span><br><span class="line">	Packages:</span><br><span class="line">		pm2@5.3.0 (default)</span><br><span class="line">			binary tools: pm2, pm2-dev, pm2-docker, pm2-runtime</span><br><span class="line">			platform:</span><br><span class="line">				runtime: node@18.18.0</span><br><span class="line">				package manager: npm@built-in</span><br><span class="line">		serve@14.2.0 (default)</span><br><span class="line">			binary tools: serve</span><br><span class="line">			platform:</span><br><span class="line">				runtime: node@14.21.3</span><br><span class="line">				package manager: npm@built-in</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>PS：<code>volta list</code> 指令列出的 <code>Tool binaries available</code> 列表中包后面跟的 <code>(default)</code> 表示为工具本身的版本，而不是依赖的 node 版本。<a target="_blank" rel="noopener" href="https://github.com/volta-cli/volta/issues/1226">Issues</a></p>
+</blockquote>
+<h2 id="1-5-volta-的原理"><a href="#1-5-volta-的原理" class="headerlink" title="1.5 volta 的原理"></a>1.5 volta 的原理</h2><p>volta 的原理并不复杂，本质上就是通过覆写二进制文件的执行指令到 volta 的处理程序中，然后 volta 就可以调用正确的 node 版本，或者调用全局安装的二进制文件并为其指定 node 版本。</p>
+<p>我们可以使用 <code>which node</code> 来查看以下 node 的执行位置，会发现其执行位置为用户目录下的 <code>.volta/bin/node</code> 中。</p>
+<p>我们在来查看一下全局安装的包，比如我们使用 <code>npm install serve -g</code> 安装的 <code>serve</code> 指令，调用 <code>which serve</code> 可以发现其执行位置同样为 <code>~/.volta/bin</code> 目录。</p>
+<p>我们切换到该目录后，就可以查看到这些可执行文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node npm npx serve volta volta-migrate volta-shim</span><br></pre></td></tr></table></figure>
+
+<p>可以发现，我们通过全局安装指令安装的二进制文件会被放到这个位置，node 和 npm 的执行文件也在这个位置。但实际上另有玄机，我们可以使用 <code>ls -l</code> 查看一下文件的详细信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">total 37008</span><br><span class="line">lrwxr-xr-x  1 username  staff    39B Jul  4 14:49 node -&gt; /Users/username/.volta/bin/volta-shim</span><br><span class="line">lrwxr-xr-x  1 username  staff    39B Jul  4 14:49 npm -&gt; /Users/username/.volta/bin/volta-shim</span><br><span class="line">lrwxr-xr-x  1 username  staff    39B Jul  4 14:49 npx -&gt; /Users/username/.volta/bin/volta-shim</span><br><span class="line">lrwxr-xr-x  1 username  staff    39B Jul  5 19:12 serve -&gt; /Users/username/.volta/bin/volta-shim</span><br><span class="line">-rwxr-xr-x  1 username  staff   7.3M Jan 25 05:38 volta</span><br><span class="line">-rwxr-xr-x  1 username  staff   4.4M Jan 25 05:37 volta-migrate</span><br><span class="line">-rwxr-xr-x  1 username  staff   6.4M Jan 25 05:37 volta-shim</span><br></pre></td></tr></table></figure>
+
+<p>这些可执行的二进制文件都被使用连接符软连接到了 <code>volta-shim</code> 这个可执行文件上去。</p>
+<p>因此 volta 背后自动切换 node 版本以及管理全局包的魔法实际上就是：当使用 Volta 时，npm、node以及其他全局包的这些二进制文件被重定向到 <code>.volta/bin</code> 目录下的对应可执行文件，而这些可执行文件实际上都是 <code>.volta/bin/volta-shim</code> 所创建的软连接。 volta-shim 本身是一个特殊的脚本，他主要做了如下这些事情：</p>
+<ul>
+<li>如果是 node、npm、yarn 等指令，监测当前工作空间是否被 <code>volta pin</code> 指定了 node 版本和包管理器的版本，如果是，则将指令定向到目标版本；</li>
+<li>如果是 serve 这种由 npm 安装的可执行文件，则定向到该可执行文件，并且<strong>使用安装该可执行文件时的 node 版本</strong> 来执行该指令。</li>
+</ul>
+<h1 id="2-Corepack"><a href="#2-Corepack" class="headerlink" title="2. Corepack"></a>2. Corepack</h1><blockquote>
+<p>注意：corepack 只适用于 <a href="mailto:node@16.9.0">node@16.9.0</a> 以上的版本，如果你的团队 node 版本低于此版本，同时项目又使用了 yarn/pnpm 来进行包管理，那么使用 corepack 可能存在问题，可以考虑使用 volta 的包管理器的管理功能。如果非要使用，可以参考 3.3 节中的方案。</p>
+</blockquote>
+<p>corepack 是 node 官方出的一个管理 node 包管理器的管理器，其已经内置于 node@20 版本中，与 npm 一样作为被默认安装的指令工具，但默认没有被启用。</p>
+<p>其诞生背景是因为 npm 本身的不思进取，导致社区出现了 yarn、pnpm 这些更优秀的包管理器工具，然而这些包管理器工具在不同的项目中又有可能使用不同的版本，因此规范项目中使用的包管理器也和规范项目所使用的 node 版本一样重要。</p>
+<blockquote>
+<p>毕竟在团队中，谁都不想 lock 文件在每个人的电脑上都有各自的版本！</p>
+</blockquote>
+<h2 id="2-1-安装"><a href="#2-1-安装" class="headerlink" title="2.1 安装"></a>2.1 安装</h2><p>如果你的团队使用的是 node@20，那么 corepack 指令则已经被默认安装。如果你是用的是其他版本的 node（最低 <a href="mailto:node@16.9.0">node@16.9.0</a>），则需要手动执行 <code>npm install corepack -g</code> 来安装。</p>
+<p>安装后的 corepack 默认是被禁用的，如果你想要启用 corepack 则需要先卸载全局安装的包管理器：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall yarn -g</span><br><span class="line">npm uninstall pnpm -g</span><br></pre></td></tr></table></figure>
+
+<p>然后执行：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">corepack <span class="built_in">enable</span></span><br><span class="line">corepack prepare --all</span><br></pre></td></tr></table></figure>
+
+<p>首先，corepack 会被启用，在你的 <code>/usr/local/bin/</code> 目录下创建 pnpm、pnpx、yarn、yarnpkg 这几个可执行文件，让你可以使用 pnpm 和 yarn 的指令。实际上，这些指令也是一个软连接，会连接到 corepack 的处理程序（其实与 volta 的原理类似），以让 corepack 可以使用正确的包管理器版本；</p>
+<p>之后使用 <code>corepack prepare --all</code> 指令会下载最新的 pnpm 和 yarn 的稳定版，此时你就可以正常在全局使用 yarn 和 pnpm 了。</p>
+<p>如果你想切换全局安装的 pnpm 和 yarn，可以使用下面的指令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将全局使用 pnpm 版本切换到 pnpm@6.35.1</span></span><br><span class="line">corepack prepare pnpm@6.35.1 --activate</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：corepack 指定包管理器版本的时候必须使用 @x.y.x 来明确三位版本号</p>
+</blockquote>
+<h2 id="2-2-使用-corepack-管理项目使用的包管理器"><a href="#2-2-使用-corepack-管理项目使用的包管理器" class="headerlink" title="2.2 使用 corepack 管理项目使用的包管理器"></a>2.2 使用 corepack 管理项目使用的包管理器</h2><p>与 volta 类似的，corepack 也是通过识别项目 package.json 中声明的配置来自动切换包管理器的，但需要手动添加：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;packageManager&quot;</span><span class="punctuation">:</span> <span class="string">&quot;pnpm@8.6.6&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>这样，就成功指定了项目使用的 pnpm 版本为 <code>8.6.6</code>，当我们使用 <code>pnpm</code> 指令的时候，corepack 会自动安装对应版本，并调用改版本。</p>
+<p>此外，如果读取到有效的 packageManger 配置，corepack 还会阻止用户使用错误的包管理器来安装，比如如果用户在上面配置的项目中使用 <code>yarn install</code>，那么就会出现报错：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Usage Error: This project is configured to use pnpm</span><br><span class="line"></span><br><span class="line">$ yarn ...</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>corepack 默认不会托管 npm，也不建议这么做（因为 node 版本与 npm 版本已经强绑定了），因此不会拦截 <code>npm install</code> 的指令</p>
+</blockquote>
+<h1 id="3-Volta-与-Corepack-结合使用"><a href="#3-Volta-与-Corepack-结合使用" class="headerlink" title="3. Volta 与 Corepack 结合使用"></a>3. Volta 与 Corepack 结合使用</h1><h2 id="3-1-为什么非要使用-Corepack-？"><a href="#3-1-为什么非要使用-Corepack-？" class="headerlink" title="3.1 为什么非要使用 Corepack ？"></a>3.1 为什么非要使用 Corepack ？</h2><p>当你看到这里可能会有疑问，volta 本身是支持同时管理 node 与包管理器，但为什么还要使用 corepack？那么我只能说 <strong>volta 本身的包管理是有缺陷的，而 corepack 是未来</strong>。</p>
+<p>使用 corepack 已经被 node 官方视为一个 <a target="_blank" rel="noopener" href="https://nodejs.org/api/corepack.html"><strong>规范</strong></a>，已经集成在 Node 的最新发行版本中，目前完整的支持 yarn 和 pnpm 的切换，yarn 和 pnpm 在初始化项目的时候也会将 <code>packageManager</code> 写入到 package.json 中，corepack 必定是一个趋势。所以对于包管理器的管理来说，应当尽量使用 Corepack 而非 Volta。</p>
+<p>综上，一个比较推荐的做法是：</p>
+<ul>
+<li>使用 volta 管理 node，以及全局安装的 npm 包</li>
+<li>使用 corepack 管理包管理器</li>
+</ul>
+<h2 id="3-2-Volta-与-Corepack-之间的冲突问题"><a href="#3-2-Volta-与-Corepack-之间的冲突问题" class="headerlink" title="3.2 Volta 与 Corepack 之间的冲突问题"></a>3.2 Volta 与 Corepack 之间的冲突问题</h2><p>由于 volta 和 corepack 对于包管理器的管理都是基于 shim 的，也就是说他们都会拦截 yarn 以及 pnpm 指令，因此两个管理器之间存在冲突，你可以能会遇到以下问题：</p>
+<ul>
+<li>volta 安装了高版本 node，但是 corepack 指令无法使用；</li>
+<li>使用 volta 管理的 node 进行全局安装 corepack，在使用 corepack 管理的 yarn/pnpm 执行 package.json 中的脚本时，node 版本也会被限制为 volta 锁定 corepack 时的版本；</li>
+<li>通过其他途径安装了 corepack，但就是无法使用 corepack 管理的 yarn/pnpm，当使用 yarn 指令时，会出现 volta 的警告；</li>
+</ul>
+<p>要想解决这个问题，一定要遵循如下的原则：</p>
+<ol>
+<li>不要使用 volta 管理的 node 来全局安装 corepack</li>
+<li>让 corepack 的 shim 覆盖掉 volta 的 shim</li>
+</ol>
+<p>以下以 MacOS 和 Ubuntu 来演示一下如何同时安装 volta 与 corepack 并解决其冲突：</p>
+<h3 id="MacOS-的安装流程"><a href="#MacOS-的安装流程" class="headerlink" title="MacOS 的安装流程"></a>MacOS 的安装流程</h3><blockquote>
+<p>前置条件：最好先卸载设备上所有的包管理器以及 node</p>
+</blockquote>
+<p>首先，如果安装了 volta，按照以下步骤 <a target="_blank" rel="noopener" href="https://docs.volta.sh/advanced/uninstall">卸载 volta</a>：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> -rf ~/.volta</span><br></pre></td></tr></table></figure>
+
+<p>然后使用 homebrew 安装 corepack：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install corepack</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>由于 corepack 依赖 node，brew 会在你的电脑上安装 node@20，不过没关系，后续我们使用 volta 管理 node，安装的这个 node 不会被使用，也不会影响我们使用 volta 切换 node 版本</p>
+</blockquote>
+<p>测试一下 corepack 指令，并将其启用：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">corepack <span class="built_in">enable</span></span><br><span class="line">corepack prepare --all</span><br></pre></td></tr></table></figure>
+
+<p>安装 volta：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://get.volta.sh | bash</span><br></pre></td></tr></table></figure>
+
+<p>使用 volta 安装 node：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">volta install node</span><br></pre></td></tr></table></figure>
+
+<p>安装完 node 后可以检查一下 pnpm/yarn 指令是否被 volta 拦截：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">which</span> yarn</span><br><span class="line"><span class="comment"># 如果输出以下路径，说明正在使用 corepack 管理 yarn</span></span><br><span class="line">/usr/local/bin/yarn</span><br></pre></td></tr></table></figure>
+
+<p>后续就不要使用 volta 安装任何包管理器，也不要执行 <code>npm install yarn -g</code> 或者 <code>npm install pnpm -g</code>，否则 corepack 可能失效。</p>
+<blockquote>
+<p>如果 corepack 失效，同时使用 <code>which yarn</code> 显示的 yarn 的执行文件在 <code>~/.volta/bin/yarn</code> 的位置，可以使用 <code>corepack enable --install-directory ~/.volta/bin</code>  来强行将 coreapck 的 shim 覆盖到 volta 的 shim 上。</p>
+</blockquote>
+<h3 id="Linux-的安装流程"><a href="#Linux-的安装流程" class="headerlink" title="Linux 的安装流程"></a>Linux 的安装流程</h3><p>同样的，在安装 corepack 前需要卸载 volta：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> -rf ~/.volta</span><br></pre></td></tr></table></figure>
+
+<p>由于 Ubuntu 等 Linux 系统没有 homebrew，同时系统的安装源中也没有 corepack，所以我们要通过安装 node@20 的方式来安装 corepack，输入以下指令来添加 node@20 的安装源，并安装 node（其他 Linux 系统可以查看 <a target="_blank" rel="noopener" href="https://github.com/nodesource/distributions#installation-instructions">这里</a>）：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - &amp;&amp;\</span><br><span class="line">sudo apt-get install -y nodejs</span><br></pre></td></tr></table></figure>
+
+<p>测试一下 corepack 指令，并将其启用：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">corepack <span class="built_in">enable</span></span><br><span class="line">corepack prepare --all</span><br></pre></td></tr></table></figure>
+
+<p>安装 volta：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://get.volta.sh | bash</span><br></pre></td></tr></table></figure>
+
+<p>使用 volta 安装 node：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">volta install node</span><br></pre></td></tr></table></figure>
+
+<p>与 MacOS 不同的是，当你重启终端后会发现 corepack 失效了，具体的表现为，当你使用 <code>yarn -v</code> 时会出现如下提示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Volta error: Yarn is not available.</span><br><span class="line"></span><br><span class="line">Use `volta install yarn` to select a default version (see `volta help install` for more info).</span><br></pre></td></tr></table></figure>
+
+<p>可以使用 <code>which yarn</code> 来查看 yarn 的执行路径变为了：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/root/.volta/bin/yarn</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>在安装了 corepack 但未安装 volta 时，执行路径为 <code>/usr/bin/yarn</code></p>
+</blockquote>
+<p><strong>我们可以使用如下指令强行让 corepack 的 shim 覆盖掉 volta 的 shim：</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">corepack <span class="built_in">enable</span> --install-directory ~/.volta/bin</span><br></pre></td></tr></table></figure>
+
+<p>进入到 <code>~/.volta/bin</code> 目录下，使用 <code>ls -l</code> 指令，我们就会发现 volta 的 pnpm、yarn 相关的指令都被指向到了 corepack 的 shim：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">lrwxrwxrwx 1 root root   51  7月  6 17:08 pnpm -&gt; ../../../usr/lib/node_modules/corepack/dist/pnpm.js</span><br><span class="line">lrwxrwxrwx 1 root root   51  7月  6 17:08 pnpx -&gt; ../../../usr/lib/node_modules/corepack/dist/pnpx.js</span><br><span class="line">lrwxrwxrwx 1 root root   51  7月  6 17:08 yarn -&gt; ../../../usr/lib/node_modules/corepack/dist/yarn.js</span><br><span class="line">lrwxrwxrwx 1 root root   54  7月  6 17:08 yarnpkg -&gt; ../../../usr/lib/node_modules/corepack/dist/yarnpkg.js</span><br></pre></td></tr></table></figure>
+
+<p>这样，yarn/pnpm 的管理权就又重新回到了 corepack 手上，可以愉快的使用 corepack 了。</p>
+<h2 id="3-3-低版本-node-项目中无法使用-corepack"><a href="#3-3-低版本-node-项目中无法使用-corepack" class="headerlink" title="3.3 低版本 node 项目中无法使用 corepack"></a>3.3 低版本 node 项目中无法使用 corepack</h2><p>如果你的某个项目低于 <a href="mailto:node@16.9.0">node@16.9.0</a>，并且这个项目使用了 pnpm 或者 yarn 来作为包管理器管理项目依赖，那么当你安装并启用了 corepack 后你会发现无法使用 pnpm 和 yarn 指令了，会出现如下报错：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/Cellar/corepack/0.19.0/libexec/lib/node_modules/corepack/dist/lib/corepack.cjs:39787</span><br><span class="line">      process.exitCode ??= code;</span><br><span class="line">                       ^^^</span><br><span class="line"></span><br><span class="line">SyntaxError: Unexpected token &#x27;??=&#x27;</span><br><span class="line">    at wrapSafe (internal/modules/cjs/loader.js:1029:16)</span><br><span class="line">    at Module._compile (internal/modules/cjs/loader.js:1078:27)</span><br><span class="line">    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1143:10)</span><br><span class="line">    at Module.load (internal/modules/cjs/loader.js:979:32)</span><br><span class="line">    at Function.Module._load (internal/modules/cjs/loader.js:819:12)</span><br><span class="line">    at Module.require (internal/modules/cjs/loader.js:1003:19)</span><br><span class="line">    at require (internal/modules/cjs/helpers.js:107:18)</span><br><span class="line">    at Object.&lt;anonymous&gt; (/usr/local/Cellar/corepack/0.19.0/libexec/lib/node_modules/corepack/dist/pnpm.js:2:1)</span><br><span class="line">    at Module._compile (internal/modules/cjs/loader.js:1114:14)</span><br><span class="line">    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1143:10)</span><br></pre></td></tr></table></figure>
+
+<p>这是因为 corepack 本身是依赖高版本 node 运行的，当当前系统环境的 node 低于 16.9.0 时，当用户使用 pnpm/yarn 指令会调用 corepack 的 shim，然后执行 corepack 的代码，但是由于当前系统环境的 node 版本低于 corepack 的要求，因此就会出现运行错误。</p>
+<p>解决这个问题最好的方案是将 node 升级，如果是在无法升级，则可以尝试以下方案：</p>
+<ul>
+<li>【最笨的方案，不推荐使用】切回高版本 node，并禁用 corepack，然后回到低版本 node，全局安装 yarn/pnpm（回到高版本 node 前卸载掉全局安装的 yarn/pnpm，然后重新启用 corepack）；</li>
+<li>【推荐网速快的使用】使用 <code>npx yarn</code> 或 <code>npx pnpm</code> 指令（还可以指定版本，比如 <code>npx pnpm@6</code>）来绕过 corepack，这种方案最便捷，但是由于是使用 npx，每次都需要重新下载 pnpm 和 yarn，网速快的话可以无视；</li>
+<li>【配置复杂，但使用比较方便】使用 <code>volta install</code> 安装一个你需要版本的包管理器，比如 <code>volta install pnpm@6</code>，然后你可以在 <code>~/.volta/tools/image/packages/pnpm/bin</code> 目录下找到一个 <code>pnpm</code> 的可执行文件，你可以在你的 <code>.bashrc</code> 或者 <code>.zshrc</code> 使用 alias 创建一个指令别名，如 <code>alias pnpm@volta=&#39;~/.volta/tools/image/packages/pnpm/bin/pnpm&#39;</code>，然后就可以在需要的时候使用 pnpm@volta 来代替执行 pnpm 指令，如果需要切换版本，则重新使用 <code>volta install</code> 安装你需要的版本即可；</li>
+</ul>
+</div></article><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/npm/">npm</a><a class="post-meta__tags" href="/tags/volta/">volta</a><a class="post-meta__tags" href="/tags/node/">node</a><a class="post-meta__tags" href="/tags/corepack/">corepack</a></div><div class="addthis_inline_share_toolbox pull-right"></div><script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-62c7f2684e36ba34" async></script><nav id="pagination"><div class="prev-post pull-left"><a href="/2023/07/f781387dffc0.html"><i class="fa fa-chevron-left">  </i><span>极米投影仪通过 HomeAssistant 与 NodeRed 接入 Homekit</span></a></div><div class="next-post pull-right"><a href="/2023/06/8c4456586225.html"><span>如何配置 SSH 管理多个 Git 仓库和以及多个 Github 账号</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="disqus_thread"></div><script>var unused = null;
+var disqus_config = function () {
+  this.page.url = 'https://blog.esunr.site/2023/07/d99593770741.html';
+  this.page.identifier = '2023/07/d99593770741.html';
+  this.page.title = '使用 volta 与 corepack 规范团队在不同项目中使用的 node 版本与 npm 包管理器';
+}
+var d = document, s = d.createElement('script');
+s.src = "https://" + 'esunr-blog' +".disqus.com/embed.js";
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);</script><script id="dsq-count-scr" src="https://esunr-blog.disqus.com/count.js" async></script></div></div><footer class="footer-bg" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div class="layout" id="footer"><div class="copyright">&copy;2017 - 2025 By EsunR</div><div class="framework-info"><span>Driven - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">hitokoto</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.0"></script><script src="/js/fancybox.js?version=1.9.0"></script><script src="/js/sidebar.js?version=1.9.0"></script><script src="/js/copy.js?version=1.9.0"></script><script src="/js/fireworks.js?version=1.9.0"></script><script src="/js/transition.js?version=1.9.0"></script><script src="/js/scroll.js?version=1.9.0"></script><script src="/js/head.js?version=1.9.0"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>Powered by</span> <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

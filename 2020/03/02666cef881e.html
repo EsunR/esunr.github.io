@@ -1,0 +1,165 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="搞定一知半解的 &lt;Head&gt;"><meta name="keywords" content=""><meta name="author" content="EsunR"><meta name="copyright" content="EsunR"><title>搞定一知半解的 &lt;Head&gt; | EsunR-Blog</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.9.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css?version=1.9.0"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="dns-prefetch" href="https://hm.baidu.com"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?31bd12722efcf47cb7d0d576bf150215";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-3RG97DCL3N"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-3RG97DCL3N');</script><script src="https://v1.hitokoto.cn/?encode=js&amp;charset=utf-8&amp;select=.footer_custom_text" defer></script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  hexoVersion: '6.2.0'
+} </script><meta name="generator" content="Hexo 6.2.0"></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Head-%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-text">1. Head 的作用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-title"><span class="toc-text">2. title</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-meta"><span class="toc-text">3. meta</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-charset"><span class="toc-text">3.1 charset</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-http-equiv"><span class="toc-text">3.2 http-equiv</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-1-content-language%EF%BC%88%E5%BA%9F%E5%BC%83%EF%BC%89"><span class="toc-text">3.2.1 content-language（废弃）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-2-content-type%EF%BC%88%E5%BA%9F%E5%BC%83%EF%BC%89"><span class="toc-text">3.2.2 content-type（废弃）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-3-refresh"><span class="toc-text">3.2.3 refresh</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-4-set-cookie%EF%BC%88%E5%BA%9F%E5%BC%83%EF%BC%89"><span class="toc-text">3.2.4 set-cookie（废弃）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-name"><span class="toc-text">3.3 name</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-1-SEO-%E7%9B%B8%E5%85%B3"><span class="toc-text">3.3.1 SEO 相关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-2-%E6%B5%8F%E8%A7%88%E5%99%A8%E8%A1%8C%E4%B8%BA%E7%9B%B8%E5%85%B3"><span class="toc-text">3.3.2 浏览器行为相关</span></a></li></ol></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://esunr-webapp.cdn.bcebos.com/blog/avatar.jpeg?x-bce-process=image/resize,m_lfit,w_200/format,f_auto" alt="avatar"></div><div class="author-info__name text-center">EsunR</div><div class="author-info__description text-center">EsunR-Blog是由EsunR维护的博客平台，分享在前端开发、Git、Vue.js、Webpack、OAuth、Linux等各个领域的知识和经验。浏览这里的深入文章，了解不同主题的见解，并及时了解行业的最新趋势和技术。</div><div class="follow-button"><a target="_blank" rel="noopener" href="https://github.com/EsunR">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">172</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">155</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">26</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">EsunR-Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"><span class="site-page social-icon search"><i class="fa fa-search"></i><span> Search</span></span></span></div><div id="post-info"><div id="post-title">搞定一知半解的 &lt;Head&gt;</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-03-20</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="post-meta__separator">|</span><i class="fa fa-comment-o post-meta__icon" aria-hidden="true"></i><a href="/2020/03/02666cef881e.html#disqus_thread"><span class="disqus-comment-count" data-disqus-identifier="2020/03/02666cef881e.html"></span></a><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">2k</span><span class="post-meta__separator">|</span><span>Reading time: 7 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="1-Head-的作用"><a href="#1-Head-的作用" class="headerlink" title="1. Head 的作用"></a>1. Head 的作用</h1><p>HTML 头部是包含在 <code>&lt;head&gt;</code> 元素里面的内容。不像 <code>&lt;body&gt;</code> 元素的内容会显示在浏览器中，head 里面的内容<strong>不会在浏览器中显示</strong>，它的作用是包含一些页面的元数据。</p>
+<blockquote>
+<p>名词解释：元数据(Metadata)是用来概括描述数据的一些基本数据，比如一个人身高为 180cm 体重为 78kg，那么其身高与体重就是这个人的元数据。 </p>
+</blockquote>
+<h1 id="2-title"><a href="#2-title" class="headerlink" title="2. title"></a>2. title</h1><p>HTML <code>&lt;title&gt;</code> 元素 定义文档的标题，显示在浏览器的标题栏或标签页上。它只应该包含文本，若是包含有标签，则它包含的任何标签都将被忽略。</p>
+<blockquote>
+<p>这个元素值拥有<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes">全局属性。</a></p>
+</blockquote>
+<p>一个好的 title 的作用通常需要考虑如下几点</p>
+<ul>
+<li>title 是一个 SEO 的重要鉴别对象，不要使用过于普遍的词汇作为完整的 title</li>
+<li>动态改变 title 来形容当前页面的内容，可以更好的解决无障碍问题</li>
+</ul>
+<h1 id="3-meta"><a href="#3-meta" class="headerlink" title="3. meta"></a>3. meta</h1><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/meta">MDN 文档</a></p>
+<p><code>&lt;meta&gt;</code> 元素表示那些不能由其它HTML元相关元素 (<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/base" title="HTML &lt;base&gt; 元素 指定用于一个文档中包含的所有相对 URL 的根 URL。一份中只能有一个 &lt;base&gt; 元素。"><code>&lt;base&gt;</code></a>, <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/link" title="HTML外部资源链接元素 (&lt;link&gt;) 规定了当前文档与外部资源的关系。该元素最常用于链接样式表，此外也可以被用来创建站点图标(比如PC端的“favicon”图标和移动设备上用以显示在主屏幕的图标) 。"><code>&lt;link&gt;</code></a>, <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/script" title="HTML &lt;script&gt; 元素用于嵌入或引用可执行脚本。"><code>&lt;script&gt;</code></a>, <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/style" title="HTML的&lt;style&gt;元素包含文档的样式信息或者文档的部分内容。默认情况下，该标签的样式信息通常是CSS的格式。"><code>&lt;style&gt;</code></a> 或 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/title" title="HTML &lt;title&gt; 元素 定义文档的标题，显示在浏览器的标题栏或标签页上。它只应该包含文本，若是包含有标签，则它包含的任何标签都将被忽略。"><code>&lt;title&gt;</code></a>) 之一表示的任何元数据信息。</p>
+<h2 id="3-1-charset"><a href="#3-1-charset" class="headerlink" title="3.1 charset"></a>3.1 charset</h2><p>此特性声明当前文档所使用的字符编码，但该声明可以被任何一个元素的 lang 特性的值覆盖。最常见的就是再每个页面开头声明格式为 <code>utf-8</code>：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;utf-8&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>此外，不应该使用不兼容ASCII的编码规范， 以避免不必要的安全风险：浏览器不支持他们(这些不规范的编码)可能会导致浏览器渲染html出错. 比如JIS_C6226-1983, JIS_X0212-1990, HZ-GB-2312, JOHAB,ISO-2022 系列,EBCDIC系列 等文字。</p>
+<h2 id="3-2-http-equiv"><a href="#3-2-http-equiv" class="headerlink" title="3.2 http-equiv"></a>3.2 http-equiv</h2><p>这个枚举属性定义了能改变服务器和用户引擎行为的编译，其可以设置如下的几个属性值（但是具体的编译值使用 <code>content</code> 属性来定义）：</p>
+<h3 id="3-2-1-content-language（废弃）"><a href="#3-2-1-content-language（废弃）" class="headerlink" title="3.2.1 content-language（废弃）"></a>3.2.1 content-language（废弃）</h3><p>这个指令定义页面使用的默认语言。</p>
+<blockquote>
+<p>不要使用这个指令，因为它已经过时了。使用 <code>&lt;html&gt;</code> 元素上全局的 lang 属性来替代它！</p>
+</blockquote>
+<p><code>&quot;content-security-policy&quot;内容安全策略</code>：</p>
+<p>它允许页面作者定义当前页的内容策略，相当于设置了一个白名单机制。内容策略主要指定允许的服务器源和脚本端点，这有助于防止跨站点脚本攻击。</p>
+<p>示例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;Content-Security-Policy&quot;</span> <span class="attr">content</span>=<span class="string">&quot;script-src &#x27;self&#x27;; object-src &#x27;none&#x27;; style-src cdn.example.org third-party.org; child-src https:&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，CSP 做了如下配置。</p>
+<ul>
+<li>脚本：只信任当前域名</li>
+<li><code>&lt;object&gt;</code>标签：不信任任何URL，即不加载任何资源</li>
+<li>样式表：只信任<code>cdn.example.org</code>和<code>third-party.org</code></li>
+<li>框架（frame）：必须使用HTTPS协议加载</li>
+<li>其他资源：没有限制</li>
+</ul>
+<p>更多：<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2016/09/csp.html">Content Security Policy 入门教程</a></p>
+<h3 id="3-2-2-content-type（废弃）"><a href="#3-2-2-content-type（废弃）" class="headerlink" title="3.2.2 content-type（废弃）"></a>3.2.2 content-type（废弃）</h3><p>这个属性定义了文档的 MIME type , 实际上由它的字符编码决定。它遵循与HTTP content-type 头部字段相同的语法， 但由于它位于HTML页面内，因此除了text / html之外的大多数值都不能使用。 因此，其content的有效语法是字符串’text / html’，后跟一个具有以下语法的字符集：’;charset=IANAcharset，其中IANAcharset是IANA定义的字符集的首选MIME名称。</p>
+<p>由于 <code>&lt;meta&gt;</code> 不能在 XHTML 或 HTML5 的 XHTML 序列化中更改文档的类型，因此切勿使用<code>&lt;meta&gt;</code> 将MIME类型设置为 XHTML MIME 类型。</p>
+<blockquote>
+<p>不要使用该指令因为它已过时。使用 <code>&lt;meta&gt;</code> 元素的charset 属性代替。</p>
+</blockquote>
+<h3 id="3-2-3-refresh"><a href="#3-2-3-refresh" class="headerlink" title="3.2.3 refresh"></a>3.2.3 refresh</h3><p>这个属性指定:</p>
+<ul>
+<li>如果<code>content</code> 只包含一个正整数,则是重新载入页面的时间间隔(秒);</li>
+<li>如果<code>content</code> 包含一个正整数并且跟着一个字符串,则是重定向到指定链接的时间间隔(秒)</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 5秒之后刷新本页面 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;refresh&quot;</span> <span class="attr">content</span>=<span class="string">&quot;5&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 5秒之后转到某一页面--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span>  <span class="attr">http-equiv</span>=<span class="string">&quot;refresh&quot;</span> <span class="attr">content</span>=<span class="string">&quot;5;url=https://esunr.xyz&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>更多：<a target="_blank" rel="noopener" href="https://www.zhangxinxu.com/wordpress/2015/03/meta-http-equiv-refresh-content/">小tip: 使用meta实现页面的定时刷新或跳转</a></p>
+<h3 id="3-2-4-set-cookie（废弃）"><a href="#3-2-4-set-cookie（废弃）" class="headerlink" title="3.2.4 set-cookie（废弃）"></a>3.2.4 set-cookie（废弃）</h3><p>为页面定义cookie。其内容必须遵循 IETF HTTP Cookie 规范中定义的语法。</p>
+<blockquote>
+<p>请勿使用此说明，因为它已过时。请改用 HTTP 的 Set-Cookie 头部。</p>
+</blockquote>
+<h2 id="3-3-name"><a href="#3-3-name" class="headerlink" title="3.3 name"></a>3.3 name</h2><p>name 属性是一个比较杂糅的属性，其可以控制 SEO 的检索信息以及浏览器某些行为的相关设置。严格点来讲：<strong>该属性定义文档级元数据的名称</strong>。</p>
+<p>同时，如果一个 meta 标签中包含了 itemprop、http-equiv、charset 任意一个属性的话就不能再定义 name，如下面的这个 meta 就是不合法的：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;utf-8&quot;</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>name 属性可以定义元数据的类型，content 属性可以定义这些元数据类型的具体值，由于 name 可配置的属性过多，因此就分开来讲：</p>
+<h3 id="3-3-1-SEO-相关"><a href="#3-3-1-SEO-相关" class="headerlink" title="3.3.1 SEO 相关"></a>3.3.1 SEO 相关</h3><ul>
+<li><p><code>application-name</code>，定义正运行在该网页上的网络应用名称;</p>
+<p>说明：</p>
+<ul>
+<li>浏览器可能会通过使用该属性去区分应用。它与 <code>&lt;title&gt;</code> 元素不同，后者通常由应用程序名称组成，但也可能包含特定信息，如文档名称或状态;</li>
+<li>简单的网页不应该去定义application-name meta标签。</li>
+</ul>
+</li>
+<li><p><code>author</code>，就是这个文档的作者名称，可以用自由的格式去定义；</p>
+<p>举例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;author&quot;</span> <span class="attr">content</span>&quot;<span class="attr">root</span>,<span class="attr">root</span>@<span class="attr">21cn.com</span>&quot;&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>description</code>，其中包含页面内容的简短和精确的描述。 一些浏览器，如Firefox和Opera，将其用作书签页面的默认描述。</p>
+<p>举例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span> =<span class="string">&quot;keywords&quot;</span> <span class="attr">content</span>=<span class="string">&quot;science, education,culture,politics,ecnomics，relationships, entertaiment, human&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>generator</code>，包含生成页面的软件的标识符。</p>
+</li>
+<li><p><code>keywords</code>，包含与逗号分隔的页面内容相关的单词。</p>
+</li>
+<li><p><code>robots</code>，robots用来告诉爬虫哪些页面需要索引，哪些页面不需要索引。content的参数有all,none,index,noindex,follow,nofollow。默认是all。</p>
+<p>举例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;robots&quot;</span> <span class="attr">content</span>=<span class="string">&quot;none&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>revisit-after</code>，如果页面不是经常更新，为了减轻搜索引擎爬虫对服务器带来的压力，可以设置一个爬虫的重访时间。如果重访时间过短，爬虫将按它们定义的默认时间来访问。</p>
+<p>举例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;revisit-after&quot;</span> <span class="attr">content</span>=<span class="string">&quot;7 days&quot;</span> &gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="3-3-2-浏览器行为相关"><a href="#3-3-2-浏览器行为相关" class="headerlink" title="3.3.2 浏览器行为相关"></a>3.3.2 浏览器行为相关</h3><ul>
+<li><p><code>viewport</code>，设置浏览器视口</p>
+<p>详情查看：<a href="https://blog.esunr.site/2019/11/%E4%BB%8E%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%80%82%E9%85%8D%E8%B0%88%E8%B0%88%E5%93%8D%E5%BA%94%E5%BC%8F%E5%B8%83%E5%B1%80%E4%B8%8Eview-port/">从移动端适配探讨响应式布局与 view-port</a></p>
+</li>
+<li><p>uc强制竖屏</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;screen-orientation&quot;</span> <span class="attr">content</span>=<span class="string">&quot;portrait&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>QQ强制竖屏</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;x5-orientation&quot;</span> <span class="attr">content</span>=<span class="string">&quot;portrait&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>UC应用模式 </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;browsermode&quot;</span> <span class="attr">content</span>=<span class="string">&quot;application&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>QQ应用模式 </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;x5-page-mode&quot;</span> <span class="attr">content</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>IOS启用 WebApp 全屏模式</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;apple-mobile-web-app-capable&quot;</span> <span class="attr">content</span>=<span class="string">&quot;yes&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>IOS全屏模式下隐藏状态栏/设置状态栏颜色 content的值为default | black | black-translucent</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;apple-mobile-web-app-status-bar-style&quot;</span> <span class="attr">content</span>=<span class="string">&quot;black-translucent&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>IOS添加到主屏后的标题 </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;apple-mobile-web-app-title&quot;</span> <span class="attr">content</span>=<span class="string">&quot;标题&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>IOS添加智能 App 广告条 Smart App Banner</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;apple-itunes-app&quot;</span> <span class="attr">content</span>=<span class="string">&quot;app-id=myAppStoreID, affiliate-data=myAffiliateData, app-argument=myURL&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>去除 iPhone 识别数字为号码</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;format-detection&quot;</span> <span class="attr">content</span>=<span class="string">&quot;telephone=no&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>不识别邮箱</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;format-detection&quot;</span> <span class="attr">content</span>=<span class="string">&quot;email=no&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>禁止跳转至地图</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;format-detection&quot;</span> <span class="attr">content</span>=<span class="string">&quot;adress=no&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可以连写</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;format-detection&quot;</span> <span class="attr">content</span>=<span class="string">&quot;telephone=no,email=no,adress=no&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</div></article><div class="post-meta__tag-list"></div><div class="addthis_inline_share_toolbox pull-right"></div><script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-62c7f2684e36ba34" async></script><nav id="pagination"><div class="prev-post pull-left"><a href="/2020/03/345ebf94bf2f.html"><i class="fa fa-chevron-left">  </i><span>Webpack下避免打包某文件</span></a></div><div class="next-post pull-right"><a href="/2020/03/022ccc40ead3.html"><span>Web常见的网络安全问题与原理简析</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="disqus_thread"></div><script>var unused = null;
+var disqus_config = function () {
+  this.page.url = 'https://blog.esunr.site/2020/03/02666cef881e.html';
+  this.page.identifier = '2020/03/02666cef881e.html';
+  this.page.title = '搞定一知半解的 <Head>';
+}
+var d = document, s = d.createElement('script');
+s.src = "https://" + 'esunr-blog' +".disqus.com/embed.js";
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);</script><script id="dsq-count-scr" src="https://esunr-blog.disqus.com/count.js" async></script></div></div><footer class="footer-bg" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div class="layout" id="footer"><div class="copyright">&copy;2017 - 2025 By EsunR</div><div class="framework-info"><span>Driven - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">hitokoto</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.0"></script><script src="/js/fancybox.js?version=1.9.0"></script><script src="/js/sidebar.js?version=1.9.0"></script><script src="/js/copy.js?version=1.9.0"></script><script src="/js/fireworks.js?version=1.9.0"></script><script src="/js/transition.js?version=1.9.0"></script><script src="/js/scroll.js?version=1.9.0"></script><script src="/js/head.js?version=1.9.0"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>Powered by</span> <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

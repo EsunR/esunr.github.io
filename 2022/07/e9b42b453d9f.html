@@ -1,0 +1,130 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="Hexo + Obsidian + Git 完美的博客部署与编辑方案"><meta name="keywords" content="Hexo,Obsidian,自动化"><meta name="author" content="EsunR"><meta name="copyright" content="EsunR"><title>Hexo + Obsidian + Git 完美的博客部署与编辑方案 | EsunR-Blog</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.9.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css?version=1.9.0"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="dns-prefetch" href="https://hm.baidu.com"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?31bd12722efcf47cb7d0d576bf150215";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-3RG97DCL3N"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-3RG97DCL3N');</script><script src="https://v1.hitokoto.cn/?encode=js&amp;charset=utf-8&amp;select=.footer_custom_text" defer></script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  hexoVersion: '6.2.0'
+} </script><meta name="generator" content="Hexo 6.2.0"></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E5%89%8D%E8%A8%80"><span class="toc-text">1. 前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E6%9B%B4%E5%A5%BD%E7%9A%84%E6%96%87%E7%AB%A0%E7%AE%A1%E7%90%86%E6%96%B9%E6%A1%88"><span class="toc-text">2. 更好的文章管理方案</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E6%96%87%E7%AB%A0%E4%BB%A5%E7%9B%AE%E5%BD%95%E5%88%86%E7%B1%BB"><span class="toc-text">2.1 文章以目录分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E6%A0%B9%E6%8D%AE%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90-categories-%E4%BF%A1%E6%81%AF"><span class="toc-text">2.2 根据文件目录自动生成 categories 信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81%E6%97%B6%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E6%96%B0%E6%96%87%E7%AB%A0%E7%9A%84-categories"><span class="toc-text">2.3 提交代码时自动生成新文章的 categories</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E4%BD%BF%E7%94%A8-Obsidian-%E6%9D%A5%E7%BC%96%E5%86%99%E5%92%8C%E7%AE%A1%E7%90%86%E6%96%87%E7%AB%A0"><span class="toc-text">3. 使用 Obsidian 来编写和管理文章</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-%E5%B0%86-Hexo-%E9%A1%B9%E7%9B%AE%E5%AF%BC%E5%85%A5-Obsidian"><span class="toc-text">3.1 将 Hexo 项目导入 Obsidian</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-%E4%BD%BF%E7%94%A8-Obsidian-%E6%A8%A1%E6%9D%BF%E5%BF%AB%E9%80%9F%E5%88%9B%E5%BB%BA%E6%96%87%E7%AB%A0"><span class="toc-text">3.2 使用 Obsidian 模板快速创建文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-%E4%BD%BF%E7%94%A8-Obsidian-Git-%E6%8F%92%E4%BB%B6"><span class="toc-text">3.3 使用 Obsidian Git 插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-%E4%BD%BF%E7%94%A8-File-Tree-%E6%8F%92%E4%BB%B6"><span class="toc-text">3.4 使用 File Tree 插件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E4%BD%BF%E7%94%A8-iCloud-%E5%90%8C%E6%AD%A5%EF%BC%88%E4%B8%8D%E6%8E%A8%E8%8D%90%EF%BC%8C%E5%9B%A0%E4%B8%BA-Obsidian-%E6%96%87%E4%BB%B6%E5%B5%8C%E5%A5%97%E5%BE%88%E6%B7%B1%EF%BC%8CiCloud-%E5%90%8C%E6%AD%A5%E4%BC%9A%E5%BE%88%E7%81%BE%E9%9A%BE%EF%BC%89"><span class="toc-text">4. 使用 iCloud 同步（不推荐，因为 Obsidian 文件嵌套很深，iCloud 同步会很灾难）</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://esunr-webapp.cdn.bcebos.com/blog/avatar.jpeg?x-bce-process=image/resize,m_lfit,w_200/format,f_auto" alt="avatar"></div><div class="author-info__name text-center">EsunR</div><div class="author-info__description text-center">EsunR-Blog是由EsunR维护的博客平台，分享在前端开发、Git、Vue.js、Webpack、OAuth、Linux等各个领域的知识和经验。浏览这里的深入文章，了解不同主题的见解，并及时了解行业的最新趋势和技术。</div><div class="follow-button"><a target="_blank" rel="noopener" href="https://github.com/EsunR">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">172</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">155</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">26</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">EsunR-Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"><span class="site-page social-icon search"><i class="fa fa-search"></i><span> Search</span></span></span></div><div id="post-info"><div id="post-title">Hexo + Obsidian + Git 完美的博客部署与编辑方案</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2022-07-06</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E5%85%B6%E4%BB%96/">其他</a><span class="post-meta__separator">|</span><i class="fa fa-comment-o post-meta__icon" aria-hidden="true"></i><a href="/2022/07/e9b42b453d9f.html#disqus_thread"><span class="disqus-comment-count" data-disqus-identifier="2022/07/e9b42b453d9f.html"></span></a><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">2.5k</span><span class="post-meta__separator">|</span><span>Reading time: 8 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h1><p>在之前的文章<a href="https://blog.esunr.site/2022/06/64163235c30f.html">《Hexo 快速搭建指南》</a>中，重点讲解了如何搭建以及部署博客。但是在后期写博客的过程中，有可能遇到很多麻烦，比如：</p>
+<ul>
+<li>我不想手动维护文章的 Categorys，我想以文件目录的形式管理文章分类</li>
+<li>VSCode 编写 Markdown 文件不爽，我想用其他的编辑器来写 Markdown</li>
+<li><code>hexo new</code> 指令生成的模板太拉了，我不想用</li>
+<li>我想把我的 markdown 文档同步到云平台上，方便我的其他设备即时查看</li>
+</ul>
+<p>那么这篇文章就会教你使用最舒服的姿势来后期维护你的博客，减少心智负担与解决各种不爽的地方。</p>
+<h1 id="2-更好的文章管理方案"><a href="#2-更好的文章管理方案" class="headerlink" title="2. 更好的文章管理方案"></a>2. 更好的文章管理方案</h1><h2 id="2-1-文章以目录分类"><a href="#2-1-文章以目录分类" class="headerlink" title="2.1 文章以目录分类"></a>2.1 文章以目录分类</h2><p>当我们写好一篇文章后，按照 hexo 的默认配置，我们需要将其放在 <code>source/_post</code> 目录下，等时间长了之后，<code>_post</code> 目录下的文章就会变得杂乱无章，无法让我们快速的 review 到一篇文章。</p>
+<p>那么最好的解决方案就是我们在创建文章的时候以 <code>文章分类</code> 作为文件夹创建我们的文章，比如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">└── source</span><br><span class="line">    └── _post</span><br><span class="line">        ├── 前端</span><br><span class="line">        │   ├── Javascript</span><br><span class="line">        │   │   └── Javascript原型链机制.md</span><br><span class="line">        │   └── 浏览器</span><br><span class="line">        │       └── 浏览器性能优化.md</span><br><span class="line">        └── 后台</span><br><span class="line">            ├── GoLang</span><br><span class="line">            │   └── go语言简介.md</span><br><span class="line">            └── Java</span><br><span class="line">                └── Spring MVC 快速入门.md</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-根据文件目录自动生成-categories-信息"><a href="#2-2-根据文件目录自动生成-categories-信息" class="headerlink" title="2.2 根据文件目录自动生成 categories 信息"></a>2.2 根据文件目录自动生成 categories 信息</h2><p>虽然我们把文章放的井井有条了，但是每个文章里的 <code>categorys</code> 字段还是要我们手动自己维护的，比如在 <code>source/_post/前端/Javascript/Javascript原型链机制.md</code> 文件中，我们要通过手写 <code>categories</code> 来让 hexo 知道这篇文章被放在 <code>前端-Javascript</code> 分类下：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: Javascript原型链机制</span><br><span class="line">categories:</span><br><span class="line"><span class="bullet">  -</span> 前端</span><br><span class="line"><span class="bullet">  -</span> Javascript</span><br><span class="line"><span class="section">date: 2022-06-05 12:06:47</span></span><br><span class="line"><span class="section">---</span></span><br><span class="line"></span><br><span class="line">这里是正文</span><br></pre></td></tr></table></figure>
+
+<p>为了省去手动维护 <code>categorys</code> 字段的这个问题，我们可以使用 <a href="hexo-auto-category">hexo-auto-category</a> 这个插件。这个插件在 Hexo 进行 build 的时候会去自动根据文章目录情况来自动修改文章的 <code>categories</code> 信息，更详细的部分可以看<a target="_blank" rel="noopener" href="https://blog.eson.org/pub/e2f6e239/">作者的文章</a>。</p>
+<p>除此之外最好修改一下 <code>_config.yml</code> 中的两处默认配置：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 修改 permalink 让你的文章链接更加友好，并且有益于 SEO</span></span><br><span class="line"><span class="attr">permalink:</span> <span class="string">:year/:month/:hash.html</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 规定你的新文章在 _post 目录下是以 cateory </span></span><br><span class="line"><span class="attr">new_post_name:</span> <span class="string">:category/:title</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-3-提交代码时自动生成新文章的-categories"><a href="#2-3-提交代码时自动生成新文章的-categories" class="headerlink" title="2.3 提交代码时自动生成新文章的 categories"></a>2.3 提交代码时自动生成新文章的 categories</h2><p>但是这里有一个问题，就是只有 hexo 在执行 <code>hexo generate</code> 或者 <code>hexo server</code> 时候才会去触发 <code>categories</code> 的生成，那么每次我们创建文章都要经历这样的工作流：</p>
+<ol>
+<li>创建分类目录，写文章，文件名推荐与文章标题一致（不用关心 <code>categories</code> 写什么）；</li>
+<li>填写 <code>title</code>、<code>date</code>、<code>tag</code> 等元信息（这个文章后续再讨论如何省去这一步）;</li>
+<li>执行 <code>npx hexo generate</code> 在构建博客的时候触发 <code>hexo-auto-category</code> 插件的自动矫正 <code>categories</code> 功能；</li>
+<li>检查文章中的 <code>categories</code> 是否正确；</li>
+<li>添加 git 工作区变更，并提交并推送代码到 github。</li>
+</ol>
+<p>为了简化这些工作，我们可以使用 git hook，在我们每次执行 <code>commit</code> 前都自动运行 <code>npx hexo generate</code> 触发自动生成 <code>categories</code> 的行为，并将生成后的变更自动添加到本次提交中，然后一同 push 到 github 上去。这里可以使用 husky 来很方便的设置这样一个 git hook。</p>
+<blockquote>
+<p>GitHook 可以在执行代码的 commit、push、rebase 等阶段前触发，做一些前置行为，比如在每次提交代码时候执行一段 shell 脚本，来做一些代码检查或者通知 ci 等操作。</p>
+<p>Husky 采用了更简单的一种方式，让管理 GitHook 更加现代化</p>
+<p>关于 Husky 的使用可以参考我之前的文章<a href="https://blog.esunr.site/2022/05/d36522b1089c.html">《使用 husky 每次提交时进行代码检查》</a></p>
+</blockquote>
+<p>你可以按照如下步骤快速完成设置：</p>
+<ol>
+<li>安装 huksy：<code>npm install husky --save-dev</code></li>
+<li>执行 huksy 初始化指令：<code>npx husky install</code></li>
+<li>在 <code>package.json</code> 中的 <code>scripts</code> 中写入：<code>&quot;prepare&quot;: &quot;husky install&quot;</code></li>
+<li>在生成的 <code>.husky</code> 目录创建 <code>pre-commit</code> 文件（有的话就不用创建），并写入以下内容：</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/env sh</span></span><br><span class="line">. <span class="string">&quot;<span class="subst">$(dirname -- <span class="string">&quot;<span class="variable">$0</span>&quot;</span>)</span>/_/husky.sh&quot;</span></span><br><span class="line"></span><br><span class="line">npx hexo generate &amp;&amp; git add .</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果手动创建记得为 pre-commit 文件添加执行权限 <code>chmod +x pre-commit</code></p>
+</blockquote>
+<p>如果提交代码的时候，终端出现类似的构建过程，就说明由 husky 创建的  git hook 生效了：</p>
+<p><img src="https://s2.loli.net/2022/07/06/vcMfioCqpDtsFQd.png" alt=""></p>
+<p>这样你新建一篇博客的工作流就简化为：</p>
+<ol>
+<li>创建分类目录，写文章；</li>
+<li>填写 <code>title</code>、<code>date</code>、<code>tag</code> 等元信息;</li>
+<li>添加 git 工作区变更，并提交并推送代码到 github。</li>
+</ol>
+<p>这样就解决了令人头疼的文章分类问题~</p>
+<h1 id="3-使用-Obsidian-来编写和管理文章"><a href="#3-使用-Obsidian-来编写和管理文章" class="headerlink" title="3. 使用 Obsidian 来编写和管理文章"></a>3. 使用 Obsidian 来编写和管理文章</h1><blockquote>
+<p>Obsidian 是目前个人感觉使用起来最舒服的基于 Markdown 的笔记管理工具，好处不多言，用了就知道。</p>
+</blockquote>
+<h2 id="3-1-将-Hexo-项目导入-Obsidian"><a href="#3-1-将-Hexo-项目导入-Obsidian" class="headerlink" title="3.1 将 Hexo 项目导入 Obsidian"></a>3.1 将 Hexo 项目导入 Obsidian</h2><p>这一步很简单，打开 Obsidian 后，它会默认打开上次的存储库，这个时候你需要点击左下角的 <code>打开其他库</code> icon 来调出欢迎面板：</p>
+<p><img src="https://s2.loli.net/2022/07/06/QekZfSFhYlPwRim.png" alt=""></p>
+<p>然后在欢迎面板打开你的 Hexo 项目即可：</p>
+<p><img src="https://s2.loli.net/2022/07/06/YuTzAZeRvICmrEw.png" alt=""></p>
+<p>由于 hexo 的文章只存在于 <code>source</code> 目录下，我们需要让 Obsidian 忽略其他文件的内容以优化性能以及减少不必要的搜索结果。具体的操作是在 <code>设置-文件与链接-Exclude Files</code>，将需要忽略的文件添加进去（尤其是 node_modules）：</p>
+<p><img src="https://s2.loli.net/2022/07/06/8kN4a7H6XSAJzMo.png" alt=""></p>
+<p>同时，在你的 hexo 项目的 .gitignore 文件中加入如下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.obsidian/workspace</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>.obsidian 文件本身是可以同步的，当前存储库的插件以及相关的配置都会下载在这个文件夹中，因此将其同步到 git 记录中也是非常有用的，假如你切换设备就不需要重新为当前的存储库重新配置 Obsidian 了。</p>
+</blockquote>
+<h2 id="3-2-使用-Obsidian-模板快速创建文章"><a href="#3-2-使用-Obsidian-模板快速创建文章" class="headerlink" title="3.2 使用 Obsidian 模板快速创建文章"></a>3.2 使用 Obsidian 模板快速创建文章</h2><p>Obsidian 是支持创建新文件时插入模板的，这就意味着我们可以不用重复写 Hexo 博客文的 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/front-matter.html">Front-matter</a> 部分。</p>
+<blockquote>
+<p>Front-matter 是文件最上方以 <code>---</code> 分隔的区域，用于指定个别文件的变量，举例来说：</p>
+<p>-–<br>title: Hello World<br>date: 2013/7/13 20:46:25<br>-–</p>
+</blockquote>
+<p>首先我们要创建模板，我们可以在 <code>source</code> 目录下创建 <code>_obsidian</code> 文件夹，并创建一篇 <code>Post Template</code> 的文章（md文件），内容为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: &#123;&#123;title&#125;&#125;</span><br><span class="line">date: &#123;&#123;date&#125;&#125;</span><br><span class="line">tags: []</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<p>然后进入到 Obsidian 的设置面板，选择『核心插件』，并启用『模板』功能。同时点击旁边的配置按钮，进入到模板配置的设置中，将配置信息设置为：</p>
+<p><img src="https://s2.loli.net/2022/07/06/GcWpeZHJIumFEs1.png" alt=""></p>
+<p>之后，我们再创建新文章的时候，只需要点击侧边栏的『插入模板』按钮就可以快速生成 Front-matter 信息：</p>
+<p><img src="https://s2.loli.net/2022/07/06/aV4GeoxKZLMWg2j.png" alt=""></p>
+<h2 id="3-3-使用-Obsidian-Git-插件"><a href="#3-3-使用-Obsidian-Git-插件" class="headerlink" title="3.3 使用 Obsidian Git 插件"></a>3.3 使用 Obsidian Git 插件</h2><p>我们将 Hexo 项目导入到 Obsidian 之后就可以写作了，但是当写作完成之后还面临着提交代码、推送代码到 Github 上这一操作。如果我们在用额外的终端来进行这些操作的话就太割裂了，因此我们可以使用 Obsidian Git 插件来在 Obsidian 内就可以实现 git commit 以及 push 的操作。</p>
+<p>Obsidian Git 属于第三方插件，要想使用它必须在设置中关闭安全模式：</p>
+<p><img src="https://s2.loli.net/2022/07/06/YmbFpJyDTazhCfd.png" alt=""></p>
+<p>然后浏览插件库，搜索 Obsidian Git 并点击安装，安装完成之后根据自己需要的设置进行配置即可。</p>
+<p>如果想要查看当前的工作区、暂存区，可以使用快捷键 <code>command + p</code> 打开命令面板，输入 <code>open source control view</code> 就可以打开 Git 面板了，这里的面板跟 VSCode 的面板操作类似，并且我它会自动帮你生成 commit 信息（你可以自行在 Obsidian Git 设置面板里配置默认的 commit 信息）：</p>
+<p><img src="https://s2.loli.net/2022/07/06/jDtmglLPznXrsx8.png" alt=""></p>
+<p>当然你也可以懒得看 source control view，自己直接用 <code>command+p</code> 打开命令面板，分别执行 <code>git commit</code> 命令与 <code>git push</code> 即可。</p>
+<h2 id="3-4-使用-File-Tree-插件"><a href="#3-4-使用-File-Tree-插件" class="headerlink" title="3.4 使用 File Tree 插件"></a>3.4 使用 File Tree 插件</h2><p>Obsidian 很不好的一点就是会把所有的文件都列在左侧的文件列表中，但是对于我们的 Hexo 项目写文章来说，我们只会修改 <code>_post</code> 目录下的文件，因此我们希望左侧的文件列表中只显示 <code>_post</code> 文件夹，但是目前为止 Obsidian 并没有推出类似『聚焦』到某一文件夹内的功能。</p>
+<p>好在 Obsidian 强大的插件库中有一个 <code>File Tree Alternative Plugin</code> 第三方插件可以满足这一需求。按照 Obsidian Git 相同的方法去下载这个第三方插件，下载完成之后我们会发现左侧菜单出现了一个 <code>File Tree</code> 的 Tab 页，点击后就可以看到文件以树形的结构呈现：</p>
+<p><img src="https://s2.loli.net/2022/07/06/83QJC6ohSzFpqVK.png" alt=""></p>
+<p>我们展开 <code>source</code> 文件夹，并右键 <code>_post</code> 文件夹，选择 <code>Focuse on Folder</code> 后，左侧的文件列表中就只会显示 <code>_post</code> 文件夹中的内容了：</p>
+<p><img src="https://s2.loli.net/2022/07/06/61qjEJyv3pwmsWt.jpg" alt=""></p>
+<h1 id="4-使用-iCloud-同步（不推荐，因为-Obsidian-文件嵌套很深，iCloud-同步会很灾难）"><a href="#4-使用-iCloud-同步（不推荐，因为-Obsidian-文件嵌套很深，iCloud-同步会很灾难）" class="headerlink" title="4. 使用 iCloud 同步（不推荐，因为 Obsidian 文件嵌套很深，iCloud 同步会很灾难）"></a>4. 使用 iCloud 同步（不推荐，因为 Obsidian 文件嵌套很深，iCloud 同步会很灾难）</h1><p>如果你是苹果系用户，完全可以通过 iCloud 将 Hexo 项目作为 Obsidian 库同步到各个设备上，让每个设备都可以通过 Obsidian 实时查看和编辑笔记。</p>
+<p>你只需要将你的 Hexo 项目复制到 iCloud 的 Obsidian 文件夹即可，但是需要注意的一点是，你项目的 <code>node_modules</code> 也同步到 iCloud 上的话就太恐怖了。为了避免这一情况，我们需要将 <code>node_modules</code> 命名为 <code>node_modules.nosync</code> 这样就不会被 iCloud 同步。但是我们又需要 <code>node_modules</code> 来让项目正常运行，因此我们可以使用软链来创建一个 <code>node_modules</code> 软链到 <code>node_modules.nosync</code> 就能一举两得。简化成终端指令可以为：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 重命名 node_modules</span></span><br><span class="line"><span class="built_in">mv</span> node_modules node_modules.nosync</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建 node_modules 软链</span></span><br><span class="line"><span class="built_in">ln</span> -s node_modules.nosync/ node_modules</span><br></pre></td></tr></table></figure>
+
+</div></article><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Hexo/">Hexo</a><a class="post-meta__tags" href="/tags/Obsidian/">Obsidian</a><a class="post-meta__tags" href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/">自动化</a></div><div class="addthis_inline_share_toolbox pull-right"></div><script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-62c7f2684e36ba34" async></script><nav id="pagination"><div class="prev-post pull-left"><a href="/2022/07/72bea7fe8c23.html"><i class="fa fa-chevron-left">  </i><span>前端 Lint 工具使用指南</span></a></div><div class="next-post pull-right"><a href="/2022/07/918f1a0f646e.html"><span>ElementPlus Webpack 下按需引入</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="disqus_thread"></div><script>var unused = null;
+var disqus_config = function () {
+  this.page.url = 'https://blog.esunr.site/2022/07/e9b42b453d9f.html';
+  this.page.identifier = '2022/07/e9b42b453d9f.html';
+  this.page.title = 'Hexo + Obsidian + Git 完美的博客部署与编辑方案';
+}
+var d = document, s = d.createElement('script');
+s.src = "https://" + 'esunr-blog' +".disqus.com/embed.js";
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);</script><script id="dsq-count-scr" src="https://esunr-blog.disqus.com/count.js" async></script></div></div><footer class="footer-bg" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div class="layout" id="footer"><div class="copyright">&copy;2017 - 2025 By EsunR</div><div class="framework-info"><span>Driven - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">hitokoto</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.0"></script><script src="/js/fancybox.js?version=1.9.0"></script><script src="/js/sidebar.js?version=1.9.0"></script><script src="/js/copy.js?version=1.9.0"></script><script src="/js/fireworks.js?version=1.9.0"></script><script src="/js/transition.js?version=1.9.0"></script><script src="/js/scroll.js?version=1.9.0"></script><script src="/js/head.js?version=1.9.0"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>Powered by</span> <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

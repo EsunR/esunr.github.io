@@ -1,0 +1,92 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="前端页面的性能优化方案"><meta name="keywords" content="面试题"><meta name="author" content="EsunR"><meta name="copyright" content="EsunR"><title>前端页面的性能优化方案 | EsunR-Blog</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.9.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css?version=1.9.0"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="dns-prefetch" href="https://hm.baidu.com"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?31bd12722efcf47cb7d0d576bf150215";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-3RG97DCL3N"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-3RG97DCL3N');</script><script src="https://v1.hitokoto.cn/?encode=js&amp;charset=utf-8&amp;select=.footer_custom_text" defer></script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  hexoVersion: '6.2.0'
+} </script><meta name="generator" content="Hexo 6.2.0"></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E5%B8%B8%E8%A7%84%E6%96%B9%E6%A1%88"><span class="toc-text">1. 常规方案</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E5%8A%A0%E8%BD%BD%E8%B5%84%E6%BA%90%E4%BC%98%E5%8C%96"><span class="toc-text">1.1 加载资源优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96"><span class="toc-text">1.2 渲染优化</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E9%9D%9E%E5%B8%B8%E8%A7%84%E6%96%B9%E6%A1%88"><span class="toc-text">2. 非常规方案</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E4%BD%BF%E7%94%A8preload%E4%B8%8Eprefetch%E5%AF%B9%E9%A1%B5%E9%9D%A2%E8%B5%84%E6%BA%90%E8%BF%9B%E8%A1%8C%E9%A2%84%E5%8A%A0%E8%BD%BD"><span class="toc-text">2.1 使用preload与prefetch对页面资源进行预加载</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://esunr-webapp.cdn.bcebos.com/blog/avatar.jpeg?x-bce-process=image/resize,m_lfit,w_200/format,f_auto" alt="avatar"></div><div class="author-info__name text-center">EsunR</div><div class="author-info__description text-center">EsunR-Blog是由EsunR维护的博客平台，分享在前端开发、Git、Vue.js、Webpack、OAuth、Linux等各个领域的知识和经验。浏览这里的深入文章，了解不同主题的见解，并及时了解行业的最新趋势和技术。</div><div class="follow-button"><a target="_blank" rel="noopener" href="https://github.com/EsunR">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">172</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">155</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">26</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">EsunR-Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"><span class="site-page social-icon search"><i class="fa fa-search"></i><span> Search</span></span></span></div><div id="post-info"><div id="post-title">前端页面的性能优化方案</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-11-15</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="post-meta__separator">|</span><i class="fa fa-comment-o post-meta__icon" aria-hidden="true"></i><a href="/2019/11/90537b604dd9.html#disqus_thread"><span class="disqus-comment-count" data-disqus-identifier="2019/11/90537b604dd9.html"></span></a><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">733</span><span class="post-meta__separator">|</span><span>Reading time: 2 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="1-常规方案"><a href="#1-常规方案" class="headerlink" title="1. 常规方案"></a>1. 常规方案</h1><p>原则：</p>
+<ul>
+<li>多使用内存、缓存或者其他方法</li>
+<li>减少CPU计算、较少网络</li>
+</ul>
+<p>从哪里入手：</p>
+<ul>
+<li>加载页面和静态资源</li>
+<li>页面渲染</li>
+</ul>
+<h2 id="1-1-加载资源优化"><a href="#1-1-加载资源优化" class="headerlink" title="1.1 加载资源优化"></a>1.1 加载资源优化</h2><ul>
+<li>静态资源的压缩合并 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;a.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;b.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;c.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;abc.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>静态资源缓存（Cache-Control、Etag）<ul>
+<li>通过连接名称控制缓存</li>
+<li><code>&lt;script src=&quot;abc_1.js&quot;&gt;&lt;/script&gt;</code></li>
+<li>只有内容改变的时候，链接名称才会改变</li>
+<li><code>&lt;script src=&quot;aba.2.js&quot;&gt;&lt;/script&gt;</code></li>
+</ul>
+</li>
+<li>使用CDN让资源加载更快</li>
+<li>使用SSR后端渲染，数据直接输出到HTML中</li>
+<li>页面中的空 href 和 src 会阻塞其他资源的加载（阻塞下载进程）</li>
+<li>服务器 gzip </li>
+</ul>
+<h2 id="1-2-渲染优化"><a href="#1-2-渲染优化" class="headerlink" title="1.2 渲染优化"></a>1.2 渲染优化</h2><ul>
+<li>CSS放前面，JS放后面（JS 会阻塞页面的渲染，但是加载还是与其他资源一样处于并行）</li>
+<li>懒加载（图片懒加载、下拉加载更多）<ul>
+<li>懒加载原理：</li>
+<li>将图片的默认src都设置为一张加载图片</li>
+<li>把图片标签的属性中添加一个值存放图片的真实地址</li>
+<li>当图片需要加载时，再将图片的真实地址替换原有的默认src<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">id</span>=<span class="string">&quot;img1&quot;</span> <span class="attr">src</span>=<span class="string">&quot;preview.png&quot;</span> <span class="attr">data-realsrc</span>=<span class="string">&quot;abc.png&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">var</span> img1=<span class="variable language_">document</span>. <span class="title function_">getElementById</span>(<span class="string">&#x27; img1&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript">  img1. src=img1. <span class="title function_">getAttribute</span>(<span class="string">&#x27; data-realsrc&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>减少DOM查询，对DOM查询做缓存（将要重复使用的DOM存放在一个变量中）<ul>
+<li><img src="http://markdown.img.esunr.xyz/20190507202554.png" alt=""></li>
+<li><img src="http://markdown.img.esunr.xyz/20190507202612.png" alt=""></li>
+</ul>
+</li>
+<li>减少DOM操作，多个操作尽量合并在一起执行</li>
+<li>事件节流</li>
+<li>尽早执行操作（如DOMContentLoaded）</li>
+<li>禁止使用 iframe<ul>
+<li>iframe 会阻塞页面的 onload 事件</li>
+<li>不利于SEO</li>
+<li>iframe 和主页面共享连接池，而浏览器对相同域的连接有限制，所以会影响页面的并行加载</li>
+<li>使用 iframe 最好通过 javascript</li>
+<li>动态给 iframe 的 src 赋值</li>
+</ul>
+</li>
+</ul>
+<h1 id="2-非常规方案"><a href="#2-非常规方案" class="headerlink" title="2. 非常规方案"></a>2. 非常规方案</h1><h2 id="2-1-使用preload与prefetch对页面资源进行预加载"><a href="#2-1-使用preload与prefetch对页面资源进行预加载" class="headerlink" title="2.1 使用preload与prefetch对页面资源进行预加载"></a>2.1 使用preload与prefetch对页面资源进行预加载</h2><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Preloading_content">MDM文档</a></p>
+<ul>
+<li>使用 preload 可以预先加载资源文件</li>
+<li>预加载的资源不会对后面的资源造成阻塞</li>
+<li>preload 不阻塞 onload 事件（<code>&lt;script async&gt;</code> 会阻塞 onload 事件）</li>
+<li>预加载的 script 不会被执行，需要在页面中领用创建 <code>&lt;script&gt;</code> 标签的方式动态调用</li>
+<li>prefetch用来加载下一个页面将要使用的资源，所以优先级最低</li>
+</ul>
+<p>preload 是个好东西，能告诉浏览器提前加载当前页面必须的资源，将加载与解析执行分离开，做得好可以对首次渲染带来不小的提升，但要避免滥用，区分其与 prefetch 的关系，且需要知道 preload 不同资源时的网络优先级差异。</p>
+</div></article><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a></div><div class="addthis_inline_share_toolbox pull-right"></div><script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-62c7f2684e36ba34" async></script><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/11/7b2afc2d3cb0.html"><i class="fa fa-chevron-left">  </i><span>Koa中的的错误处理方案</span></a></div><div class="next-post pull-right"><a href="/2019/11/742b4ca50d57.html"><span>密码学基础：对称加密、非对称加密与数字签名与https</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="disqus_thread"></div><script>var unused = null;
+var disqus_config = function () {
+  this.page.url = 'https://blog.esunr.site/2019/11/90537b604dd9.html';
+  this.page.identifier = '2019/11/90537b604dd9.html';
+  this.page.title = '前端页面的性能优化方案';
+}
+var d = document, s = d.createElement('script');
+s.src = "https://" + 'esunr-blog' +".disqus.com/embed.js";
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);</script><script id="dsq-count-scr" src="https://esunr-blog.disqus.com/count.js" async></script></div></div><footer class="footer-bg" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div class="layout" id="footer"><div class="copyright">&copy;2017 - 2025 By EsunR</div><div class="framework-info"><span>Driven - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">hitokoto</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.0"></script><script src="/js/fancybox.js?version=1.9.0"></script><script src="/js/sidebar.js?version=1.9.0"></script><script src="/js/copy.js?version=1.9.0"></script><script src="/js/fireworks.js?version=1.9.0"></script><script src="/js/transition.js?version=1.9.0"></script><script src="/js/scroll.js?version=1.9.0"></script><script src="/js/head.js?version=1.9.0"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>Powered by</span> <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

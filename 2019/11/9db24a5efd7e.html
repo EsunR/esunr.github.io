@@ -1,0 +1,188 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="Git常用操作整理"><meta name="keywords" content="Git,Github"><meta name="author" content="EsunR"><meta name="copyright" content="EsunR"><title>Git常用操作整理 | EsunR-Blog</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.9.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css?version=1.9.0"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="dns-prefetch" href="https://hm.baidu.com"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?31bd12722efcf47cb7d0d576bf150215";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-3RG97DCL3N"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-3RG97DCL3N');</script><script src="https://v1.hitokoto.cn/?encode=js&amp;charset=utf-8&amp;select=.footer_custom_text" defer></script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  hexoVersion: '6.2.0'
+} </script><meta name="generator" content="Hexo 6.2.0"></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Git-%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="toc-text">1. Git 基本原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%9F%BA%E7%A1%80%E6%8C%87%E4%BB%A4"><span class="toc-text">2. 基础指令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-%E9%85%8D%E7%BD%AE"><span class="toc-text">Git 配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E4%BA%A4%E5%88%B0%E6%9A%82%E5%AD%98%E5%8C%BA"><span class="toc-text">提交到暂存区</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E6%96%87%E4%BB%B6%E7%8A%B6%E6%80%81"><span class="toc-text">查看当前文件状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E4%BA%A4%E5%88%B0%E5%8E%86%E5%8F%B2%E5%8C%BA"><span class="toc-text">提交到历史区</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="toc-text">3. 远程仓库</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8B%E6%BA%90"><span class="toc-text">远程源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8B%89%E5%8F%96%E6%8F%90%E4%BA%A4%E5%88%B0%E8%BF%9C%E7%A8%8B%E6%BA%90"><span class="toc-text">拉取提交到远程源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Clone"><span class="toc-text">Clone</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#https-%E5%85%8D%E5%AF%86%E7%A0%81%E5%90%8C%E6%AD%A5"><span class="toc-text">https 免密码同步</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E5%86%85%E5%AE%B9%E5%A4%84%E7%90%86"><span class="toc-text">4. 内容处理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%A2%E5%BC%83%E6%9B%B4%E6%94%B9"><span class="toc-text">丢弃更改</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%92%A4%E9%94%80%E6%9A%82%E5%AD%98"><span class="toc-text">撤销暂存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%BF%AE%E6%94%B9"><span class="toc-text">文件修改</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%88%A0%E9%99%A4"><span class="toc-text">文件删除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E9%87%8D%E5%91%BD%E5%90%8D"><span class="toc-text">文件重命名</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E5%B7%B2%E6%8F%90%E4%BA%A4%E7%9A%84%E4%BF%A1%E6%81%AF"><span class="toc-text">修改已提交的信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gitignore"><span class="toc-text">.gitignore</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-%E5%88%86%E6%94%AF"><span class="toc-text">5. 分支</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E6%94%AF%E6%9F%A5%E7%9C%8B"><span class="toc-text">分支查看</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%88%86%E6%94%AF"><span class="toc-text">创建分支</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%87%E6%8D%A2%E5%88%86%E6%94%AF"><span class="toc-text">切换分支</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E5%88%86%E6%94%AF"><span class="toc-text">删除分支</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E6%94%AF%E5%90%88%E5%B9%B6"><span class="toc-text">分支合并</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HEAD-%E4%B8%8E-master"><span class="toc-text">HEAD 与 master</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%B2%E7%AA%81%E8%A7%A3%E5%86%B3"><span class="toc-text">冲突解决</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fast-forward"><span class="toc-text">fast-forward</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-%E5%AD%90%E6%A8%A1%E5%9D%97"><span class="toc-text">6. 子模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%90%E6%A8%A1%E5%9D%97%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-text">子模块初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8B%89%E5%8F%96%E5%AD%90%E6%A8%A1%E5%9D%97%E4%B8%8A%E6%B8%B8%E6%9B%B4%E6%96%B0"><span class="toc-text">拉取子模块上游更新</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-upstream"><span class="toc-text">7. upstream</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://esunr-webapp.cdn.bcebos.com/blog/avatar.jpeg?x-bce-process=image/resize,m_lfit,w_200/format,f_auto" alt="avatar"></div><div class="author-info__name text-center">EsunR</div><div class="author-info__description text-center">EsunR-Blog是由EsunR维护的博客平台，分享在前端开发、Git、Vue.js、Webpack、OAuth、Linux等各个领域的知识和经验。浏览这里的深入文章，了解不同主题的见解，并及时了解行业的最新趋势和技术。</div><div class="follow-button"><a target="_blank" rel="noopener" href="https://github.com/EsunR">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">172</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">155</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">26</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">EsunR-Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"><span class="site-page social-icon search"><i class="fa fa-search"></i><span> Search</span></span></span></div><div id="post-info"><div id="post-title">Git常用操作整理</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-11-18</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Git/">Git</a><span class="post-meta__separator">|</span><i class="fa fa-comment-o post-meta__icon" aria-hidden="true"></i><a href="/2019/11/9db24a5efd7e.html#disqus_thread"><span class="disqus-comment-count" data-disqus-identifier="2019/11/9db24a5efd7e.html"></span></a><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">2k</span><span class="post-meta__separator">|</span><span>Reading time: 7 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="1-Git-基本原理"><a href="#1-Git-基本原理" class="headerlink" title="1. Git 基本原理"></a>1. Git 基本原理</h1><ul>
+<li>工作区：我们能看到的，用来写代码的区域</li>
+<li>暂存区：临时存储用的</li>
+<li>历史区：生成历史版本</li>
+</ul>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20191118231730.png" alt="Git基本工作流程"></p>
+<h1 id="2-基础指令"><a href="#2-基础指令" class="headerlink" title="2. 基础指令"></a>2. 基础指令</h1><h2 id="Git-配置"><a href="#Git-配置" class="headerlink" title="Git 配置"></a>Git 配置</h2><p>查看配置信息：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git config -l           <span class="comment"># 查看配置信息</span></span><br><span class="line">git config --global -l  <span class="comment"># 查看全局配置</span></span><br><span class="line">git config --<span class="built_in">local</span>  -l  <span class="comment"># 查看当前项目配置</span></span><br></pre></td></tr></table></figure>
+
+<p>设置配置：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&#x27;username&#x27;</span></span><br><span class="line">git config --global user.email <span class="string">&#x27;email&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="提交到暂存区"><a href="#提交到暂存区" class="headerlink" title="提交到暂存区"></a>提交到暂存区</h2><p>在本地编写完成代码后，把一些内容提交到暂存区</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add xxx   <span class="comment"># 把某个文件提交到暂存区</span></span><br><span class="line">git add .     <span class="comment"># 把当前仓库中的所有最新修改的文件都提交到暂存区</span></span><br><span class="line">git add -A    <span class="comment"># 同上</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="查看当前文件状态"><a href="#查看当前文件状态" class="headerlink" title="查看当前文件状态"></a>查看当前文件状态</h2><p>红色代表在工作区，绿色代表在暂存区，看不见东西证明所有修改信息都已提交到历史区</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status </span><br></pre></td></tr></table></figure>
+
+<p><img src="http://img.cdn.esunr.xyz/markdown/20191118233413.png" alt="演示示例"></p>
+<h2 id="提交到历史区"><a href="#提交到历史区" class="headerlink" title="提交到历史区"></a>提交到历史区</h2><p>只能将暂存区中的代码提交到历史区：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m <span class="string">&#x27;描述信息&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>查看历史信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git log         # 查看历史版本信息</span><br><span class="line">git reflog      # 查看包含回滚信息的历史版本信息</span><br><span class="line">git log --graph # 以时间线的形式查看分支信息</span><br></pre></td></tr></table></figure>
+
+<p>从工作区提交到暂存区、从暂存区提交到历史区都是把内容复制一份传过去，文本域中仍存在这些信息。</p>
+<blockquote>
+<p>在 vscode 中，更改后的代码在提交时可以自动进行暂存操作（add），无需再手动暂存。</p>
+</blockquote>
+<h1 id="3-远程仓库"><a href="#3-远程仓库" class="headerlink" title="3. 远程仓库"></a>3. 远程仓库</h1><h2 id="远程源"><a href="#远程源" class="headerlink" title="远程源"></a>远程源</h2><p>查看当前仓库远程源：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
+
+<p>添加/删除远程源:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin <span class="string">&#x27;Git Origin&#x27;</span>   </span><br><span class="line">git remote remove origin <span class="string">&#x27;Git Origin&#x27;</span>   </span><br></pre></td></tr></table></figure>
+
+<h2 id="拉取提交到远程源"><a href="#拉取提交到远程源" class="headerlink" title="拉取提交到远程源"></a>拉取提交到远程源</h2><p>拉取远程源：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull origin master</span><br></pre></td></tr></table></figure>
+
+<p>提交远程源：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
+
+<h2 id="Clone"><a href="#Clone" class="headerlink" title="Clone"></a>Clone</h2><p>Clone 可以简化拉取远程项目的步骤，与 <code>add remote origin</code> 并 <code>git pull</code> 不同的是，Clone 拉取的是整个项目的所有分支：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> <span class="string">&#x27;Git Origin&#x27;</span> </span><br></pre></td></tr></table></figure>
+
+<h2 id="https-免密码同步"><a href="#https-免密码同步" class="headerlink" title="https 免密码同步"></a>https 免密码同步</h2><p>在添加 git remote 地址的时候，如果使用的是 https，则需要每次提交同步代码的时候都输入用户名与密码，为了免去用户名与密码的输入我们可以修改 <code>.git/config</code> 文件下的配置，添加用户名与密码：</p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">## config</span><br><span class="line"></span><br><span class="line">[remote &quot;origin&quot;]</span><br><span class="line"><span class="deletion">-      url = https://github.com/UserName/YourProject.git</span></span><br><span class="line"><span class="addition">+      url = https://username:password@github.com/UserName/YourProject.git</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="4-内容处理"><a href="#4-内容处理" class="headerlink" title="4. 内容处理"></a>4. 内容处理</h1><h2 id="丢弃更改"><a href="#丢弃更改" class="headerlink" title="丢弃更改"></a>丢弃更改</h2><p>当文件进行变更后，且尚未进入暂存区时，使用 <code>chekcout --</code> 指令可以丢弃已有的更改</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -- &lt;file&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="撤销暂存"><a href="#撤销暂存" class="headerlink" title="撤销暂存"></a>撤销暂存</h2><p>当更改过的文件被提交到暂存区后，可以重新撤回到工作区</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset HEAD &lt;file&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="文件修改"><a href="#文件修改" class="headerlink" title="文件修改"></a>文件修改</h2><h3 id="文件删除"><a href="#文件删除" class="headerlink" title="文件删除"></a>文件删除</h3><p>删除一个被 git 追踪的文件：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">rm</span> &lt;file&gt;</span><br></pre></td></tr></table></figure>
+
+<p>与使用系统指令直接删除不同的是，文件删除之后会出现在暂存区，可以从暂存区中撤销到工作区，也可以再从工作区撤销更改，文件就会被恢复。</p>
+<h3 id="文件重命名"><a href="#文件重命名" class="headerlink" title="文件重命名"></a>文件重命名</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">mv</span> &lt;file name&gt; &lt;new file name&gt;</span><br></pre></td></tr></table></figure>
+
+<p>此时文件会被存放到暂存区，显示为对文件进行了一个 R（rename） 操作</p>
+<h2 id="修改已提交的信息"><a href="#修改已提交的信息" class="headerlink" title="修改已提交的信息"></a>修改已提交的信息</h2><p>当用户写错了一个提交信息并向修正信息时可以使用以下指令修正信息：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit --amend -m <span class="string">&#x27;纠正过的提交信息&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>amend: 修正</p>
+</blockquote>
+<h2 id="gitignore"><a href="#gitignore" class="headerlink" title=".gitignore"></a>.gitignore</h2><ul>
+<li><code>*.a</code> 忽略所有 .a 结尾的文件</li>
+<li><code>!lib.a</code> 在上述的忽略规则中 lib.a 除外</li>
+<li><code>/TODO</code> 仅仅忽略项目根目录下的 TODO 文件，不包括 subdir/TODO</li>
+<li><code>build/</code> 忽略 build/ 目录下的所有文件</li>
+<li><code>doc/*.txt</code> 会忽略 doc/notes.txt 但不包括 doc/server/arch.txt</li>
+</ul>
+<h1 id="5-分支"><a href="#5-分支" class="headerlink" title="5. 分支"></a>5. 分支</h1><h2 id="分支查看"><a href="#分支查看" class="headerlink" title="分支查看"></a>分支查看</h2><p>查看当前版本库的所有分支：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://img.cdn.esunr.xyz/markdown/20191210112942.png" alt=""></p>
+<p>查看本地分支以及远程分支：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -a</span><br></pre></td></tr></table></figure>
+
+<p>查看各分支最近一次提交的记录：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -v</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git branch &lt;branch name&gt;</span><br><span class="line">git checkout -b &lt;branch name&gt; <span class="comment"># 创建并切换到新分支</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="切换分支"><a href="#切换分支" class="headerlink" title="切换分支"></a>切换分支</h2><p>git 分支的切换也用的是 <code>checkout</code> 指令，这与文件的签出要进行区别，文件的签出是将文件从工作区撤销更改，而分支的签出是改变分支：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout &lt;branch name&gt;</span><br><span class="line">git checkout - <span class="comment"># 切换到上一个分支</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="删除分支"><a href="#删除分支" class="headerlink" title="删除分支"></a>删除分支</h2><p>git 不可以删除当前分支，删除分支前需要切换到别的分支：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d &lt;branch name&gt;</span><br></pre></td></tr></table></figure>
+
+<p>如果删除的目标分支被改动且没有被合并过，则分支需要使用强制删除：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -D &lt;branch name&gt;</span><br></pre></td></tr></table></figure>
+
+<p>删除远程分支：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin --delete &lt;branch name&gt;</span><br></pre></td></tr></table></figure>
+
+<p>删除当前分支外的所有分支：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch | xargs git branch -d</span><br></pre></td></tr></table></figure>
+
+<p>删除分支名包含指定字符的分支：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch | grep <span class="string">&#x27;dev*&#x27;</span> | xargs git branch -d</span><br></pre></td></tr></table></figure>
+
+<p>删除远程不存在的分支：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote prune origin</span><br></pre></td></tr></table></figure>
+
+<h2 id="分支合并"><a href="#分支合并" class="headerlink" title="分支合并"></a>分支合并</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git merge &lt;target branch&gt; &lt;branch&gt;  <span class="comment"># 将 branch 的最新修改合并到 target branch 中</span></span><br><span class="line">git merge &lt;branch&gt;                  <span class="comment"># 将 branch 的最新修改合并到当前分支</span></span><br></pre></td></tr></table></figure>
+
+<p>如果将某一个分支（branch）的最新修改合并到目标分支（target branch）上，那么目标分支（target branch）的文件会处于修改的最新版本，而合并的分支（branch）并不会拥有目标分支（target branch）的新内容。如果需要目标分支（target branch）的新内容，则需要将目标分支合并到该分支上。</p>
+<h2 id="HEAD-与-master"><a href="#HEAD-与-master" class="headerlink" title="HEAD 与 master"></a>HEAD 与 master</h2><p>HEAD 指的是当前分支，master 指的是当前提交的版本：</p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20191210141717.png" alt=""></p>
+<p>当用户新创建了一个 dev 分支，最新的分支还是会指向当前 master 主分支指向的节点：</p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20191210142013.png" alt=""></p>
+<p>当用户在 dev 分支进行提交后，dev 分支会新建一个版本并指向新版本的提交：</p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20191210142110.png" alt=""></p>
+<p>当 master 分支上没有进行更改，此时合并 dev 与 master 分支的话，master 分支的指针会直接指向当前的版本，我们称这样的操作为 “快进（fast forward）”：</p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20191210142312.png" alt=""></p>
+<h2 id="冲突解决"><a href="#冲突解决" class="headerlink" title="冲突解决"></a>冲突解决</h2><p>当我们将 dev 分支的最新内容合并到 master 分支时如果出现了冲突需要手动解决冲突，冲突的文件会内容会被标识为类似：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">new file</span><br><span class="line">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</span><br><span class="line">master edit</span><br><span class="line">=======</span><br><span class="line">dev edit</span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt; dev</span><br></pre></td></tr></table></figure>
+
+<p>此时我们需要手动进入到文件中，将不需要的代码删除，然后再进行一次提交，这样就解决了冲突。</p>
+<p>当此时切回到 dev 分支后，如果想要获取到最新的 master 分支的内容，则需要将 master 分支合并到 dev 分支，此时由于 master 分支被标记为最新更改，所以如果在 dev 分支上没有对已在 master 分支解决了冲突的文件进行修改，dev 分支就会直接快进到 master 分支的版本。</p>
+<p>实际上冲突也是另外开了一个冲突分支，我们解决冲突就是去合并冲突分支：</p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20191210152834.png" alt=""></p>
+<h2 id="fast-forward"><a href="#fast-forward" class="headerlink" title="fast-forward"></a>fast-forward</h2><p>如果可能，git 提交会使用 fast-forward 模式，在这种模式下合并分支并未生成一个新的提交，而是将当前分支的指针指向了</p>
+<h1 id="6-子模块"><a href="#6-子模块" class="headerlink" title="6. 子模块"></a>6. 子模块</h1><h2 id="子模块初始化"><a href="#子模块初始化" class="headerlink" title="子模块初始化"></a>子模块初始化</h2><p>项目有子模块，Clone 后需要进行初始化：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git submodule init     <span class="comment"># 初始化子模块信息</span></span><br><span class="line">git submodule update   <span class="comment"># 拉去子模块更新</span></span><br></pre></td></tr></table></figure>
+
+<p>上面两个模块可以合并为一个：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git submodule update --init</span><br></pre></td></tr></table></figure>
+
+<h2 id="拉取子模块上游更新"><a href="#拉取子模块上游更新" class="headerlink" title="拉取子模块上游更新"></a>拉取子模块上游更新</h2><blockquote>
+<p>–recursive 为递归</p>
+</blockquote>
+<p>从远程源拉取：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git submodule update --recursive --remote</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>远程源默认拉取 master 分支，如果需要更改拉取分支，则需要在 .gitmodules 文件中添加 branch 信息</p>
+</blockquote>
+<p>从本地 url 源拉取：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git submodule update --init --recursive</span><br></pre></td></tr></table></figure>
+
+<p>手动递归拉取：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git submodule foreach git pull origin &lt;branch&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="7-upstream"><a href="#7-upstream" class="headerlink" title="7. upstream"></a>7. upstream</h1><p>当你在 Github 上 Fork 别人的项目，同时保持与 Fork 项目的同步更新时，可以将目标项目设置为 <code>upstream</code>，这样就能做到保持更新了，他们的关系如下图：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202405091350390.png" alt="202405091350390.png|496"></p>
+<p>设置 upstream:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add upstream &lt;git_repository_url&gt;</span><br></pre></td></tr></table></figure>
+
+<p>从 upstream 更新代码到当前分支：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull upstream &lt;upstream_brach_name&gt;</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://gb.yekai.net/concepts/origin-vs-upstream">更多参考</a></p>
+</div></article><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Git/">Git</a><a class="post-meta__tags" href="/tags/Github/">Github</a></div><div class="addthis_inline_share_toolbox pull-right"></div><script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-62c7f2684e36ba34" async></script><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/11/a3089ef6c32b.html"><i class="fa fa-chevron-left">  </i><span>Surface Pro 6 日常使用问题记录</span></a></div><div class="next-post pull-right"><a href="/2019/11/7b2afc2d3cb0.html"><span>Koa中的的错误处理方案</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="disqus_thread"></div><script>var unused = null;
+var disqus_config = function () {
+  this.page.url = 'https://blog.esunr.site/2019/11/9db24a5efd7e.html';
+  this.page.identifier = '2019/11/9db24a5efd7e.html';
+  this.page.title = 'Git常用操作整理';
+}
+var d = document, s = d.createElement('script');
+s.src = "https://" + 'esunr-blog' +".disqus.com/embed.js";
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);</script><script id="dsq-count-scr" src="https://esunr-blog.disqus.com/count.js" async></script></div></div><footer class="footer-bg" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div class="layout" id="footer"><div class="copyright">&copy;2017 - 2025 By EsunR</div><div class="framework-info"><span>Driven - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">hitokoto</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.0"></script><script src="/js/fancybox.js?version=1.9.0"></script><script src="/js/sidebar.js?version=1.9.0"></script><script src="/js/copy.js?version=1.9.0"></script><script src="/js/fireworks.js?version=1.9.0"></script><script src="/js/transition.js?version=1.9.0"></script><script src="/js/scroll.js?version=1.9.0"></script><script src="/js/head.js?version=1.9.0"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>Powered by</span> <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

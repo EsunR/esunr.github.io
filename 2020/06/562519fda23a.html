@@ -1,0 +1,319 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="浏览器常见的兼容性问题以及解决方案"><meta name="keywords" content=""><meta name="author" content="EsunR"><meta name="copyright" content="EsunR"><title>浏览器常见的兼容性问题以及解决方案 | EsunR-Blog</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.9.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css?version=1.9.0"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="dns-prefetch" href="https://hm.baidu.com"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?31bd12722efcf47cb7d0d576bf150215";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-3RG97DCL3N"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-3RG97DCL3N');</script><script src="https://v1.hitokoto.cn/?encode=js&amp;charset=utf-8&amp;select=.footer_custom_text" defer></script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  hexoVersion: '6.2.0'
+} </script><meta name="generator" content="Hexo 6.2.0"></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E5%89%8D%E8%A8%80"><span class="toc-text">1. 前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%9B%BD%E5%86%85%E4%B8%BB%E6%B5%81%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85%E6%A0%B8%E7%89%88%E6%9C%AC"><span class="toc-text">2. 国内主流浏览器内核版本</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Javascript-%E5%85%BC%E5%AE%B9%E6%80%A7%E9%97%AE%E9%A2%98"><span class="toc-text">3. Javascript 兼容性问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3"><span class="toc-text">网络相关</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#XMLHttpRequest"><span class="toc-text">XMLHttpRequest</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fetch-API"><span class="toc-text">Fetch API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Websocket"><span class="toc-text">Websocket</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM-%E7%9B%B8%E5%85%B3"><span class="toc-text">DOM 相关</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#document-all"><span class="toc-text">document.all</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTMLElement-childNodes"><span class="toc-text">HTMLElement.childNodes</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E7%9B%B8%E5%85%B3"><span class="toc-text">事件相关</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#window-event"><span class="toc-text">window.event</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#addEventListener"><span class="toc-text">addEventListener</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E7%9B%B8%E5%85%B3"><span class="toc-text">图像相关</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#window-requestAnimationFrame"><span class="toc-text">window.requestAnimationFrame</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Web-Animations-API"><span class="toc-text">Web Animations API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WebGL"><span class="toc-text">WebGL</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text">其他</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#window-getComputedStyle"><span class="toc-text">window.getComputedStyle()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Date-prototype-getYear"><span class="toc-text">Date.prototype.getYear()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87%E7%B4%A2%E5%BC%95%E8%8E%B7%E5%8F%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%9F%90%E4%B8%AA%E5%AD%97%E7%AC%A6"><span class="toc-text">通过索引获取字符串某个字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WebWorker-API"><span class="toc-text">WebWorker API</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ES6-%E8%AF%AD%E6%B3%95"><span class="toc-text">ES6 语法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Babel"><span class="toc-text">Babel</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#babel-preset-env"><span class="toc-text">@babel&#x2F;preset-env</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-CSS-%E5%B1%9E%E6%80%A7%E5%85%BC%E5%AE%B9%E6%80%A7%E9%97%AE%E9%A2%98"><span class="toc-text">4. CSS 属性兼容性问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-text">选择器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-text">基本选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E5%90%88%E5%99%A8"><span class="toc-text">组合器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%AA%E7%B1%BB"><span class="toc-text">伪类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%AA%E5%85%83%E7%B4%A0"><span class="toc-text">伪元素</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96-1"><span class="toc-text">其他</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AA%92%E4%BD%93%E6%9F%A5%E8%AF%A2%E5%99%A8"><span class="toc-text">媒体查询器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#page"><span class="toc-text">@page</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-HTML-%E6%A0%87%E7%AD%BE%E5%85%BC%E5%AE%B9%E6%80%A7%E9%97%AE%E9%A2%98"><span class="toc-text">5. HTML 标签兼容性问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTML5-%E6%A0%87%E7%AD%BE%E6%94%AF%E6%8C%81"><span class="toc-text">HTML5 标签支持</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#template"><span class="toc-text">template</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#video"><span class="toc-text">video</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#embed"><span class="toc-text">embed</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#audio"><span class="toc-text">audio</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#track"><span class="toc-text">track</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#canvas"><span class="toc-text">canvas</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#svg"><span class="toc-text">svg</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#datalist"><span class="toc-text">datalist</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#output"><span class="toc-text">output</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#process"><span class="toc-text">process</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Meter"><span class="toc-text">Meter</span></a></li></ol></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://esunr-webapp.cdn.bcebos.com/blog/avatar.jpeg?x-bce-process=image/resize,m_lfit,w_200/format,f_auto" alt="avatar"></div><div class="author-info__name text-center">EsunR</div><div class="author-info__description text-center">EsunR-Blog是由EsunR维护的博客平台，分享在前端开发、Git、Vue.js、Webpack、OAuth、Linux等各个领域的知识和经验。浏览这里的深入文章，了解不同主题的见解，并及时了解行业的最新趋势和技术。</div><div class="follow-button"><a target="_blank" rel="noopener" href="https://github.com/EsunR">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">172</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">155</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">26</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">EsunR-Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"><span class="site-page social-icon search"><i class="fa fa-search"></i><span> Search</span></span></span></div><div id="post-info"><div id="post-title">浏览器常见的兼容性问题以及解决方案</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-06-03</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="post-meta__separator">|</span><i class="fa fa-comment-o post-meta__icon" aria-hidden="true"></i><a href="/2020/06/562519fda23a.html#disqus_thread"><span class="disqus-comment-count" data-disqus-identifier="2020/06/562519fda23a.html"></span></a><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">3.2k</span><span class="post-meta__separator">|</span><span>Reading time: 10 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h1><p>本文前半部分将主要展示各主流浏览器的内核版本情况，HTML5以及CSS3的支持情况，以及开发过程中常见的兼容性问题。后半部分则将会从工程化的角度上来考虑如何解决这些问题，并提出向下兼容的方案。</p>
+<blockquote>
+<p>Tips：文档内 “+” 均表示大于等于，如 IE9+ 即代表 IE 版本号大于等于 9。</p>
+</blockquote>
+<h1 id="2-国内主流浏览器内核版本"><a href="#2-国内主流浏览器内核版本" class="headerlink" title="2. 国内主流浏览器内核版本"></a>2. 国内主流浏览器内核版本</h1><p>对于国内的情况而言，大多数用户会使用主流大厂提供的浏览器，同时对于部分机房环境则使用了系统默认的 IE 浏览器，因此在下面的列表中整理了IE浏览器以及主流国产浏览器对于浏览器内核的版本使用情况，同时附带了各浏览器版本的发布时间：</p>
+<blockquote>
+<p>Tips: 部分国产浏览较早之前的浏览器使用了 Webkit 内核，但是由于受 Chrome 转向使用了 Blink 内核的影响，因此国产浏览器也逐渐放弃使用了 Webkit 内核，目前为止，国内主流的浏览器均使用了 Chromium 内核来作为底层内核（<a href="[https://zh.wikipedia.org/wiki/Chromium#%E9%9D%9E%E5%AE%98%E6%96%B9%E4%BF%AE%E6%94%B9%E7%89%88](https://zh.wikipedia.org/wiki/Chromium#非官方修改版)">引用参考</a>），只是内核版本不同。</p>
+</blockquote>
+<ul>
+<li>Internet Explore<ul>
+<li>IE6 2001</li>
+<li>IE7 2006（Windows XP SP3、Windows Vista）</li>
+<li>IE8 2009（Windows7）</li>
+<li>IE9 2011</li>
+<li>IE10 2011（Windows 8）</li>
+<li>IE11 2013（Windows8.1、Windows 10）</li>
+</ul>
+</li>
+<li>QQ 浏览器（基于Chromium开发，针对IE内核优化）<ul>
+<li>v10.0 2020（Chromium70 &amp; IE 10）</li>
+<li>v9.6 2017（Chromium53）</li>
+<li>v9.3 2016（Chromium47）</li>
+<li>v9.0 2015（Chromium43 &amp; IE 8）</li>
+<li>v7.0 2012（Webkit）</li>
+</ul>
+</li>
+<li>360极速浏览器（双核）<ul>
+<li>v12.0 2020 （Chromium78）</li>
+</ul>
+</li>
+<li>360安全浏览器（双核）<ul>
+<li>v12.1 2020 （Chromium78）</li>
+<li>v6.0 2015（Chromium45）</li>
+</ul>
+</li>
+<li>搜狗浏览器（双核）<ul>
+<li>v8.0 2020 （Chromium65）</li>
+</ul>
+</li>
+<li>猎豹浏览器（双核）<ul>
+<li>v6.5 2017（Chromium57）</li>
+</ul>
+</li>
+<li>Edge<ul>
+<li>旧版本 （Trident 7 / IE 11）</li>
+<li>2020 年正式版（Chromium83）</li>
+</ul>
+</li>
+</ul>
+<h1 id="3-Javascript-兼容性问题"><a href="#3-Javascript-兼容性问题" class="headerlink" title="3. Javascript 兼容性问题"></a>3. Javascript 兼容性问题</h1><h2 id="网络相关"><a href="#网络相关" class="headerlink" title="网络相关"></a>网络相关</h2><h3 id="XMLHttpRequest"><a href="#XMLHttpRequest" class="headerlink" title="XMLHttpRequest"></a>XMLHttpRequest</h3><p><img src="http://img.cdn.esunr.xyz/markdown/20200603194101.png" alt=""></p>
+<p>对于原生 XMLHttpRequest 支持 IE6+ 的浏览器，如果需要在 IE6 上支持 XMLHttpRequest 对象，则需要使用 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Archive/Web/JavaScript/Microsoft_Extensions/ActiveXObject">ActiveXObject</a> 对象做兼容。</p>
+<p>关于跨域，IE10+ 才支持 ResponseHeader Access-Control-Allow-Origin（<a href="[https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS#%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%BC%E5%AE%B9%E6%80%A7](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS#浏览器兼容性)">完整兼容性参考</a>），低版本浏览器可以使用 JSONP 方案进行跨域。</p>
+<p>关于基于 XMLHttpRequest 而构建的 <a target="_blank" rel="noopener" href="https://github.com/axios/axios">Axios</a> 使用了 Promise，因此在不支持 ES6 版本的浏览器上使用时需要添加 Promise 的语法垫片。</p>
+<h3 id="Fetch-API"><a href="#Fetch-API" class="headerlink" title="Fetch API"></a>Fetch API</h3><p><img src="http://img.cdn.esunr.xyz/markdown/20200603194004.png" alt=""></p>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">Fetch API</a> 提供了一个 JavaScript 接口，用于访问和操纵 HTTP 管道的一些具体部分，需要注意其实一个实验性特征，且 IE 所有版本均不支持。</p>
+<h3 id="Websocket"><a href="#Websocket" class="headerlink" title="Websocket"></a>Websocket</h3><p><img src="http://img.cdn.esunr.xyz/markdown/20200605163344.png" alt=""></p>
+<p>在 IE10+ 支持 WebSocket 对象，并且与其他浏览器一样遵循了 Standard - RFC 6455 Support 协议。对于低版本的浏览器，SocketIO Client 端提供了 IE9 的解决方案（实现原理是在 WebSocket、AJAX long-polling、AJAX multipart streaming、 Forever Iframe 几种方式之间进行切换）。</p>
+<h2 id="DOM-相关"><a href="#DOM-相关" class="headerlink" title="DOM 相关"></a>DOM 相关</h2><h3 id="document-all"><a href="#document-all" class="headerlink" title="document.all"></a>document.all</h3><p>仅支持 IE 浏览器，该特性已经从 Web 标准中删除，请尽量不要使用该特性。</p>
+<h3 id="HTMLElement-childNodes"><a href="#HTMLElement-childNodes" class="headerlink" title="HTMLElement.childNodes"></a>HTMLElement.childNodes</h3><p>IE8 以及以下版本浏览器获仅获取元素节点，更高版本的浏览器以及现代浏览器获取包含文本节点的所有子节点。</p>
+<h2 id="事件相关"><a href="#事件相关" class="headerlink" title="事件相关"></a>事件相关</h2><h3 id="window-event"><a href="#window-event" class="headerlink" title="window.event"></a>window.event</h3><p>window.event 作为 IE10 以及以下版本的 IE 浏览器获得事件对象的方法，<strong>在 IE11 中已经被移出</strong>，该方法是一个非标准化的方法。</p>
+<h3 id="addEventListener"><a href="#addEventListener" class="headerlink" title="addEventListener"></a>addEventListener</h3><p><img src="http://img.cdn.esunr.xyz/markdown/20200603201239.png" alt=""></p>
+<p>IE9 以下版本的浏览器不支持 addEventListener 方法添加事件，需要使用 attachEvent 来添加。同时需要注意，使用 attachEvent 方法有个缺点，this 的值会变成 window 对象的引用而不是触发事件的元素。</p>
+<h2 id="图像相关"><a href="#图像相关" class="headerlink" title="图像相关"></a>图像相关</h2><h3 id="window-requestAnimationFrame"><a href="#window-requestAnimationFrame" class="headerlink" title="window.requestAnimationFrame"></a>window.requestAnimationFrame</h3><p><img src="http://img.cdn.esunr.xyz/markdown/20200608194036.png" alt=""></p>
+<p>在 IE9 以及以下版本的浏览器上可以使用定时器来解决 <code>requestAnimationFrame</code> 的兼容性问题，但这也就意味着会失去其带来的最佳的动画流畅度的优势。</p>
+<h3 id="Web-Animations-API"><a href="#Web-Animations-API" class="headerlink" title="Web Animations API"></a>Web Animations API</h3><p><img src="http://img.cdn.esunr.xyz/markdown/20200608194845.png" alt=""></p>
+<p>Web Animations API 提供给了开发人员使用 JS 来操作动画的能力，但是目前该 API 的标准仍处于草案阶段，对浏览器的版本依赖较高（其中 Chrome 不完全支持，PC Safari 在 2020 年 5 月份的更新中完成了对 API 的全支持，IE 则完全不支持），因此目前阶段不推荐在生产环境下使用。</p>
+<h3 id="WebGL"><a href="#WebGL" class="headerlink" title="WebGL"></a>WebGL</h3><p>WebGL1 兼容性：</p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20200610152028.png" alt=""></p>
+<p>WebGL2 兼容性：</p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20200610152132.png" alt=""></p>
+<p>WebGL 经常用于 3D Canvas，尽管 WebGL1 可以在 IE11 运行，但是需要注意的是前端最常用的 3D 模型渲染库 three.js 从 R95 版本起使用 WebGL2 环境来进行渲染，因此在 IE 浏览器上会出现兼容性问题。</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="window-getComputedStyle"><a href="#window-getComputedStyle" class="headerlink" title="window.getComputedStyle()"></a>window.getComputedStyle()</h3><p><img src="http://img.cdn.esunr.xyz/markdown/20200603200329.png" alt=""></p>
+<p>IE9+ 支持 <code>getComputedStyle()</code> 获取行外样式，可以使用 <code>currentStyle()</code> 兼容低版本浏览器。</p>
+<h3 id="Date-prototype-getYear"><a href="#Date-prototype-getYear" class="headerlink" title="Date.prototype.getYear()"></a>Date.prototype.getYear()</h3><p>getYear() 方法返回指定的本地日期的年份。因为 getYear 不返回千禧年[full years] (“year 2000 problem”)，所以这个方法不再被使用，现在替换为 getFullYear。仅在 IE8 以及以下的浏览器可以获取到正常的年份。</p>
+<h3 id="通过索引获取字符串某个字符"><a href="#通过索引获取字符串某个字符" class="headerlink" title="通过索引获取字符串某个字符"></a>通过索引获取字符串某个字符</h3><p>IE7 以及以下浏览器不兼容类似 <code>str[1]</code> 的写法，可以使用 <code>charAt()</code> 方法来由索引获取字符。</p>
+<h3 id="WebWorker-API"><a href="#WebWorker-API" class="headerlink" title="WebWorker API"></a>WebWorker API</h3><p><img src="http://img.cdn.esunr.xyz/markdown/20200610151842.png" alt=""></p>
+<h2 id="ES6-语法"><a href="#ES6-语法" class="headerlink" title="ES6 语法"></a>ES6 语法</h2><p>在现代浏览器中，已经基本可以使用 ES6 标准的语法，同时在 Chrome 80、Firefox 67、Safari 11.1 版本以上支持了动态 import 引入模块。但是在生产环境中使用 ES6 语法并不进行转义仍是一种不合适的做法。</p>
+<h3 id="Babel"><a href="#Babel" class="headerlink" title="Babel"></a>Babel</h3><p>Babel 作为前端工程化的代码转义器，是目前让 ES6 语法兼容低版本浏览器的主要解决方案。引入 Babel 到构建工具中后，Babel 可以支持 ES6 语法（如：Class 语法、箭头函数、解构等）转 ES5 语法，让低版本浏览器可以正常解析。</p>
+<p>但是对于 ES6 新增对象，如 Promise、Map、Set 等，原生 Babel 不能对其进行转义。为了支持新对象，Babel 提供了 babel-runtime 与 babel-polyfill 两种解决方案：</p>
+<ul>
+<li>runtime 主要是在需要使用 ES6 对象时将其作为模块引入，这样不会造成全局变量的污染；</li>
+<li>而所谓的 polyfill 即语法垫片，则是将可能使用到的 ES6 对象在全局环境下进行声明并使用 ES5 语法进行了功能实现，这样可能会造成全局变量的污染，并且编译后 polyfill 将会占据很大空间，因此不推荐在方法类库中使用。</li>
+</ul>
+<h3 id="babel-preset-env"><a href="#babel-preset-env" class="headerlink" title="@babel/preset-env"></a>@babel/preset-env</h3><p>在 Babel7 后，官方推荐使用 @babel/preset-env 作为预设方案，开发者可以通过配置所需的浏览器的最低版本，就会自动在项目中引入所需的 plugin，来兼容语法。</p>
+<p>以 Webpack 为例，当我们采用了如下的配置后，@babel/preset-env 最终转义得到的代码会兼容 IE8 以上的浏览器：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">test</span>: <span class="regexp">/\.js$/</span>,</span><br><span class="line">  <span class="attr">exclude</span>: <span class="regexp">/node_modules/</span>,</span><br><span class="line">  <span class="attr">use</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">loader</span>: <span class="string">&quot;babel-loader&quot;</span>,</span><br><span class="line">      <span class="attr">options</span>: &#123;</span><br><span class="line">        <span class="attr">presets</span>: [</span><br><span class="line">          [</span><br><span class="line">            <span class="string">&quot;@babel/preset-env&quot;</span>,</span><br><span class="line">            &#123;</span><br><span class="line">              <span class="attr">targets</span>: &#123;</span><br><span class="line">                <span class="attr">browsers</span>: [<span class="string">&quot;ie &gt;= 8&quot;</span>]</span><br><span class="line">              &#125;,</span><br><span class="line">              <span class="attr">useBuiltIns</span>: <span class="string">&quot;usage&quot;</span>,</span><br><span class="line">              <span class="attr">corejs</span>: <span class="string">&quot;3.6.5&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">          ]</span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">&quot;eslint-loader&quot;</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在 IE8 环境下，由于 ES3 不允许使用保留字作为对象的键值，因此会出现代码报错（<a target="_blank" rel="noopener" href="https://juejin.im/post/5cabf7b0e51d456e8b07dd04#heading-2">引用参考</a>）。</p>
+<h1 id="4-CSS-属性兼容性问题"><a href="#4-CSS-属性兼容性问题" class="headerlink" title="4. CSS 属性兼容性问题"></a>4. CSS 属性兼容性问题</h1><h2 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Selectors">引用参考</a></p>
+</blockquote>
+<h3 id="基本选择器"><a href="#基本选择器" class="headerlink" title="基本选择器"></a>基本选择器</h3><p>基本选择器包含了通用选择器(<code>*</code>)、类型选择器、类选择器、ID 选择器、属性选择器(<code>[attr=value]</code>)，他们在 IE7+ 的浏览器环境下都得到了比较好的适配。但是关于兼容性，仍需要注意以下两点：</p>
+<ol>
+<li>对于可以使用 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/@namespace"><strong>命名空间</strong></a> 的选择器，只有 IE9+ 以上的浏览器才可以使用。</li>
+<li>属性选择器不区分大小写的修饰符(i)不能在 IE 浏览器上使用，区分大小写的修饰符(s)只能在 Firefox66 上使用（<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Attribute_selectors">引用参考</a>）。</li>
+</ol>
+<h3 id="组合器"><a href="#组合器" class="headerlink" title="组合器"></a>组合器</h3><p>组合器包含了后代组合器、直接子代组合器(<code>&gt;</code>)、一般兄弟组合器(<code>~</code>)、紧邻兄弟组合器(<code>+</code>)。组合器需要在 IE7+ 以上版本的浏览器使用，更低版本的浏览器则不支持。</p>
+<h3 id="伪类"><a href="#伪类" class="headerlink" title="伪类"></a>伪类</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Pseudo-classes">引用参考</a></p>
+</blockquote>
+<p>伪类选择器的兼容情况通常比较复杂，在 CSS3 规范实现不标准的 IE 浏览器上会出现不兼容的情况，以下是对兼容性的概览：</p>
+<p>支持比较好的伪类选择器 (IE4+)：</p>
+<ol>
+<li>:active</li>
+<li>:hover</li>
+<li>:link</li>
+<li>:visited</li>
+</ol>
+<p>部分支持的伪类选择器：</p>
+<table>
+<thead>
+<tr>
+<th>选择器</th>
+<th>兼容版本</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>:checked</td>
+<td>IE9+</td>
+<td></td>
+</tr>
+<tr>
+<td>:focus</td>
+<td>IE8+</td>
+<td></td>
+</tr>
+<tr>
+<td>:default</td>
+<td>非 IE 浏览器</td>
+<td></td>
+</tr>
+<tr>
+<td>:disabled</td>
+<td>IE9+</td>
+<td>IE 浏览器不支持 <code>&lt;fieldset&gt;</code> 标签上的 disabled 状态识别</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/:indeterminate">:indeterminate</a></td>
+<td>IE10+</td>
+<td></td>
+</tr>
+<tr>
+<td>:first</td>
+<td>IE8+</td>
+<td></td>
+</tr>
+<tr>
+<td>:not</td>
+<td>IE9+</td>
+<td></td>
+</tr>
+<tr>
+<td>:first-child / :last-child</td>
+<td>IE9+</td>
+<td>对于 IE8 及更早版本的浏览器中的 :first-child，必须声明 &lt;!DOCTYPE&gt;</td>
+</tr>
+<tr>
+<td>:first-of-type / :last-of-type</td>
+<td>IE9+</td>
+<td>IE浏览器会将所有未知元素视为相同的元素类型</td>
+</tr>
+<tr>
+<td>:last-child / :first-child</td>
+<td>IE9+</td>
+<td></td>
+</tr>
+<tr>
+<td>:nth-child() / :nth-last-child()</td>
+<td>IE9+</td>
+<td>IE浏览器不支持匹配没有父元素的元素</td>
+</tr>
+<tr>
+<td>:nth-of-type() / :nth-last-of-type()</td>
+<td>IE9+</td>
+<td>IE浏览器会将所有未知元素视为相同的元素类型</td>
+</tr>
+<tr>
+<td>:only-child</td>
+<td>IE9+</td>
+<td>IE浏览器不支持匹配没有父元素的元</td>
+</tr>
+<tr>
+<td>:only-of-type</td>
+<td>IE9+</td>
+<td>IE浏览器会将所有未知元素视为相同的元素类型</td>
+</tr>
+<tr>
+<td>:optional</td>
+<td>IE10+</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/:out-of-range">:out-of-range</a></td>
+<td>非 IE 浏览器</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/:root">:root</a></td>
+<td>IE9+</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/:valid">:valid</a></td>
+<td>IE10+</td>
+<td>IE浏览器无法适用于 <code>&lt;form&gt;</code> 元素</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/:target">:target</a></td>
+<td>IE9+</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="伪元素"><a href="#伪元素" class="headerlink" title="伪元素"></a>伪元素</h3><blockquote>
+<p>CSS3 规范中规定伪元素要使用双冒号 <code>::</code> 来与伪类做区分，但 IE8 以及以下的浏览器不支持这一规范，只能使用 <code>:</code>。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>伪元素</th>
+<th>兼容版本</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>::after</td>
+<td>IE8+</td>
+<td>IE浏览器不支持动画和过渡支持</td>
+</tr>
+<tr>
+<td>::before</td>
+<td>IE8+</td>
+<td>IE浏览器不支持动画和过渡支持</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/CSS/::first-letter">::first-letter</a></td>
+<td>IE5.5+</td>
+<td>不支持荷兰文</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/CSS/::first-line">::first-line</a></td>
+<td>IE5.5+</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/::selection">::selection</a></td>
+<td>IE9+</td>
+<td>::selection CSS伪元素选择器是CSS第3级选择器的草案，但是在被推荐使用前就被废弃。它现在在第4级伪元素选择器草案中。</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/::slotted">::slotted()</a></td>
+<td>非 IE 浏览器</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="其他-1"><a href="#其他-1" class="headerlink" title="其他"></a>其他</h2><h3 id="媒体查询器"><a href="#媒体查询器" class="headerlink" title="媒体查询器"></a>媒体查询器</h3><p>媒体查询器的支持情况比较复杂，但是常用于做页面响应式的 <code>width</code> 查询（width media feature）仅在 IE9+ 的浏览器环境下运行，<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/@media"><strong>引用参考</strong></a> 中可以查看到完整的媒体查询器的兼容情况。</p>
+<h3 id="page"><a href="#page" class="headerlink" title="@page"></a>@page</h3><p>@page 规则用于在打印文档时修改某些CSS属性。你不能用@page规则来修改所有的CSS属性，而是只能修改margin,orphans,widow 和 page breaks of the document。对其他属性的修改是无效的。</p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20200611144557.png" alt=""></p>
+<h1 id="5-HTML-标签兼容性问题"><a href="#5-HTML-标签兼容性问题" class="headerlink" title="5. HTML 标签兼容性问题"></a>5. HTML 标签兼容性问题</h1><h2 id="HTML5-标签支持"><a href="#HTML5-标签支持" class="headerlink" title="HTML5 标签支持"></a>HTML5 标签支持</h2><blockquote>
+<p>关于 HTML5 标签，大部分常用的语义化标签如 nav、article 等，都可以在 IE9+ 的浏览器上正常被解析，因此这些标签不再进行一一列举，下文主要罗列出 HTML5 新增的功能性组件的兼容性情况。</p>
+</blockquote>
+<h3 id="template"><a href="#template" class="headerlink" title="template"></a>template</h3><p>HTML内容模板 <code>&lt;template&gt;</code> 元素是一种用于保存客户端内容机制，该内容在加载页面时不会呈现，但随后可以(原文为 may be)在运行时使用JavaScript实例化。</p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20200605170434.png" alt=""></p>
+<h3 id="video"><a href="#video" class="headerlink" title="video"></a>video</h3><p>HTML <code>&lt;video&gt;</code> 元素 用于在HTML或者XHTML文档中嵌入媒体播放器，用于支持文档内的视频播放。</p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20200605170903.png" alt=""></p>
+<h3 id="embed"><a href="#embed" class="headerlink" title="embed"></a>embed</h3><p>HTML <code>&lt;embed&gt;</code> 元素将外部内容嵌入文档中的指定位置。此内容由外部应用程序或其他交互式内容源（如浏览器插件）提供。</p>
+<blockquote>
+<p>不同浏览器之间显示有差异。Blink 内核浏览器（Chrome，Opera）会显示 HTML 资源的内容，但 Firefox 会显示一条通知消息，指出内容需要一个插件（见 bug 730768）。建议使用 <code>&lt;object&gt;</code> 或 <code>&lt;iframe&gt;</code> 元素。</p>
+</blockquote>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20200605171315.png" alt=""></p>
+<h3 id="audio"><a href="#audio" class="headerlink" title="audio"></a>audio</h3><p>HTML <code>&lt;audio&gt;</code> 元素用于在文档中表示音频内容。 <code>&lt;audio&gt;</code> 元素可以包含多个音频资源， 这些音频资源可以使用 src 属性或者<code>&lt;source&gt;</code> 元素来进行描述； 浏览器将会选择最合适的一个来使用。对于不支持 <code>&lt;audio&gt;</code> 元素的浏览器，<code>&lt;audio&gt;</code> 元素也可以作为浏览器不识别的内容加入到文档中。</p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20200605171813.png" alt=""></p>
+<h3 id="track"><a href="#track" class="headerlink" title="track"></a>track</h3><p>为 <code>&lt;video&gt;</code> 或 <code>&lt;audio&gt;</code> 这类媒体元素指定文本轨道（字幕）。(<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/track">MDN</a>)</p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20200605172000.png" alt=""></p>
+<h3 id="canvas"><a href="#canvas" class="headerlink" title="canvas"></a>canvas</h3><p><code>&lt;canvas&gt;</code> 元素可被用来通过JavaScript（Canvas API 或 WebGL API）绘制图形及图形动画。</p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20200605172242.png" alt=""></p>
+<h3 id="svg"><a href="#svg" class="headerlink" title="svg"></a>svg</h3><p>定义一个嵌入式矢量图。</p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20200605172451.png" alt=""></p>
+<h3 id="datalist"><a href="#datalist" class="headerlink" title="datalist"></a>datalist</h3><p>代表提供给其他控件的一组预定义选项。(<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/datalist">MDN</a>)</p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20200605173000.png" alt=""></p>
+<h3 id="output"><a href="#output" class="headerlink" title="output"></a>output</h3><p>代表计算值。(<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/output">MDN</a>)</p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20200605173133.png" alt=""></p>
+<h3 id="process"><a href="#process" class="headerlink" title="process"></a>process</h3><p>代表进度条。(<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/progress">MDN</a>)</p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20200605173300.png" alt=""></p>
+<h3 id="Meter"><a href="#Meter" class="headerlink" title="Meter"></a>Meter</h3><p>HTML <code>&lt;meter&gt;</code> 元素用来显示已知范围的标量值或者分数值。(<a href="[https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/meter]">MDN</a>)</p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20200605173331.png" alt=""></p>
+</div></article><div class="post-meta__tag-list"></div><div class="addthis_inline_share_toolbox pull-right"></div><script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-62c7f2684e36ba34" async></script><nav id="pagination"><div class="prev-post pull-left"><a href="/2020/06/37a4efa38b28.html"><i class="fa fa-chevron-left">  </i><span>ShadowSocksR使用教程</span></a></div><div class="next-post pull-right"><a href="/2020/05/39427290f3ae.html"><span>TypeScript基础概念入门</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="disqus_thread"></div><script>var unused = null;
+var disqus_config = function () {
+  this.page.url = 'https://blog.esunr.site/2020/06/562519fda23a.html';
+  this.page.identifier = '2020/06/562519fda23a.html';
+  this.page.title = '浏览器常见的兼容性问题以及解决方案';
+}
+var d = document, s = d.createElement('script');
+s.src = "https://" + 'esunr-blog' +".disqus.com/embed.js";
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);</script><script id="dsq-count-scr" src="https://esunr-blog.disqus.com/count.js" async></script></div></div><footer class="footer-bg" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div class="layout" id="footer"><div class="copyright">&copy;2017 - 2025 By EsunR</div><div class="framework-info"><span>Driven - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">hitokoto</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.0"></script><script src="/js/fancybox.js?version=1.9.0"></script><script src="/js/sidebar.js?version=1.9.0"></script><script src="/js/copy.js?version=1.9.0"></script><script src="/js/fireworks.js?version=1.9.0"></script><script src="/js/transition.js?version=1.9.0"></script><script src="/js/scroll.js?version=1.9.0"></script><script src="/js/head.js?version=1.9.0"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>Powered by</span> <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="node应用服务器部署与多版本管理指南"><meta name="keywords" content="node,pm2,nvm"><meta name="author" content="EsunR"><meta name="copyright" content="EsunR"><title>node应用服务器部署与多版本管理指南 | EsunR-Blog</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.9.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css?version=1.9.0"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="dns-prefetch" href="https://hm.baidu.com"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?31bd12722efcf47cb7d0d576bf150215";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-3RG97DCL3N"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-3RG97DCL3N');</script><script src="https://v1.hitokoto.cn/?encode=js&amp;charset=utf-8&amp;select=.footer_custom_text" defer></script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  hexoVersion: '6.2.0'
+} </script><meta name="generator" content="Hexo 6.2.0"></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E4%BD%BF%E7%94%A8-n-%E4%B8%8E-nvm-%E7%AE%A1%E7%90%86-node-%E7%89%88%E6%9C%AC"><span class="toc-text">1. 使用 n 与 nvm 管理 node 版本</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-n"><span class="toc-text">1.1 n</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-nvm"><span class="toc-text">1.2 nvm</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-PM2-%E7%AE%A1%E7%90%86-node-%E5%BA%94%E7%94%A8"><span class="toc-text">2. PM2 管理 node 应用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-PM2-%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8"><span class="toc-text">2.1 PM2 基础使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-PM2-%E6%8C%87%E5%AE%9A%E4%B8%8D%E5%90%8C%E7%9A%84-node-%E7%89%88%E6%9C%AC"><span class="toc-text">2.2 PM2 指定不同的 node 版本</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://esunr-webapp.cdn.bcebos.com/blog/avatar.jpeg?x-bce-process=image/resize,m_lfit,w_200/format,f_auto" alt="avatar"></div><div class="author-info__name text-center">EsunR</div><div class="author-info__description text-center">EsunR-Blog是由EsunR维护的博客平台，分享在前端开发、Git、Vue.js、Webpack、OAuth、Linux等各个领域的知识和经验。浏览这里的深入文章，了解不同主题的见解，并及时了解行业的最新趋势和技术。</div><div class="follow-button"><a target="_blank" rel="noopener" href="https://github.com/EsunR">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">172</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">155</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">26</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">EsunR-Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"><span class="site-page social-icon search"><i class="fa fa-search"></i><span> Search</span></span></span></div><div id="post-info"><div id="post-title">node应用服务器部署与多版本管理指南</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-01-30</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/Node/">Node</a><span class="post-meta__separator">|</span><i class="fa fa-comment-o post-meta__icon" aria-hidden="true"></i><a href="/2020/01/7dea0b18aba8.html#disqus_thread"><span class="disqus-comment-count" data-disqus-identifier="2020/01/7dea0b18aba8.html"></span></a><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">1.1k</span><span class="post-meta__separator">|</span><span>Reading time: 4 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="1-使用-n-与-nvm-管理-node-版本"><a href="#1-使用-n-与-nvm-管理-node-版本" class="headerlink" title="1. 使用 n 与 nvm 管理 node 版本"></a>1. 使用 n 与 nvm 管理 node 版本</h1><h2 id="1-1-n"><a href="#1-1-n" class="headerlink" title="1.1 n"></a>1.1 n</h2><p>n 是一个需要全局安装的 npm package。</p>
+<p>这意味着，我们在使用 n 管理 node 版本前，首先需要一个 node 环境。我们或者用 Homebrew 来安装一个 node，或者从官网下载 pkg 来安装，总之我们得先自己装一个 node —— n 本身是没法给你装的。</p>
+<p>然后我们可以使用 n 来安装不同版本的 node。</p>
+<p>在安装的时候，n 会先将指定版本的 node 存储下来，然后将其复制到我们熟知的路径 <code>/usr/local/bin</code>，非常简单明了。当然由于 n 会操作到非用户目录，所以需要加 <code>sudo</code> 来执行命令。</p>
+<p>所以这样看来，n 在其实现上是一个非常易理解的方案。</p>
+<blockquote>
+<p>引用：<a target="_blank" rel="noopener" href="https://fed.taobao.org/blog/taofed/do71ct/nvm-or-n/?spm=taofed.homepage.header.7.7eab5ac8a3p43I">https://fed.taobao.org/blog/taofed/do71ct/nvm-or-n/?spm=taofed.homepage.header.7.7eab5ac8a3p43I</a></p>
+</blockquote>
+<p>安装：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g n</span><br></pre></td></tr></table></figure>
+
+<p>下载完成后就可以使用 <code>n</code> 来安装指定版本的 node：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ n 版本号</span><br></pre></td></tr></table></figure>
+
+<p>下载最新版本：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ n latest</span><br></pre></td></tr></table></figure>
+
+<p>删除某个版本：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ n <span class="built_in">rm</span> 4.4.4</span><br></pre></td></tr></table></figure>
+
+<p>查看当前 node 版本：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ node -v</span><br></pre></td></tr></table></figure>
+
+<p>切换版本：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ n</span><br><span class="line"></span><br><span class="line">  6.9.4</span><br><span class="line">ο 7.4.0</span><br><span class="line">  4.4.4</span><br></pre></td></tr></table></figure>
+
+<p>以指定的版本来执行脚本：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ n use 7.4.0 index.js</span><br></pre></td></tr></table></figure>
+
+<p>获取某个 node 版本的 bin 文件目录：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ n bin 8.17.0</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-2-nvm"><a href="#1-2-nvm" class="headerlink" title="1.2 nvm"></a>1.2 nvm</h2><p>不同于 n，nvm 不是一个 npm package，而是一个独立软件包。</p>
+<p>我们可以使用 nvm 来安装不同版本的 node。</p>
+<p>在安装的时候，nvm 将不同的 node 版本存储到 <code>~/.nvm/&lt;version&gt;/</code> 下，然后修改 <code>$PATH</code>，将指定版本的 node 路径加入，这样我们调用的 <code>node</code> 命令即是使用指定版本的 node。</p>
+<p>nvm 显然比 n 要复杂一些，但是另一方面，由于它是一个独立软件包，因此它和 node 之间的关系看上去更合乎逻辑：nvm 不依赖 node 环境，是 node 依赖 nvm；而不像 n 那样产生类似循环依赖的问题。</p>
+<p>同时由于 nvm 是通过修改系统 PATH 来切换全局的 node 版本，因此如果系统使用了 nvm 来管理 node 版本，n 的管理就会失效。</p>
+<p>nvm 基础指令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ nvm -h //查看nvm的指令</span><br><span class="line">$ nvm list //查看本地已经安装的node版本列表</span><br><span class="line">$ nvm list available //查看可以安装的node版本</span><br><span class="line">$ nvm install latest //安装最新版本的node</span><br><span class="line">$ nvm install [version][<span class="built_in">arch</span>] //安装指定版本的node 例如：nvm install 10.16.3 安装node v10.16.3 <span class="built_in">arch</span>表示电脑的位数 如果电脑需要安装32位的， 则运行：nvm install 10.16.3 32</span><br><span class="line">$ nvm use [version] //使用node 例如：nvm use 10.16.3</span><br><span class="line">$ nvm uninstall [version] //卸载node</span><br></pre></td></tr></table></figure>
+
+<p><code>nvm use</code> 仅能指定当前的 node 版本，并不能将其指定为默认的 node 版本，可以通过以下方法设置默认的 node 版本：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm <span class="built_in">alias</span> default v13.7.0</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-PM2-管理-node-应用"><a href="#2-PM2-管理-node-应用" class="headerlink" title="2. PM2 管理 node 应用"></a>2. PM2 管理 node 应用</h1><p>pm2（process manager）是一个进程管理工具，维护一个进程列表，可以用它来管理你的node进程，负责所有正在运行的进程，并查看node进程的状态，也支持性能监控，负载均衡等功能。</p>
+<p>使用pm2管理的node程序的好处：</p>
+<ul>
+<li>监听文件变化，自动重启程序</li>
+<li>支持性能监控</li>
+<li>负载均衡</li>
+<li>程序崩溃自动重启</li>
+<li>服务器重新启动时自动重新启动</li>
+<li>自动化部署项目</li>
+</ul>
+<h2 id="2-1-PM2-基础使用"><a href="#2-1-PM2-基础使用" class="headerlink" title="2.1 PM2 基础使用"></a>2.1 PM2 基础使用</h2><p>安装：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install pm2 -g </span><br></pre></td></tr></table></figure>
+
+<p>启动一个node程序: </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 start start.js --name test-app</span><br></pre></td></tr></table></figure>
+
+<p>查看运行列表：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 list </span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2020/01/30/o8N1qWATgluyaE4.png" alt=""></p>
+<p>删除进程:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// pm2 delete [appname] | <span class="built_in">id</span></span><br><span class="line">pm2 delete app  // 指定进程名删除</span><br><span class="line">pm2 delete 0    // 指定进程<span class="built_in">id</span>删除</span><br><span class="line">pm2 delete all</span><br></pre></td></tr></table></figure>
+
+<p>查看某个进程具体情况: </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pm2 describe app</span><br></pre></td></tr></table></figure>
+
+<p>查看进程的资源消耗情况: </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pm2 monit</span><br></pre></td></tr></table></figure>
+
+<p>重启进程：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ pm2 restart app // 重启指定名称的进程</span><br><span class="line">$ pm2 restart all // 重启所有进程</span><br></pre></td></tr></table></figure>
+
+<p>设置pm2开机自启：</p>
+<p>开启启动设置，此处是CentOS系统，其他系统替换最后一个选项（可选项：ubuntu, centos, redhat, gentoo, systemd, darwin, amazon）</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pm2 startup centos </span><br></pre></td></tr></table></figure>
+
+<p>保存设置</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 save</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-PM2-指定不同的-node-版本"><a href="#2-2-PM2-指定不同的-node-版本" class="headerlink" title="2.2 PM2 指定不同的 node 版本"></a>2.2 PM2 指定不同的 node 版本</h2><p>pm2 指令有一个选项为 <code>--interpreter</code> ，可以通过该选项指定 node 的位置，配合 n 模块的 <code>n bin [node-version]</code> 指令可以来获取不同版本 node 的路径：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 -f start index.js --interpreter `n bin 8.17.0`</span><br></pre></td></tr></table></figure></div></article><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/node/">node</a><a class="post-meta__tags" href="/tags/pm2/">pm2</a><a class="post-meta__tags" href="/tags/nvm/">nvm</a></div><div class="addthis_inline_share_toolbox pull-right"></div><script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-62c7f2684e36ba34" async></script><nav id="pagination"><div class="prev-post pull-left"><a href="/2020/02/475edda2351e.html"><i class="fa fa-chevron-left">  </i><span>NodeJS爬虫基础原理及实战</span></a></div><div class="next-post pull-right"><a href="/2020/01/45fc5ccecdaf.html"><span>Minecraft服务器搭建教程（转载）</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="disqus_thread"></div><script>var unused = null;
+var disqus_config = function () {
+  this.page.url = 'https://blog.esunr.site/2020/01/7dea0b18aba8.html';
+  this.page.identifier = '2020/01/7dea0b18aba8.html';
+  this.page.title = 'node应用服务器部署与多版本管理指南';
+}
+var d = document, s = d.createElement('script');
+s.src = "https://" + 'esunr-blog' +".disqus.com/embed.js";
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);</script><script id="dsq-count-scr" src="https://esunr-blog.disqus.com/count.js" async></script></div></div><footer class="footer-bg" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div class="layout" id="footer"><div class="copyright">&copy;2017 - 2025 By EsunR</div><div class="framework-info"><span>Driven - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">hitokoto</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.0"></script><script src="/js/fancybox.js?version=1.9.0"></script><script src="/js/sidebar.js?version=1.9.0"></script><script src="/js/copy.js?version=1.9.0"></script><script src="/js/fireworks.js?version=1.9.0"></script><script src="/js/transition.js?version=1.9.0"></script><script src="/js/scroll.js?version=1.9.0"></script><script src="/js/head.js?version=1.9.0"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>Powered by</span> <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

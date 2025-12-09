@@ -1,0 +1,230 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="Linux指令备忘录"><meta name="keywords" content="Linux"><meta name="author" content="EsunR"><meta name="copyright" content="EsunR"><title>Linux指令备忘录 | EsunR-Blog</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.9.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css?version=1.9.0"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="dns-prefetch" href="https://hm.baidu.com"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?31bd12722efcf47cb7d0d576bf150215";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-3RG97DCL3N"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-3RG97DCL3N');</script><script src="https://v1.hitokoto.cn/?encode=js&amp;charset=utf-8&amp;select=.footer_custom_text" defer></script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  hexoVersion: '6.2.0'
+} </script><meta name="generator" content="Hexo 6.2.0"></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E7%B3%BB%E7%BB%9F%E7%9B%B8%E5%85%B3"><span class="toc-text">1. 系统相关</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E6%9C%BA%E4%B8%8E%E9%87%8D%E5%90%AF"><span class="toc-text">关机与重启</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8"><span class="toc-text">查看端口占用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E8%BF%9B%E7%A8%8B"><span class="toc-text">删除进程</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E8%B4%A6%E5%8F%B7%E7%9B%B8%E5%85%B3"><span class="toc-text">2. 账号相关</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7"><span class="toc-text">创建用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E7%BB%84%E7%BE%A4"><span class="toc-text">用户组群</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%87%E6%8D%A2%E7%94%A8%E6%88%B7"><span class="toc-text">切换用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-root-%E7%94%A8%E6%88%B7"><span class="toc-text">使用 root 用户</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E6%9D%83%E9%99%90%E7%9B%B8%E5%85%B3"><span class="toc-text">3. 权限相关</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%83%E9%99%90%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86"><span class="toc-text">权限基本知识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%83%E9%99%90%E7%9A%84%E6%9F%A5%E7%9C%8B"><span class="toc-text">权限的查看</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%83%E9%99%90%E7%9A%84%E4%BF%AE%E6%94%B9"><span class="toc-text">权限的修改</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E6%96%87%E4%BB%B6%E7%9B%B8%E5%85%B3"><span class="toc-text">4. 文件相关</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E5%88%B6%E6%96%87%E4%BB%B6"><span class="toc-text">复制文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%8B%E7%BC%A9%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86"><span class="toc-text">压缩文件处理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-%E5%BA%94%E7%94%A8%E7%9B%B8%E5%85%B3"><span class="toc-text">5. 应用相关</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE%E5%BA%94%E7%94%A8"><span class="toc-text">查找应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%B8%E8%BD%BD%E5%BA%94%E7%94%A8"><span class="toc-text">卸载应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-text">添加环境变量</span></a></li></ol></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://esunr-webapp.cdn.bcebos.com/blog/avatar.jpeg?x-bce-process=image/resize,m_lfit,w_200/format,f_auto" alt="avatar"></div><div class="author-info__name text-center">EsunR</div><div class="author-info__description text-center">EsunR-Blog是由EsunR维护的博客平台，分享在前端开发、Git、Vue.js、Webpack、OAuth、Linux等各个领域的知识和经验。浏览这里的深入文章，了解不同主题的见解，并及时了解行业的最新趋势和技术。</div><div class="follow-button"><a target="_blank" rel="noopener" href="https://github.com/EsunR">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">172</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">155</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">26</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">EsunR-Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"><span class="site-page social-icon search"><i class="fa fa-search"></i><span> Search</span></span></span></div><div id="post-info"><div id="post-title">Linux指令备忘录</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-12-05</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Linux/">Linux</a><span class="post-meta__separator">|</span><i class="fa fa-comment-o post-meta__icon" aria-hidden="true"></i><a href="/2019/12/9a94fb35a3ad.html#disqus_thread"><span class="disqus-comment-count" data-disqus-identifier="2019/12/9a94fb35a3ad.html"></span></a><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">2.6k</span><span class="post-meta__separator">|</span><span>Reading time: 8 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="1-系统相关"><a href="#1-系统相关" class="headerlink" title="1. 系统相关"></a>1. 系统相关</h1><h3 id="关机与重启"><a href="#关机与重启" class="headerlink" title="关机与重启"></a>关机与重启</h3><p>关机指令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">shutdown </span><br><span class="line"> [-t] 在改变到其它runlevel之前﹐告诉init多久以后关机。</span><br><span class="line"> [-r] 重启计算器。</span><br><span class="line"> [-k] 并不真正关机﹐只是送警告信号给每位登录者〔login〕。</span><br><span class="line"> [-h] 关机后关闭电源〔halt〕。</span><br><span class="line"> [-n] 不用init﹐而是自己来关机。不鼓励使用这个选项﹐而且该选项所产生的后果往往不总是你所预期得到的。</span><br><span class="line"> [-c] cancel current process取消目前正在执行的关机程序。所以这个选项当然没有时间参数﹐但是可以输入一个用来解释的讯</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">halt </span><br><span class="line">halt = shutdown -h</span><br><span class="line">[-n] 防止<span class="built_in">sync</span>系统调用﹐它用在用fsck修补根分区之后﹐以阻止内核用老版本的超级块〔superblock〕覆盖修补过的超级块。</span><br><span class="line">[-w] 并不是真正的重启或关机﹐只是写wtmp〔/var/log/wtmp〕纪录。</span><br><span class="line">[-d] 不写wtmp纪录〔已包含在选项[-n]中〕。</span><br><span class="line">[-f] 没有调用shutdown而强制关机或重启。</span><br><span class="line">[-i] 关机〔或重启〕前﹐关掉所有的网络接口。</span><br><span class="line">[-p] 该选项为缺省选项。就是关机时调用poweroff。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">init</span><br><span class="line">init 0为关机﹐init 1为重启</span><br></pre></td></tr></table></figure>
+
+<p>重启指令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reboot</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看端口占用"><a href="#查看端口占用" class="headerlink" title="查看端口占用"></a>查看端口占用</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -ntulp | grep 3306 //查看所有3306端口使用情况</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除进程"><a href="#删除进程" class="headerlink" title="删除进程"></a>删除进程</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">kill</span> -9 pid</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-账号相关"><a href="#2-账号相关" class="headerlink" title="2. 账号相关"></a>2. 账号相关</h1><h3 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo useradd [Options] UserName</span><br></pre></td></tr></table></figure>
+
+<p>其中各选项含义如下：</p>
+<p>-c comment 指定一段注释性描述。<br>-d 目录 指定用户主目录，如果此目录不存在，则同时使用-m选项，可以创建主目录。<br>-g 用户组 指定用户所属的用户组。<br>-G 用户组，用户组 指定用户所属的附加组。<br>-s Shell文件 指定用户的登录Shell。<br>-u 用户号 指定用户的用户号，如果同时有-o选项，则可以重复使用其他用户的标识号。</p>
+<p>为用户添加密码：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd UserName</span><br></pre></td></tr></table></figure>
+
+<p>通常 <code>useradd</code> 指令创建一个新用户需要对新用户进行各种初始化设置，如果不想手动设置，可以使用 <code>adduser</code> 指令快速添加一个新用户：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo adduser UserName</span><br></pre></td></tr></table></figure>
+
+<h3 id="用户组群"><a href="#用户组群" class="headerlink" title="用户组群"></a>用户组群</h3><p>创建组：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo groupadd GroupName </span><br></pre></td></tr></table></figure>
+
+<p>将用户加入组（三选一）：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo usermod -G GroupName UserName  <span class="comment"># 这个会把用户从其他组中去掉</span></span><br><span class="line">sudo usermod -a GroupName UserName</span><br><span class="line">sudo gpasswd -a UserName GroupName</span><br></pre></td></tr></table></figure>
+
+<p>查看当前用户所在组：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">groups</span></span><br><span class="line">&gt; root</span><br></pre></td></tr></table></figure>
+
+<p>查看固定用户的权限组</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">groups</span> root esunr</span><br><span class="line">&gt; root[用户名]: root[用户组]</span><br><span class="line">&gt; esunr: esunr</span><br></pre></td></tr></table></figure>
+
+<p>查看组：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /etc/group</span><br><span class="line"></span><br><span class="line">在/etc/group 中的每条记录分四个字段：</span><br><span class="line">第一字段：用户组名称；</span><br><span class="line">第二字段：用户组密码；</span><br><span class="line">第三字段：GID</span><br><span class="line">第四字段：用户列表，每个用户之间用,号分割；本字段可以为空；如果字段为空表示用户组为GID的用户名；</span><br></pre></td></tr></table></figure>
+
+<h3 id="切换用户"><a href="#切换用户" class="headerlink" title="切换用户"></a>切换用户</h3><p>切换用户：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su [username]</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用-root-用户"><a href="#使用-root-用户" class="headerlink" title="使用 root 用户"></a>使用 root 用户</h3><p>创建并登录root用户：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd root <span class="comment"># 创建 root 用户</span></span><br><span class="line">su 				 <span class="comment"># 登录 root 用户</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="3-权限相关"><a href="#3-权限相关" class="headerlink" title="3. 权限相关"></a>3. 权限相关</h1><h3 id="权限基本知识"><a href="#权限基本知识" class="headerlink" title="权限基本知识"></a>权限基本知识</h3><p>权限示例：<code>-rw-rw-r--</code></p>
+<p><strong>权限一共有10位数其中：</strong></p>
+<ul>
+<li><p>最前面那个 <code>-</code> 代表的是类型：<code>-</code> 代表文件，<code>d</code> 代表文件夹</p>
+</li>
+<li><p>中间那三个 <code>rw-</code> 代表的是所有者（user）</p>
+</li>
+<li><p>然后那三个 <code>rw-</code> 代表的是组群（group）</p>
+</li>
+<li><p>最后那三个 <code>r--</code> 代表的是其他人（other）</p>
+</li>
+</ul>
+<p><strong>rwx 的含义：</strong></p>
+<p>r 表示文件可以被读（read），w 表示文件可以被写（write），x 表示文件可以被执行（如果它是程序的话）。</p>
+<p><strong>用数字代替rwx：</strong></p>
+<ul>
+<li><p>r = 4</p>
+</li>
+<li><p>w = 2</p>
+</li>
+<li><p>x = 1</p>
+</li>
+</ul>
+<p><strong>Tips：</strong></p>
+<ul>
+<li><p>如果递归删除一个文件夹，文件夹内有当前用户没有权限的文件的话，会跳过删除，只删除有权限的文件。</p>
+</li>
+<li><p>如果一个文件是只读属性，用户去强制修改后原来的文件会被命名为 <code>FileName~</code> 的形式保留下来。</p>
+</li>
+</ul>
+<h3 id="权限的查看"><a href="#权限的查看" class="headerlink" title="权限的查看"></a>权限的查看</h3><p>查看文件权限：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -l FileName  <span class="comment"># 查看指定文件权限</span></span><br><span class="line"><span class="built_in">ls</span> -l 			<span class="comment"># 查看当前文件夹所有文件的权限详情，如果有子文件是文件夹，则列出文件夹权限详情</span></span><br></pre></td></tr></table></figure>
+
+<p>查看文件夹权限：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -ld FolderName   <span class="comment"># 查看指定文件夹权限</span></span><br><span class="line"><span class="built_in">ls</span> -ld 				<span class="comment"># 查看当前文件夹权限</span></span><br></pre></td></tr></table></figure>
+
+<p>权限输出：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">total 0 [文件列表总大小]</span><br><span class="line">-rw-rw-r--[权限详情] 1[硬连接个数] esunr[创建人] esunr[归属组] 17[文件大小] Dec 5 17:34 <span class="built_in">test</span>[文件名]</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>文件被创建后，默认的权限为 -rw-rw-r– 也就是 664</p>
+</blockquote>
+<h3 id="权限的修改"><a href="#权限的修改" class="headerlink" title="权限的修改"></a>权限的修改</h3><p>修改文件权限：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> 777 FileName</span><br></pre></td></tr></table></figure>
+
+<p>递归修改文件权限：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod -R 777 FolderName</span><br></pre></td></tr></table></figure>
+
+<p>如果递归修改权限的文件夹中有当前执行指令用户没有权限的文件，那么就会出现提醒拒绝修改，只修改用户有权限的文件。</p>
+<p>修改文件的归属组：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chown</span> [-R] 用户名:群组名 文件或目录</span><br></pre></td></tr></table></figure>
+
+<h1 id="4-文件相关"><a href="#4-文件相关" class="headerlink" title="4. 文件相关"></a>4. 文件相关</h1><h3 id="复制文件"><a href="#复制文件" class="headerlink" title="复制文件"></a>复制文件</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> [Option] SorceFile TargetFile</span><br><span class="line"><span class="built_in">cp</span> -r FolderName TargetFolder	 	<span class="comment"># 复制文件夹，移动文件夹不受制于权限，文件的权限信息会一并被复制</span></span><br><span class="line"><span class="built_in">cp</span> -r FolderName1/* FolderName2		<span class="comment"># 将 FolderName1 下的文件全部覆盖到 FolderName2 下，覆盖文件不会有提示</span></span><br><span class="line"><span class="built_in">cp</span> -r -i FloderName1 FolderName2 	<span class="comment"># 将 FolderName1 下的文件全部覆盖到 FolderName2 下，覆盖文件会有提示</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>文件复制默认覆盖，但是文件夹递归复制不会覆盖文件</p>
+</blockquote>
+<p>参数说明：</p>
+<p>-a:是指archive的意思，也说是指复制所有的目录</p>
+<p>-d:若源文件为连接文件(link file)，则复制连接文件属性而非文件本身</p>
+<p>-f:强制(force)，若有重复或其它疑问时，不会询问用户，而强制复制</p>
+<p>-i:若目标文件(destination)已存在，在覆盖时会先询问是否真的操作</p>
+<p>-l:建立硬连接(hard link)的连接文件，而非复制文件本身</p>
+<p>-p:与文件的属性一起复制，而非使用默认属性</p>
+<p>-r:递归复制，用于目录的复制操作</p>
+<p>-s:复制成符号连接文件(symbolic link)，即“快捷方式”文件</p>
+<p>-u:若目标文件比源文件旧，更新目标文件 </p>
+<h3 id="压缩文件处理"><a href="#压缩文件处理" class="headerlink" title="压缩文件处理"></a>压缩文件处理</h3><p><strong><code>.tar</code> 文件</strong></p>
+<p>压缩：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zcvf distFilePath（生成压缩包的目录） originFilePath（要压缩的文件目录）</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>示例：tar -zcvf /home/xahot.tar.gz /xahot</p>
+</blockquote>
+<p>解压：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zcxf targetFile</span><br></pre></td></tr></table></figure>
+
+<p><strong><code>.zip</code> 文件</strong></p>
+<p>压缩：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zip -r distFilePath originFilePath/* -r <span class="comment"># r表示递归</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>示例：zip -r ./xahot.zip ./* -r</p>
+</blockquote>
+<p>linux zip命令参数列表：</p>
+<ul>
+<li><p><code>-a</code> 将文件转成ASCII模式</p>
+</li>
+<li><p><code>-F</code> 尝试修复损坏的压缩文件</p>
+</li>
+<li><p><code>-h</code> 显示帮助界面</p>
+</li>
+<li><p><code>-m</code> 将文件压缩之后，删除源文件</p>
+</li>
+<li><p><code>-n</code> 特定字符串 不压缩具有特定字尾字符串的文件</p>
+</li>
+<li><p><code>-o</code> 将压缩文件内的所有文件的最新变动时间设为压缩时候的时间</p>
+</li>
+<li><p><code>-q</code> 安静模式，在压缩的时候不显示指令的执行过程</p>
+</li>
+<li><p><code>-r</code> 将指定的目录下的所有子目录以及文件一起处理</p>
+</li>
+<li><p><code>-S</code> 包含系统文件和隐含文件（S是大写）</p>
+</li>
+<li><p><code>-t</code> 日期 把压缩文件的最后修改日期设为指定的日期，日期格式为mmddyyyy</p>
+</li>
+</ul>
+<p>解压：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip tragetFile <span class="comment"># 解压到当前目录</span></span><br></pre></td></tr></table></figure>
+
+
+<h1 id="5-应用相关"><a href="#5-应用相关" class="headerlink" title="5. 应用相关"></a>5. 应用相关</h1><h3 id="查找应用"><a href="#查找应用" class="headerlink" title="查找应用"></a>查找应用</h3><p>通过以下指令可以查找到安装过的应用：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dpkg --get-selections | grep appName</span><br></pre></td></tr></table></figure>
+
+<p>通过以下指令查看安装的应用的详情：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dpkg -l appName</span><br></pre></td></tr></table></figure>
+
+<p>通过以下指令查找软件位置：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dpkg -L appName</span><br></pre></td></tr></table></figure>
+
+<h3 id="卸载应用"><a href="#卸载应用" class="headerlink" title="卸载应用"></a>卸载应用</h3><p><code>apt-get purge / apt-get --purge remove</code></p>
+<p>删除已安装包（不保留配置文件）。</p>
+<p>如软件包a，依赖软件包b，则执行该命令会删除a，而且不保留配置文件</p>
+<p><code>apt-get autoremove</code></p>
+<p>删除为了满足依赖而安装的，但现在不再需要的软件包（包括已安装包），保留配置文件。</p>
+<p><code>apt-get remove</code></p>
+<p>删除已安装的软件包（保留配置文件），不会删除依赖软件包，且保留配置文件。</p>
+<p><code>apt-get autoclean</code></p>
+<p>APT的底层包是dpkg, 而dpkg 安装Package时, 会将 *.deb 放在 /var/cache/apt/archives/中，apt-get autoclean 只会删除 /var/cache/apt/archives/ 已经过期的deb。</p>
+<p><code>apt-get clean</code></p>
+<p>使用 apt-get clean 会将 /var/cache/apt/archives/ 的 所有 deb 删掉，可以理解为 rm /var/cache/apt/archives/*.deb。</p>
+<h3 id="添加环境变量"><a href="#添加环境变量" class="headerlink" title="添加环境变量"></a>添加环境变量</h3><p>当在源码安装的过程中如果在生成内容时用 <code>prefix</code> 设置了源码安装应用的位置，那么安装的应用携带有 bin 文件，是无法自动与系统做关联的，我们就无法在 bash 中直接使用它们，与 Windows 相似的，我们需要添加系统环境变量中的 PATH 才能连接到应用的 bin 文件，这时如果直接在命令行中使用 <code>export</code> 设置 PATH 的话只是临时的，如果想要永久产生影响就还是需要去修改 <code>/etc/.profile</code> 文件，这是在系统每次启动时会自动执行的文件，我们在这里设置 PATH 会让系统在每次开机时都应用这些 PATH，与其相类似的文件还有以下几个：</p>
+<ol>
+<li><p><strong>/etc/profile：</strong> 此文件为系统的每个用户设置环境信息,当用户第一次登录时,该文件被执行. 并从/etc/profile.d目录的配置文件中搜集shell的设置。</p>
+</li>
+<li><p><strong>/etc/bashrc:</strong> 为每一个运行bash shell的用户执行此文件.当bash shell被打开时,该文件被读取（即每次新开一个终端，都会执行bashrc）。</p>
+</li>
+<li><p><strong>~/.bash_profile:</strong> 每个用户都可使用该文件输入专用于自己使用的shell信息,当用户登录时,该文件仅仅执行一次。默认情况下,设置一些环境变量,执行用户的.bashrc文件。</p>
+</li>
+<li><p><strong>~/.bashrc:</strong> 该文件包含专用于你的bash shell的bash信息,当登录时以及每次打开新的shell时,该该文件被读取。</p>
+</li>
+<li><p><strong>~/.bash_logout:</strong> 当每次退出系统(退出bash shell)时,执行该文件. 另外,/etc/profile中设定的变量(全局)的可以作用于任何用户,而~/.bashrc等中设定的变量(局部)只能继承 /etc/profile中的变量,他们是”父子”关系。</p>
+</li>
+<li><p><strong>~/.bash_profile:</strong> 是交互式、login 方式进入 bash 运行的~/.bashrc 是交互式 non-login 方式进入 bash 运行的通常二者设置大致相同，所以通常前者会调用后者。</p>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/profile</span><br><span class="line"></span><br><span class="line"><span class="comment">###### /etc/profile</span></span><br><span class="line"><span class="comment"># $PATH 表示已经设置的环境变量</span></span><br><span class="line"><span class="built_in">export</span> PATH=xxx/xxx/bin:<span class="variable">$PATH</span> </span><br><span class="line"><span class="comment">######</span></span><br></pre></td></tr></table></figure>
+
+<p>保存后再运行该文件让其生效：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> /etc/profile</span><br></pre></td></tr></table></figure>
+
+<p>输出环境变量检查是否设置成功：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="variable">$PATH</span></span><br></pre></td></tr></table></figure></div></article><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Linux/">Linux</a></div><div class="addthis_inline_share_toolbox pull-right"></div><script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-62c7f2684e36ba34" async></script><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/12/40c2fd2ada1b.html"><i class="fa fa-chevron-left">  </i><span>React 开发框架 —— Umi 与 Dva 的快速使用指南</span></a></div><div class="next-post pull-right"><a href="/2019/12/642246688abe.html"><span>温故知新，谈谈浏览器的原生事件</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="disqus_thread"></div><script>var unused = null;
+var disqus_config = function () {
+  this.page.url = 'https://blog.esunr.site/2019/12/9a94fb35a3ad.html';
+  this.page.identifier = '2019/12/9a94fb35a3ad.html';
+  this.page.title = 'Linux指令备忘录';
+}
+var d = document, s = d.createElement('script');
+s.src = "https://" + 'esunr-blog' +".disqus.com/embed.js";
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);</script><script id="dsq-count-scr" src="https://esunr-blog.disqus.com/count.js" async></script></div></div><footer class="footer-bg" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div class="layout" id="footer"><div class="copyright">&copy;2017 - 2025 By EsunR</div><div class="framework-info"><span>Driven - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">hitokoto</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.0"></script><script src="/js/fancybox.js?version=1.9.0"></script><script src="/js/sidebar.js?version=1.9.0"></script><script src="/js/copy.js?version=1.9.0"></script><script src="/js/fireworks.js?version=1.9.0"></script><script src="/js/transition.js?version=1.9.0"></script><script src="/js/scroll.js?version=1.9.0"></script><script src="/js/head.js?version=1.9.0"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>Powered by</span> <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

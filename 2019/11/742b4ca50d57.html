@@ -1,0 +1,102 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="密码学基础：对称加密、非对称加密与数字签名与https"><meta name="keywords" content="密码学,公开课"><meta name="author" content="EsunR"><meta name="copyright" content="EsunR"><title>密码学基础：对称加密、非对称加密与数字签名与https | EsunR-Blog</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.9.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css?version=1.9.0"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="dns-prefetch" href="https://hm.baidu.com"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?31bd12722efcf47cb7d0d576bf150215";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-3RG97DCL3N"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-3RG97DCL3N');</script><script src="https://v1.hitokoto.cn/?encode=js&amp;charset=utf-8&amp;select=.footer_custom_text" defer></script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  hexoVersion: '6.2.0'
+} </script><meta name="generator" content="Hexo 6.2.0"></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E5%AF%86%E7%A0%81%E5%AD%A6%E7%AE%80%E4%BB%8B"><span class="toc-text">1. 密码学简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E4%BF%A1%E6%81%AF%E5%8A%A0%E5%AF%86"><span class="toc-text">1.1 信息加密</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D%E7%AE%80%E4%BB%8B"><span class="toc-text">1.2 数字签名简介</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%8A%A0%E5%AF%86%E9%80%9A%E4%BF%A1"><span class="toc-text">2. 加密通信</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86"><span class="toc-text">2.1 对称加密</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%EF%BC%88%E5%85%AC%E5%BC%80%E5%AF%86%E9%92%A5%E5%8A%A0%E5%AF%86%EF%BC%89"><span class="toc-text">2.2 非对称加密（公开密钥加密）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-%E6%B7%B7%E5%90%88%E5%8A%A0%E5%AF%86"><span class="toc-text">2.3 混合加密</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D"><span class="toc-text">3. 数字签名</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D%E7%9A%84%E5%8E%9F%E7%90%86"><span class="toc-text">3.1 数字签名的原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-text">3.2 数字签名的作用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6"><span class="toc-text">4. 数字证书</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://esunr-webapp.cdn.bcebos.com/blog/avatar.jpeg?x-bce-process=image/resize,m_lfit,w_200/format,f_auto" alt="avatar"></div><div class="author-info__name text-center">EsunR</div><div class="author-info__description text-center">EsunR-Blog是由EsunR维护的博客平台，分享在前端开发、Git、Vue.js、Webpack、OAuth、Linux等各个领域的知识和经验。浏览这里的深入文章，了解不同主题的见解，并及时了解行业的最新趋势和技术。</div><div class="follow-button"><a target="_blank" rel="noopener" href="https://github.com/EsunR">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">172</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">155</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">26</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">EsunR-Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"><span class="site-page social-icon search"><i class="fa fa-search"></i><span> Search</span></span></span></div><div id="post-info"><div id="post-title">密码学基础：对称加密、非对称加密与数字签名与https</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-11-12</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E5%85%B6%E4%BB%96/">其他</a><span class="post-meta__separator">|</span><i class="fa fa-comment-o post-meta__icon" aria-hidden="true"></i><a href="/2019/11/742b4ca50d57.html#disqus_thread"><span class="disqus-comment-count" data-disqus-identifier="2019/11/742b4ca50d57.html"></span></a><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">2.4k</span><span class="post-meta__separator">|</span><span>Reading time: 7 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><blockquote>
+<p>课程来源：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av70001643">https://www.bilibili.com/video/av70001643</a></p>
+</blockquote>
+<h1 id="1-密码学简介"><a href="#1-密码学简介" class="headerlink" title="1. 密码学简介"></a>1. 密码学简介</h1><p>密码学是通信安全方面的研究，主要分为加密通信与数字签名两个功能：</p>
+<h2 id="1-1-信息加密"><a href="#1-1-信息加密" class="headerlink" title="1.1 信息加密"></a>1.1 信息加密</h2><p>加密通信分为 对称加密 与 非对称加密。</p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20191112193853.png" alt="20191112193853.png"></p>
+<p>对称加密拥有同一套密钥，是一种比较简单的加密方式，但是其劣势就是公用的一套密钥可能会被窃取。对称加密最常见的算法是 AES 算法。</p>
+<p>而非对称加密是使用了一对公钥和密钥实现了信息的加密，一方用公钥加密信息，而另一方用私钥解密信息。非对称加密的主要算法有两种，一种是 RSA（经典算法）, 另一种是 ECC（比特币加密算法）。</p>
+<p>所以对比之下，非对称加密相对于对称加密的的优势在于：信息加密传递的过程中只需要显式传递公钥，私钥由一方保密，外界没有私钥就无法对传递的信息进行解密，所以公钥暴露也无所谓。</p>
+<h2 id="1-2-数字签名简介"><a href="#1-2-数字签名简介" class="headerlink" title="1.2 数字签名简介"></a>1.2 数字签名简介</h2><p>数字签名（又称公钥数字签名）是只有信息的发送者才能产生的别人无法伪造的一段数字串，这段数字串同时也是对信息的发送者发送信息真实性的一个有效证明。</p>
+<p>数字签名是基于非对称加密实现的，是由私钥产生的，公钥可以验证数字签名的有效性：</p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20191112201025.png" alt="20191112201025.png"></p>
+<h1 id="2-加密通信"><a href="#2-加密通信" class="headerlink" title="2. 加密通信"></a>2. 加密通信</h1><h2 id="2-1-对称加密"><a href="#2-1-对称加密" class="headerlink" title="2.1 对称加密"></a>2.1 对称加密</h2><p>对称加密就是双方使用同一个解密密钥，对信息进行两端的加密和解密。</p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20191112201402.png" alt="20191112201402.png"></p>
+<p>但是在互联网通信中，服务器端与客户端并不能同时约定一个对信息加密和解密的密钥。只能由一方规定生成密钥后，再将密钥传递给另一方，那么传递的过程中，密钥就有可能被泄露。所以解决如何安全传递对称加密的密钥就成了主要解决的问题。</p>
+<h2 id="2-2-非对称加密（公开密钥加密）"><a href="#2-2-非对称加密（公开密钥加密）" class="headerlink" title="2.2 非对称加密（公开密钥加密）"></a>2.2 非对称加密（公开密钥加密）</h2><p>非对称加密双发使用了不同的密钥来进行解密，在传递过程中仅传递公钥，所以信息不会对外泄露，这就弥补了对称加密的不足。</p>
+<p>其具体的实现流程就是让接收方生成一套公钥和私钥，这两套密钥在数学上关系上有着紧密的联系，但同时不可由私钥推算出公钥。之后接收方将公钥交给信息发送方，信息发送放使用公钥对信息进行加密，发送信息给信息接收方后，信息接收方就可以使用其私钥对加密信息进行解密。</p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20191112194832.png" alt="20191112194832.png"></p>
+<p>关于私钥与公钥的加密原理，重点在于公钥与私钥之间有 <strong>一定的数学联系</strong> ，一般是由一个单向函数实现的，比如 <code>a*b=123312213212</code> 我们并不能逆向推算出 <code>a</code> 和 <code>b</code> 的具体值。</p>
+<p>举个简单的例子（<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/33645891/answer/192604856">引用来源</a>）：</p>
+<p>让对方任意想一个3位数，并把这个数和91相乘，然后告诉我积的最后三位数，我就可以猜出对方想的是什么数字！</p>
+<p>比如对方想的是123，那么对方就计算出123 * 91等于11193，并把结果的末三位193告诉我。看起来，这么做似乎损失了不少信息，让我没法反推出原来的数。不过，我仍然有办法：只需要把对方告诉我的结果再乘以11，乘积的末三位就是对方刚开始想的数了。可以验证一下，193 * 11 = 2123，末三位正是对方所想的秘密数字！</p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20191112195647.png" alt="20191112195647.png"></p>
+<p>其实道理很简单，91乘以11等于1001，而任何一个三位数乘以1001后，末三位显然都不变（例如123乘以1001就等于123123）。</p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20191112200028.png" alt="20191112200028.png"></p>
+<p>所以用上面的例子，我们可以将其整理为一个非对称加密传输信息的模型：</p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20191112195554.png" alt="20191112195554.png"></p>
+<h2 id="2-3-混合加密"><a href="#2-3-混合加密" class="headerlink" title="2.3 混合加密"></a>2.3 混合加密</h2><p>混合加密就是将对称加密与非对称加密相结合而进行信息传递的方式，互联网两端的通信虽然完全可以使用非对称加密来进行，但是非对称加密这种方式及其消耗性能成本，而对称加密更为节省性能。所以我们没有必要全程使用非对称加密来进行通信，只需要使用非对称加密传递对称加密的密钥即可，主要的信息通信仍使用对称加密。</p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20191113114844.png" alt="混合加密传递密钥的流程"></p>
+<p>使用混合加密实现的例子有：PGP、HTTPS</p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20191112203459.png" alt="PGP基础原理"></p>
+<h1 id="3-数字签名"><a href="#3-数字签名" class="headerlink" title="3. 数字签名"></a>3. 数字签名</h1><p>在上述两节中，公钥的主要作用是用来 <strong>加密信息</strong>，并没有体现其解密功能，那么为什么要称公钥为钥匙呢？原来除了加密信息外，公钥还可以用来解密数字签名，来验证信息的发送方是否来自于对应的私钥。</p>
+<p>所以总结一下，私钥的解密功能主要体现在加密通信（解密key），而公钥的解密功能体现在数字签名（验证key）。</p>
+<h2 id="3-1-数字签名的原理"><a href="#3-1-数字签名的原理" class="headerlink" title="3.1 数字签名的原理"></a>3.1 数字签名的原理</h2><p>对于加密通信与数字签名的具体过程，私钥与公钥的作用是互相对陈的：</p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20191112210610.png" alt="20191112210610.png"></p>
+<p>签名算法的输入是文件与私钥，而输出是一串密文；而验证算法的输入时文件、密文与公钥，输出是判定文件的签名是否有效。</p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20191112210727.png" alt="20191112210727.png"></p>
+<p>对于签名的验证算法是公开的，所有人都可以在自己的计算机上执行验证算法。这段过程中要注意，签名算法并没有对文件进行加密，只是加密了文件的哈希值：</p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20191112211451.png" alt="20191112211451.png"></p>
+<h2 id="3-2-数字签名的作用"><a href="#3-2-数字签名的作用" class="headerlink" title="3.2 数字签名的作用"></a>3.2 数字签名的作用</h2><ul>
+<li>认证 —— 确认身份</li>
+<li>防止抵赖 —— 不能返回</li>
+<li>防篡改 —— 文件完整</li>
+</ul>
+<p>对于防止文件篡改、验证文件完整，这一步是因为验证算法生成的密文是由文件的哈希值与私钥生成的，如果文件在传输过程中遭到篡改或不完整，那么在客户端将传递到文件、密文、公钥进行验证时就会不一致。</p>
+<h1 id="4-数字证书"><a href="#4-数字证书" class="headerlink" title="4. 数字证书"></a>4. 数字证书</h1><p>弄懂了对称加密、非对称加密、数字签名这三个主要概念之后，我们回头看一下，在最合理的混合加密过程中仍存在着不安全的情况。</p>
+<p>如果黑客在混合加密传递公钥的这一步拦截了公钥，将其替换为自己的公钥，诱骗客户端生成加密密钥；随后客户端在向服务器传递加密密钥时，黑客再次进行拦截，并将来自客户端的加密密钥进行解密得到密钥，并将解密后的密钥由真正的公钥再次加密发送给服务器端。这样就可以在服务器端与客户端 <strong>无法察觉</strong> 的情况下获取到两端进行对称加密通信的密钥了。</p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20191112205817.png" alt="公钥被黑客拦截并篡改"></p>
+<p>那么我们来思考一下如何解决安全的传递公钥的这一问题：</p>
+<p>我们设想，假如在服务器传递公钥时，同时夹带一张证书，来证明当前的公钥时由服务器发送的，那么如果黑客在中途窃取了拦截了公钥，将“真公钥”替换为了“假公钥”，但是 <strong>证书是不能被黑客篡改的</strong> ，那么客户端在验证证书时就会发现公钥不正确，从而防止信息泄露。</p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20191113120230.png" alt="不携带证书的情况"></p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20191113120141.png" alt="携带证书的情况"></p>
+<p>我们可以利用我们上一节讲的数字签名来制作这张证书，同时还要有一个可信任的 <strong>发证机构（CA）</strong> 来颁发这张证书，这也就是 HTTPS 的加密原理。</p>
+<p>一张证书通常包含以下几个重要信息：</p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20191113121219.png" alt="证书"></p>
+<p>我们可以注意到证书上有一个数字签名，这个数字签名是由发证机构生成的，用于验证证书的有效性，其对应的验证公钥是发证机构提供的。所以公钥传递的完整流程（也就是HTTPS的加密流程）应该为：</p>
+<ol>
+<li>服务器在发送公钥前，会拿着该公钥与自己的信息向发证机构提出申请。</li>
+<li>发证机构收到服务器的申请后，将这些信息进行HASH处理，结合自己的算法生成一个证书的数字签名，并将证书递交给服务器。</li>
+<li>服务器将证书发送给客户端</li>
+<li>客户端接收到证书后，拿着发证机构提供的公钥验证证书是否是由发证机构提供的，同时验证其余信息有没有被篡改（这一步提现了非对称加密的验证功能），如果验证通过那么证书中携带的公钥就是可信的。</li>
+</ol>
+<p>此时可能会有这两个问题：</p>
+<ul>
+<li><p>问：发证机构的公钥如何获取？<br>答：发证机构是基于信任的，发证机构的公钥已经对公众公开并集成于浏览器中了。</p>
+</li>
+<li><p>问：证书可能被篡改吗？<br>答：不可能。如果黑客对数字签名进行了篡改，那么客户端就无法解密；如果黑客篡改了证书中的明文信息，那么客户端在使用 CA 公钥进行签名验证时就会发现解出的HASH与明文信息不对应。</p>
+</li>
+</ul>
+</div></article><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学</a><a class="post-meta__tags" href="/tags/%E5%85%AC%E5%BC%80%E8%AF%BE/">公开课</a></div><div class="addthis_inline_share_toolbox pull-right"></div><script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-62c7f2684e36ba34" async></script><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/11/90537b604dd9.html"><i class="fa fa-chevron-left">  </i><span>前端页面的性能优化方案</span></a></div><div class="next-post pull-right"><a href="/2019/11/feec6e96dc41.html"><span>使用 Element UI Select 组件的 value-key 属性，让绑定值可以为一个对象</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="disqus_thread"></div><script>var unused = null;
+var disqus_config = function () {
+  this.page.url = 'https://blog.esunr.site/2019/11/742b4ca50d57.html';
+  this.page.identifier = '2019/11/742b4ca50d57.html';
+  this.page.title = '密码学基础：对称加密、非对称加密与数字签名与https';
+}
+var d = document, s = d.createElement('script');
+s.src = "https://" + 'esunr-blog' +".disqus.com/embed.js";
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);</script><script id="dsq-count-scr" src="https://esunr-blog.disqus.com/count.js" async></script></div></div><footer class="footer-bg" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div class="layout" id="footer"><div class="copyright">&copy;2017 - 2025 By EsunR</div><div class="framework-info"><span>Driven - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">hitokoto</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.0"></script><script src="/js/fancybox.js?version=1.9.0"></script><script src="/js/sidebar.js?version=1.9.0"></script><script src="/js/copy.js?version=1.9.0"></script><script src="/js/fireworks.js?version=1.9.0"></script><script src="/js/transition.js?version=1.9.0"></script><script src="/js/scroll.js?version=1.9.0"></script><script src="/js/head.js?version=1.9.0"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>Powered by</span> <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="将本地项目托管到Github上，以及将Github上的项目同步到本地"><meta name="keywords" content="Git,Github"><meta name="author" content="EsunR"><meta name="copyright" content="EsunR"><title>将本地项目托管到Github上，以及将Github上的项目同步到本地 | EsunR-Blog</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.9.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css?version=1.9.0"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="dns-prefetch" href="https://hm.baidu.com"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?31bd12722efcf47cb7d0d576bf150215";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-3RG97DCL3N"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-3RG97DCL3N');</script><script src="https://v1.hitokoto.cn/?encode=js&amp;charset=utf-8&amp;select=.footer_custom_text" defer></script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  hexoVersion: '6.2.0'
+} </script><meta name="generator" content="Hexo 6.2.0"></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E6%89%98%E7%AE%A1%E5%88%B0Github"><span class="toc-text">本地项目托管到Github</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%9C%AC%E5%9C%B0%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85Git%E7%8E%AF%E5%A2%83"><span class="toc-text">1. 本地下载安装Git环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%B7%BB%E5%8A%A0%E5%BC%80%E5%8F%91%E6%9C%BA%E7%9A%84SSH-Key"><span class="toc-text">2. 添加开发机的SSH Key</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%9C%A8Github%E4%B8%AD%E5%88%9B%E5%BB%BA%E7%A9%BA%E9%A1%B9%E7%9B%AE"><span class="toc-text">3. 在Github中创建空项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E4%B8%8A%E4%BC%A0%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E5%88%B0Github"><span class="toc-text">4. 上传本地项目代码到Github</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Github%E4%BB%A3%E7%A0%81%E5%90%8C%E6%AD%A5%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-text">Github代码同步到服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85Git%E7%8E%AF%E5%A2%83"><span class="toc-text">1. 服务器下载安装Git环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%B7%BB%E5%8A%A0%E5%BC%80%E5%8F%91%E6%9C%BA%E7%9A%84SSH-Key-1"><span class="toc-text">2. 添加开发机的SSH Key</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%90%8C%E6%AD%A5%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88%E6%9C%AC%E5%9C%B0%EF%BC%89"><span class="toc-text">4. 同步项目代码到服务器（本地）</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://esunr-webapp.cdn.bcebos.com/blog/avatar.jpeg?x-bce-process=image/resize,m_lfit,w_200/format,f_auto" alt="avatar"></div><div class="author-info__name text-center">EsunR</div><div class="author-info__description text-center">EsunR-Blog是由EsunR维护的博客平台，分享在前端开发、Git、Vue.js、Webpack、OAuth、Linux等各个领域的知识和经验。浏览这里的深入文章，了解不同主题的见解，并及时了解行业的最新趋势和技术。</div><div class="follow-button"><a target="_blank" rel="noopener" href="https://github.com/EsunR">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">172</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">155</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">26</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">EsunR-Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"><span class="site-page social-icon search"><i class="fa fa-search"></i><span> Search</span></span></span></div><div id="post-info"><div id="post-title">将本地项目托管到Github上，以及将Github上的项目同步到本地</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018-12-21</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Git/">Git</a><span class="post-meta__separator">|</span><i class="fa fa-comment-o post-meta__icon" aria-hidden="true"></i><a href="/2018/12/c1cb569e511d.html#disqus_thread"><span class="disqus-comment-count" data-disqus-identifier="2018/12/c1cb569e511d.html"></span></a><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">1k</span><span class="post-meta__separator">|</span><span>Reading time: 3 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在日常开发中我们经常会遇到这样的需求：在本地开发项目同步到Github上，同时将服务器上的代码也做更新。倘若能把 <code>本地-Github-服务器</code> 这三个平台关联（如图），这样就能极大的提高我们的效率。</p>
+<p><img src="https://s2.loli.net/2023/04/22/wOzFbcxL1WoHvga.png" alt=""></p>
+<p>那么大体上的思路就只分两步了：</p>
+<ol>
+<li>将本地项目托管到Github</li>
+<li>将Github上的代码同步到远程服务器端</li>
+</ol>
+<h1 id="本地项目托管到Github"><a href="#本地项目托管到Github" class="headerlink" title="本地项目托管到Github"></a>本地项目托管到Github</h1><p>先假设我们再本地的D盘目录下创建了一个<code>test</code>文件夹，里面放着我们的项目代码，接下来我们需要进行如下操作将其托管到Github。</p>
+<h3 id="1-本地下载安装Git环境"><a href="#1-本地下载安装Git环境" class="headerlink" title="1. 本地下载安装Git环境"></a>1. 本地下载安装Git环境</h3><p>这一步不多做赘述，去Git官网下载Git的安装包就可以了，安装完成后打开<code>Git Bash</code>应用，输入指令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C &quot;yourEmail&quot;</span><br><span class="line">$ Generating public/private rsa key pair.</span><br><span class="line">$ Enter file in which to save the key (/c/Users/esunr/.ssh/id_rsa): </span><br><span class="line">$ Created directory &#x27;/c/Users/esunr/.ssh&#x27;.</span><br><span class="line">$ Enter passphrase (empty for no passphrase):</span><br><span class="line">$ Enter same passphrase again:</span><br><span class="line"></span><br><span class="line">$ git config --global user.name &quot;yourName&quot;</span><br><span class="line">$ git config --global user.email &quot;yourEmal&quot;</span><br></pre></td></tr></table></figure>
+<p><code>yourName</code>和<code>yourEmal</code>分别对应你的Github用户名和邮箱</p>
+<h3 id="2-添加开发机的SSH-Key"><a href="#2-添加开发机的SSH-Key" class="headerlink" title="2. 添加开发机的SSH Key"></a>2. 添加开发机的SSH Key</h3><p><code>SSH Key</code>即SSH公钥，只有我们把某台PC的SSH公钥添加到Github的设置中，我们的这台PC才能跟我们上传的项目进行同步和更改。</p>
+<p>首先我们打开Git Bash，在命令中输入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd ~/.ssh</span><br><span class="line">$ ls</span><br></pre></td></tr></table></figure>
+<p>如果列出如下目录：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id_rsa  id_rsa.pub  known_hosts</span><br></pre></td></tr></table></figure>
+<p>说明已存在SSH Key无需再生成，如果不存在则运行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen</span><br></pre></td></tr></table></figure>
+<p>生成<code>id_rsa.pub</code>文件后，我们使用命令查看密钥</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat id_rsa.pub</span><br></pre></td></tr></table></figure>
+
+<p>得到的密钥大概长这样</p>
+<p><img src="https://s2.loli.net/2023/04/22/jHBbVcumG45eCtR.png" alt=""></p>
+<p>我们将<code>id_ras.pub</code>文件中的所有文本都复制下来，打开Github，选择右上角头像-Settings-SSH and GPG keys，点击选项面板中的<code>New SSH Key</code>。</p>
+<p><img src="https://s2.loli.net/2023/04/22/ADPX1pEoZJ43yCM.png" alt=""></p>
+<p>将自己的SSH Key添加到选项中即可，之后我们可以运行测试是否连接到Github</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+
+<p>如果出现如下提示，则说名连接成功</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hi EsunR! You&#x27;ve successfully authenticated, but GitHub does not provide shell access.</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-在Github中创建空项目"><a href="#3-在Github中创建空项目" class="headerlink" title="3. 在Github中创建空项目"></a>3. 在Github中创建空项目</h3><p>我们点击右上角的“+”选择<code>New repository</code>创建一个新项目，要注意一点的是：</p>
+<blockquote>
+<p>新项目中除了题目和描述之外，不要点击任何选项，我们要的是一个完全空的项目仓库</p>
+</blockquote>
+<p><img src="https://s2.loli.net/2023/04/22/dy1zqZ3FUHxn857.png" alt=""></p>
+<h3 id="4-上传本地项目代码到Github"><a href="#4-上传本地项目代码到Github" class="headerlink" title="4. 上传本地项目代码到Github"></a>4. 上传本地项目代码到Github</h3><p>我们点击<code>Create repository</code>之后，会出现一个提示，如下做讲解</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 这一步是跳转到本地的项目目录，我们可以替换为cd指令跳转，cd C:/test</span><br><span class="line">echo &quot;# test&quot; &gt;&gt; README.md</span><br><span class="line">// 初始化项目</span><br><span class="line">git init</span><br><span class="line">// 添加一个README.md文件（选择性）</span><br><span class="line">git add README.md</span><br><span class="line">// 托管更改</span><br><span class="line">git add . </span><br><span class="line">// 提交一次初始化更改</span><br><span class="line">git commit -m &quot;first commit&quot;</span><br><span class="line">// 将本地与Github做远程连接</span><br><span class="line">git remote add origin git@github.com:EsunR/test.git</span><br><span class="line">// 提交代码到主分支</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+
+<p>之后再刷新Github页面就发现代码提交完成了。</p>
+<h1 id="Github代码同步到服务器"><a href="#Github代码同步到服务器" class="headerlink" title="Github代码同步到服务器"></a>Github代码同步到服务器</h1><blockquote>
+<p>PS: 将代码下载到本地同理</p>
+</blockquote>
+<h3 id="1-服务器下载安装Git环境"><a href="#1-服务器下载安装Git环境" class="headerlink" title="1. 服务器下载安装Git环境"></a>1. 服务器下载安装Git环境</h3><p>与上文相同，只不过是服务器端就不需要用Git Bash了</p>
+<h3 id="2-添加开发机的SSH-Key-1"><a href="#2-添加开发机的SSH-Key-1" class="headerlink" title="2. 添加开发机的SSH Key"></a>2. 添加开发机的SSH Key</h3><p>与上文相同</p>
+<h3 id="4-同步项目代码到服务器（本地）"><a href="#4-同步项目代码到服务器（本地）" class="headerlink" title="4. 同步项目代码到服务器（本地）"></a>4. 同步项目代码到服务器（本地）</h3><p>首先在服务器或本地创建一个文件夹，作为项目的存放仓库，利用cd指令跳转到该文件夹下，如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cd /var/www/html</span><br><span class="line">$ mkdir test</span><br><span class="line">$ cd test</span><br></pre></td></tr></table></figure>
+
+<p>初始化该目录为Git仓库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git init</span><br></pre></td></tr></table></figure>
+
+<p>我们在Github中打开我们的项目，之后选择<code>Clone or download</code>，复制我们项目的SSH地址</p>
+<p><img src="https://s2.loli.net/2023/04/22/VCdth546ielnUqx.png" alt=""></p>
+<p>将仓库远程源连接到Github上的该项目</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git remote add origin git@github.com:EsunR/test.git</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>PS: 如过手滑信息填写错误，使用清除指令 <code>$ git remote remove origin</code> 清除源</p>
+</blockquote>
+<p>使用<code>Pull</code>指令，从远程源的主分支更新代码到服务器（本地）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git pull origin master</span><br></pre></td></tr></table></figure>
+
+<p>完成。</p>
+</div></article><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Git/">Git</a><a class="post-meta__tags" href="/tags/Github/">Github</a></div><div class="addthis_inline_share_toolbox pull-right"></div><script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-62c7f2684e36ba34" async></script><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/01/c02de085b779.html"><i class="fa fa-chevron-left">  </i><span>Javascript设计模式——观察者模式与发布订阅模式的对比</span></a></div></nav><div id="disqus_thread"></div><script>var unused = null;
+var disqus_config = function () {
+  this.page.url = 'https://blog.esunr.site/2018/12/c1cb569e511d.html';
+  this.page.identifier = '2018/12/c1cb569e511d.html';
+  this.page.title = '将本地项目托管到Github上，以及将Github上的项目同步到本地';
+}
+var d = document, s = d.createElement('script');
+s.src = "https://" + 'esunr-blog' +".disqus.com/embed.js";
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);</script><script id="dsq-count-scr" src="https://esunr-blog.disqus.com/count.js" async></script></div></div><footer class="footer-bg" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div class="layout" id="footer"><div class="copyright">&copy;2017 - 2025 By EsunR</div><div class="framework-info"><span>Driven - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">hitokoto</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.0"></script><script src="/js/fancybox.js?version=1.9.0"></script><script src="/js/sidebar.js?version=1.9.0"></script><script src="/js/copy.js?version=1.9.0"></script><script src="/js/fireworks.js?version=1.9.0"></script><script src="/js/transition.js?version=1.9.0"></script><script src="/js/scroll.js?version=1.9.0"></script><script src="/js/head.js?version=1.9.0"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>Powered by</span> <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

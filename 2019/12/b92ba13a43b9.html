@@ -1,0 +1,141 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="PHP 开发环境搭建指引"><meta name="keywords" content="快速使用,PHP"><meta name="author" content="EsunR"><meta name="copyright" content="EsunR"><title>PHP 开发环境搭建指引 | EsunR-Blog</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.9.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css?version=1.9.0"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="dns-prefetch" href="https://hm.baidu.com"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?31bd12722efcf47cb7d0d576bf150215";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-3RG97DCL3N"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-3RG97DCL3N');</script><script src="https://v1.hitokoto.cn/?encode=js&amp;charset=utf-8&amp;select=.footer_custom_text" defer></script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  hexoVersion: '6.2.0'
+} </script><meta name="generator" content="Hexo 6.2.0"></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Apache"><span class="toc-text">1. Apache</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-Windows-%E7%AB%AF%E5%AE%89%E8%A3%85-Apache"><span class="toc-text">1.1 Windows 端安装 Apache</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-Apaceh-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4"><span class="toc-text">1.2 Apaceh 常用指令</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-PHP"><span class="toc-text">2. PHP</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-PHP-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-text">2.1 PHP 环境配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-Apache-%E5%8A%A0%E8%BD%BD-PHP-%E6%A8%A1%E5%9D%97"><span class="toc-text">2.2 Apache 加载 PHP 模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-Apache-%E5%8A%A0%E8%BD%BD-PHP-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">3.3 Apache 加载 PHP 配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-PHP-%E9%80%89%E6%8B%A9%E5%8A%A0%E8%BD%BD%E6%A8%A1%E5%9D%97"><span class="toc-text">3.4 PHP 选择加载模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-5-%E8%AE%BE%E7%BD%AE-PHP-%E6%97%B6%E5%8C%BA"><span class="toc-text">3.5 设置 PHP 时区</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-6-Linux-%E7%B3%BB%E7%BB%9F%E4%B8%8B%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-text">3.6 Linux 系统下的注意事项</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://esunr-webapp.cdn.bcebos.com/blog/avatar.jpeg?x-bce-process=image/resize,m_lfit,w_200/format,f_auto" alt="avatar"></div><div class="author-info__name text-center">EsunR</div><div class="author-info__description text-center">EsunR-Blog是由EsunR维护的博客平台，分享在前端开发、Git、Vue.js、Webpack、OAuth、Linux等各个领域的知识和经验。浏览这里的深入文章，了解不同主题的见解，并及时了解行业的最新趋势和技术。</div><div class="follow-button"><a target="_blank" rel="noopener" href="https://github.com/EsunR">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">172</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">155</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">26</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">EsunR-Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"><span class="site-page social-icon search"><i class="fa fa-search"></i><span> Search</span></span></span></div><div id="post-info"><div id="post-title">PHP 开发环境搭建指引</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-12-12</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/PHP/">PHP</a><span class="post-meta__separator">|</span><i class="fa fa-comment-o post-meta__icon" aria-hidden="true"></i><a href="/2019/12/b92ba13a43b9.html#disqus_thread"><span class="disqus-comment-count" data-disqus-identifier="2019/12/b92ba13a43b9.html"></span></a><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">1.6k</span><span class="post-meta__separator">|</span><span>Reading time: 5 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="1-Apache"><a href="#1-Apache" class="headerlink" title="1. Apache"></a>1. Apache</h1><h2 id="1-1-Windows-端安装-Apache"><a href="#1-1-Windows-端安装-Apache" class="headerlink" title="1.1 Windows 端安装 Apache"></a>1.1 Windows 端安装 Apache</h2><p>Windows 端安装 (Apache Haus)[<a target="_blank" rel="noopener" href="https://www.apachehaus.com/cgi-bin/download.plx]，选择">https://www.apachehaus.com/cgi-bin/download.plx]，选择</a> x64 版本，下载完成之后是一个压缩包：</p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20191211161848.png" alt=""></p>
+<p>将文件解压到任意一个工作目录，如：<code>D:/Apache24</code>，之后打开 Apache 目录下的 <code>/conf/httpd.conf</code> ，修改配置文件：</p>
+<ol>
+<li>初次修改必须要修改 <code>Define SRVROOT</code>，将其更改为我们解压后所放置的工作目录；</li>
+<li><code>Listen</code> 选项为服务的开启的端口，默认为 <code>80</code>，如果该端口被占用，需要改变端口号才可以启动 Apache 服务。</li>
+</ol>
+<p>之后进入 <code>/bin</code> 目录下，使用有管理员权限的 <code>cmd</code> 或者 <code>powershell</code>，输入 <code>httpd.exe</code> 即可开启服务。</p>
+<p>Windows 端的 apache 目录结构：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">├─bin             # windows 可执行二进制文件</span><br><span class="line">│  └─iconv</span><br><span class="line">├─cgi-bin</span><br><span class="line">├─conf            # 配置文件</span><br><span class="line">│  ├─extra</span><br><span class="line">│  ├─original</span><br><span class="line">│  │  └─extra</span><br><span class="line">│  └─ssl</span><br><span class="line">├─error</span><br><span class="line">│  └─include</span><br><span class="line">├─htdocs          # 静态文件访问目录</span><br><span class="line">├─icons</span><br><span class="line">│  └─small</span><br><span class="line">├─include</span><br><span class="line">├─lib</span><br><span class="line">├─logs</span><br><span class="line">└─modules         # Apache 加载模块</span><br></pre></td></tr></table></figure>
+
+<p>之后可以将 Apache 安装为系统服务，那样便可以使用 <code>bin</code> 目录下的 <code>ApacheMonitor.exe</code> 工具，一键开启与重启 Apache 服务器（注意这里必须使用管理员权限运行命令行程序，并保证设置的端口没有被占用）：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">httpd -k install</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-2-Apaceh-常用指令"><a href="#1-2-Apaceh-常用指令" class="headerlink" title="1.2 Apaceh 常用指令"></a>1.2 Apaceh 常用指令</h2><p>查看模块状况：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">httpd.exe -M</span><br><span class="line"></span><br><span class="line"><span class="comment"># &lt;static&gt; 为静态加载模块</span></span><br><span class="line"><span class="comment"># &lt;shared&gt; 为动态加载模块</span></span><br></pre></td></tr></table></figure>
+
+<p>验证配置文件：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">httpd -t</span><br><span class="line"></span><br><span class="line"><span class="comment"># Syntax OK 表示没有错误</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Ubuntu 环境下需要使用 <code>apachectl</code> 替代 <code>httpd</code></p>
+</blockquote>
+<h1 id="2-PHP"><a href="#2-PHP" class="headerlink" title="2. PHP"></a>2. PHP</h1><h2 id="2-1-PHP-环境配置"><a href="#2-1-PHP-环境配置" class="headerlink" title="2.1 PHP 环境配置"></a>2.1 PHP 环境配置</h2><p>上官网安装<a target="_blank" rel="noopener" href="https://windows.php.net/download">适用于 Windows 的 PHP</a>，<strong>注意要下载 Thread Safe 版本，否则没有 Apache 的模块</strong>。</p>
+<p>下载同样是一个压缩包格式的文件，将其解压并放置到自定的目录，其目录结构为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">├─dev</span><br><span class="line">├─ext                      # 扩展包</span><br><span class="line">├─extras</span><br><span class="line">│  └─ssl</span><br><span class="line">├─lib</span><br><span class="line">│  └─enchant</span><br><span class="line">└─sasl2</span><br><span class="line"></span><br><span class="line">- php.exe                  # 交互式解释器</span><br><span class="line">- php.ini-development      # 开发版配置文件</span><br><span class="line">- php.ini-production       # 生产环境下的配置文件</span><br><span class="line">- php7apache2_4.dll        # apahce 支持文件</span><br><span class="line">- php7apache2_4filter.dll  # apahce 支持文件</span><br></pre></td></tr></table></figure>
+
+<p>执行 php 文件：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php.exe -f /dirName/fileName.php</span><br></pre></td></tr></table></figure>
+
+<p>将 php 环境的目录设置到系统 PATH 中，即可直接编译运行 php 文件：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// helloworld.php</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">  <span class="keyword">echo</span> <span class="string">&#x27;hello world&#x27;</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ php helloword.php</span><br><span class="line">&gt; hello world</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-Apache-加载-PHP-模块"><a href="#2-2-Apache-加载-PHP-模块" class="headerlink" title="2.2 Apache 加载 PHP 模块"></a>2.2 Apache 加载 PHP 模块</h2><p>打开 Apache 配置文件，在 LoadModule 处添加模块路径：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># httpd.conf</span><br><span class="line">LoadModule php7_module &#x27;C:/Program Files/php/7.4.0/php7apache2_4.dll&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>之后可以通过 <code>httpd -t</code> 来检查配置文件是否可用，同时使用 <code>httpd -M</code> 可以看到新增的模块：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php7_module (shared)</span><br></pre></td></tr></table></figure>
+
+<p>除此之外，我们还要显式配置 Apache 支持读取 php 文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># httpd.conf</span><br><span class="line">AddType application/x-httpd-php .php</span><br></pre></td></tr></table></figure>
+
+<p>此时已可以将 php 文件放置到 <code>Apache24/htdocs/</code> 目录下，服务器即可处理 php 文件了。</p>
+<h2 id="3-3-Apache-加载-PHP-配置文件"><a href="#3-3-Apache-加载-PHP-配置文件" class="headerlink" title="3.3 Apache 加载 PHP 配置文件"></a>3.3 Apache 加载 PHP 配置文件</h2><p>由于 Apache 是运行 php 的环境，所以 php 的相关设置比如加载模块，需要让 Apache 读取，因此我们要让 Apache 去加载 PHP 的配置文件。</p>
+<blockquote>
+<p>以下配置仅适用于 Windows 平台</p>
+</blockquote>
+<p>在 Apache 配置文件中添加：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># httpd.conf</span><br><span class="line">PHPIniDir &#x27;C:/Program Files/php/7.4.0&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>由于 PHP 环境下载下来之后，相关的配置文件并没有进行初始化操作，我们需要在 PHP 目录下创建一个 <code>php.ini</code> 文件，我们可以将 <code>php.ini-development</code> 复制一份并重命名为 <code>php.ini</code> 完成初始化操作。</p>
+<p>之后我们可以在 apache 静态文件目录下（windows 平台在为 Apache 目录下的 htdocs 文件夹）中创建一个 <code>info.php</code>，输入：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// info.php</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">phpinfo</span>();</span><br></pre></td></tr></table></figure>
+
+<p>访问 <code>http://localhost/env.php</code> 既可看到当前的 php 环境配置详情：</p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20191219111739.png" alt="inof.php"></p>
+<blockquote>
+<p>php 的很大一个好处就是可以热更新，无需重启服务器修改文件即可生效，当然加载模块还是要重启服务器的。</p>
+</blockquote>
+<h2 id="3-4-PHP-选择加载模块"><a href="#3-4-PHP-选择加载模块" class="headerlink" title="3.4 PHP 选择加载模块"></a>3.4 PHP 选择加载模块</h2><p>通过以上的设置，Apache 已经能够处理 PHP 文件了，但是 PHP 还有众多扩展包可以供我们使用，比如 <code>mysqli</code> 扩展可以帮助我们连接 myslq，只有我们启用了这些扩展，才可以在 PHP 中使用这些服务。</p>
+<p>这里以启用 <code>myslqi</code> 扩展为例，打开 <code>php.ini</code> 文件，在 <code>;extension=mysqli</code> 这一行取消掉前面的 <code>;</code> 即启用该插件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">;php.ini</span><br><span class="line">extension=mysqli</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>在 php7.3 以下版本，<code>mysqli</code> 可能被写为 <code>php_mysqli.dll</code>，这里也可以填写一个绝对路径来指向插件的存放位置。</p>
+</blockquote>
+<p>在 Windows 平台上还需要额外配置 PHP 扩展的路径，如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">;php.ini</span><br><span class="line">extension_dir = &quot;C:/Progarm Files/php/7.4.0/ext/&quot;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Ubuntu 可以通过查看 phpinfo 来获取插件的默认路径。</p>
+</blockquote>
+<h2 id="3-5-设置-PHP-时区"><a href="#3-5-设置-PHP-时区" class="headerlink" title="3.5 设置 PHP 时区"></a>3.5 设置 PHP 时区</h2><p>系统默认的时区并不安全，需要手动切换为当前国家的时区：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">date.timezone = RPC</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-6-Linux-系统下的注意事项"><a href="#3-6-Linux-系统下的注意事项" class="headerlink" title="3.6 Linux 系统下的注意事项"></a>3.6 Linux 系统下的注意事项</h2><ul>
+<li><p>Linux 系统下可能会安装多个 PHP 版本，可以用 <code>php --verison</code> 查看当前 php 版本。</p>
+</li>
+<li><p>PHP 的目录为 <code>/etc/php</code>，在该目录下可以看到多个 PHP 版本。</p>
+</li>
+<li><p>PHP 命令行环境下与 Apache 环境下加载的 <code>php.ini</code> 文件是不一样的。</p>
+<ul>
+<li>命令行环境下执行的是 <code>/etc/php/[php_version]/cli/php.ini</code>，命令行中使用 <code>php -i | grep php.ini</code> 可以查看。</li>
+<li>Apache 环境下加载的是 <code>/etc/php/[php_version]/cli/php.ini</code>，php 文件中使用 <code>phpinfo()</code> 方法输出当前环境可以查看。</li>
+</ul>
+</li>
+<li><p>模块位置在 <code>/usr/lib/php/[php_api_version]/</code> 目录下存放。</p>
+<ul>
+<li>该位置可以按照 windows 上的设置方式显式指定（不推荐更改）。</li>
+<li>该位置不同的 php 版本不一样，具体看当前的 PHP API 的值。</li>
+<li>命令行环境与 Apache 环境中对于扩展的路径是相同的，命令行环境下使用 <code>php -i | grep extension_dir</code> 查看。</li>
+</ul>
+</li>
+<li><p>如果安装有多个版本的 php 可以使用 <code>php[version]</code> 来执行不同版本的 php ，如 <code>php7.2 --version</code>。</p>
+</li>
+</ul>
+<blockquote>
+<p>可以在 <code>/usr/bin</code> 目录下查看当前所可执行的 php 版本</p>
+</blockquote>
+<ul>
+<li>如果要手动安装扩展，需要安装当前版本的 <code>dev</code> 开发工具，比如 php7.3 需要安装 <code>php7.3-dev</code>。<ul>
+<li>dev 工具中的 phpize 可以用来编译扩展，与多版本的 php 使用类似，可以使用 <code>phpize[version]</code> 来切换不同版本的编译工具</li>
+<li>dev 工具中可以调用 <code>php-config</code> 来查看当前开发工具对应的 php 环境，如果当前设备安装了 <code>php7.3</code> 而 dev 工具是 <code>php7.2-dev</code> ，那么当前的环境只会是 php7.2 的环境，响应的编译的文件也会编译到 <code>php7.2</code> 的扩展路径中。</li>
+</ul>
+</li>
+</ul>
+</div></article><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%BF%AB%E9%80%9F%E4%BD%BF%E7%94%A8/">快速使用</a><a class="post-meta__tags" href="/tags/PHP/">PHP</a></div><div class="addthis_inline_share_toolbox pull-right"></div><script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-62c7f2684e36ba34" async></script><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/12/08ff36578f99.html"><i class="fa fa-chevron-left">  </i><span>PHP语法基础</span></a></div><div class="next-post pull-right"><a href="/2019/12/40c2fd2ada1b.html"><span>React 开发框架 —— Umi 与 Dva 的快速使用指南</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="disqus_thread"></div><script>var unused = null;
+var disqus_config = function () {
+  this.page.url = 'https://blog.esunr.site/2019/12/b92ba13a43b9.html';
+  this.page.identifier = '2019/12/b92ba13a43b9.html';
+  this.page.title = 'PHP 开发环境搭建指引';
+}
+var d = document, s = d.createElement('script');
+s.src = "https://" + 'esunr-blog' +".disqus.com/embed.js";
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);</script><script id="dsq-count-scr" src="https://esunr-blog.disqus.com/count.js" async></script></div></div><footer class="footer-bg" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div class="layout" id="footer"><div class="copyright">&copy;2017 - 2025 By EsunR</div><div class="framework-info"><span>Driven - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">hitokoto</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.0"></script><script src="/js/fancybox.js?version=1.9.0"></script><script src="/js/sidebar.js?version=1.9.0"></script><script src="/js/copy.js?version=1.9.0"></script><script src="/js/fireworks.js?version=1.9.0"></script><script src="/js/transition.js?version=1.9.0"></script><script src="/js/scroll.js?version=1.9.0"></script><script src="/js/head.js?version=1.9.0"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>Powered by</span> <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

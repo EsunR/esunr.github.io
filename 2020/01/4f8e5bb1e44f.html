@@ -1,0 +1,324 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="现阶段前端页面所使用的动画技术方案总结"><meta name="keywords" content="Canvas,研究报告,CSS3"><meta name="author" content="EsunR"><meta name="copyright" content="EsunR"><title>现阶段前端页面所使用的动画技术方案总结 | EsunR-Blog</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.9.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css?version=1.9.0"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="dns-prefetch" href="https://hm.baidu.com"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?31bd12722efcf47cb7d0d576bf150215";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-3RG97DCL3N"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-3RG97DCL3N');</script><script src="https://v1.hitokoto.cn/?encode=js&amp;charset=utf-8&amp;select=.footer_custom_text" defer></script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  hexoVersion: '6.2.0'
+} </script><meta name="generator" content="Hexo 6.2.0"></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-CSS3-%E5%8A%A8%E7%94%BB"><span class="toc-text">1. CSS3 动画</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-transition-%E8%BF%87%E6%B8%A1"><span class="toc-text">1.1 transition 过渡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-transform"><span class="toc-text">1.2 transform</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2D"><span class="toc-text">2D</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3D"><span class="toc-text">3D</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#matrix-%E7%9F%A9%E9%98%B5"><span class="toc-text">matrix 矩阵</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-animation"><span class="toc-text">1.3 animation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-%E4%BA%8B%E4%BB%B6"><span class="toc-text">1.4 事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-%E6%80%A7%E8%83%BD"><span class="toc-text">1.5 性能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="toc-text">性能优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS-%E5%AF%B9%E6%AF%94-JavaScript-%E7%9A%84%E6%80%A7%E8%83%BD"><span class="toc-text">CSS 对比 JavaScript 的性能</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Canvas-2D"><span class="toc-text">2. Canvas 2D</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-Canvas-%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84"><span class="toc-text">2.1 Canvas 的基本结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E4%B8%8A%E4%B8%8B%E6%96%87%E5%AF%B9%E8%B1%A1"><span class="toc-text">2.2 上下文对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-Canvas-%E7%9A%84%E7%BB%98%E5%88%B6%E8%BF%87%E7%A8%8B"><span class="toc-text">2.3 Canvas 的绘制过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%98%E5%88%B6%E8%B7%AF%E5%BE%84"><span class="toc-text">绘制路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%98%E5%88%B6%E6%A0%B7%E5%BC%8F"><span class="toc-text">绘制样式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E7%BB%98%E5%88%B6"><span class="toc-text">快速绘制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%98%E5%88%B6%E5%A4%8D%E6%9D%82%E5%9B%BE%E5%83%8F"><span class="toc-text">绘制复杂图像</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-Canvas%E5%8A%A8%E7%94%BB"><span class="toc-text">2.4 Canvas动画</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%AD%96%E7%95%A5"><span class="toc-text">2.5 性能优化策略</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-requestAnimationFrame"><span class="toc-text">使用 requestAnimationFrame</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E7%A6%BB%E5%B1%8F-canvas-%E4%BC%98%E5%8C%96%E6%80%A7%E8%83%BD"><span class="toc-text">使用离屏 canvas 优化性能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%BF%E5%85%8D%E6%B5%AE%E7%82%B9%E6%95%B0%E7%9A%84%E5%9D%90%E6%A0%87%E7%82%B9%EF%BC%8C%E7%94%A8%E6%95%B4%E6%95%B0%E5%8F%96%E8%80%8C%E4%BB%A3%E4%B9%8B"><span class="toc-text">避免浮点数的坐标点，用整数取而代之</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E4%B8%AD%E6%89%B9%E9%87%8F%E8%B0%83%E7%94%A8%E7%94%BB%E5%B8%83"><span class="toc-text">集中批量调用画布</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%97%AD%E9%80%8F%E6%98%8E%E5%BA%A6"><span class="toc-text">关闭透明度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%A4%9A%E5%B1%82%E7%94%BB%E5%B8%83%E5%8E%BB%E7%94%BB%E4%B8%80%E4%B8%AA%E5%A4%8D%E6%9D%82%E7%9A%84%E5%9C%BA%E6%99%AF"><span class="toc-text">使用多层画布去画一个复杂的场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E6%96%B9%E6%A1%88"><span class="toc-text">其他方案</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-WebGL"><span class="toc-text">3. WebGL</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-WebGL%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="toc-text">3.1 WebGL核心概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9D%80%E8%89%B2%E5%99%A8"><span class="toc-text">着色器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF"><span class="toc-text">渲染管线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%93%E5%86%B2%E5%8C%BA"><span class="toc-text">缓冲区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%E8%BF%90%E7%AE%97"><span class="toc-text">矩阵运算</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-ThreeJS"><span class="toc-text">3.2 ThreeJS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ThreeJS-%E6%A6%82%E8%BF%B0"><span class="toc-text">ThreeJS 概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%B2%E6%9F%93%E5%99%A8-Renderer"><span class="toc-text">渲染器 Renderer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E6%9C%BA-Camera"><span class="toc-text">相机 Camera</span></a></li></ol></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://esunr-webapp.cdn.bcebos.com/blog/avatar.jpeg?x-bce-process=image/resize,m_lfit,w_200/format,f_auto" alt="avatar"></div><div class="author-info__name text-center">EsunR</div><div class="author-info__description text-center">EsunR-Blog是由EsunR维护的博客平台，分享在前端开发、Git、Vue.js、Webpack、OAuth、Linux等各个领域的知识和经验。浏览这里的深入文章，了解不同主题的见解，并及时了解行业的最新趋势和技术。</div><div class="follow-button"><a target="_blank" rel="noopener" href="https://github.com/EsunR">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">172</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">155</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">26</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">EsunR-Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"><span class="site-page social-icon search"><i class="fa fa-search"></i><span> Search</span></span></span></div><div id="post-info"><div id="post-title">现阶段前端页面所使用的动画技术方案总结</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-01-02</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E5%89%8D%E7%AB%AF/%E5%8F%AF%E8%A7%86%E5%8C%96/">可视化</a><span class="post-meta__separator">|</span><i class="fa fa-comment-o post-meta__icon" aria-hidden="true"></i><a href="/2020/01/4f8e5bb1e44f.html#disqus_thread"><span class="disqus-comment-count" data-disqus-identifier="2020/01/4f8e5bb1e44f.html"></span></a><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">6.4k</span><span class="post-meta__separator">|</span><span>Reading time: 21 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="1-CSS3-动画"><a href="#1-CSS3-动画" class="headerlink" title="1. CSS3 动画"></a>1. CSS3 动画</h1><p>CSS3动画基于DOM的CSS样式，主要分为以下几个核心概念：</p>
+<h2 id="1-1-transition-过渡"><a href="#1-1-transition-过渡" class="headerlink" title="1.1 transition 过渡"></a>1.1 transition 过渡</h2><p><code>transition</code> 是一个动画元素的附加属性，它可以定义动画产生时的效果与方式，以及动画所作用的范围。</p>
+<blockquote>
+<p>过渡可以为一个元素在不同状态之间切换的时候定义不同的过渡效果。比如在不同的伪元素之间切换，像是 <code>:hover</code>，<code>:active</code> 或者通过 JavaScript 实现的状态变化。</p>
+</blockquote>
+<p>transition CSS 属性是 <code>transition-property</code>，<code>transition-duration</code>，<code>transition-timing-function</code> 和 <code>transition-delay</code> 的一个简写属性。</p>
+<h2 id="1-2-transform"><a href="#1-2-transform" class="headerlink" title="1.2 transform"></a>1.2 transform</h2><p>在 CSS3 当中，transform 用于元素进行旋转、缩放、移动或倾斜，和设置样式的动画并没有什么关系，就相当于color一样用来设置元素的“外表”。transform 分为 2D 转换与 3D 转换：</p>
+<h3 id="2D"><a href="#2D" class="headerlink" title="2D"></a>2D</h3><p>transform 的 2D 转换可以让元素在 2D 平面中进行样式的变化， transform 不会让元素脱离标准流，所以元素发生变化后仍保留元素原有的占位。</p>
+<p>2D转换的主要 API 包括：缩放（scale）、移动（translate）、旋转（rotate）、翻转（skew）以及转换函数 （matrix）。</p>
+<h3 id="3D"><a href="#3D" class="headerlink" title="3D"></a>3D</h3><p>transform 3D 变化是在一个三维坐标中进行的：</p>
+<p><img src="https://images2015.cnblogs.com/blog/740839/201604/740839-20160404190248937-1489051755.png" alt="img"></p>
+<p>3D 变换与 2D 变化不同的是空间上增加了 Z 轴，可以让元素在空间上进行改变。</p>
+<p>通过设置 perspective （视距）属性可以实现在 Z 轴空间上的透视效果；通过设置 perspective-origin （透视原点）可以设置观察的位置，不同的观察位置会对物体产生不同的形变效果。</p>
+<p>transform 3d 的位移方法为 <code>translate3d(x,y,z)</code> ，与 2d 位移不同的是增加了 Z 轴方向的坐标，同样的缩放也提供了一个 Z 轴方向上的缩放 <code>scale3d(x,y,z)</code>，旋转提供了物体可以在空间中绕坐标轴进行旋转的能力 <code>rotate3d(x,y,z,Ndeg)</code>。</p>
+<h3 id="matrix-矩阵"><a href="#matrix-矩阵" class="headerlink" title="matrix 矩阵"></a>matrix 矩阵</h3><p>实际上，所有的形变操作都是通过矩阵matrix实现的，而 matrix 同样分为 2d 操作与 3d 操作。</p>
+<blockquote>
+<p>目前有多种用来描述转换坐标模型，最常用的是 <strong>笛卡尔坐标系统</strong> 和 <strong>齐次坐标</strong></p>
+</blockquote>
+<p><strong>2d matrix：</strong></p>
+<p>matrix(a,b,c,d,e,f)函数有a,b,c,d,e,f这6个参数。而x和y是变形前元素的任意点。通过以下矩阵变换，生成对应的新坐标x’和y’。</p>
+<p><img src="https://images2015.cnblogs.com/blog/740839/201604/740839-20160403215129566-1605208130.png" alt="img"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x&#x27; = ax + cy + e;</span><br><span class="line">y&#x27; = bx + dy + f;</span><br></pre></td></tr></table></figure>
+
+<p>由此可得到默认a、d为1，b、c、e、f为0。a和d控制缩放，且不可为0；c和b控制倾斜；而e和f控制位移</p>
+<p><strong>3d matrix：</strong></p>
+<p>　3d变形函数位移、旋转和缩放都是通过矩阵设置不同的参数而实现的。相比于2d矩阵martrix()的6个参数而言，3d矩阵matrix3d却有12个参数。其变形规则与2dmatrix()类似，只不过是从3<em>3矩阵，变成了4</em>4矩阵</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">matrix3d(a,b,c,0,d,e,f,0,g,h,i,0,j,k,l,1)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://images2015.cnblogs.com/blog/740839/201604/740839-20160406224526468-933175389.jpg" alt="img"></p>
+<h2 id="1-3-animation"><a href="#1-3-animation" class="headerlink" title="1.3 animation"></a>1.3 animation</h2><p>animation 定义了元素使用一组由 <code>@keyframes</code> 定义的动画，并且规定了动画的持续时间执行次数等，完整的定义如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">animation: 定义的动画名称 持续时间  执行次数  是否反向  运动曲线 延迟执行(infinite 表示无限次)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS">CSS</a> <strong>animation</strong> 属性是 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/animation-name"><code>animation-name</code></a>，<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/animation-duration"><code>animation-duration</code></a>, <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/animation-timing-function"><code>animation-timing-function</code></a>，<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/animation-delay"><code>animation-delay</code></a>，<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/animation-iteration-count"><code>animation-iteration-count</code></a>，<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/animation-direction"><code>animation-direction</code></a>，<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/animation-fill-mode"><code>animation-fill-mode</code></a> 和 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/animation-play-state"><code>animation-play-state</code></a> 属性的一个简写属性形式。</p>
+</blockquote>
+<p>使用 <code>@keyframes</code> 定义关键帧动画可以制作更为复杂且需要连续的动画，通过定义百分比或者关键字可以定义动画时间内不同时间段的动画。</p>
+<p>animation 有一个很显然的缺点就是 CSS3 动画没有时间轴的概念，通常去控制多个关键帧动画之间的切换需要用到延迟参数，将每个动画拼接出来：</p>
+<p><img src="https://misc.aotu.io/Yettyzyt/2016-11-28-css3-animation-properties/animation-delay-timeline.png" alt="动画时间轴"></p>
+<h2 id="1-4-事件"><a href="#1-4-事件" class="headerlink" title="1.4 事件"></a>1.4 事件</h2><p>虽然 css 不支持时间轴，拼接多个动画需要手动设置每个动画的延迟时间，但是同时可以通过 javascript 来对元素添加动画事件的监听来捕获动画开始、结束等时机：</p>
+<table>
+<thead>
+<tr>
+<th align="left">事件</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">animationstart</td>
+<td align="left">如果需要，在动画开始时发生，计算任何动画延迟（由 animation-delay 属性指定）。负延迟会导致事件以等于延迟绝对值的经过时间触发。</td>
+</tr>
+<tr>
+<td align="left">animationend</td>
+<td align="left">动画结束时发生。</td>
+</tr>
+<tr>
+<td align="left">animationiteration</td>
+<td align="left">在动画的每次迭代结束时发生。仅当 animation-iteration-count 属性设置为大于1的值时，才会发生此事件。</td>
+</tr>
+<tr>
+<td align="left">transitionend</td>
+<td align="left">transitionend 事件会在 CSS transition 结束后触发. 当transition完成前移除transition时，比如移除css的transition-property 属性，事件将不会被触发.如在transition完成前设置  display 为”none”，事件同样不会被触发。</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>PS：使用 Javascript 编写动画的 Web Animations API 现仍处于草案阶段：<a target="_blank" rel="noopener" href="https://drafts.csswg.org/web-animations/">https://drafts.csswg.org/web-animations/</a></p>
+</blockquote>
+<h2 id="1-5-性能"><a href="#1-5-性能" class="headerlink" title="1.5 性能"></a>1.5 性能</h2><h3 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h3><p>实现页面动画的效果有多种途径，比如将一个页面元素的高度从100px渐变到200px，可以直接改变元素的height属性，也可以操控CSS transform属性，但是前者会对引起页面的relayout以及对向集合线程发送重新结算的bitmap信息，具体的流程如下：</p>
+<p><img src="http://zencode.in/imgs/18/1.png" alt="img"></p>
+<p>所以高度的变化是很耗时的，但是如果我们改用CSS transform属性来缩放元素，总体的处理过程如下：</p>
+<p><img src="http://zencode.in/imgs/18/2.png" alt="img"></p>
+<p>依据规范，CSS transform属性并不会触发当前元素或附近元素的relayout。浏览器将当前元素视为一个整体，它会缩放、旋转、移动这一整个元素。浏览器只需要在动画开始之时生成位图，然后将位图发送给GPU。之后浏览器不需要做额外的relayout和repaint，甚至不需要发送位图给GPU。浏览器只需要充分发挥GPU的长处：绘制同一张位图到不同的位置、旋转角度和缩放比例。</p>
+<h3 id="CSS-对比-JavaScript-的性能"><a href="#CSS-对比-JavaScript-的性能" class="headerlink" title="CSS 对比 JavaScript 的性能"></a>CSS 对比 JavaScript 的性能</h3><p>网络上有很多网页和评论从性能的角度讨论了 CSS 和 JavaScript 动画的相对优点。以下是要记住的几个要点：</p>
+<ul>
+<li>基于 CSS 的动画以及原生支持的网络动画通常由一个名为“合成器线程”的线程处理。这不同于在其中执行样式、布局、绘制和 JavaScript 的浏览器“主线程”。这意味着，如果浏览器正在主线程上运行一些高开销任务，则这些动画可以继续运行而不中断。</li>
+<li>在许多情况下，变形和透明度的其他更改还可由合成器线程来处理。</li>
+<li>如果任何动画触发绘制、布局或同时触发这两者，则“主线程”将必须执行工作。这点同时适用于基于 CSS 和 JavaScript 的动画，并且布局或绘制的开销可能拖慢与 CSS 或 JavaScript 执行相关的任何工作，使问题变得无意义。</li>
+</ul>
+<blockquote>
+<p>更多：<a target="_blank" rel="noopener" href="https://developers.google.com/web/fundamentals/design-and-ux/animations/animations-and-performance?hl=zh-cn#css-vs-javascript-performance">https://developers.google.com/web/fundamentals/design-and-ux/animations/animations-and-performance?hl=zh-cn#css-vs-javascript-performance</a></p>
+</blockquote>
+<h1 id="2-Canvas-2D"><a href="#2-Canvas-2D" class="headerlink" title="2. Canvas 2D"></a>2. Canvas 2D</h1><p>Canvas 是 HTML5 中取代 Flash 的新技术，Canvas 和 Flash 的思路完全不一样，Flash是上屏幕之后还是对象，编程语言叫做 Action Script 也是ECMAScript范畴。Canvas上屏幕之后像素化了，再也不能得到这个对象了，所以要想让这个元素运动，必须擦除整个屏幕、重绘这个元素，相比之下Canvas更加流畅，移动端也能保持很高的流畅度。</p>
+<blockquote>
+<p><code>&lt;Canvas&gt;</code> 是一个可以使用脚本(通常为<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/JavaScript">JavaScript</a>)来绘制图形的 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/HTML">HTML</a> 元素.例如,它可以用于绘制图表、制作图片构图或者制作简单的(以及<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/A_basic_ray-caster">不那么简单的</a>)动画。</p>
+</blockquote>
+<h2 id="2-1-Canvas-的基本结构"><a href="#2-1-Canvas-的基本结构" class="headerlink" title="2.1 Canvas 的基本结构"></a>2.1 Canvas 的基本结构</h2><p>canvas 元素本身没有任何外观，它就是一块空白画板，提供给JS的一套API，最早由 Safari 引入，IE9之前可以使用一些类库在IE中模拟canvas，大部分的API都不在canvas元素自身定义，canvas元素自身属性与常规的HTML元素并没有多大区别。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">	<span class="tag">&lt;<span class="name">title</span>&gt;</span>坐标系demo<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">	<span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span> = <span class="string">&#x27;square&#x27;</span> <span class="attr">width</span>= <span class="string">200</span> <span class="attr">heigth</span>=<span class="string">200</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-上下文对象"><a href="#2-2-上下文对象" class="headerlink" title="2.2 上下文对象"></a>2.2 上下文对象</h2><p>我们通常使用 <code>ctx</code> 变量作为 Canvas 操作的上下文对象，对 Canvas 上像素的操作即对该上下文的操作。</p>
+<p><code>&lt;canvas&gt;</code> 元素有一个叫做 <code>getContext()</code> 的方法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">canvas.<span class="title function_">getContext</span>(contextType, contextAttributes);</span><br></pre></td></tr></table></figure>
+
+<p>这个方法是用来获得渲染上下文和它的绘画功能</p>
+<table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">contextType</td>
+<td align="left">上下文类型，一个字符串，值可以是 <code>2d</code> 、<code>webgl</code></td>
+</tr>
+<tr>
+<td align="left">contextAttributes</td>
+<td align="left">创建上下文时设置属性，一个字典对象，默认为空即可</td>
+</tr>
+</tbody></table>
+<p>对于 2d 图像而言，可以使用下面的代码获取渲染上下文</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> canvas = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;canvas&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> ctx = canvas.<span class="title function_">getContext</span>(<span class="string">&#x27;2d&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p><code>ctx</code> 现在 <code>CanvasRenderingContext2D</code> 的一个实例。</p>
+<h2 id="2-3-Canvas-的绘制过程"><a href="#2-3-Canvas-的绘制过程" class="headerlink" title="2.3 Canvas 的绘制过程"></a>2.3 Canvas 的绘制过程</h2><p>Canvas 有一个概念称作”笔触“也叫作“描边”，Canvas中的任何形状都是由这两个部分组成的。</p>
+<p>笔触在canvas中视为一个“Path”的实例，必须stroke之后才能上屏幕；填充用fill才能上屏幕。</p>
+<h3 id="绘制路径"><a href="#绘制路径" class="headerlink" title="绘制路径"></a>绘制路径</h3><p>使用 <code>beginPath()</code> 代表开始绘制；<code>moveTo(x, y)</code> 代表将笔触移动到某一坐标；<code>lineTo(x, y)</code> 代表直线绘制到某一点；使用 <code>stroke()</code> 能将绘制的图像显示出来。</p>
+<p>如下可以绘制出一条折线：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ctx.beginPath();</span><br><span class="line">ctx.moveTo(100, 100);</span><br><span class="line">ctx.lineTo(300, 300);</span><br><span class="line">ctx.lineTo(600, 300);</span><br><span class="line">ctx.stroke();</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/420ce10cb0196ecaadb70032526375518895c0a0/68747470733a2f2f7773312e73696e61696d672e636e2f6c617267652f61373165666161666c793167326c70626a726467326a323065733038367132732e6a7067"><img src="https://camo.githubusercontent.com/420ce10cb0196ecaadb70032526375518895c0a0/68747470733a2f2f7773312e73696e61696d672e636e2f6c617267652f61373165666161666c793167326c70626a726467326a323065733038367132732e6a7067" alt="img"></a></p>
+<p>使用 <code>closePath()</code> 可以将最后一个绘制点【该绘制点是被用<code>moveTo(x, y)</code>打断绘制前的那个点】与第一个绘制点连接：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">  ctx.beginPath();</span><br><span class="line">  ctx.moveTo(100, 100);</span><br><span class="line">  ctx.lineTo(300, 300);</span><br><span class="line">  ctx.lineTo(600, 300);</span><br><span class="line">+ ctx.closePath();</span><br><span class="line">  ctx.stroke();</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/3e58e2fd4dddfb2947bb4637d03cc8ae0773aefe/68747470733a2f2f7773312e73696e61696d672e636e2f6c617267652f61373165666161666c793167326c7065343373746e6a3230657130376a6a72392e6a7067"><img src="https://camo.githubusercontent.com/3e58e2fd4dddfb2947bb4637d03cc8ae0773aefe/68747470733a2f2f7773312e73696e61696d672e636e2f6c617267652f61373165666161666c793167326c7065343373746e6a3230657130376a6a72392e6a7067" alt="img"></a></p>
+<p>连续使用 <code>moveTo()</code> 可以让开始新的绘制点：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ctx.beginPath();</span><br><span class="line">ctx.moveTo(100, 100);</span><br><span class="line">ctx.lineTo(300, 300);</span><br><span class="line">ctx.lineTo(600, 300);</span><br><span class="line"></span><br><span class="line">ctx.moveTo(600, 400);</span><br><span class="line">ctx.lineTo(700, 400);</span><br><span class="line">ctx.stroke();</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/0f65ddb76a863f0782b8906fab6620ae6c1e8c1e/68747470733a2f2f7773312e73696e61696d672e636e2f6c617267652f61373165666161666c793167326c70673970376d336a323068303039647765642e6a7067"><img src="https://camo.githubusercontent.com/0f65ddb76a863f0782b8906fab6620ae6c1e8c1e/68747470733a2f2f7773312e73696e61696d672e636e2f6c617267652f61373165666161666c793167326c70673970376d336a323068303039647765642e6a7067" alt="img"></a></p>
+<h3 id="绘制样式"><a href="#绘制样式" class="headerlink" title="绘制样式"></a>绘制样式</h3><p>在绘制前可以对绘制的线段进行样式设置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ctx.lineWidth = &quot;10&quot;;</span><br><span class="line">ctx.strokeStyle = &quot;red&quot;;</span><br><span class="line">... ...</span><br><span class="line">ctx.stock();</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/0664b9abf84d656b101c0c74eb710153a479f733/68747470733a2f2f7773312e73696e61696d672e636e2f6c617267652f61373165666161666c793167326c707731713961716a3230686b3061396139792e6a7067"><img src="https://camo.githubusercontent.com/0664b9abf84d656b101c0c74eb710153a479f733/68747470733a2f2f7773312e73696e61696d672e636e2f6c617267652f61373165666161666c793167326c707731713961716a3230686b3061396139792e6a7067" alt="img"></a></p>
+<p>在绘制之后，使用 <code>fill()</code> 可以填充封闭图像（如果没有封闭也会自动封闭）的颜色，设置 <code>fillStyle</code> 属性可以来设置填充颜色：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">... ...</span><br><span class="line">ctx.stock();</span><br><span class="line">ctx.fillStyle = &quot;skyblue&quot;</span><br><span class="line">ctx.fill();</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/760f8dd276b299739ac248d8abc11634fe782c95/68747470733a2f2f7773312e73696e61696d672e636e2f6c617267652f61373165666161666c793167326c71306e386a757a6a323068683039776d78342e6a7067"><img src="https://camo.githubusercontent.com/760f8dd276b299739ac248d8abc11634fe782c95/68747470733a2f2f7773312e73696e61696d672e636e2f6c617267652f61373165666161666c793167326c71306e386a757a6a323068683039776d78342e6a7067" alt="img"></a></p>
+<p>使用了 <code>fill()</code> 之后，Canvas会自动认为之前的绘制操已经绘制了一个独立的图形。</p>
+<h3 id="快速绘制"><a href="#快速绘制" class="headerlink" title="快速绘制"></a>快速绘制</h3><p><code>strokeReact(x, y, w, h)</code>快速绘制一个矩形</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ctx.fillStyle = &quot;lightseagreen&quot;</span><br><span class="line">ctx.strokeReact(100, 100, 300, 200);</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/06653ad551c95cecb5a41eb54f16faba06db251e/68747470733a2f2f7773312e73696e61696d672e636e2f6c617267652f61373165666161666c793167326c7161697532656f6a3230623730367874386a2e6a7067"><img src="https://camo.githubusercontent.com/06653ad551c95cecb5a41eb54f16faba06db251e/68747470733a2f2f7773312e73696e61696d672e636e2f6c617267652f61373165666161666c793167326c7161697532656f6a3230623730367874386a2e6a7067" alt="img"></a></p>
+<p>filRecto是一个快捷方法，让你省略了beginPath、move To、lineTo。所以fillRect（100，100，300，200）等价于：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ctx.move(100，100);</span><br><span class="line">ctx.lineTo(400，100);</span><br><span class="line">ctx.lineTo(400，300);</span><br><span class="line">ctx.lineTo(100，300);</span><br><span class="line">ctx.closePath（);</span><br><span class="line">ctx.fill();</span><br></pre></td></tr></table></figure>
+
+<h3 id="绘制复杂图像"><a href="#绘制复杂图像" class="headerlink" title="绘制复杂图像"></a>绘制复杂图像</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">for (var i = 0; i &lt;= 500; i += 10) &#123;</span><br><span class="line">  ctx.beginPath();</span><br><span class="line">  ctx.moveTo(i, i);</span><br><span class="line">  ctx.lineTo(i + 200, i);</span><br><span class="line">  ctx.lineTo(i, i + 300);</span><br><span class="line">  ctx.closePath();</span><br><span class="line">  ctx.stroke();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/0d242357c4d02f47c1611c226017c45e87601f87/68747470733a2f2f7773312e73696e61696d672e636e2f6c617267652f61373165666161666c793167326c7166776373716f6a32306a733065646d78692e6a7067"><img src="https://camo.githubusercontent.com/0d242357c4d02f47c1611c226017c45e87601f87/68747470733a2f2f7773312e73696e61696d672e636e2f6c617267652f61373165666161666c793167326c7166776373716f6a32306a733065646d78692e6a7067" alt="img"></a></p>
+<h2 id="2-4-Canvas动画"><a href="#2-4-Canvas动画" class="headerlink" title="2.4 Canvas动画"></a>2.4 Canvas动画</h2><p>如果想要在 Canvas 2D 画布中绘制出一组动画，那么需要进行如下几个步骤：</p>
+<ol>
+<li><strong>清空 canvas</strong><br>除非接下来要画的内容会完全充满 canvas （例如背景图），否则你需要清空所有。最简单的做法就是用 <code>clearRect</code> 方法。</li>
+<li><strong>保存 canvas 状态</strong><br>如果你要改变一些会改变 canvas 状态的设置（样式，变形之类的），又要在每画一帧之时都是原始状态的话，你需要先保存一下。</li>
+<li><strong>绘制动画图形（animated shapes）</strong><br>这一步才是重绘动画帧。</li>
+<li><strong>恢复 canvas 状态</strong><br>如果已经保存了 canvas 的状态，可以先恢复它，然后重绘下一帧。</li>
+</ol>
+<h2 id="2-5-性能优化策略"><a href="#2-5-性能优化策略" class="headerlink" title="2.5 性能优化策略"></a>2.5 性能优化策略</h2><h3 id="使用-requestAnimationFrame"><a href="#使用-requestAnimationFrame" class="headerlink" title="使用 requestAnimationFrame"></a>使用 requestAnimationFrame</h3><p>requestAnimationFrame采用系统时间间隔，保持最佳绘制效率，不会因为间隔时间过短，造成过度绘制，增加开销；也不会因为间隔时间太长，使用动画卡顿不流畅，让各种网页动画效果能够有一个统一的刷新机制，从而节省系统资源，提高系统性能，改善视觉效果。</p>
+<blockquote>
+<p>大多数电脑显示器的刷新频率是<code>60Hz</code>，大概相当于每秒钟重绘<code>60</code>次。大多数浏览器都会对重绘操作加以限制，不超过显示器的重绘频率，因为即使超过那个频率用户体验也不会有提升。因此，最平滑动画的最佳循环间隔是<code>1000ms/60</code>，约等于<code>16.6ms</code>。</p>
+</blockquote>
+<p>requestAnimationFrame 的特点：</p>
+<ul>
+<li>requestAnimationFrame会把每一帧中的所有DOM操作集中起来，在一次重绘或回流中就完成，并且重绘或回流的时间间隔紧紧跟随浏览器的刷新频率</li>
+<li>在隐藏或不可见的元素中，requestAnimationFrame将不会进行重绘或回流，这当然就意味着更少的CPU、GPU和内存使用量</li>
+<li>requestAnimationFrame是由浏览器专门为动画提供的API，在运行时浏览器会自动优化方法的调用，并且如果页面不是激活状态下的话，动画会自动暂停，有效节省了CPU开销</li>
+</ul>
+<h3 id="使用离屏-canvas-优化性能"><a href="#使用离屏-canvas-优化性能" class="headerlink" title="使用离屏 canvas 优化性能"></a>使用离屏 canvas 优化性能</h3><p>如果要将相似图元重复绘制到屏幕的多个帧上，可以通过预呈现场景中较大的部分从而显著提升性能。预呈现是指在一张（或多张）离屏画布上呈现临时图片，然后使用 <code>drawImage()</code> 方法将离屏画布重新呈现到显示的画布上。离屏canvas的操作都是在内存中进行并且离屏canvas的任何操作都不会导致页面变(重绘、重排)</p>
+<h3 id="避免浮点数的坐标点，用整数取而代之"><a href="#避免浮点数的坐标点，用整数取而代之" class="headerlink" title="避免浮点数的坐标点，用整数取而代之"></a>避免浮点数的坐标点，用整数取而代之</h3><p>当你画一个没有整数坐标点的对象时会发生子像素渲染。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ctx.<span class="title function_">drawImage</span>(myImage, <span class="number">0.3</span>, <span class="number">0.5</span>);</span><br></pre></td></tr></table></figure>
+
+<p>浏览器为了达到抗锯齿的效果会做额外的运算。为了避免这种情况，请保证在你调用 <code>drawImage()</code> 函数时，用<code>Math.floor()</code>函数对所有的坐标点取整。</p>
+<h3 id="集中批量调用画布"><a href="#集中批量调用画布" class="headerlink" title="集中批量调用画布"></a>集中批量调用画布</h3><p>绘制操作的性能开销较高，因此效率更高的做法是，加载带有一长串命令的绘制状态机，然后通过状态机将命令全部转储到缓冲区中，最后集中进行绘制（<code>stock</code>）操作</p>
+<h3 id="关闭透明度"><a href="#关闭透明度" class="headerlink" title="关闭透明度"></a>关闭透明度</h3><p>如果使用画布而且不需要透明，当使用 <code>HTMLCanvasElement.getContext()</code> 创建一个绘图上下文时把 <code>alpha</code> 选项设置为 <code>false</code> 。这个选项可以帮助浏览器进行内部优化。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ctx = canvas.<span class="title function_">getContext</span>(<span class="string">&#x27;2d&#x27;</span>, &#123; <span class="attr">alpha</span>: <span class="literal">false</span> &#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用多层画布去画一个复杂的场景"><a href="#使用多层画布去画一个复杂的场景" class="headerlink" title="使用多层画布去画一个复杂的场景"></a>使用多层画布去画一个复杂的场景</h3><p>在绘制图像时，特别是制作游戏时，有些元素不断地改变或者移动，而其它的元素，例如外观，永远不变。这种情况的一种优化是去用多个画布元素去创建不同层次。</p>
+<p>例如，我们可以在最顶层创建一个外观层，而且仅仅在用户输入的时候被画出。还可以创建一个游戏层，在上面会有不断更新的元素和一个背景层，给那些较少更新的元素。</p>
+<h3 id="其他方案"><a href="#其他方案" class="headerlink" title="其他方案"></a>其他方案</h3><p>对于Canvas的优化策略大多都集中在如何减少画面的重绘工作量，这样可以通过降低Canvas的资源消耗从而提升性能，除了上述的常见优化方案，还有以下的优化方案：</p>
+<ul>
+<li>尽量利用 CSS</li>
+<li>尽量不要频繁地调用比较耗时的API</li>
+<li>渲染绘制操作不要频繁调用</li>
+<li>尽量少的改变状态机 ctx的里状态</li>
+<li>尽量少的调用 canvas API</li>
+<li>用CSS transforms特性缩放画布</li>
+<li>不要在用drawImage时缩放图像</li>
+<li>将画布的函数调用集合到一起（例如，画一条折线，而不要画多条分开的直线）</li>
+<li>使用不同的办法去清除画布 <code>clearRect()</code> vs. <code>fillRect()</code> vs. 调整canvas大小</li>
+</ul>
+<h1 id="3-WebGL"><a href="#3-WebGL" class="headerlink" title="3. WebGL"></a>3. WebGL</h1><p>WebGL是一种JavaScript API，用于在不使用插件的情况下在任何兼容的网页浏览器中呈现交互式2D和3D图形。WebGL完全集成到浏览器的所有网页标准中，可将影像处理和效果的GPU加速使用方式当做网页Canvas的一部分。</p>
+<p>WebGL元素可以加入其他HTML元素之中并与网页或网页背景的其他部分混合。WebGL程序由JavaScript编写的句柄和OpenGL Shading Language（GLSL）编写的着色器代码组成，该语言类似于C或C++，并在计算机的图形处理器（GPU）上运行。</p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20190820204937.png" alt="20190820204937.png"></p>
+<h2 id="3-1-WebGL核心概念"><a href="#3-1-WebGL核心概念" class="headerlink" title="3.1 WebGL核心概念"></a>3.1 WebGL核心概念</h2><h3 id="着色器"><a href="#着色器" class="headerlink" title="着色器"></a>着色器</h3><p>在OpenGL ES 2.0 中可以使用着色器编程，意味着可以调用显卡并行运算的能力，来进行业务中需要的开发。</p>
+<p>着色器是使用 OpenGL ES Shading Language(GLSL)编写的程序，它携带着绘制形状的顶点信息以及构造绘制在屏幕上像素的所需数据，换句话说，它负责记录着像素点的位置和颜色。</p>
+<p>绘制WebGL时候有两种不同的着色器函数， <strong>顶点着色器（VertexShader）</strong> 和 <strong>片段着色器（FragmentShader）</strong> 。开发者需要通过用GLSL 编写这些着色器，并将代码文本传递给WebGL， 使之在GPU执行时编译。</p>
+<blockquote>
+<p>顶点着色器和片元着色器的代码是单独分开的，使用GLSL语言编写。</p>
+</blockquote>
+<p>顶点着色器的作用是计算顶点的位置。根据计算出的一系列顶点位置，WebGL 可以对点、线和三角形在内的一些图元进行光栅化处理。当对这些图元进行光栅化处理时需要使用片段着色器方法。片段着色器的作用是计算出当前绘制图元中每个像素的颜色值。</p>
+<blockquote>
+<p>光栅化是指将构成图形的一系列的点进行上色。</p>
+</blockquote>
+<h3 id="渲染管线"><a href="#渲染管线" class="headerlink" title="渲染管线"></a>渲染管线</h3><p>在开发WebGL应用程序时，我们需要写Shader语言代码与GPU进行沟通。使用JavaScript编写的程序，其中包括以下操作的控制代码：</p>
+<ul>
+<li>初始化WebGL − JavaScript是用于初始化WebGL的上下文。</li>
+<li>创建数组 − 我们创建JavaScript数组来保存几何数据。</li>
+<li>缓冲区对象 − 通过将数组作为参数来创建缓冲区对象(顶点和索引)。</li>
+<li>着色器 − 我们创建，编译和使用JavaScript链接着色器。</li>
+<li>属性− 我们可以创建属性，启用它们并使用JavaScript缓冲区对象相关联。</li>
+<li>制服− 我们还可以使用 JavaScript 制服(uniforms)关联。</li>
+<li>变换矩阵 − 使用JavaScript，我们可以创建变换矩阵。</li>
+</ul>
+<p>WebGL 渲染管线在 WebGL Api 下的执行过程如下图所示：</p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20190820212148.png" alt="20190820212148.png"></p>
+<h3 id="缓冲区"><a href="#缓冲区" class="headerlink" title="缓冲区"></a>缓冲区</h3><p>buffer 是一个重要的概念，开发者在 js 中定义的坐标不能够直接使用，必须将原数据绑定到一个顶点着色器 buffer 中，再将这个顶点着色器与 WebGL 绑定，获取到在 GLSL 语言编写的着色器代码变量，buffer 可以自动将开发者编写的2d坐标转化为三维坐标点，再传入着色器代码中，以下是绘制一个三角形所需要生成的缓冲区：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">initVertexBuffers</span>(<span class="params">gl</span>) &#123;</span><br><span class="line">  <span class="comment">// 传入三角形的三个顶点到 vertices</span></span><br><span class="line">  <span class="keyword">var</span> vertices = <span class="keyword">new</span> <span class="title class_">Float32Array</span>([</span><br><span class="line">    <span class="number">0</span>, <span class="number">0.5</span>, -<span class="number">0.5</span>, -<span class="number">0.5</span>, <span class="number">0.5</span>, -<span class="number">0.5</span></span><br><span class="line">  ])</span><br><span class="line">  <span class="comment">// 顶点个数</span></span><br><span class="line">  <span class="keyword">var</span> n = <span class="number">3</span></span><br><span class="line">  <span class="comment">// 创建一个 buffer</span></span><br><span class="line">  <span class="keyword">var</span> vertexBuffer = gl.<span class="title function_">createBuffer</span>()</span><br><span class="line">  <span class="comment">// 将 vertexBuffer 与 webgl 绑定</span></span><br><span class="line">  gl.<span class="title function_">bindBuffer</span>(gl.<span class="property">ARRAY_BUFFER</span>, vertexBuffer)</span><br><span class="line">  <span class="comment">// 将数据写入到 vertexBuffer 中</span></span><br><span class="line">  gl.<span class="title function_">bufferData</span>(gl.<span class="property">ARRAY_BUFFER</span>, vertices, gl.<span class="property">STATIC_DRAW</span>)</span><br><span class="line">  <span class="comment">// 获取变量 a_Position 在 vertex shader 中的地址</span></span><br><span class="line">  <span class="keyword">var</span> a_Position = gl.<span class="title function_">getAttribLocation</span>(gl.<span class="property">program</span>, <span class="string">&#x27;a_Position&#x27;</span>)</span><br><span class="line">  <span class="comment">// 将 bufferData 传入到 a_Position 的地址，同时需要规定一个顶点对应数组中的几个数据</span></span><br><span class="line">  gl.<span class="title function_">vertexAttribPointer</span>(a_Position, <span class="number">2</span>, gl.<span class="property">FLOAT</span>, <span class="literal">false</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">  <span class="comment">// 启用 a_Position variable</span></span><br><span class="line">  gl.<span class="title function_">enableVertexAttribArray</span>(a_Position)</span><br><span class="line">  <span class="keyword">return</span> n</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> n = <span class="title function_">initVertexBuffers</span>(gl)</span><br></pre></td></tr></table></figure>
+
+<p>但是绘制于缓冲区的图像并不能展示在视图上，需要通过绘制才能展现：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">gl.<span class="title function_">clearColor</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>)</span><br><span class="line"><span class="comment">// 绘制</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">draw</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// 调用clear方法将当前绘制结果清空</span></span><br><span class="line">  gl.<span class="title function_">clear</span>(gl.<span class="property">COLOR_BUFFER_BIT</span>)</span><br><span class="line">  <span class="comment">// 按照三角形的图源去绘制，从 buffer 的起始位获取数据，绘制 n 个顶点</span></span><br><span class="line">  gl.<span class="title function_">drawArrays</span>(gl.<span class="property">TRIANGLES</span>, <span class="number">0</span>, n)</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">draw</span>()</span><br></pre></td></tr></table></figure>
+
+<h3 id="矩阵运算"><a href="#矩阵运算" class="headerlink" title="矩阵运算"></a>矩阵运算</h3><p>如果我们想让图像从初始位置移动到另一个位置，则需要通过相应的计算来得出目标位置的坐标，在WebGL中，坐标的运算则是需要通过矩阵运算得出的，最常见的移动为平移与绕轴旋转，他们的常用计算公式如下：</p>
+<p><strong>在平面平移时的矩阵计算：</strong></p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20190821151121.png" alt="20190821151121.png"></p>
+<p><strong>在旋转时的矩阵运算：</strong></p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20190821151156.png" alt="20190821151156.png"></p>
+<p><strong>绕轴渲染的矩阵运算：</strong></p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20190821151215.png" alt="20190821151215.png"></p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20190821151248.png" alt="20190821151248.png"></p>
+<p>利用旋转矩阵，与计算好的矩阵与原坐标向量 （<code>a_Position</code>） 相乘，就可以得到图形处理后的向量了，利用这个原理就可以移动图形了。我们可以将定点着色器的GLSL代码改写为：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable constant_">VSHADER_SOURCE</span> = <span class="string">`</span></span><br><span class="line"><span class="string">  attribute vec4 a_Position;</span></span><br><span class="line"><span class="string">  uniform mat4 u_ModelMatrix;</span></span><br><span class="line"><span class="string">  void main()&#123;</span></span><br><span class="line"><span class="string">    gl_Position = a_Position * u_ModelMatrix;</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">`</span></span><br></pre></td></tr></table></figure>
+
+<p>定义了一个常量 <code>u_ModelMatrix</code> 我们传入这个常量与原向量相乘就可以得到新的顶点坐标位置。</p>
+<h2 id="3-2-ThreeJS"><a href="#3-2-ThreeJS" class="headerlink" title="3.2 ThreeJS"></a>3.2 ThreeJS</h2><h3 id="ThreeJS-概述"><a href="#ThreeJS-概述" class="headerlink" title="ThreeJS 概述"></a>ThreeJS 概述</h3><p>由于原生WebGL相对复杂，所以使用ThreeJS可以大幅减少开发成本，ThreeJS 将常用的 WebGL 表达式、算法、图形封装，以便开发者可以便捷使用，减少对 WebGL 复杂 api 的使用。</p>
+<p>使用 ThreeJS 的优势：</p>
+<ul>
+<li>弥补原生 WebGL 的缺乏抽象和模块化的缺点</li>
+<li>简便图形学算法的实现</li>
+<li>简化 GLSL 开发和调试，尽量避免使用 GLSL</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>缺少自由度</li>
+</ul>
+<p>以下是 ThreeJS 中封装的主要对象：</p>
+<p><img src="http://study.esunr.xyz/1577946595924.png" alt=""></p>
+<h3 id="渲染器-Renderer"><a href="#渲染器-Renderer" class="headerlink" title="渲染器 Renderer"></a>渲染器 Renderer</h3><p>在场景中设立了物体与光线以及相机后，需要渲染器将场景渲染出来。</p>
+<p>Renderer要绑定一个canvas对象，实例化一个 Renderer 的过程如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> canvas = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;demo-canvas&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> renderer = <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">WebGLRenderer</span>(&#123;</span><br><span class="line">  <span class="attr">canvas</span>: canvas</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>通过 Render 可以设置背景色与大小，通常这个大小与整个画布相等：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">renderer.<span class="title function_">setClearColor</span>(<span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">Color</span>(<span class="number">0x000000</span>, <span class="number">1.0</span>))</span><br><span class="line">renderer.<span class="title function_">setSize</span>(<span class="number">400</span>, <span class="number">400</span>)</span><br></pre></td></tr></table></figure>
+
+<p>当完成了相机和场景的定义后，就可以使用渲染器上的 <code>render()</code> 方法将其渲染到画面上，第一个参数位传入实例化的 scene，第二个参数位传入实例化的 camera：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">renderer.<span class="title function_">render</span>(scene, camera)</span><br></pre></td></tr></table></figure>
+
+<p>通常渲染器会放在一个render函数中被重复调用，渲染器在每次渲染时会自动将上一帧场景清除，重新绘制一帧，这样不停的重新渲染，就会产生动态效果了：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> render = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// ... 每一帧对场景进行应有的变动</span></span><br><span class="line">  renderer.<span class="title function_">render</span>(scene, camera)</span><br><span class="line">  <span class="title function_">requestAnimationFrame</span>(render)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="相机-Camera"><a href="#相机-Camera" class="headerlink" title="相机 Camera"></a>相机 Camera</h3><p>在 ThreeJS 中相机分为两种相机，分别是 <strong>正交投影相机</strong> 与 <strong>透视投影相机</strong>。</p>
+<p><strong>正交投影相机 OrthographicCamera：</strong></p>
+<p><img src="https://pic4.zhimg.com/80/v2-62ede52e0bb0d8b49f6cf2e41debc247_hd.jpg" alt=""></p>
+<blockquote>
+<p>注：图中的”视点”对应着Three中的Camera。</p>
+<p>这里补充一个视景体的概念：视景体是一个几何体，只有视景体内的物体才会被我们看到，视景体之外的物体将被裁剪掉。这是为了去除不必要的运算。</p>
+<p>正交投影相机的视景体是一个长方体，OrthographicCamera的构造函数是这样的：OrthographicCamera( left, right, top, bottom, near, far )</p>
+<p>Camera本身可以看作是一个点，left则表示左平面在左右方向上与Camera的距离。另外几个参数同理。于是六个参数分别定义了视景体六个面的位置。</p>
+<p>可以近似地认为，视景体里的物体平行投影到近平面上，然后近平面上的图像被渲染到屏幕上。</p>
+</blockquote>
+<p>实例化一个简单的正交相机可以使用 <code>new THREE.OrthographicCamera()</code> 传入的参数分别为定义的空间范围（上下左右前后）：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> camera = <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">OrthographicCamera</span>(-width / <span class="number">2</span>, width / <span class="number">2</span>, height / <span class="number">2</span>, -height / <span class="number">2</span>, -<span class="number">1000</span>, <span class="number">1000</span>)</span><br></pre></td></tr></table></figure>
+
+<p>在一个3D的空间中，相机需要摆放到一个固定的点去观察物体，同时还要设置观察的方向：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 相机由 (0,0,100) 的坐标望向 (0,0,0) 的坐标</span></span><br><span class="line">camera.<span class="property">position</span>.<span class="property">x</span> = <span class="number">0</span></span><br><span class="line">camera.<span class="property">position</span>.<span class="property">y</span> = <span class="number">0</span></span><br><span class="line">camera.<span class="property">position</span>.<span class="property">z</span> = <span class="number">100</span></span><br><span class="line">camera.<span class="title function_">lookAt</span>(<span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">Vector3</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>))</span><br></pre></td></tr></table></figure>
+
+<p>假如我们在点 (0,0,0) 处设置了一个平面三角形，按照相机的摆放位置看上去是这样的：</p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20190824174049.png" alt="20190824174049.png"></p>
+<p>当将相机摆放在(100,100,100)的位置，即摆放在三角形的右上角，观察三角形的情况为：</p>
+<p><img src="http://img.cdn.esunr.xyz/markdown/20190824174230.png" alt="20190824174230.png"></p>
+<blockquote>
+<p>由于我们使用了正交相机，图形没有近大远小的效果，看起来很奇怪，但是由 AxisHelp 坐标可以看出视角已经发生了变化</p>
+</blockquote>
+<p><strong>透视投影相机：</strong></p>
+<p><img src="https://pic2.zhimg.com/80/v2-3b160a77bda7661c4dd3920ddeaae605_hd.jpg" alt=""></p>
+<blockquote>
+<p>透视投影相机的视景体是个四棱台，它的构造函数是这样的：PerspectiveCamera( fov, aspect, near, far )</p>
+<p>fov对应着图中的视角，是上下两面的夹角。aspect是近平面的宽高比。在加上近平面距离near，远平面距离far，就可以唯一确定这个视景体了。</p>
+<p>透视投影相机很符合我们通常的看东西的感觉，因此大多数情况下我们都是用透视投影相机展示3D效果。</p>
+</blockquote>
+<p><strong>场景：</strong></p>
+<p>场景是所有物体的容器，也对应着我们创建的三维世界，只有我们在 scene 中添加的物体才会被展示出来。</p>
+<p>创建一个 scene 实例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> scene = <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">Scene</span>()</span><br></pre></td></tr></table></figure>
+
+<p>向scene中添加一个物体，如AxisHelper（辅助坐标，可以帮助我们观察场景）：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> axesHelper = <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">AxisHelper</span>(<span class="number">100</span>)</span><br><span class="line">scene.<span class="title function_">add</span>(<span class="variable language_">this</span>.<span class="property">axesHelper</span>)</span><br></pre></td></tr></table></figure></div></article><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Canvas/">Canvas</a><a class="post-meta__tags" href="/tags/%E7%A0%94%E7%A9%B6%E6%8A%A5%E5%91%8A/">研究报告</a><a class="post-meta__tags" href="/tags/CSS3/">CSS3</a></div><div class="addthis_inline_share_toolbox pull-right"></div><script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-62c7f2684e36ba34" async></script><nav id="pagination"><div class="prev-post pull-left"><a href="/2020/01/112370758277.html"><i class="fa fa-chevron-left">  </i><span>图片格式转换神器 imagemagick 7 的安装与使用</span></a></div><div class="next-post pull-right"><a href="/2020/01/ead3ce88df8c.html"><span>PHP文件操作以及文件的上传与下载</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="disqus_thread"></div><script>var unused = null;
+var disqus_config = function () {
+  this.page.url = 'https://blog.esunr.site/2020/01/4f8e5bb1e44f.html';
+  this.page.identifier = '2020/01/4f8e5bb1e44f.html';
+  this.page.title = '现阶段前端页面所使用的动画技术方案总结';
+}
+var d = document, s = d.createElement('script');
+s.src = "https://" + 'esunr-blog' +".disqus.com/embed.js";
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);</script><script id="dsq-count-scr" src="https://esunr-blog.disqus.com/count.js" async></script></div></div><footer class="footer-bg" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div class="layout" id="footer"><div class="copyright">&copy;2017 - 2025 By EsunR</div><div class="framework-info"><span>Driven - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">hitokoto</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.0"></script><script src="/js/fancybox.js?version=1.9.0"></script><script src="/js/sidebar.js?version=1.9.0"></script><script src="/js/copy.js?version=1.9.0"></script><script src="/js/fireworks.js?version=1.9.0"></script><script src="/js/transition.js?version=1.9.0"></script><script src="/js/scroll.js?version=1.9.0"></script><script src="/js/head.js?version=1.9.0"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>Powered by</span> <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

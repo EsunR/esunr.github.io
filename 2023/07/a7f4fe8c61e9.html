@@ -1,0 +1,151 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="使用 Lambda 函数实现 AWS S3 的图片缩放、质量调整、自动 webp"><meta name="keywords" content="aws,lambda,lambda@edge,s3,webp"><meta name="author" content="EsunR"><meta name="copyright" content="EsunR"><title>使用 Lambda 函数实现 AWS S3 的图片缩放、质量调整、自动 webp | EsunR-Blog</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.9.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css?version=1.9.0"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="dns-prefetch" href="https://hm.baidu.com"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?31bd12722efcf47cb7d0d576bf150215";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-3RG97DCL3N"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-3RG97DCL3N');</script><script src="https://v1.hitokoto.cn/?encode=js&amp;charset=utf-8&amp;select=.footer_custom_text" defer></script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  hexoVersion: '6.2.0'
+} </script><meta name="generator" content="Hexo 6.2.0"></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E5%89%8D%E8%A8%80"><span class="toc-text">1. 前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%85%88%E6%9D%A5%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%9E%B6%E6%9E%84%E5%90%A7"><span class="toc-text">2. 先来个简单的架构吧</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E4%BD%BF%E7%94%A8-API-Gateway-Lambda-%E5%AE%9E%E7%8E%B0-ImageHandler"><span class="toc-text">3. 使用 API Gateway + Lambda 实现 ImageHandler</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E6%9E%B6%E6%9E%84"><span class="toc-text">初始架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E6%9E%B6%E6%9E%84"><span class="toc-text">优化架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">架构实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%B6%E6%9E%84%E7%BC%BA%E9%99%B7"><span class="toc-text">架构缺陷</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E4%BD%BF%E7%94%A8-Lambda-Edge-%E5%AE%9E%E7%8E%B0-ImageHandler"><span class="toc-text">3. 使用 Lambda@Edge 实现 ImageHandler</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Lambda-Edge-%E7%AE%80%E4%BB%8B"><span class="toc-text">Lambda@Edge 简介</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-Lambda-Edge-%E5%AE%9E%E7%8E%B0-ImageHandler"><span class="toc-text">使用 Lambda@Edge 实现 ImageHandler</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%8A%A8-webp-%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="toc-text">添加自动 webp 的功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%B6%E6%9E%84%E4%BC%98%E5%8C%96"><span class="toc-text">架构优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%B6%E6%9E%84%E7%BC%BA%E9%99%B7-1"><span class="toc-text">架构缺陷</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E5%BC%95%E7%94%A8"><span class="toc-text">参考引用</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://esunr-webapp.cdn.bcebos.com/blog/avatar.jpeg?x-bce-process=image/resize,m_lfit,w_200/format,f_auto" alt="avatar"></div><div class="author-info__name text-center">EsunR</div><div class="author-info__description text-center">EsunR-Blog是由EsunR维护的博客平台，分享在前端开发、Git、Vue.js、Webpack、OAuth、Linux等各个领域的知识和经验。浏览这里的深入文章，了解不同主题的见解，并及时了解行业的最新趋势和技术。</div><div class="follow-button"><a target="_blank" rel="noopener" href="https://github.com/EsunR">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">172</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">155</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">26</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">EsunR-Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"><span class="site-page social-icon search"><i class="fa fa-search"></i><span> Search</span></span></span></div><div id="post-info"><div id="post-title">使用 Lambda 函数实现 AWS S3 的图片缩放、质量调整、自动 webp</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-07-31</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E4%BA%91%E5%8E%9F%E7%94%9F/">云原生</a><span class="post-meta__separator">|</span><i class="fa fa-comment-o post-meta__icon" aria-hidden="true"></i><a href="/2023/07/a7f4fe8c61e9.html#disqus_thread"><span class="disqus-comment-count" data-disqus-identifier="2023/07/a7f4fe8c61e9.html"></span></a><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">4.5k</span><span class="post-meta__separator">|</span><span>Reading time: 14 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><blockquote>
+<p>本文章只是讲实现方案，并不会涉及具体的代码上线，如果你想参考代码以及详细的部署流程，可以参考该项目：<a target="_blank" rel="noopener" href="https://github.com/EsunR/s3-image-handler">s3-image-handler</a></p>
+</blockquote>
+<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h1><p>不同于国内的很多对象存储服务，AWS S3 并不提供图像处理的服务，需要用户使用 Lambda 函数或者 EC2 搭建图片缩放服务，这就使用用户有比较高的使用门槛了，但是相当于国内云服务厂商提供的黑盒图像处理服务，AWS Lambda 也有着透明、高兼容度、高可编程性的优势。</p>
+<p>首先我们要明确一下最终的实现需求，需要达到以下的功能：</p>
+<ul>
+<li>请求携带图像处理参数访问图片后返回相应的处理好的图片；</li>
+<li>处理过的图片要存储到 S3 上，防止重复的图片处理请求；</li>
+<li>Lambda 函数要部署到全球边缘节点，而不只是一个固定的地区，以加快用户的调用速度；</li>
+<li>支持 CloudFront 缓存，加快用户访问；</li>
+<li>需要支持自动转换格式，如果用户的浏览器支持 webp 则自动请求 webp 资源</li>
+</ul>
+<p>那么接下来我们将逐步实现它。</p>
+<h1 id="2-先来个简单的架构吧"><a href="#2-先来个简单的架构吧" class="headerlink" title="2. 先来个简单的架构吧"></a>2. 先来个简单的架构吧</h1><p>我们先假设搭建了一个图片存储服务，那么当用户每次发起请求时，请求都会经过一个 <code>Image Handler</code> 服务（我们暂不考虑其具体实现），其相当于一个中间人的角色，如果访问的图片存在于 S3 上，那么 <code>Image Handler</code> 就将图片原封不动的返回给用户。</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202307251653285.png" alt=""></p>
+<p>但是如果我们为图片添加一些格式转换的参数，比如说请求 <code>image.jpg__op__format,f_webp</code> 代表获取 <code>image.jpg</code> 的 webp 格式的图片，那么经过 <code>Image Handler</code> 这个中间服务时候就会执行如下流程：</p>
+<ol>
+<li>Image Handler 尝试获取 <code>image.jpg__op__format,f_webp</code> 文件，结果文件不存在；</li>
+<li>Image Handler 去除格式转换参数，请求 <code>image.jpg</code> 文件，成功获取文件；</li>
+<li>Image Handler 解析格式转换参数，并调用图像处理工具对图片进行格式转换；</li>
+<li>Image Handler 将转换好格式的图片上传至 S3；<ol>
+<li>此时，S3 会同时存在 <code>image.jpg</code> 和 <code>image.jpg__op__format,f_webp</code> 两个文件。</li>
+</ol>
+</li>
+<li>Image Handler 重定向用户请求，让用户重新获取 S3 资源。</li>
+</ol>
+<p>整体流程图如下：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202307251722922.png" alt=""></p>
+<p>那么接下来我们就由简入繁，尝试实现以下这套架构。</p>
+<h1 id="3-使用-API-Gateway-Lambda-实现-ImageHandler"><a href="#3-使用-API-Gateway-Lambda-实现-ImageHandler" class="headerlink" title="3. 使用 API Gateway + Lambda 实现 ImageHandler"></a>3. 使用 API Gateway + Lambda 实现 ImageHandler</h1><h3 id="初始架构"><a href="#初始架构" class="headerlink" title="初始架构"></a>初始架构</h3><p>上节我们文中提到的 <code>Image Hanlder</code> 就可以使用 Lambda 函数来实现，我们可以加上一个 API GateWay 服务来用于触发 Lambda 函数，那么架构图就会变为：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202307251811317.png" alt=""></p>
+<p>这个与我们上面的架构图差别不大，只是将 <code>Image Handler</code> 由 Lambda 和 API Gateway 相结合而实现。其中，API Gateway 只作为 Lambda 函数的触发器，用户请求图片时就直接请求 API Gateway 的访问 url，并将访问文件的路径作为 path 参数拼接入 url，如 <code>api-gateway?path=image.jpg__op__format,f_webp</code>，然后 Lambda 函数收到会从 API Gateway 发来的事件，并提取 url query 中的文件路径，执行获取图像、处理图像、返回图像等上节我们提到的操作。</p>
+<blockquote>
+<p>你可能会有顾虑，如果参数越来越多，在 s3 上保存的对象文件名（也就是 key）会不会因为过长而无法处理？其实不必过分担忧，s3 标称可以允许 1024 个字符长度的 key 值，经过测试，就算文本是纯中文也支持300~350 个中文，而操作系统的最长文件名一般为 255 个，并不足矣达到让 S3 都无法处理文件名的地步。</p>
+</blockquote>
+<h3 id="优化架构"><a href="#优化架构" class="headerlink" title="优化架构"></a>优化架构</h3><p>但是我们会发现，如果用户直接请求 API Gateway 的话，那么每次请求都会触发 Lambda 函数的执行，而 Lambda 函数检查文件是否存在的这一行为也会消耗大量的时间。</p>
+<p>因此我们需要优化一下架构：首先让用户请求 S3，如果 S3 文件不存在就使用 307 临时重定向，让用户访问 API Getway 的 url，然后再触发 Lambda 函数。此时可以确定的是用户访问的是不存在于 S3 的图片，因此 Lambda 函数无需检查图片是否存在，直接从 S3 中获取原始图片并处理，处理完成后使用 301 永久重定向让用户重新从 S3 获取由 Lambda 处理好的图片，下次请求用户遍也无需经过 Lambda 函数，这样大大提升了用户的访问效率。修改后的架构图如下：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202307251821604.png" alt=""></p>
+<h3 id="架构实现"><a href="#架构实现" class="headerlink" title="架构实现"></a>架构实现</h3><p>上面的架构在 Github 上有完整的实现参考：<a target="_blank" rel="noopener" href="https://github.com/sagidM/s3-resizer/tree/master">s3-resizer</a>，与上面描述唯一不一样的为图像处理参数的处理，该函数只专注于图片缩放，想要其他的功能需要自己实现。</p>
+<p>需要值得注意的一点是，S3 如果查找不到图片返回 307 重定向的这个行为，S3 默认是无法实现的，需要开启 S3 的 <strong>静态网站托管服务</strong>，这样就可以改写资源 404 时的行为，让 S3 重定向到 API Gateway，具体<br>的配置流程可以在 <a target="_blank" rel="noopener" href="https://github.com/sagidM/s3-resizer/tree/master">s3-resizer</a> 项目的 README 中查看。</p>
+<h3 id="架构缺陷"><a href="#架构缺陷" class="headerlink" title="架构缺陷"></a>架构缺陷</h3><p>其实这个架构是有明显的缺陷的，总结为以下几点：</p>
+<ul>
+<li><p>开启静态网站托管后，AWS 不支持 https 访问，要想开启 https 需要自己的域名，<a target="_blank" rel="noopener" href="https://github.com/sagidM/s3-resizer/issues/7">参考</a>；</p>
+</li>
+<li><p>过多的重定向，如果某个图片不存在，则需要三次重定向才能获取到图片，这个过程在高并发的资源请求下简直是灾难；</p>
+</li>
+<li><p>CloudFront 加速比较麻烦；</p>
+</li>
+<li><p>Lambda 函数和 API Getway 只能部署在固定的地区，如果用户请求来自其他地区，函数响应速度将会收到影响；</p>
+</li>
+<li><p>这个架构无法实现自动 webp。</p>
+<p>如果不需要优化多区域访问速度的话，这个架构已经可以应对一些简单的项目了，但是多次重定向、Lambda 函数无法全球化的问题确实是比较致命的，因此我们接下来将探讨另外一种实现方案，可以把上面的问题都解决掉。</p>
+</li>
+</ul>
+<h1 id="3-使用-Lambda-Edge-实现-ImageHandler"><a href="#3-使用-Lambda-Edge-实现-ImageHandler" class="headerlink" title="3. 使用 Lambda@Edge 实现 ImageHandler"></a>3. 使用 Lambda@Edge 实现 ImageHandler</h1><h3 id="Lambda-Edge-简介"><a href="#Lambda-Edge-简介" class="headerlink" title="Lambda@Edge 简介"></a>Lambda@Edge 简介</h3><p>Lambda@Edge 是 AWS 的边缘计算服务，不同于普通的 Lambda 函数：普通的 Lambda 函数只能部署在单个区域的节点上，然后用户通过设置的触发器（如 API Gateway）来触发该函数；而 Lambda@Edge 可以借助 CloudFront 部署在全球的边缘节点上，当用户访问某个与其物理位置最接近的 CloudFront 分配时，就会触发部署在其上面的 Lambda@Edge 函数。</p>
+<p>由于 Lambda@Edge 完全依托于 CloudFront，其触发流程也是围绕着用户请求某个 CloudFront 节点的生命周期，具体如下：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202307311108474.png" alt=""></p>
+<ul>
+<li>当用户访问到某个 CloudFront 分配且在 CloudFront 检查缓存之前，首先会触发 viewer request；</li>
+<li>当 CloudFront 没有发现缓存资源时候，按照回源规则向上访问时（如当 S3 上存放的图片没有被 CloudFront 缓存，那么就会回源访问到 S3），就会触发 origin request；</li>
+<li>当 CloudFront 收到来自源的响应之后、在缓存行为发生之前，会触发 origin response；</li>
+<li>当 CloudFront 将用户请求的资源返回前，会触发 viewer response。</li>
+</ul>
+<p>Lambda@Edge 可以部署在以上四个 CloudFront 资源请求的时间点，<strong>并且可以在 request 阶段修改用户的请求，在 response 阶段修改服务器返回的响应</strong>。</p>
+<p>但是 Lambda@Edge 是有部署条件的：</p>
+<ul>
+<li><strong>只有弗吉尼亚北部（us-east-1）上的 Lambda 函数才能部署到 CloudFront 上</strong>，成为 Lambda@Edge 函数，其他地区的函数触发器都不包含 CloudFront；</li>
+<li>viewer request 和 viewer response 的资源配额较小，编程时需要额外注意，响应时长不得超过 5s，内存分配不得超过 128M，Lambda 及其依赖包大小不得超过 1M；</li>
+<li>如果需要篡改响应，那么只能返回给客户端纯文本或者 base64 编码；</li>
+<li>由于函数经过 CloudFront，到 OriginResponse 后就会被移出掉客户端的请求头字段，如果需要透传，则需要手动在 CloudFront 的 <code>行为</code> 面板中单独配置 <code>源请求策略</code>；</li>
+<li>更多功能限制可以查看 <a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/edge-functions-restrictions.html">这里</a>；</li>
+<li>更多配额限制可以查看 <a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html">这里</a>。</li>
+</ul>
+<h2 id="使用-Lambda-Edge-实现-ImageHandler"><a href="#使用-Lambda-Edge-实现-ImageHandler" class="headerlink" title="使用 Lambda@Edge 实现 ImageHandler"></a>使用 Lambda@Edge 实现 ImageHandler</h2><p>首先，我们要将 S3 接入 CloudFront，这样才能进一步接入 Lambda@Edge，关于具体如何接入，可以参考 <a href="https://blog.esunr.site/2023/07/cd2440f9b860.html">这篇文章</a>。</p>
+<p>将 S3 接入 CloudFront 之后，我们再来看一下 CloudFront 的工作机制，与所有的 CDN 服务一样，当 CloudFront 没有缓存时，就会触发回源，如果有缓存且缓存没有失效，就不会触发回源，而是直接从服务器节点获取资源：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202307311403801.png" alt=""></p>
+<p>那么 Lambda@Edge 函数的四个触发时间点，就分布在下图所示的四个阶段：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202307311433055.png" alt=""></p>
+<p>以上的流程图中演示的是用户请求了一张 S3 存在的图片，那么假如用户请求了一张携带了图片处理参数的图片（假设携带了参数的图片不存在于 S3 上），当请求会回源到 S3，然后触发 403 Forbidden（PS：S3 没有 404 的状态码，无权限和文件不存在都是 403），我们所要做的就是 <strong>修改这次回源响应</strong> ，让回源返回的是一张处理好的图片，而不是 403 状态码。</p>
+<p>经过上面的流程分析，很容易发现最合适操作的位置就是 <code>origin response</code> 阶段，因为在这一阶段可以直接获取到 S3 的回源结果：如果是一个 200 的状态码，就说明用户请求的是原始图片，或者带参数的图片已经存在于 S3 中；反之，如果是一个 403 状态码，就说明图片不存在，此时 Lambda 函数就开始进行获取原图、处理图片、上传图片、返回响应的这一系列行为。</p>
+<p>以用户请求 <code>image.jpg__op__format,f_webp</code> 这一携带了图片处理参数的请求为例，经历了如下流程：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202307311512282.png" alt=""><br>如果用户请求了一个原始图片不存在，但是携带了图片操作参数的图片（如 <code>error.jpg__op__format,f_webp</code>），<code>origin response</code> 阶段部署的 Lambda 函数依旧会工作，但由于 Lambda 函数并不确定原始图片是否存在，仍然会尝试二次向 S3 请求原始图片来确认，如果原始图片确实不存在，那么 Lambda 函数则仍返回原响应（403），工作流程如下：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202307311531640.png" alt=""></p>
+<h2 id="添加自动-webp-的功能"><a href="#添加自动-webp-的功能" class="headerlink" title="添加自动 webp 的功能"></a>添加自动 webp 的功能</h2><p>webp 格式在提升 Web 图片传输效率上有很大的优势，能将图片进一步压缩，不仅节省 S3 的存储空间以及 CloudFront 的流量消耗，更能页面更快的展现给用户，在上面的示例中，我们请求 <code>image.jpg__op__format,f_webp</code> 的目的就是为了指定获取 webp 的图片而不是原图。</p>
+<p>但是对于 webp 的支持上，Safria 浏览器极其拉胯，直到 2022 年的 Safria 16 才 <a target="_blank" rel="noopener" href="https://caniuse.com/webp">完全支持</a>，为了某一小撮浏览器的兼容性，我们并不能大放手脚的全站使用 webp。从前端开发来讲，虽然完全可以从前端写一个判断函数来判断用户浏览器是否兼容 webp 而编程式的来获取不同格式的图片，但这样做并不是完美的，比如 SSR 场景来说，在客户端和服务端都要写两套判断代码，简直徒增工作量。</p>
+<p>那么最优雅的解决方案还是从我们刚才写的 Lambda 函数入手，新增一个 <code>f_auto</code> 参数，比如当用户请求 <code>image.jpg__op__format,f_auto</code> 时，通过用户的 request header 的 accept 字段来判断用户的浏览器是否支持 webp，如果支持则返回格式为 webp 的图片，否则返回原图。设想很美好，但是当我们按照这个思路去完善 origin response 阶段部署的 Lambda 函数时却很容易发现走不通，会出现两个致命的问题：</p>
+<ol>
+<li>从 origin response 阶段的 Lambda 函数事件中，并不获取到 accept 请求头，因为该请求是从 CloudFront 转发过来的，转发过程中 CloudFront 会移除掉部分客户端请求头。</li>
+<li>就算我们在 CloudFront 中进行了配置，允许 accept 透传到 origin response 阶段，如果判断出来用户支持 webp，那么就会生成一张名为 <code>image.jpg__op__format,f_auto</code> 格式为 webp 的图片上传到 S3。但当下一个用户浏览器不支持 webp 时，请求的仍为 <code>image.jpg__op__format,f_auto</code> 就会获取到由上个用户生成的 webp 格式的图片。也就是说，在 origin response 阶段写的自动格式判断逻辑只能满足首个用户的浏览器需求，后续的用户请求过来的图片都是首个用户触发生成的图片。</li>
+</ol>
+<p>因此，我们不可能通过完善 origin response 的 Lambda 函数来实现自动 webp 的功能。但是我们还可以考虑部署于其他位置的 Lambda@Edge 函数来实现这一功能，还记得 Lambda@Edge 的能力吗？不仅可以修改回源响应，<strong>更能在 request  阶段修改用户请求</strong>。假如我们在 request 阶段判断用户的浏览器是否支持 webp，如果支持的话就将用户请求改为 <code>image.jpg__op__format,f_webp</code>，反之则将用户请求改为 <code>image.jpg</code> 使用户请求原图，这样后续 origin response 处部署的 Lambda 函数就仍只需要关注图片处理参数即可。</p>
+<p>但是可以修改用户请求的时间点有两处，一处是 viewer request，另一处则是 origin request：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202307311556050.png" alt=""></p>
+<p>具体应该使用哪个呢？答案是 viewer request。</p>
+<p>因为 origin request 只会在 CloudFront 不存在缓存进行回源查找时才会触发，假如自动 webp 的逻辑放在此处，一旦某个使用了支持 webp 格式浏览器的用户访问了携带了 <code>f_auto</code> 参数的图片，经过图片处理函数的操作后 CloudFront 就会缓存上 webp 格式的图片；后续假如来了一个使用不支持 webp 格式浏览器的用户访问了该图片，因为存在缓存，所以回源过程并不会触发， origin request 自然也不会触发，该用户只会获取到 CloudFront 上缓存的 webp 格式的图片。</p>
+<p>但是 viewer request 却不同，因为其位于用户访问 CloudFront 的阶段上，因此不论 CloudFront 是否有目标图片的缓存，viewer request 始终会触发，那么我们只需要在 viewer request 阶段部署一个 Lambda 函数来根据用户的请求头判断用户使用的浏览器是否支持 webp，根据判断结果修改用户的请求 uri，就可以实现自动 webp 的功能，具体流程如下：</p>
+<p><img src="https://esunr-image-bed.oss-cn-beijing.aliyuncs.com/picgo/202307311648469.png" alt=""></p>
+<h2 id="架构优化"><a href="#架构优化" class="headerlink" title="架构优化"></a>架构优化</h2><p>上面只是演示了最基础的实现方案，虽然已经可以投入使用了，但这个架构还有一定的优化空间，具体如下，可以进行参考：</p>
+<ul>
+<li>在 origin response 处理完图片后，由于收到限制，只能将返回的图片编码为 base64 返回，浏览器必须等待所有的数据都返回才会渲染图片，而不是像普通图片那样在请求加载时浏览器就已经开始渲染图片。这个对于弱网环境效果尤为明显，因此建议在 origin response 处理后，返回的响应字段里添加 <code>cache-control: no-cache, no-store, must-revalidate</code>，这样 CloudFront 上就不会缓存首次请求触发的 base64 图片，而是等待缓存下次请求的正常图片。</li>
+<li>origin response 改写的响应是有大小限制的，base64 编码后的大小不得大于 1.33M。如果转换后的图片大小超过这个限制，可以使用重定向，让服务端重新请求资源，此时请求的就是从 S3 中拿的资源了。</li>
+<li>在图片处理前，在 Lambda 函数中会去尝试下载原始图片，应该尽量减少这一行为的触发，除了单纯的判断 S3 上并不存在已经处理的图片外，还应该判断用户的请求是否是获取图片的请求、请求是否携带了正确的图片处理参数等。</li>
+<li>S3 无法查找图片和权限不足返回的都是 403 状态码，如果某个路径下的资源不允许普通用户读取，那么图片处理函数中一定要对其进行特殊处理，不能一昧的把 403 作为图片不存在的状态码来处理，否则会造成权限泄露。推荐在使用该架构时，bucket 中所有内容的权限都是统一的。</li>
+</ul>
+<blockquote>
+<p> 这些优化项在 <a target="_blank" rel="noopener" href="https://github.com/EsunR/s3-image-handler">s3-image-handler</a> 已经处理。</p>
+</blockquote>
+<h2 id="架构缺陷-1"><a href="#架构缺陷-1" class="headerlink" title="架构缺陷"></a>架构缺陷</h2><p>虽然当前的架构已经满足了我们的需求，但是其还是存在着一些无法避免的缺陷，需要开发者知悉：</p>
+<ul>
+<li>权限缺陷：需要注意防止越权操作；</li>
+<li>性能缺陷：图片过大处理时间会很长；</li>
+<li>无法避免的上传时长等待：图片转换后 Lambda 函数需要等待上传函数执行完成才能返回给客户端响应，由于 Lambda 函数的限制，将上传操作放进异步线程先返回客户端响应会导致上传行为失败（实际上异步的上传任务是被挂起了，但是在高并发场景下会因为 Lambda 函数的动态扩展而销毁上传任务）；</li>
+</ul>
+<h1 id="参考引用"><a href="#参考引用" class="headerlink" title="参考引用"></a>参考引用</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://aws.amazon.com/cn/blogs/networking-and-content-delivery/resizing-images-with-amazon-cloudfront-lambdaedge-aws-cdn-blog/">Resizing Images with Amazon CloudFront &amp; Lambda@Edge | AWS CDN Blog</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-edge-how-it-works.html">Get started creating and using Lambda@Edge functions</a></li>
+<li><a target="_blank" rel="noopener" href="https://dashbird.io/blog/aws-image-resize-with-lambda-and-s3/">Serverless with AWS – Image resize on-the-fly with Lambda and S3</a></li>
+</ul>
+</div></article><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/aws/">aws</a><a class="post-meta__tags" href="/tags/lambda/">lambda</a><a class="post-meta__tags" href="/tags/lambda-edge/">lambda@edge</a><a class="post-meta__tags" href="/tags/s3/">s3</a><a class="post-meta__tags" href="/tags/webp/">webp</a></div><div class="addthis_inline_share_toolbox pull-right"></div><script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-62c7f2684e36ba34" async></script><nav id="pagination"><div class="prev-post pull-left"><a href="/2023/12/88456067f15c.html"><i class="fa fa-chevron-left">  </i><span>在 Webpack 中同时使用 ts-loader 和 babel-loader</span></a></div><div class="next-post pull-right"><a href="/2023/07/cd2440f9b860.html"><span>创建 AWS S3 公共存储桶并添加 CloudFront CDN 加速域名</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="disqus_thread"></div><script>var unused = null;
+var disqus_config = function () {
+  this.page.url = 'https://blog.esunr.site/2023/07/a7f4fe8c61e9.html';
+  this.page.identifier = '2023/07/a7f4fe8c61e9.html';
+  this.page.title = '使用 Lambda 函数实现 AWS S3 的图片缩放、质量调整、自动 webp';
+}
+var d = document, s = d.createElement('script');
+s.src = "https://" + 'esunr-blog' +".disqus.com/embed.js";
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);</script><script id="dsq-count-scr" src="https://esunr-blog.disqus.com/count.js" async></script></div></div><footer class="footer-bg" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div class="layout" id="footer"><div class="copyright">&copy;2017 - 2025 By EsunR</div><div class="framework-info"><span>Driven - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">hitokoto</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.0"></script><script src="/js/fancybox.js?version=1.9.0"></script><script src="/js/sidebar.js?version=1.9.0"></script><script src="/js/copy.js?version=1.9.0"></script><script src="/js/fireworks.js?version=1.9.0"></script><script src="/js/transition.js?version=1.9.0"></script><script src="/js/scroll.js?version=1.9.0"></script><script src="/js/head.js?version=1.9.0"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>Powered by</span> <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>
