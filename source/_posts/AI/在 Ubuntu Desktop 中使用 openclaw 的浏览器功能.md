@@ -27,7 +27,7 @@ sudo apt --fix-broken install -y  # if there are dependency errors
 {
   "browser": {
     "enabled": true,
-    "profile": "openclaw",
+    "defaultProfile": "openclaw",
     "executablePath": "/usr/bin/google-chrome-stable",
     "headless": true,
     "noSandbox": true
