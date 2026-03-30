@@ -1,0 +1,97 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="让 Claude Code 像 OpenClaw 一样连接你的浏览器"><meta name="keywords" content=""><meta name="author" content="EsunR"><meta name="copyright" content="EsunR"><title>让 Claude Code 像 OpenClaw 一样连接你的浏览器 | EsunR-Blog</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.9.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css?version=1.9.0"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="dns-prefetch" href="https://hm.baidu.com"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?31bd12722efcf47cb7d0d576bf150215";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-3RG97DCL3N"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-3RG97DCL3N');</script><script src="https://v1.hitokoto.cn/?encode=js&amp;charset=utf-8&amp;select=.footer_custom_text" defer></script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  hexoVersion: '6.2.0'
+} </script><meta name="generator" content="Hexo 6.2.0"></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Agent-Browser-%E5%AE%89%E8%A3%85"><span class="toc-text">Agent Browser 安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A3%85%E8%BD%BD-Skill"><span class="toc-text">装载 Skill</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-Agent-Browser-%E8%AE%A9%E5%85%B6%E6%9B%B4%E5%A5%BD%E7%94%A8"><span class="toc-text">配置 Agent Browser 让其更好用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9E%E7%94%A8%E7%94%A8%E4%BE%8B"><span class="toc-text">实用用例</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://esunr-webapp.cdn.bcebos.com/blog/avatar.jpeg?x-bce-process=image/resize,m_lfit,w_200/format,f_auto" alt="avatar"></div><div class="author-info__name text-center">EsunR</div><div class="author-info__description text-center">EsunR-Blog是由EsunR维护的博客平台，分享在前端开发、Git、Vue.js、Webpack、OAuth、Linux等各个领域的知识和经验。浏览这里的深入文章，了解不同主题的见解，并及时了解行业的最新趋势和技术。</div><div class="follow-button"><a target="_blank" rel="noopener" href="https://github.com/EsunR">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">177</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">158</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">27</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">EsunR-Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"><span class="site-page social-icon search"><i class="fa fa-search"></i><span> Search</span></span></span></div><div id="post-info"><div id="post-title">让 Claude Code 像 OpenClaw 一样连接你的浏览器</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2026-03-17</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/AI/">AI</a><span class="post-meta__separator">|</span><i class="fa fa-comment-o post-meta__icon" aria-hidden="true"></i><a href="/2026/03/5f9832405a4d.html#disqus_thread"><span class="disqus-comment-count" data-disqus-identifier="2026/03/5f9832405a4d.html"></span></a><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">1.7k</span><span class="post-meta__separator">|</span><span>Reading time: 5 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>年后 OpenClaw 国内爆火，但说实话自己在云端或者虚拟机部署一个玩玩还行，但是真的让在自己本地部署一个助手级的 AI，OpenClaw 那个烂代码和安全性我属实不敢恭维。</p>
+<p>OpenClaw 并没有创新什么东西，只是内置了一堆 Skill 以及能够通过 IM 来远程调用，仅此而已。但如果是在本地干活来说，远程调用是没有必要的，那 OpenClaw 的优势就只剩下开箱即用的一堆自动化 Skill 了，但不得不说 OpenClaw 的 Browser Tool 确实好用，底层调用的是 Playwright 框架，运行时还会自己编写执行脚本，只要 token 够用以及有足够多的耐心，那么其可以胜任 80% 的需求（虽然配好 OpenClaw 的 Browser 也简直是一种顶级折磨）。</p>
+<p>那 Claude Code 就不能实现同等的需求了吗？那必须有的，官方已经出了 <a target="_blank" rel="noopener" href="https://claude.com/plugins/playwright">Playwright Plugin</a>，在官方的 <a target="_blank" rel="noopener" href="https://github.com/anthropics/claude-plugins-official">Plugin 订阅源</a>里安装即可（或者你也可以直接去安装 Playwright 的 MCP）。安装完成之后，当你想访问某个页面，Claude Code 就会自动调用 Playwright 的 MCP 服务来访问这个页面并进行自动化操作。</p>
+<p>但实际用下来存在以下的问题 ：</p>
+<ul>
+<li>Playwright 非常依赖大模型的能力，可以用和会用的差别很大；</li>
+<li>Playwright 并非为 AI 设计，没有针对 Agent 自动化提供针对性的优化；</li>
+<li>由于 Playwright 本质是拉取整个页面的内容，所以他会连带 AI 不需要读取的样式等一起反馈给 AI，如果连续操作多个页面，会导致上下文丢失；</li>
+</ul>
+<p>所以相比 Playwright MCP，我更推荐使用 Vercel 推出的 <a target="_blank" rel="noopener" href="https://agent-browser.dev/">Agent Browser</a>，一款专门用于 AI Agent 的浏览器 Cli 工具，相对于 Playwright MCP 来说，其抓取的结构更适合 AI 阅读、更减少 Token 消耗，同时还针对对浏览器下载、会话保持等场景进行了优化。</p>
+<h1 id="Agent-Browser-安装"><a href="#Agent-Browser-安装" class="headerlink" title="Agent Browser 安装"></a>Agent Browser 安装</h1><p>Agent Browser 提供了多种安装方式，推荐使用 npm 全局安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 全局安装（推荐）</span></span><br><span class="line">npm install -g agent-browser</span><br><span class="line"></span><br><span class="line"><span class="comment"># 首次使用需要下载 Chrome</span></span><br><span class="line">agent-browser install</span><br></pre></td></tr></table></figure>
+
+<p><code>agent-browser install</code> 命令会从 <a target="_blank" rel="noopener" href="https://developer.chrome.com/blog/chrome-for-testing/">Chrome for Testing</a> 下载 Chrome 浏览器，这是 Google 官方提供的自动化测试渠道，无需额外安装 Playwright 或 Node.js 依赖。</p>
+<p>如果你使用 macOS，也可以通过 Homebrew 安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew install agent-browser</span><br><span class="line">agent-browser install</span><br></pre></td></tr></table></figure>
+
+<p>Linux 用户需要安装额外的系统依赖：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">agent-browser install --with-deps</span><br></pre></td></tr></table></figure>
+
+<p>安装完成后，你可以通过以下命令快速体验：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">agent-browser open example.com</span><br><span class="line">agent-browser snapshot                    <span class="comment"># 获取页面的可访问性树</span></span><br><span class="line">agent-browser screenshot page.png         <span class="comment"># 截图</span></span><br><span class="line">agent-browser close</span><br></pre></td></tr></table></figure>
+
+<h1 id="装载-Skill"><a href="#装载-Skill" class="headerlink" title="装载 Skill"></a>装载 Skill</h1><p>Agent Browser 本身只是一个命令行工具，为了让 LLM 能够了解如何使用这个工具，Agent Browser 官方提供了一系列开箱即用的 Skill，将其安装到 Claude Code、Codex、Github Copilot 等 Agent 工具中后，当我们的会话中包含网页请求相关的要求时，LLM 就会调用 Agent Browser。</p>
+<p>Agent Browser 提供以下官方 Skills：</p>
+<table>
+<thead>
+<tr>
+<th>Skill</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>agent-browser</strong></td>
+<td>核心 Skill，教授完整的 agent-browser API：导航、快照、表单填充、截图、数据提取、会话、认证、Diff 比较等</td>
+</tr>
+<tr>
+<td><strong>dogfood</strong></td>
+<td>系统性探索测试工具，像真实用户一样导航应用，发现 Bug 和 UX 问题，生成带有截图和复现视频的结构化报告</td>
+</tr>
+<tr>
+<td><strong>electron</strong></td>
+<td>自动化任何 Electron 应用（VS Code、Slack、Discord、Figma 等），通过连接其内置的 Chrome DevTools Protocol 端口</td>
+</tr>
+<tr>
+<td><strong>slack</strong></td>
+<td>基于 Slack 的浏览器自动化，检查未读消息、导航频道、搜索对话、发送消息等，无需 API 令牌</td>
+</tr>
+<tr>
+<td><strong>vercel-sandbox</strong></td>
+<td>在 Vercel Sandbox 微型 VM 中运行 agent-browser + 无头 Chrome，支持 Next.js、SvelteKit、Nuxt 等框架</td>
+</tr>
+</tbody></table>
+<p>我们可以通过 <a target="_blank" rel="noopener" href="https://github.com/vercel-labs/skills">skills</a> CLI 工具直接安装这些 skill，这是一个 skill 管理工具，支持 OpenCode、Claude Code、Codex、Cursor 等 40+ 种 AI Agent 的 skill 的统一管理。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 agent-browser 核心技能</span></span><br><span class="line">npx skills add vercel-labs/agent-browser --skill agent-browser</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装探索测试技能</span></span><br><span class="line">npx skills add vercel-labs/agent-browser --skill dogfood</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 Electron 自动化技能</span></span><br><span class="line">npx skills add vercel-labs/agent-browser --skill electron</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 Slack 自动化技能</span></span><br><span class="line">npx skills add vercel-labs/agent-browser --skill slack</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 Vercel Sandbox 技能</span></span><br><span class="line">npx skills add vercel-labs/agent-browser --skill vercel-sandbox</span><br></pre></td></tr></table></figure>
+
+<h1 id="配置-Agent-Browser-让其更好用"><a href="#配置-Agent-Browser-让其更好用" class="headerlink" title="配置 Agent Browser 让其更好用"></a>配置 Agent Browser 让其更好用</h1><p>Agent Browser 的一些默认配置并不太好用，比如默认使用的是无头模式（headless）、每次会话启动的都是一个新的 Chrome Profile 因此无法持久化一些登录信息等。但是你都可以在 <code>~/.agent-browser/config.json</code> 中进行修改（你需要手动创建配置文件），以下是参考配置：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;headed&quot;</span><span class="punctuation">:</span> <span class="keyword">true</span><span class="punctuation">,</span> <span class="comment">// 默认以 headful 模式打开页面，方便真人介入操作</span></span><br><span class="line">    <span class="attr">&quot;profile&quot;</span><span class="punctuation">:</span> <span class="string">&quot;~/.agent-browser/profiles/default&quot;</span><span class="punctuation">,</span> <span class="comment">// 创建一个持久化的 Chrome Profile 给 Agent Browser 使用</span></span><br><span class="line">    <span class="attr">&quot;downloadPath&quot;</span><span class="punctuation">:</span> <span class="string">&quot;./downloads&quot;</span> <span class="comment">// 默认的文件下载路径（不能使用 `~`，只能使用相对路径写法）</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="实用用例"><a href="#实用用例" class="headerlink" title="实用用例"></a>实用用例</h1><p>LLM + 浏览器自动化也是需要调教的，如果你只想通过一句话就让 LLM 达到你的最终目的大概率是没法成功的，因为它会像一个新人小白一样不断的进行操作 - 截图 - 思考 - 再操作的流程。因此对于一个比较流水线式的工作，你应该为其描述一个完整的工作流，固化为一个 Skill，那么下次你再让 LLM 替你干活的时候，它就会读取这份 skill 按照完整的工作流做事，避免了像一个无头苍蝇一样乱撞。</p>
+<p>例如我们想让 Claude Code 帮我们读取 BLS 的日志并进行分析，就可以为其简单描述一个流程：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. 使用 agent-browser 登录 BLS 平台</span><br><span class="line">2. 点击 `.xxx` 元素，进入日志列表</span><br><span class="line">3. 按照用户需求生成日志的查询语句，日志规则参考 `reference/sql.md` 文件（这个文件你可以让大模型爬百度云的文档来生成）</span><br><span class="line">4. 操作页面中的过滤器，并输入查询语句进行查询</span><br><span class="line">5. 点击下载日志按钮（下载按钮元素为 `.xxx`），使用 `agent-browser download .xxx ~/Download` 下载完整日志到本地</span><br><span class="line">6. 在本地分析日志，给出结论</span><br></pre></td></tr></table></figure>
+
+<p>让 Claude Code 按照这个流程完成一次完整的工作，在工作的过程中我们可以随时打断并调整 Claude Code 的工作流，当其完成后将所有的操作总结生成一份 SKILL.md，这样我们就完成了 Cluade Code 对一个流水线式的工作的初步调教。后续我们就不断完善、优化这份 SKILL，直至 Claude Code 能够彻底流畅的完成这个任务。</p>
+</div></article><div class="post-meta__tag-list"></div><div class="addthis_inline_share_toolbox pull-right"></div><script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-62c7f2684e36ba34" async></script><nav id="pagination"><div class="prev-post pull-left"><a href="/2026/03/3d8c8845e33c.html"><i class="fa fa-chevron-left">  </i><span>从米家到手搓：智能家居折腾进阶之路</span></a></div><div class="next-post pull-right"><a href="/2026/02/3892f329148c.html"><span>在 Ubuntu Desktop 中使用 openclaw 的浏览器功能</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="disqus_thread"></div><script>var unused = null;
+var disqus_config = function () {
+  this.page.url = 'https://blog.esunr.site/2026/03/5f9832405a4d.html';
+  this.page.identifier = '2026/03/5f9832405a4d.html';
+  this.page.title = '让 Claude Code 像 OpenClaw 一样连接你的浏览器';
+}
+var d = document, s = d.createElement('script');
+s.src = "https://" + 'esunr-blog' +".disqus.com/embed.js";
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);</script><script id="dsq-count-scr" src="https://esunr-blog.disqus.com/count.js" async></script></div></div><footer class="footer-bg" style="background-image: url(https://esunr-webapp.cdn.bcebos.com/blog/background.png?x-bce-process=image/quality,q_80/format,f_auto)"><div class="layout" id="footer"><div class="copyright">&copy;2017 - 2026 By EsunR</div><div class="framework-info"><span>Driven - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">hitokoto</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.0"></script><script src="/js/fancybox.js?version=1.9.0"></script><script src="/js/sidebar.js?version=1.9.0"></script><script src="/js/copy.js?version=1.9.0"></script><script src="/js/fireworks.js?version=1.9.0"></script><script src="/js/transition.js?version=1.9.0"></script><script src="/js/scroll.js?version=1.9.0"></script><script src="/js/head.js?version=1.9.0"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>Powered by</span> <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>
