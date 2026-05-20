@@ -1,7 +1,14 @@
 ---
+title: 如何统一管理团队中的项目级 Skill
+tags:
+  - AI
+  - Skills
+  - 项目管理
 categories:
   - AI
+date: 2026-05-20 14:44:02
 ---
+
 # 1. 项目 Skills 的重要性
 
 Skill 是 Agent 工作过程中的重要文件，编写一个完善的 Skill 能够更好的指导 Agent 去正确的理解和处理工作。
